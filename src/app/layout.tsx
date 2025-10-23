@@ -8,11 +8,11 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "PeerLink",
+  title: "PeerLink | Cedar College",
   description: "Peer Tutoring platform for Cedar College",
 
   openGraph: {
-    title: "PeerLink",
+    title: "PeerLink | Cedar College",
     description: "Peer Tutoring platform for Cedar College",
     url: "https://cedarpeerlink.vercel.app",
     siteName: "PeerLink",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
-    title: "PeerLink",
+    title: "PeerLink | Cedar College",
     description: "Peer Tutoring platform for Cedar College",
     images: ["/og-image.png"],
   },
