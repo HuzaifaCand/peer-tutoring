@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "PeerLink",
     description: "Peer Tutoring platform for A Level Colleges in Pakistan",
-    url: "https://peerLink.vercel.app",
+    url: "https://peerlink-cedar.vercel.app",
     siteName: "PeerLink",
     images: [
       {
