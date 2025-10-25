@@ -3,7 +3,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import CountCard from "@/components/cards/CountCard";
-import { CURRENT_ACADEMIC_YEAR } from "@/lib/constants";
 
 export default function UserCount() {
   const [counts, setCounts] = useState({
@@ -35,8 +34,8 @@ export default function UserCount() {
           students: studentsRes.count || 0,
           tutors: tutorsRes.count || 0,
         });
-      } catch (err: any) {
-        console.error("Error fetching user counts:", err.message);
+      } catch (err) {
+        console.error("Error fetching user counts:", err);
         setError("Failed to load user counts. Please try again later.");
       } finally {
         setLoading(false);

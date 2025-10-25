@@ -7,8 +7,6 @@ import {
   Users,
   GraduationCap,
   Clock,
-  CheckCircle,
-  Settings,
   LogOut,
 } from "lucide-react";
 
