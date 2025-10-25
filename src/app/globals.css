@@ -8,3 +8,26 @@
   --color-textWhite: #e6e9ec;
   --color-textButton: #ffffff;
 }
+
+::-webkit-scrollbar {
+  height: 0.5em;
+  width: 0.4em;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0e12;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2.2em;
+  background: #222;
+  cursor: pointer;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
