@@ -54,7 +54,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={manrope.className}>
-        <main className="bg-mainBg min-h-screen">{children}</main>
+        <main className="bg-mainBg">{children}</main>
       </body>
     </html>
   );
