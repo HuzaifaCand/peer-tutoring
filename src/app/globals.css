@@ -7,6 +7,12 @@
 
   --color-textWhite: #e6e9ec;
   --color-textButton: #ffffff;
+  --color-textMuted: #9aa0a6;
+
+  /* yellow  */
+  --color-accent: #ebff10;
+  --color-highlight: #f4f870;
+  --color-dimAccent: #d1e60a;
 }
 
 ::-webkit-scrollbar {
