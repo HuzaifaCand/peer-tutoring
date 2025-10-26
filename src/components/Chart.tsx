@@ -61,7 +61,6 @@ export default function Chart({ data, dataLoading }: WeeklyLineChartProps) {
           />
 
           <YAxis
-            dataKey="count"
             tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
@@ -80,7 +79,7 @@ export default function Chart({ data, dataLoading }: WeeklyLineChartProps) {
 
           <Line
             type="linear"
-            dataKey="total"
+            dataKey="count"
             stroke="#ebff10"
             strokeWidth={1.5}
             dot={{ r: 2.5, fill: "#ebff10" }}

@@ -34,7 +34,7 @@ export default function MonthSelector({
         onChange={handleChange}
         className="
           w-full appearance-none
-          bg-elevatedBg text-textWhite text-sm font-medium
+          bg-elevatedBg text-textButton text-sm font-medium
           border border-white/10
           rounded-xl px-4 py-2 pr-10
           cursor-pointer transition-all duration-200
