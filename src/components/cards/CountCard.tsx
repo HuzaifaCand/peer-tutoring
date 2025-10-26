@@ -1,5 +1,3 @@
-import { Loader2 } from "lucide-react";
-
 export default function CountCard({
   label,
   count,
@@ -12,14 +10,13 @@ export default function CountCard({
   return (
     <div className="bg-elevatedBg border border-white/10 rounded-xl p-6 flex flex-col items-start justify-between">
       <p className="text-sm text-textWhite/60">{label}</p>
-      <h2 className="text-3xl font-semibold mt-2">
-        {" "}
+      <div className="mt-2 h-[32px] flex items-center">
         {loading ? (
-          <Loader2 className="animate-spin w-6 h-6 text-textSecondary" />
+          <div className="w-16 h-7 rounded-md bg-white/10 animate-pulse" />
         ) : (
-          count.toLocaleString()
+          <h2 className="text-3xl font-semibold">{count.toLocaleString()}</h2>
         )}
-      </h2>
+      </div>
     </div>
   );
 }
