@@ -27,7 +27,7 @@ export default function StatCard({ info, count, loading }: Props) {
 
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-textWhite/70 tracking-wide">
+        <span className="text-sm text-textMuted tracking-wide">
           {info.label}
         </span>
 
@@ -39,7 +39,7 @@ export default function StatCard({ info, count, loading }: Props) {
       {/* Count */}
       <div className="mt-4 mb-6 text-4xl font-semibold text-textWhite tracking-tight leading-none">
         {loading ? (
-          <Loader2 className="animate-spin w-6 h-6 text-textWhite/70" />
+          <Loader2 className="animate-spin w-6 h-6 text-textMuted" />
         ) : (
           count.toLocaleString()
         )}
