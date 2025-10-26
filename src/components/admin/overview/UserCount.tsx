@@ -11,13 +11,11 @@ export default function UserCount() {
   });
 
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchCounts() {
       try {
         setLoading(true);
-        setError(null);
 
         const [studentsRes, tutorsRes] = await Promise.all([
           supabase.from("students").select("*", { count: "exact", head: true }),
@@ -36,7 +34,6 @@ export default function UserCount() {
         });
       } catch (err) {
         console.error("Error fetching user counts:", err);
-        setError("Failed to load user counts. Please try again later.");
       } finally {
         setLoading(false);
       }
@@ -47,22 +44,18 @@ export default function UserCount() {
 
   return (
     <div className="mt-8">
-      {error ? (
-        <p className="text-red-500 text-sm mb-4">{error}</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <CountCard
-            loading={loading}
-            count={counts.students}
-            label="Total Students"
-          />
-          <CountCard
-            loading={loading}
-            count={counts.tutors}
-            label="Total Tutors"
-          />
-        </div>
-      )}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <CountCard
+          loading={loading}
+          count={counts.students}
+          label="Total Students"
+        />
+        <CountCard
+          loading={loading}
+          count={counts.tutors}
+          label="Total Tutors"
+        />
+      </div>
     </div>
   );
 }

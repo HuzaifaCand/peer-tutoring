@@ -85,21 +85,14 @@ export default function OperationalStats() {
 
   return (
     <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-      <StatCard
-        info={info.activeSessions}
-        count={stats.activeSessions}
-        loading={loading}
-      />
-      <StatCard
-        info={info.pendingSessionVerifications}
-        count={stats.pendingSessionVerifications}
-        loading={loading}
-      />
-      <StatCard
-        info={info.pendingTutorVerifications}
-        count={stats.pendingTutorVerifications}
-        loading={loading}
-      />
+      {Object.entries(info).map(([key, value]) => (
+        <StatCard
+          key={key}
+          info={value}
+          count={stats[key as keyof typeof stats]}
+          loading={loading}
+        />
+      ))}
     </div>
   );
 }
