@@ -1,3 +1,4 @@
+import { Loader2 } from "lucide-react";
 import {
   LineChart,
   Line,
@@ -9,7 +10,8 @@ import {
 } from "recharts";
 
 interface WeeklyLineChartProps {
-  data: { day: string; total: number }[];
+  data: { week: string; count: number }[];
+  dataLoading: boolean;
 }
 
 interface CustomTooltipPayload {
@@ -40,21 +42,26 @@ export function CustomTooltip({
   return null;
 }
 
-export default function Chart({ data }: WeeklyLineChartProps) {
+export default function Chart({ data, dataLoading }: WeeklyLineChartProps) {
+  if (dataLoading)
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="animate-spin w-7 h-7" />
+      </div>
+    );
   return (
     <div className="w-full h-64 focus:outline-none">
       <ResponsiveContainer width="100%" height="100%">
         <LineChart data={data}>
-          {/* X Axis (days of week) */}
           <XAxis
-            dataKey="day"
-            tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 10 }}
+            dataKey="week"
+            tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
           />
 
-          {/* Y Axis (hidden gridlines, subtle labels) */}
           <YAxis
+            dataKey="count"
             tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
@@ -65,20 +72,19 @@ export default function Chart({ data }: WeeklyLineChartProps) {
           <Tooltip
             content={<CustomTooltip />}
             cursor={{
-              stroke: "#f2ff62ff",
+              stroke: "#ebff10",
               strokeWidth: 0.5,
               strokeDasharray: "3 3",
             }}
           />
 
-          {/* The line itself */}
           <Line
             type="linear"
             dataKey="total"
-            stroke="#f2ff62ff"
+            stroke="#ebff10"
             strokeWidth={1.5}
-            dot={{ r: 2.5, fill: "#f2ff62ff" }}
-            activeDot={{ r: 4.5, fill: "#f2ff62ff", strokeWidth: 0 }}
+            dot={{ r: 2.5, fill: "#ebff10" }}
+            activeDot={{ r: 4.5, fill: "#ebff10", strokeWidth: 0 }}
           />
         </LineChart>
       </ResponsiveContainer>
