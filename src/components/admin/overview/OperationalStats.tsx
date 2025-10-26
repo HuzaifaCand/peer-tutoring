@@ -52,11 +52,11 @@ export default function OperationalStats() {
             .from("sessions")
             .select("*", { count: "exact", head: true })
             .eq("status", "completed")
-            .eq("verified", false),
+            .is("verified", null),
           supabase
             .from("tutors")
             .select("*", { count: "exact", head: true })
-            .eq("verified", false),
+            .is("approved", null),
         ]);
 
         if (activeErr || pendingSessErr || pendingTutorErr) {
