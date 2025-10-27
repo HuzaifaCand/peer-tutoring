@@ -20,7 +20,7 @@ export default function StatCard({ info, count, loading }: Props) {
   return (
     <Link
       href={info.href}
-      className="group relative flex flex-col justify-between bg-elevatedBg border border-white/10 rounded-xl p-6 hover:border-white/20 hover:bg-hoverBg transition-colors duration-200"
+      className="group relative flex flex-col justify-between bg-elevatedBg border border-textWhite/10 rounded-xl p-6 hover:border-white/20 hover:bg-hoverBg transition-colors duration-200"
     >
       {/* Accent bar */}
       <div className="absolute top-0 left-0 w-full h-1 rounded-t-xl bg-white/5 group-hover:bg-white/10 transition-colors" />

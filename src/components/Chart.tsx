@@ -55,7 +55,7 @@ export default function Chart({ data, dataLoading }: WeeklyLineChartProps) {
         <LineChart data={data}>
           <XAxis
             dataKey="week"
-            tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 12 }}
+            tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 11 }}
             axisLine={false}
             tickLine={false}
           />
