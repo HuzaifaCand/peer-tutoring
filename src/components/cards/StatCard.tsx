@@ -5,7 +5,7 @@ import { ArrowUpRight } from "lucide-react";
 
 type CardUI = {
   label: string;
-  Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   cta: string;
   href: string;
 };
@@ -20,10 +20,11 @@ export default function StatCard({ info, count, loading }: Props) {
   return (
     <Link
       href={info.href}
-      className="group relative flex flex-col justify-between bg-elevatedBg border border-textWhite/10 rounded-xl p-6 hover:border-white/20 hover:bg-hoverBg transition-colors duration-200"
+      className="group relative flex flex-col justify-between bg-elevatedBg rounded-lg p-6 hover:bg-hoverBg/80 transition-colors duration-200"
     >
       {/* Accent bar */}
-      <div className="absolute top-0 left-0 w-full h-1 rounded-t-xl bg-white/5 group-hover:bg-white/10 transition-colors" />
+
+      <div className="absolute top-0.25  left-0 w-full h-2 bg-hoverBg rounded-t-xl" />
 
       {/* Header */}
       <div className="flex items-center justify-between">
@@ -32,12 +33,12 @@ export default function StatCard({ info, count, loading }: Props) {
         </span>
 
         <div className="p-2 rounded-full  border border-white/5">
-          <info.Icon className="w-6 h-6 text-textWhite" />
+          <info.icon className="w-6 h-6 text-textWhite" />
         </div>
       </div>
 
       {/* Count */}
-      <div className="mt-2 mb-6 text-4xl font-semibold text-textWhite tracking-tight leading-none">
+      <div className="mt-2 mb-6 text-3xl font-semibold text-textWhite tracking-tight leading-none">
         {loading ? (
           <div className="w-16 h-9 rounded-md bg-white/10 animate-pulse" />
         ) : (
