@@ -10,19 +10,19 @@ const info = {
     label: "Active Sessions",
     cta: "Manage Active Sessions",
     href: "/admin/sessions/active",
-    Icon: Play,
+    icon: Play,
   },
   pendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
     href: "/admin/sessions/verifications",
-    Icon: ClipboardCheck,
+    icon: ClipboardCheck,
   },
   pendingTutorVerifications: {
     label: "Pending Tutor Approvals",
     cta: "Review Pending Tutors",
     href: "/admin/tutors/verifications",
-    Icon: UserCheck,
+    icon: UserCheck,
   },
 };
 
@@ -84,15 +84,17 @@ export default function OperationalStats() {
   }, []);
 
   return (
-    <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
-      {Object.entries(info).map(([key, value]) => (
-        <StatCard
-          key={key}
-          info={value}
-          count={stats[key as keyof typeof stats]}
-          loading={loading}
-        />
-      ))}
-    </div>
+    <section className="">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        {Object.entries(info).map(([key, value]) => (
+          <StatCard
+            key={key}
+            info={value}
+            count={stats[key as keyof typeof stats]}
+            loading={loading}
+          />
+        ))}
+      </div>
+    </section>
   );
 }

@@ -47,19 +47,17 @@ export default function GradeCount({ type }: { type: "tutors" | "students" }) {
   }, []);
 
   return (
-    <div className="mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <CountCard
-          loading={loading}
-          count={counts.as}
-          label={`AS ${type.charAt(0).toUpperCase() + type.slice(1)}`}
-        />
-        <CountCard
-          loading={loading}
-          count={counts.a2}
-          label={`A2 ${type.charAt(0).toUpperCase() + type.slice(1)}`}
-        />
-      </div>
+    <div className="grid grid-cols-2 gap-4">
+      <CountCard
+        loading={loading}
+        count={counts.as}
+        label={`AS ${type.charAt(0).toUpperCase() + type.slice(1)}`}
+      />
+      <CountCard
+        loading={loading}
+        count={counts.a2}
+        label={`A2 ${type.charAt(0).toUpperCase() + type.slice(1)}`}
+      />
     </div>
   );
 }
