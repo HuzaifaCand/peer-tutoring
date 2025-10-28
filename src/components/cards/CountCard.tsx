@@ -5,7 +5,7 @@ export default function CountCard({
 }: {
   label: string;
   count: number;
-  loading: boolean;
+  loading?: boolean;
 }) {
   return (
     <div className="bg-elevatedBg rounded-xl p-6 flex flex-col items-start justify-between">
