@@ -41,7 +41,7 @@ export function useGradeCount(type: "tutors" | "students") {
     }
 
     fetchCounts();
-  }, []);
+  }, [type]);
 
   return { loading, counts };
 }
