@@ -2,7 +2,7 @@
 
 import Chart from "@/components/Chart";
 import MonthSelector from "@/components/MonthSelector";
-import { useMonthlySessionData } from "@/hooks/useMonthlySessionData";
+import { useMonthlySessionData } from "@/hooks/admin/useMonthlySessionData";
 import { getMonthLabel } from "@/utils/months";
 
 export default function SessionsChart() {
