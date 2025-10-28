@@ -8,7 +8,9 @@ export default function AdminLayout({
   return (
     <div className="flex">
       <AdminSidebar />
-      <main className="flex-1 p-8 md:p-12 max-w-6xl mx-auto">{children}</main>
+      <main className="flex-1 px-6 py-8 md:py-12 md:px-8 max-w-6xl mx-auto">
+        {children}
+      </main>
     </div>
   );
 }
