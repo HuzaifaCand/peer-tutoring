@@ -178,6 +178,7 @@ export type Database = {
       tutors: {
         Row: {
           about: string | null;
+          admin_seen: boolean | null;
           approved: boolean | null;
           created_at: string;
           credentials: string | null;
@@ -189,6 +190,7 @@ export type Database = {
         };
         Insert: {
           about?: string | null;
+          admin_seen?: boolean | null;
           approved?: boolean | null;
           created_at?: string;
           credentials?: string | null;
@@ -200,6 +202,7 @@ export type Database = {
         };
         Update: {
           about?: string | null;
+          admin_seen?: boolean | null;
           approved?: boolean | null;
           created_at?: string;
           credentials?: string | null;
