@@ -8,7 +8,7 @@ export function TableLoading<T extends Record<string, unknown>>({
   return (
     <div className="overflow-hidden rounded-t-xl bg-mainBg shadow-md animate-fadeIn">
       <table className="w-full border-collapse text-sm text-textWhite">
-        <thead className="bg-gradient-to-r from-[#1a1a1a] to-[#222]">
+        <thead className="bg-gradient-to-r from-elevatedBg to-elevatedBg/50">
           <tr>
             {columns.map((col) => (
               <th

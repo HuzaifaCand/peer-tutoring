@@ -1,11 +1,5 @@
 import React from "react";
-import { TableColumn } from "./types";
-
-interface TableRowProps<T> {
-  row: T;
-  columns: TableColumn<T>[];
-  onClick?: () => void;
-}
+import { TableRowProps } from "./types";
 
 export function TableRow<T extends Record<string, unknown>>({
   row,
@@ -19,6 +13,8 @@ export function TableRow<T extends Record<string, unknown>>({
     >
       {columns.map((col) => {
         const value = row[col.key];
+        const content = col.render ? col.render(row) : String(value ?? "");
+
         return (
           <td
             key={String(col.key)}
@@ -29,9 +25,9 @@ export function TableRow<T extends Record<string, unknown>>({
               whiteSpace: col.truncate ? "nowrap" : undefined,
             }}
             className="p-3 text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis"
-            title={col.truncate ? String(value) : undefined}
+            title={col.truncate && !col.render ? String(value) : undefined}
           >
-            {String(value)}
+            {content}
           </td>
         );
       })}
