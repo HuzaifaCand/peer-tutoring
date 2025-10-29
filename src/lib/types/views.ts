@@ -1,4 +1,4 @@
-import { StudentRow, TutorRow, UserRow } from "./types/base";
+import { StudentRow, TutorRow, UserRow } from "./base";
 
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 

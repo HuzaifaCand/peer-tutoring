@@ -1,6 +1,6 @@
 import { Table } from "@/components/table/Table";
 import { getTutors } from "./data";
-import { tutorUserColumns } from "@/lib/views";
+import { tutorUserColumns } from "@/lib/types/views";
 
 export default async function TutorsTable() {
   const formatted = await getTutors();
