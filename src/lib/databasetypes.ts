@@ -19,6 +19,7 @@ export type Database = {
           available: boolean | null;
           created_at: string | null;
           day: string;
+          duration_minutes: number;
           hour: string;
           id: string;
           is_online: boolean | null;
@@ -28,6 +29,7 @@ export type Database = {
           available?: boolean | null;
           created_at?: string | null;
           day: string;
+          duration_minutes?: number;
           hour: string;
           id?: string;
           is_online?: boolean | null;
@@ -37,6 +39,7 @@ export type Database = {
           available?: boolean | null;
           created_at?: string | null;
           day?: string;
+          duration_minutes?: number;
           hour?: string;
           id?: string;
           is_online?: boolean | null;
@@ -180,6 +183,7 @@ export type Database = {
           credentials: string | null;
           grade: string;
           id: string;
+          rejection_reason: string | null;
           subjects: string[];
           updated_at: string;
         };
@@ -190,6 +194,7 @@ export type Database = {
           credentials?: string | null;
           grade: string;
           id: string;
+          rejection_reason?: string | null;
           subjects: string[];
           updated_at?: string;
         };
@@ -200,6 +205,7 @@ export type Database = {
           credentials?: string | null;
           grade?: string;
           id?: string;
+          rejection_reason?: string | null;
           subjects?: string[];
           updated_at?: string;
         };
