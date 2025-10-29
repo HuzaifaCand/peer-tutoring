@@ -1,5 +1,5 @@
-import VerificationBadge from "@/components/VerificationBadge";
-import { GradeBadge } from "@/components/GradeBadge";
+import VerificationBadge from "@/components/admin/tutors/VerificationBadge";
+import { GradeBadge } from "@/components/table/GradeBadge";
 import { TableColumn } from "@/components/table/types";
 import { ComputedTutorRow } from "./getTutors";
 
