@@ -1,4 +1,3 @@
-import React from "react";
 import { TableLoadingProps } from "./types";
 
 export function TableLoading<T extends Record<string, unknown>>({
@@ -10,11 +9,13 @@ export function TableLoading<T extends Record<string, unknown>>({
       <table className="w-full border-collapse text-sm text-textWhite">
         <thead className="bg-gradient-to-r from-elevatedBg to-elevatedBg/50">
           <tr>
-            {columns.map((col) => (
+            {columns.map((col, index) => (
               <th
                 key={String(col.key)}
                 style={{ width: col.width }}
-                className="p-3 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider"
+                className={`py-3 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider ${
+                  index === 0 ? "pl-6" : "pl-3"
+                }`}
               >
                 {col.label}
               </th>
@@ -28,7 +29,7 @@ export function TableLoading<T extends Record<string, unknown>>({
               className="border-b border-white/5 hover:bg-transparent transition-all"
             >
               {columns.map((col, j) => (
-                <td key={j} className="p-3">
+                <td key={j} className={`p-3 ${j === 0 ? "pl-3" : ""}`}>
                   <div className="h-4 w-full max-w-[80%] bg-white/10 rounded-md overflow-hidden relative">
                     <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   </div>
