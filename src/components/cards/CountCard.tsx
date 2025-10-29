@@ -1,3 +1,5 @@
+import TextLoader from "../TextLoader";
+
 export default function CountCard({
   label,
   count,
@@ -12,7 +14,7 @@ export default function CountCard({
       <p className="text-sm text-textMuted">{label}</p>
       <div className="mt-2 h-[32px] flex items-center">
         {loading ? (
-          <div className="w-16 h-7 rounded-md bg-white/10 animate-pulse" />
+          <TextLoader width="w-16" height="h-7" />
         ) : (
           <h2 className="text-3xl font-semibold">{count.toLocaleString()}</h2>
         )}

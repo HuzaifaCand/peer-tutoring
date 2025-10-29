@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import TextLoader from "../TextLoader";
 
 type CardUI = {
   label: string;
@@ -40,7 +41,7 @@ export default function StatCard({ info, count, loading }: Props) {
       {/* Count */}
       <div className="mt-2 mb-6 text-3xl font-semibold text-textWhite tracking-tight leading-none">
         {loading ? (
-          <div className="w-16 h-9 rounded-md bg-white/10 animate-pulse" />
+          <TextLoader width="w-16" height="h-7" />
         ) : (
           count.toLocaleString()
         )}
@@ -51,7 +52,7 @@ export default function StatCard({ info, count, loading }: Props) {
         <span className="text-xs flex items-center gap-1 text-textButton border border-white/10 rounded-md px-3 py-1.5 group-hover:bg-hoverBg transition-all">
           {info.cta}{" "}
           <span>
-            <ArrowUpRight className="w-3 h-3" />
+            <ArrowRight className="w-3 h-3" />
           </span>
         </span>
       </div>
