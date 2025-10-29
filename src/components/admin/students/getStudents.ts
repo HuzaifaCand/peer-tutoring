@@ -1,9 +1,9 @@
 import { supabase } from "@/lib/supabase/client";
 import { StudentUser } from "@/lib/types/views";
 
-export async function getTutors() {
+export async function getStudents() {
   const { data: students, error } = await supabase
-    .from("tutors")
+    .from("students")
     .select("grade, subjects, users(full_name, email)")
     .overrideTypes<StudentUser[]>();
 
@@ -16,8 +16,12 @@ export async function getTutors() {
     id: s.users.email.split("@")[0],
     full_name: s.users.full_name,
     email: s.users.email,
-    grade: s.grade ?? "—",
+    grade: s.grade,
     subjects: s.subjects.join(" | ") || [],
   }));
   return formatted;
 }
+
+export type ComputedStudentRow = Awaited<
+  ReturnType<typeof getStudents>
+>[number];
