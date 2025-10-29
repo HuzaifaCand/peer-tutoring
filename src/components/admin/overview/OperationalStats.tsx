@@ -15,13 +15,13 @@ const info = {
   pendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
-    href: "/admin/sessions/verifications",
+    href: "/admin/sessions",
     icon: ClipboardList, // reviewing items / verification queue
   },
   pendingTutorVerifications: {
     label: "Pending Tutor Approvals",
-    cta: "Review Pending Tutors",
-    href: "/admin/tutors/verifications",
+    cta: "Review Unverified Tutors",
+    href: "/admin/tutors",
     icon: UserCheck2, // reviewing / approving users
   },
 };
