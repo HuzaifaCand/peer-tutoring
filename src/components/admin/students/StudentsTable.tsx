@@ -2,26 +2,8 @@
 
 import { Table } from "@/components/table/Table";
 import { ComputedStudentRow, getStudents } from "./getStudents";
-import { TableColumn } from "@/components/table/types";
-import { GradeBadge } from "@/components/GradeBadge";
+import { studentColumns } from "./StudentTableColumns";
 import { useEffect, useState } from "react";
-
-export const studentUserColumns: TableColumn<ComputedStudentRow>[] = [
-  { key: "id", label: "ID", width: 90 },
-  {
-    key: "full_name",
-    label: "Name",
-    width: 200,
-    render: (row) => (
-      <div className="flex items-center gap-2">
-        <span className="truncate">{row.full_name}</span>
-        <GradeBadge grade={row.grade} />
-      </div>
-    ),
-  },
-  { key: "email", label: "Email", width: 200 },
-  { key: "subjects", label: "Subjects", width: 150 },
-];
 
 export default function StudentsTable() {
   const [data, setData] = useState<ComputedStudentRow[]>([]);
@@ -43,7 +25,7 @@ export default function StudentsTable() {
     <Table
       type="students"
       data={data}
-      columns={studentUserColumns}
+      columns={studentColumns}
       loading={loading}
       setRefetchFlag={setRefetchFlag}
     />

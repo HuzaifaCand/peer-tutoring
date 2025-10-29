@@ -1,5 +1,4 @@
 import SectionHeader from "@/components/SectionHeader";
-import SectionDivider from "@/components/SectionDivider";
 import StudentsTable from "./StudentsTable";
 
 export default async function StudentsOverview() {
@@ -8,7 +7,6 @@ export default async function StudentsOverview() {
       <SectionHeader title="Registered Students" otherText="Username" />
 
       <StudentsTable />
-      <SectionDivider />
     </main>
   );
 }

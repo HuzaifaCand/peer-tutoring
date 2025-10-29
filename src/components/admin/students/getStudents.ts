@@ -14,7 +14,7 @@ export async function getStudents() {
 
   const formatted = (students || []).map((s) => ({
     id: s.users.email.split("@")[0],
-    full_name: s.users.full_name,
+    full_name: s.users.full_name.split(" ").slice(0, -1).join(" "),
     email: s.users.email,
     grade: s.grade,
     subjects: s.subjects.join(" | ") || [],
