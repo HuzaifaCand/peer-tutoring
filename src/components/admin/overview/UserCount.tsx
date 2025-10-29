@@ -3,7 +3,7 @@
 import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import CountCard from "@/components/cards/CountCard";
-import GradeCount from "../GradeCount";
+import GradeCount from "./GradeCount";
 
 export default function UserCount() {
   const [counts, setCounts] = useState({
