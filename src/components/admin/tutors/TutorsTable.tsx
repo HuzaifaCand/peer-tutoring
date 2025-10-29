@@ -2,30 +2,11 @@
 
 import { Table } from "@/components/table/Table";
 import { getTutors, ComputedTutorRow } from "./getTutors";
-import { GradeBadge } from "@/components/GradeBadge";
-import { TableColumn } from "@/components/table/types";
+import { tutorColumns } from "./TutorTableColumns";
 import { useEffect, useState } from "react";
 
-export const tutorUserColumns: TableColumn<ComputedTutorRow>[] = [
-  { key: "id", label: "ID", width: 90 },
-  {
-    key: "full_name",
-    label: "Name",
-    width: 200,
-    render: (row) => (
-      <div className="flex items-center gap-2">
-        <span className="truncate">{row.full_name}</span>
-        <GradeBadge grade={row.grade} />
-      </div>
-    ),
-  },
-  { key: "email", label: "Email", width: 150 },
-  { key: "available_slots", label: "Free Slots", width: 120 },
-  { key: "subjects", label: "Subjects", width: 150 },
-];
-
 export default function TutorsTable() {
-  const [data, setData] = useState<ComputedTutorRow[]>([]);
+  const [tutors, setTutors] = useState<ComputedTutorRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
 
@@ -33,7 +14,27 @@ export default function TutorsTable() {
     async function loadTutors() {
       setLoading(true);
       const formatted = await getTutors();
-      setData(formatted);
+
+      const statusOrder = {
+        Unverified: 0,
+        Verified: 1,
+        Rejected: 2,
+      };
+
+      // Sort tutors by admin_seen first, then by verification status
+      const sorted = [...formatted].sort((a, b) => {
+        // unseen first
+        if (a.admin_seen !== b.admin_seen) {
+          return a.admin_seen ? 1 : -1;
+        }
+        // then by verification status
+        const aStatus = statusOrder[a.verified as keyof typeof statusOrder];
+        const bStatus = statusOrder[b.verified as keyof typeof statusOrder];
+        return aStatus - bStatus;
+      });
+
+      setTutors(sorted);
+
       setLoading(false);
     }
 
@@ -43,8 +44,8 @@ export default function TutorsTable() {
   return (
     <Table
       type="tutors"
-      data={data}
-      columns={tutorUserColumns}
+      data={tutors}
+      columns={tutorColumns}
       loading={loading}
       setRefetchFlag={setRefetchFlag}
     />
