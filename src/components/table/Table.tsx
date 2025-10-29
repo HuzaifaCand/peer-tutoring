@@ -65,6 +65,11 @@ export function Table<T extends Record<string, unknown>>({
           </table>
         )}
       </div>
+      {!loading && (
+        <div className="sticky bottom-0 bg-mainBg/90 backdrop-blur-md flex justify-end py-2 px-4 text-textMuted text-sm border-t border-white/10">
+          {filteredData.length} results shown
+        </div>
+      )}
     </div>
   );
 }
