@@ -2,7 +2,7 @@
 
 import StatCard from "@/components/cards/StatCard";
 import { supabase } from "@/lib/supabase/client";
-import { ClipboardCheck, Play, UserCheck } from "lucide-react";
+import { Activity, ClipboardList, UserCheck2 } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const info = {
@@ -10,22 +10,21 @@ const info = {
     label: "Active Sessions",
     cta: "Manage Active Sessions",
     href: "/admin/sessions/active",
-    icon: Play,
+    icon: Activity, // active/ongoing status
   },
   pendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
     href: "/admin/sessions/verifications",
-    icon: ClipboardCheck,
+    icon: ClipboardList, // reviewing items / verification queue
   },
   pendingTutorVerifications: {
     label: "Pending Tutor Approvals",
     cta: "Review Pending Tutors",
     href: "/admin/tutors/verifications",
-    icon: UserCheck,
+    icon: UserCheck2, // reviewing / approving users
   },
 };
-
 export default function OperationalStats() {
   const [stats, setStats] = useState({
     activeSessions: 0,
@@ -84,7 +83,7 @@ export default function OperationalStats() {
   }, []);
 
   return (
-    <section className="">
+    <section>
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
         {Object.entries(info).map(([key, value]) => (
           <StatCard
