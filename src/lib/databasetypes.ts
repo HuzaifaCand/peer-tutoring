@@ -142,6 +142,7 @@ export type Database = {
       };
       students: {
         Row: {
+          admin_seen: boolean;
           created_at: string;
           extra_info: string | null;
           grade: string;
@@ -150,6 +151,7 @@ export type Database = {
           updated_at: string;
         };
         Insert: {
+          admin_seen?: boolean;
           created_at?: string;
           extra_info?: string | null;
           grade: string;
@@ -158,6 +160,7 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
+          admin_seen?: boolean;
           created_at?: string;
           extra_info?: string | null;
           grade?: string;
@@ -178,7 +181,7 @@ export type Database = {
       tutors: {
         Row: {
           about: string | null;
-          admin_seen: boolean | null;
+          admin_seen: boolean;
           approved: boolean | null;
           created_at: string;
           credentials: string | null;
@@ -190,7 +193,7 @@ export type Database = {
         };
         Insert: {
           about?: string | null;
-          admin_seen?: boolean | null;
+          admin_seen?: boolean;
           approved?: boolean | null;
           created_at?: string;
           credentials?: string | null;
@@ -202,7 +205,7 @@ export type Database = {
         };
         Update: {
           about?: string | null;
-          admin_seen?: boolean | null;
+          admin_seen?: boolean;
           approved?: boolean | null;
           created_at?: string;
           credentials?: string | null;
