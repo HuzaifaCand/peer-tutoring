@@ -21,8 +21,8 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-0 h-screen hidden lg:flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-track-transparent w-64 bg-elevatedBg text-textWhite flex flex-col border-r border-white/10 ">
-      <div className="px-4 pt-14 pb-4 text-lg font-bold border-b border-white/10 ">
+    <aside className="sticky top-0 h-screen hidden lg:flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-track-transparent w-64 bg-elevatedBg text-textWhite flex flex-col border-r border-white/5 ">
+      <div className="px-4 pt-13 pb-3 text-xl font-bold border-b border-white/5 ">
         Dashboard
       </div>
 
@@ -38,7 +38,7 @@ export default function AdminSidebar() {
               href={href}
               className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-sm font-medium ${
                 isActive
-                  ? "bg-white/10 text-white"
+                  ? "bg-white/5 text-white"
                   : "hover:bg-white/5 text-gray-300"
               }`}
             >
@@ -52,12 +52,12 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="px-3 py-4 border-t border-white/10    ">
+      <div className="px-3 py-4 border-t border-white/5    ">
         <Link
           href="/admin/logout"
           className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-sm font-medium ${
             pathname === "/admin/logout"
-              ? "bg-white/10 text-white"
+              ? "bg-white/5 text-white"
               : "hover:bg-white/5 text-gray-300"
           }`}
         >
