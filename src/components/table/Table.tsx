@@ -74,6 +74,7 @@ export function Table<K extends keyof TableRowByType>({
     <div className="w-full text-sm overflow-x-auto">
       <TableTopbar
         gradeCounts={gradeCounts}
+        type={type}
         searchConfig={{
           value: search,
           setValue: setSearch,
@@ -94,7 +95,7 @@ export function Table<K extends keyof TableRowByType>({
           <TableLoading columns={columns} rowCount={filteredData.length || 8} />
         )}
         {!loading && (
-          <table className="w-full border-collapse text-sm text-textWhite">
+          <table className="w-full border-collapse text-xs text-textWhite">
             <TableHeader columns={columns} />
             <TableBody
               data={filteredData}

@@ -14,6 +14,7 @@ interface TopbarProps {
     refetch: refetchFlagType;
   };
   gradeCounts: { as: number; a2: number } | null;
+  type: "tutors" | "students" | "sessions";
   availabilityFilter?: {
     value: "all" | "active" | "inactive";
     setValue: (v: "all" | "active" | "inactive") => void;
@@ -25,6 +26,7 @@ export function TableTopbar({
   searchConfig,
   loadingState,
   availabilityFilter,
+  type,
 }: TopbarProps) {
   const { value, setValue, searchable } = searchConfig;
   const { loading, refetch } = loadingState;
@@ -40,7 +42,7 @@ export function TableTopbar({
       </div>
 
       <div className="flex items-center gap-2 mb-1">
-        {availabilityFilter && (
+        {availabilityFilter && type === "tutors" && (
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
               {["active", "inactive"].map((key) => {

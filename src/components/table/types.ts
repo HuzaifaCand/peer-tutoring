@@ -1,7 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
-import { ComputedTutorRow } from "../admin/tutors/getTutors";
-import { ComputedStudentRow } from "../admin/students/getStudents";
-
 export interface TableColumn<T> {
   key: keyof T | string;
   label: string;
@@ -16,10 +12,15 @@ export interface TableRowProps<T> {
   onClick?: () => void;
 }
 
+import { ComputedTutorRow } from "../admin/tutors/getTutors";
+import { ComputedStudentRow } from "../admin/students/getStudents";
+
 export type TableRowByType = {
   tutors: ComputedTutorRow;
   students: ComputedStudentRow;
 };
+
+import { Dispatch, SetStateAction } from "react";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
 export interface DataTableProps<T> {
