@@ -5,7 +5,11 @@ import { getTutors, ComputedTutorRow } from "./getTutors";
 import { tutorColumns } from "./TutorTableColumns";
 import { useEffect, useState } from "react";
 
-export default function TutorsTable() {
+interface TutorsTableProps {
+  setRowCount: (rows: number) => void;
+}
+
+export default function TutorsTable({ setRowCount }: TutorsTableProps) {
   const [tutors, setTutors] = useState<ComputedTutorRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
@@ -21,16 +25,19 @@ export default function TutorsTable() {
         Rejected: 2,
       };
 
-      // Sort tutors by admin_seen first, then by verification status
+      // sort by verification status first, then admin_seen
       const sorted = [...formatted].sort((a, b) => {
-        // unseen first
+        // first by verification
+        const aStatus = statusOrder[a.verified as keyof typeof statusOrder];
+        const bStatus = statusOrder[b.verified as keyof typeof statusOrder];
+        if (aStatus !== bStatus) return aStatus - bStatus;
+
+        // then unseen first within each status group
         if (a.admin_seen !== b.admin_seen) {
           return a.admin_seen ? 1 : -1;
         }
-        // then by verification status
-        const aStatus = statusOrder[a.verified as keyof typeof statusOrder];
-        const bStatus = statusOrder[b.verified as keyof typeof statusOrder];
-        return aStatus - bStatus;
+
+        return 0;
       });
 
       setTutors(sorted);
@@ -48,6 +55,7 @@ export default function TutorsTable() {
       columns={tutorColumns}
       loading={loading}
       setRefetchFlag={setRefetchFlag}
+      setRowCount={setRowCount}
     />
   );
 }
