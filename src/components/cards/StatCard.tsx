@@ -25,11 +25,11 @@ export default function StatCard({ info, count, loading }: Props) {
     >
       {/* Accent bar */}
 
-      <div className="absolute top-0.25  left-0 w-full h-2 bg-hoverBg rounded-t-xl" />
+      <div className="absolute top-0 left-0 w-full h-2 bg-hoverBg rounded-t-xl" />
 
       {/* Header */}
       <div className="flex items-center justify-between">
-        <span className="text-sm text-textMuted tracking-wide">
+        <span className="text-[13px] text-textMuted tracking-wide">
           {info.label}
         </span>
 
