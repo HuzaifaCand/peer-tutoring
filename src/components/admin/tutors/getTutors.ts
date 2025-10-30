@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { TutorUser } from "@/lib/types/views";
+import { TutorUser } from "@/lib/computedtypes";
 
 export async function getTutors() {
   const { data: tutors, error } = await supabase
