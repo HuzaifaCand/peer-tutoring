@@ -5,7 +5,11 @@ import { ComputedStudentRow, getStudents } from "./getStudents";
 import { studentColumns } from "./StudentTableColumns";
 import { useEffect, useState } from "react";
 
-export default function StudentsTable() {
+interface StudentsTableProps {
+  setRowCount: (rows: number) => void;
+}
+
+export default function StudentsTable({ setRowCount }: StudentsTableProps) {
   const [data, setData] = useState<ComputedStudentRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
@@ -28,6 +32,7 @@ export default function StudentsTable() {
       columns={studentColumns}
       loading={loading}
       setRefetchFlag={setRefetchFlag}
+      setRowCount={setRowCount}
     />
   );
 }

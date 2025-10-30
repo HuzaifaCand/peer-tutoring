@@ -8,8 +8,13 @@ export const studentColumns: TableColumn<ComputedStudentRow>[] = [
     label: "ID",
     width: 80,
     render: (row) => (
-      <div className="flex items-center ml-3 gap-2">
-        <span className="truncate">{row.id}</span>
+      <div className="flex items-center gap-2">
+        <span
+          className={`h-1 w-1 rounded-full ${
+            row.admin_seen === false ? "bg-yellow-400" : "invisible"
+          }`}
+        />
+        <span>{row.id}</span>
         <GradeBadge grade={row.grade} />
       </div>
     ),
