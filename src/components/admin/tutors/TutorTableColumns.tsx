@@ -29,12 +29,12 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
     label: "Name ",
     width: 120,
   },
-  { key: "subjects", label: "Subjects", width: 150 },
+  { key: "subjects", label: "Subjects", width: 120 },
 
   {
     key: "available_slots",
-    label: "Free Slots",
-    width: 120,
+    label: "Available Slots",
+    width: 150,
     render: (row) => (
       <div
         title={`${
