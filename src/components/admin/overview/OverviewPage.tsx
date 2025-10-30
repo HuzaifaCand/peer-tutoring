@@ -10,7 +10,7 @@ export default function OverviewPage() {
   return (
     <main className="text-textWhite">
       {/* Header */}
-      <SectionHeader title="Overview" rightSlot="Username" />
+      <SectionHeader title="Overview" />
 
       {/* Student and Tutor Count */}
       <UserCount />
