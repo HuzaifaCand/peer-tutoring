@@ -53,7 +53,7 @@ export function Table<K extends keyof TableRowByType>({
     }
 
     return filtered;
-  }, [search, data, availabilityFilter]);
+  }, [search, data, availabilityFilter, type]);
 
   useEffect(() => {
     if (setRowCount) {
