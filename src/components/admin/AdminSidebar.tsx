@@ -21,9 +21,9 @@ export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="sticky top-0 h-screen hidden lg:flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-track-transparent w-72 bg-elevatedBg text-textWhite flex flex-col border-r border-white/10 ">
+    <aside className="sticky top-0 h-screen hidden lg:flex flex-col justify-between overflow-y-auto scrollbar-thin scrollbar-track-transparent w-64 bg-elevatedBg text-textWhite flex flex-col border-r border-white/10 ">
       <div className="px-4 pt-14 pb-4 text-lg font-bold border-b border-white/10 ">
-        Admin Dashboard
+        Dashboard
       </div>
 
       <nav className="flex-1 px-3 py-4 space-y-1">
