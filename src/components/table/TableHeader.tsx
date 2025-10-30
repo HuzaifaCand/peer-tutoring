@@ -18,7 +18,7 @@ export function TableHeader<T extends Record<string, unknown>>({
               width: col.width,
               maxWidth: col.width,
             }}
-            className={`py-3  text-left text-sm font-semibold text-textButton uppercase tracking-wide ${
+            className={`py-3  text-left text-[13px] font-semibold text-textButton uppercase tracking-wide ${
               index === 0 ? "pl-6" : "pl-3"
             }`}
           >
