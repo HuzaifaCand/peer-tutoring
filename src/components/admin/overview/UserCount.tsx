@@ -71,10 +71,9 @@ export default function UserCount() {
 
             <Link
               href={`/admin/${item.type}`}
-              className="mt-auto flex items-center w-full justify-center gap-2 rounded-lg bg-elevatedBg/70 hover:bg-elevatedBg transition text-textWhite/90 hover:text-textButton font-medium py-2 px-3 text-sm active:scale-95"
+              className="mt-auto w-full text-center rounded-lg bg-mainBg hover:bg-elevatedBg border border-textWhite/10 transition text-textButton font-medium py-2 px-3 text-xs sm:text-sm active:scale-95"
             >
               View {item.capitalized}
-              <ArrowRight className="w-3 h-3" />
             </Link>
           </div>
         ))}
