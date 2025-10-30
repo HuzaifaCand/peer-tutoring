@@ -15,13 +15,13 @@ export function GradeCounts({ counts, loading }: CountsProps) {
       {items.map(({ label, value }) => (
         <div
           key={label}
-          className="rounded-lg bg-elevatedBg px-4 py-2 shadow-sm text-textWhite font-medium flex items-baseline gap-1"
+          className="rounded-lg bg-elevatedBg px-3 py-1.5 shadow-sm text-textWhite font-medium flex items-baseline gap-1"
         >
           {loading ? (
             <TextLoader width="w-7" height="h-5" />
           ) : (
             <>
-              <span className="text-xl font-semibold leading-none">
+              <span className="text-lg font-semibold leading-none">
                 {value}
               </span>
               <span className="text-[10px] text-textWhite/70 font-medium tracking-wide relative top-[1px]">
