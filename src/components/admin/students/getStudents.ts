@@ -4,7 +4,7 @@ import { StudentUser } from "@/lib/types/views";
 export async function getStudents() {
   const { data: students, error } = await supabase
     .from("students")
-    .select("grade, subjects, users(full_name, email)")
+    .select("grade, subjects, admin_seen, users(full_name, email)")
     .overrideTypes<StudentUser[]>();
 
   if (error) {
@@ -18,6 +18,7 @@ export async function getStudents() {
     email: s.users.email,
     grade: s.grade,
     subjects: s.subjects.join(" | ") || [],
+    admin_seen: s.admin_seen,
   }));
   return formatted;
 }
