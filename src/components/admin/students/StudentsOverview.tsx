@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function StudentsOverview() {
   const [rowCount, setRowCount] = useState(0);
   return (
-    <main className="text-textWhite">
+    <main>
       <SectionHeader
         title="Registered Students"
         rightSlot={`${rowCount} rows shown`}
