@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { DataTableProps } from "./types";
+import { useState, useMemo, useEffect } from "react";
+import { DataTableProps, TableRowByType } from "./types";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
 import { TableLoading } from "./TableLoading";
 import { TableTopbar } from "./TableTopbar";
 
-export function Table<T extends Record<string, unknown>>({
+export function Table<K extends keyof TableRowByType>({
   type,
   data,
   columns,
@@ -15,16 +15,51 @@ export function Table<T extends Record<string, unknown>>({
   loading,
   searchable = true,
   setRefetchFlag,
-}: DataTableProps<T>) {
+  setRowCount,
+}: DataTableProps<TableRowByType[K]> & { type: K }) {
   const [search, setSearch] = useState("");
+  const [availabilityFilter, setAvailabilityFilter] = useState<
+    "all" | "active" | "inactive"
+  >("all");
 
+  // compuiting filtered data
   const filteredData = useMemo(() => {
-    if (!search.trim()) return data;
-    const lower = search.toLowerCase();
-    return data.filter((row) =>
-      Object.values(row).some((v) => String(v).toLowerCase().includes(lower))
-    );
-  }, [search, data]);
+    let filtered = data;
+
+    // availability filter first
+    if (type === "tutors") {
+      const tutorData = data as TableRowByType["tutors"][];
+
+      if (availabilityFilter !== "all") {
+        filtered = tutorData.filter((row) => {
+          const isActive = row.unavailable_slots > 0;
+          return availabilityFilter === "active" ? isActive : !isActive;
+        });
+      }
+    }
+
+    // search filter
+    if (search.trim()) {
+      const lower = search.toLowerCase();
+      filtered = filtered.filter((row) =>
+        Object.entries(row).some(([key, value]) => {
+          const val = String(value).toLowerCase();
+
+          if (key === "full_name") return val.startsWith(lower);
+          if (key === "grade") return val === lower;
+          return val.includes(lower);
+        })
+      );
+    }
+
+    return filtered;
+  }, [search, data, availabilityFilter]);
+
+  useEffect(() => {
+    if (setRowCount) {
+      setRowCount(filteredData.length);
+    }
+  }, [filteredData, setRowCount]);
 
   const gradeCounts = useMemo(() => {
     if (type !== "students" && type !== "tutors") return null;
@@ -48,11 +83,15 @@ export function Table<T extends Record<string, unknown>>({
           loading,
           refetch: setRefetchFlag,
         }}
+        availabilityFilter={{
+          value: availabilityFilter,
+          setValue: setAvailabilityFilter,
+        }}
       />
 
       <div className="overflow-hidden rounded-t-xl bg-mainBg shadow-md">
         {loading && (
-          <TableLoading columns={columns} rowCount={filteredData.length} />
+          <TableLoading columns={columns} rowCount={filteredData.length || 8} />
         )}
         {!loading && (
           <table className="w-full border-collapse text-sm text-textWhite">
@@ -65,11 +104,6 @@ export function Table<T extends Record<string, unknown>>({
           </table>
         )}
       </div>
-      {!loading && (
-        <div className="sticky bottom-0 bg-mainBg/90 backdrop-blur-md flex justify-end py-2 px-4 text-textMuted text-sm border-t border-white/10">
-          {filteredData.length} results shown
-        </div>
-      )}
     </div>
   );
 }
