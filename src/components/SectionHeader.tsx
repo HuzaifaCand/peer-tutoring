@@ -1,14 +1,16 @@
 export default function SectionHeader({
   title,
-  otherText,
+  rightSlot,
 }: {
   title: string;
-  otherText: string;
+  rightSlot?: React.ReactNode;
 }) {
   return (
-    <div className="pb-4 border-b border-textWhite/10 flex flex-col gap-2 md:gap-0 md:flex-row md:justify-between md:items-end mb-8">
-      <h1 className="text-2xl sm:text-3xl font-semibold">{title}</h1>
-      <p className="text-xs text-textMuted">{otherText}</p>
+    <div className="pb-4 border-b border-textWhite/10 flex flex-col gap-2 sm:gap-0 sm:flex-row sm:justify-between sm:items-end mb-8">
+      <h1 className="text-2xl md:text-3xl font-semibold">{title}</h1>
+      {rightSlot && (
+        <div className="text-xs md:text-sm text-textMuted">{rightSlot}</div>
+      )}
     </div>
   );
 }
