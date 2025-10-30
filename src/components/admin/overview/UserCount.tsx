@@ -70,7 +70,7 @@ export default function UserCount() {
             <GradeCount type={item.type} />
 
             <Link
-              href={`/admin/${item.capitalized}`}
+              href={`/admin/${item.type}`}
               className="mt-auto flex items-center w-full justify-center gap-2 rounded-lg bg-elevatedBg/70 hover:bg-elevatedBg transition text-textWhite/90 hover:text-textButton font-medium py-2 px-3 text-sm active:scale-95"
             >
               View {item.capitalized}
