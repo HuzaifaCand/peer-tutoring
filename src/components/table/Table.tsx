@@ -6,6 +6,7 @@ import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
 import { TableLoading } from "./TableLoading";
 import { TableTopbar } from "./TableTopbar";
+import { availabilities } from "./AvailabilityFilter";
 
 export function Table<K extends keyof TableRowByType>({
   type,
@@ -18,9 +19,8 @@ export function Table<K extends keyof TableRowByType>({
   setRowCount,
 }: DataTableProps<TableRowByType[K]> & { type: K }) {
   const [search, setSearch] = useState("");
-  const [availabilityFilter, setAvailabilityFilter] = useState<
-    "all" | "active" | "inactive"
-  >("all");
+  const [availabilityFilter, setAvailabilityFilter] =
+    useState<availabilities>("all");
 
   // compuiting filtered data
   const filteredData = useMemo(() => {
