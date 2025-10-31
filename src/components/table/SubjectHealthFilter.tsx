@@ -1,5 +1,8 @@
 "use client";
 
+import { SubjectHealthStatus } from "../admin/overview/getSubjectsHealth";
+import { titles } from "../admin/overview/SubjectsHealthTable";
+
 export type healths = "all" | "healthy" | "oversupply" | "low-supply";
 interface SubjectHealthFilterProps {
   healths: {
@@ -30,6 +33,7 @@ export function SubjectHealthFilter({ healths }: SubjectHealthFilterProps) {
 
           return (
             <button
+              title={titles[key as SubjectHealthStatus]}
               key={key}
               onClick={() =>
                 healths.setValue(

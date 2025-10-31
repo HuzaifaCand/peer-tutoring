@@ -8,7 +8,7 @@ import {
 } from "./getSubjectsHealth";
 import HealthBadge from "../tutors/HealthBadge";
 
-const titles: Record<SubjectHealthStatus, string> = {
+export const titles: Record<SubjectHealthStatus, string> = {
   healthy: "Good Student-Teacher Ratio",
   "low-supply": "Lack of sufficient teachers for this subject",
   oversupply: "Not enough students for this subject; too many teachers",
