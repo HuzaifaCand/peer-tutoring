@@ -2,24 +2,22 @@
 
 import SectionHeader from "@/components/SectionHeader";
 import OperationalStats from "./OperationalStats";
-import UserCount from "./UserCount";
-import SessionsChart from "./SessionsChart";
+import UsersOverview from "./UsersOverview";
 import SectionDivider from "@/components/SectionDivider";
 
 export default function OverviewPage() {
   return (
-    <main className="text-textWhite">
+    <main>
       {/* Header */}
       <SectionHeader title="Overview" />
 
-      {/* Student and Tutor Count */}
-      <UserCount />
-      <SectionDivider />
       {/* things that require looking at basically */}
       <OperationalStats />
       <SectionDivider />
 
-      <SessionsChart />
+      {/* Student and Tutor Count with buttons to go to either page*/}
+      <UsersOverview />
+      <SectionDivider />
     </main>
   );
 }
