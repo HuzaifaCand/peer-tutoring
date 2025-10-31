@@ -4,7 +4,7 @@ import { Database } from "./databasetypes";
 
 export type StudentRow = Database["public"]["Tables"]["students"]["Row"];
 export type TutorRow = Database["public"]["Tables"]["tutors"]["Row"];
-export type SessionRow = Database["public"]["Tables"]["tutors"]["Row"];
+export type SessionRow = Database["public"]["Tables"]["sessions"]["Row"];
 export type UserRow = Database["public"]["Tables"]["users"]["Row"];
 export type SlotsRow = Database["public"]["Tables"]["available_slots"]["Row"];
 
@@ -17,4 +17,18 @@ export type StudentUser = StudentRow & {
 export type TutorUser = TutorRow & {
   users: Pick<UserRow, "full_name" | "email">; // student table on admins/tutor
   avaialble_slots: SlotsRow[];
+};
+
+export type SessionWithUsers = SessionRow & {
+  tutors: {
+    users: Pick<UserRow, "full_name" | "email">;
+  };
+  students: {
+    users: Pick<UserRow, "full_name" | "email">;
+  };
+};
+
+export type CancelledSession = SessionWithUsers & {
+  status: "cancelled";
+  cancel_reason: string | null;
 };
