@@ -1,8 +1,8 @@
 import { availabilities, AvailabilityFilter } from "./AvailabilityFilter";
 import { GradeCounts } from "./GradeCounts";
 import { TableSearch } from "./TableSearch";
-import { refetchFlagType } from "./types";
-import { RefreshCcw } from "lucide-react";
+import { refetchFlagType, tableTypes } from "./types";
+import { Info, RefreshCcw } from "lucide-react";
 
 interface TopbarProps {
   searchConfig: {
@@ -14,8 +14,9 @@ interface TopbarProps {
     loading: boolean;
     refetch: refetchFlagType;
   };
-  gradeCounts: { as: number; a2: number } | null;
-  type: "tutors" | "students" | "sessions";
+  gradeCounts?: { as: number; a2: number } | null;
+  rowCount: number;
+  type: tableTypes;
   availabilityFilter?: {
     value: availabilities;
     setValue: (v: availabilities) => void;
@@ -24,6 +25,7 @@ interface TopbarProps {
 
 export function TableTopbar({
   gradeCounts,
+  rowCount,
   searchConfig,
   loadingState,
   availabilityFilter,
@@ -40,13 +42,25 @@ export function TableTopbar({
     <div className="flex justify-between items-center mb-3">
       <div className="flex items-center gap-3">
         {gradeCounts && <GradeCounts counts={gradeCounts} loading={loading} />}
+        {type === "cancelledSessions" && (
+          <p className="text-xs text-textMuted">{rowCount} rows shown</p>
+        )}
       </div>
 
       <div className="flex items-center gap-2 mb-1">
         {availabilityFilter && type === "tutors" && (
           <AvailabilityFilter availabilityFilter={availabilityFilter} />
         )}
-        {searchable && <TableSearch value={value} onChange={setValue} />}
+        {searchable && (
+          <div className="flex items-center gap-2">
+            {type.includes("Sessions") && (
+              <div title="You can search by tutor or student id as well">
+                <Info className="w-5 h-5 text-textMuted/80 hover:text-textWhite" />
+              </div>
+            )}
+            <TableSearch value={value} onChange={setValue} />
+          </div>
+        )}
 
         <button
           onClick={handleRefresh}
