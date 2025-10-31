@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { DataTableProps, TableRowByType } from "./types";
 import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";

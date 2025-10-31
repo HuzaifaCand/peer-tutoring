@@ -8,7 +8,6 @@ import {
   getCancelledSessions,
 } from "./getCancelledSessions";
 import { cancelledSessionColumns } from "./CancelledSessionColumns";
-import { BadgeInfoIcon, InfoIcon } from "lucide-react";
 
 export default function CancelledSessionsTable() {
   const [data, setData] = useState<ComputedCancelledSessionRow[]>([]);
