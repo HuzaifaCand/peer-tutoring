@@ -34,8 +34,8 @@ export default function SidebarContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (
-    <section className="flex flex-col h-screen">
-      <div className="px-4 pt-13 pb-3 text-xl font-bold border-b border-white/5 ">
+    <section className="flex flex-col min-h-full">
+      <div className="px-4 lg:pt-13 pb-3 text-xl font-bold border-b border-white/5 ">
         Dashboard
       </div>
 
