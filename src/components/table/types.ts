@@ -22,14 +22,17 @@ export type tableTypes =
   | "cancelledSessions"
   | "activeSessions"
   | "scheduledSessions"
-  | "completedSessions";
+  | "completedSessions"
+  | "subjects";
 export type TableRowByType = {
   tutors: ComputedTutorRow;
   students: ComputedStudentRow;
   cancelledSessions: ComputedCancelledSessionRow;
+  subjects: ComputedSubjectHealthView;
 };
 
 import { Dispatch, SetStateAction } from "react";
+import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
 export interface DataTableProps<T> {
