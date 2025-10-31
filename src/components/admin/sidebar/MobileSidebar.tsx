@@ -1,14 +1,21 @@
 "use client";
 
 import { X, AlignJustify } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SidebarContent from "./SidebarContent";
 
 export default function MobileSidebar() {
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
-    <div className="lg:hidden pt-4 pl-4 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-elevatedBg hover:scrollbar-thumb-elevatedBg ">
+    <div className="lg:hidden p-4 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-elevatedBg hover:scrollbar-thumb-elevatedBg ">
       <button onClick={() => setOpen(true)} className="text-textWhite">
         <AlignJustify size={20} />
       </button>
@@ -20,7 +27,7 @@ export default function MobileSidebar() {
       )}
 
       <div
-        className={`fixed inset-0 w-4/5 h-full bg-elevatedBg text-textWhite z-50 p-4 overflow-y-auto lg:hidden transition-transform duration-300 ease-in-out scrollbar-thin scrollbar-track-transparent scrollbar-thumb-elevatedBg hover:scrollbar-thumb-elevatedBg ${
+        className={`fixed inset-0 w-4/5 sm:w-2/5 md:w-1/3 h-full bg-elevatedBg text-textWhite z-50 p-4 overflow-y-auto lg:hidden transition-transform duration-300 ease-in-out scrollbar-thin scrollbar-track-transparent scrollbar-thumb-elevatedBg hover:scrollbar-thumb-elevatedBg ${
           open
             ? "translate-x-0 opacity-100 pointer-events-auto"
             : "-translate-x-full opacity-0 pointer-events-none"
@@ -36,5 +43,3 @@ export default function MobileSidebar() {
     </div>
   );
 }
-
-// redeploy
