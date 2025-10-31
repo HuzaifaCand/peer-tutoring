@@ -3,6 +3,8 @@ import { GradeBadge } from "@/components/table/GradeBadge";
 import { TableColumn } from "@/components/table/types";
 import { ComputedTutorRow } from "./getTutors";
 
+export type verificationStatus = "verified" | "rejected" | "unverified";
+
 export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
     key: "id",
@@ -19,7 +21,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
         <GradeBadge grade={row.grade} />
         <VerificationBadge
           title={`Status: ${row.verified}`}
-          status={row.verified as "Verified" | "Rejected" | "Unverified"}
+          status={row.verified as verificationStatus}
         />
       </div>
     ),

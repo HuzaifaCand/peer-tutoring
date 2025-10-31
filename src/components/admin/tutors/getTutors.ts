@@ -29,10 +29,10 @@ export async function getTutors() {
     subjects: t.subjects.join(" | "),
     verified:
       t.approved === false
-        ? "Rejected"
+        ? "rejected"
         : t.approved === true
-        ? "Verified"
-        : "Unverified",
+        ? "verified"
+        : "unverified",
     available_slots: t.available_slots
       ? t.available_slots.filter((s) => s.available).length
       : 0, // count only available ones

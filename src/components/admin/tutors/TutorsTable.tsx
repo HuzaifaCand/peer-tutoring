@@ -2,7 +2,7 @@
 
 import { Table } from "@/components/table/Table";
 import { getTutors, ComputedTutorRow } from "./getTutors";
-import { tutorColumns } from "./TutorTableColumns";
+import { tutorColumns, verificationStatus } from "./TutorTableColumns";
 import { useEffect, useState } from "react";
 
 interface TutorsTableProps {
@@ -19,10 +19,10 @@ export default function TutorsTable({ setRowCount }: TutorsTableProps) {
       setLoading(true);
       const formatted = await getTutors();
 
-      const statusOrder = {
-        Unverified: 0,
-        Verified: 1,
-        Rejected: 2,
+      const statusOrder: Record<verificationStatus, number> = {
+        unverified: 0,
+        verified: 1,
+        rejected: 2,
       };
 
       // sort by verification status first, then admin_seen

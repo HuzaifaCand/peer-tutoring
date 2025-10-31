@@ -15,11 +15,5 @@ export default function HealthBadge({
       ? "bg-red-500/20 text-red-200 border border-red-500/40"
       : "bg-yellow-500/20 text-yellow-200 border border-yellow-500/40"; // rejected
 
-  return (
-    <Badge
-      title={title}
-      styles={styles}
-      value={status.slice(0, 1).toUpperCase() + status.slice(1)}
-    />
-  );
+  return <Badge title={title} styles={styles} value={status} />;
 }
