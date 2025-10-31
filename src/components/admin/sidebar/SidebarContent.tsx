@@ -6,23 +6,27 @@ import {
   LayoutDashboard,
   Users,
   GraduationCap,
-  Clock,
-  LogOut,
-  Activity,
-  Clock2,
+  CalendarClock,
+  PlayCircle,
+  CalendarDays,
   Verified,
+  LogOut,
 } from "lucide-react";
 
 const navItems = [
   { href: "/admin", label: "Overview", icon: LayoutDashboard },
   { href: "/admin/students", label: "Students", icon: Users },
   { href: "/admin/tutors", label: "Tutors", icon: GraduationCap },
-  { href: "/admin/sessions", label: "Sessions", icon: Clock },
-  { href: "/admin/sessions/active", label: "Active Sessions", icon: Activity },
+  { href: "/admin/sessions", label: "Sessions", icon: CalendarClock },
+  {
+    href: "/admin/sessions/active",
+    label: "Active Sessions",
+    icon: PlayCircle,
+  },
   {
     href: "/admin/sessions/scheduled",
     label: "Scheduled Sessions",
-    icon: Clock2,
+    icon: CalendarDays,
   },
   {
     href: "/admin/sessions/completed",
@@ -30,12 +34,13 @@ const navItems = [
     icon: Verified,
   },
 ];
+
 export default function SidebarContent({ onClose }: { onClose?: () => void }) {
   const pathname = usePathname();
 
   return (
     <section className="flex flex-col min-h-full">
-      <div className="px-4 lg:pt-13 pb-3 text-xl font-bold border-b border-white/5 ">
+      <div className="px-4 lg:pt-13 pb-3 text-xl font-bold border-b border-white/5">
         Dashboard
       </div>
 
@@ -43,7 +48,8 @@ export default function SidebarContent({ onClose }: { onClose?: () => void }) {
         {navItems.map(({ href, label, icon: Icon }) => {
           const isActive =
             pathname === href ||
-            (href !== "/admin" && pathname.startsWith(href));
+            (pathname.startsWith(href + "/") &&
+              !["/admin", "/admin/sessions"].includes(href));
 
           return (
             <Link
@@ -66,7 +72,7 @@ export default function SidebarContent({ onClose }: { onClose?: () => void }) {
         })}
       </nav>
 
-      <div className="pl-2 pr-3 py-4 border-t border-white/5 ">
+      <div className="mt-auto pl-2 pr-3 py-4 border-t border-white/5">
         <Link
           href="/admin/logout"
           className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium ${
@@ -76,7 +82,7 @@ export default function SidebarContent({ onClose }: { onClose?: () => void }) {
           }`}
           onClick={onClose}
         >
-          <LogOut size={16} className="text-gray-400" />
+          <LogOut size={15} className="text-gray-400" />
           <span>Sign Out</span>
         </Link>
       </div>
