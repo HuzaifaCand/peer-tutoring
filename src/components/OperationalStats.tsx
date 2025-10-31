@@ -97,7 +97,7 @@ export default function OperationalStats({ config }: OperationalStatsProps) {
   }, [config]);
 
   const enabledCount = Object.entries(config).filter(
-    ([enabled]) => enabled
+    ([_, enabled]) => enabled
   ).length;
 
   const gridColsClass = enabledCount <= 2 ? "sm:grid-cols-2" : "sm:grid-cols-3";
