@@ -9,7 +9,7 @@ interface TableSearchProps {
 export function TableSearch({ value, onChange }: TableSearchProps) {
   return (
     <div className="flex items-center justify-end px-1">
-      <div className="relative w-48 sm:w-56">
+      <div className="relative w-42 sm:w-56">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
           size={12}
