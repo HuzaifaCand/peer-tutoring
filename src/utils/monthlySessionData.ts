@@ -9,7 +9,7 @@ import {
 import { supabase } from "@/lib/supabase/client";
 
 function addOrdinalSuffix(day: number) {
-  if (day > 3 && day < 21) return `${day}th`; // 4–20 always 'th'
+  if (day > 3 && day < 21) return `${day}th`;
   switch (day % 10) {
     case 1:
       return `${day}st`;
@@ -28,10 +28,10 @@ export async function getMonthlySessionData(year: number, month: number) {
 
   const { data, error } = await supabase
     .from("sessions")
-    .select("scheduled_at")
+    .select("scheduled_for")
     .eq("status", "completed")
-    .gte("scheduled_at", monthStart.toISOString())
-    .lt("scheduled_at", monthEnd.toISOString());
+    .gte("scheduled_for", monthStart.toISOString())
+    .lt("scheduled_for", monthEnd.toISOString());
 
   if (error) {
     console.error("Error fetching sessions:", error);
@@ -54,7 +54,7 @@ export async function getMonthlySessionData(year: number, month: number) {
   // --- Count sessions per week range ---
   const weekCounts = weekRanges.map(({ start, end }) => {
     const count = data.filter((session) => {
-      const date = new Date(session.scheduled_at);
+      const date = new Date(session.scheduled_for);
       return date >= start && date <= end;
     }).length;
 
