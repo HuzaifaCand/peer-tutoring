@@ -4,6 +4,7 @@ import SectionHeader from "@/components/SectionHeader";
 import OperationalStats from "@/components/OperationalStats";
 import UsersOverview from "./UsersOverview";
 import SectionDivider from "@/components/SectionDivider";
+import SubjectsHealthTable from "./SubjectsHealthTable";
 
 export default function OverviewPage() {
   return (
@@ -23,6 +24,7 @@ export default function OverviewPage() {
       {/* Student and Tutor Count with buttons to go to either page*/}
       <UsersOverview />
       <SectionDivider />
+      <SubjectsHealthTable />
     </main>
   );
 }

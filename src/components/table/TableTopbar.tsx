@@ -1,5 +1,6 @@
 import { availabilities, AvailabilityFilter } from "./AvailabilityFilter";
 import { GradeCounts } from "./GradeCounts";
+import { healths, SubjectHealthFilter } from "./SubjectHealthFilter";
 import { TableSearch } from "./TableSearch";
 import { refetchFlagType, tableTypes } from "./types";
 import { Info, RefreshCcw } from "lucide-react";
@@ -21,6 +22,10 @@ interface TopbarProps {
     value: availabilities;
     setValue: (v: availabilities) => void;
   };
+  healthFilter?: {
+    value: healths;
+    setValue: (h: healths) => void;
+  };
 }
 
 export function TableTopbar({
@@ -29,6 +34,7 @@ export function TableTopbar({
   searchConfig,
   loadingState,
   availabilityFilter,
+  healthFilter,
   type,
 }: TopbarProps) {
   const { value, setValue, searchable } = searchConfig;
@@ -45,12 +51,16 @@ export function TableTopbar({
         {type === "cancelledSessions" && (
           <p className="text-xs text-textMuted">{rowCount} rows shown</p>
         )}
+        {healthFilter && type === "subjects" && (
+          <SubjectHealthFilter healths={healthFilter} />
+        )}
       </div>
 
       <div className="flex items-center gap-2 mb-1">
         {availabilityFilter && type === "tutors" && (
           <AvailabilityFilter availabilityFilter={availabilityFilter} />
         )}
+
         {searchable && (
           <div className="flex items-center gap-2">
             {type.includes("Sessions") && (

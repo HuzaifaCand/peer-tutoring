@@ -2,12 +2,15 @@ import { useMemo } from "react";
 import { TableRowByType } from "./types";
 import { availabilities } from "./AvailabilityFilter";
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
+import { healths } from "./SubjectHealthFilter";
+import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,
   data: TableRowByType[K][],
   search: string,
-  availabilityFilter: availabilities
+  availabilityFilter?: availabilities,
+  subjectHealthFilter?: healths
 ) {
   return useMemo(() => {
     let filtered = data;
@@ -21,6 +24,15 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
           return availabilityFilter === "active" ? isActive : !isActive;
         }) as TableRowByType[K][];
       }
+    }
+    if (
+      type === "subjects" &&
+      subjectHealthFilter &&
+      subjectHealthFilter !== "all"
+    ) {
+      filtered = (data as ComputedSubjectHealthView[]).filter(
+        (row) => row.health === subjectHealthFilter
+      ) as TableRowByType[K][];
     }
 
     // universal search filter
@@ -37,5 +49,5 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     }
 
     return filtered;
-  }, [data, type, search, availabilityFilter]);
+  }, [data, type, search, availabilityFilter, subjectHealthFilter]);
 }

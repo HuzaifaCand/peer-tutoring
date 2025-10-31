@@ -9,6 +9,7 @@ import { TableTopbar } from "./TableTopbar";
 import { availabilities } from "./AvailabilityFilter";
 import { useGradeCounts } from "./useGradeCount";
 import { useFilteredTableData } from "./useTableFiltering";
+import { healths } from "./SubjectHealthFilter";
 
 export function Table<K extends keyof TableRowByType>({
   type,
@@ -23,13 +24,15 @@ export function Table<K extends keyof TableRowByType>({
   const [search, setSearch] = useState("");
   const [availabilityFilter, setAvailabilityFilter] =
     useState<availabilities>("all");
+  const [healthFilter, setHealthFilter] = useState<healths>("all");
 
   // compuiting filtered data
   const filteredData = useFilteredTableData(
     type,
     data,
     search,
-    availabilityFilter
+    availabilityFilter,
+    healthFilter
   );
 
   useEffect(() => {
@@ -54,6 +57,10 @@ export function Table<K extends keyof TableRowByType>({
         loadingState={{
           loading,
           refetch: setRefetchFlag,
+        }}
+        healthFilter={{
+          value: healthFilter,
+          setValue: setHealthFilter,
         }}
         availabilityFilter={{
           value: availabilityFilter,
