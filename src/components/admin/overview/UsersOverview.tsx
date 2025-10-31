@@ -59,7 +59,7 @@ export default function UsersOverview() {
         {items.map((item) => (
           <div
             key={item.type}
-            className="flex flex-col gap-4 w-full p-4 rounded-2xl bg-elevatedBg/30"
+            className="flex flex-col gap-4 w-full p-4 rounded-2xl bg-elevatedBg/50"
           >
             <CountCard
               loading={loading}
