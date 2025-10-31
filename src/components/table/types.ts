@@ -14,10 +14,19 @@ export interface TableRowProps<T> {
 
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { ComputedStudentRow } from "../admin/students/getStudents";
+import { ComputedCancelledSessionRow } from "../admin/sessions/overview/cancelled/getCancelledSessions";
 
+export type tableTypes =
+  | "students"
+  | "tutors"
+  | "cancelledSessions"
+  | "activeSessions"
+  | "scheduledSessions"
+  | "completedSessions";
 export type TableRowByType = {
   tutors: ComputedTutorRow;
   students: ComputedStudentRow;
+  cancelledSessions: ComputedCancelledSessionRow;
 };
 
 import { Dispatch, SetStateAction } from "react";
@@ -28,10 +37,10 @@ export interface DataTableProps<T> {
   columns: TableColumn<T>[];
   onRowClick?: (row: T) => void;
   searchable?: boolean;
-  type?: "students" | "tutors" | "sessions";
+  type: tableTypes;
   loading: boolean;
   setRefetchFlag: refetchFlagType;
-  setRowCount: (rows: number) => void;
+  setRowCount?: (rows: number) => void;
 }
 
 export interface TableLoadingProps<T> {
