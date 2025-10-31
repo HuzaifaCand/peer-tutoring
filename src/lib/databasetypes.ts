@@ -270,7 +270,14 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      subject_health: {
+        Row: {
+          student_count: number | null;
+          subject: string | null;
+          tutor_count: number | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       [_ in never]: never;
