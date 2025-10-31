@@ -7,6 +7,8 @@ import { TableBody } from "./TableBody";
 import { TableLoading } from "./TableLoading";
 import { TableTopbar } from "./TableTopbar";
 import { availabilities } from "./AvailabilityFilter";
+import { useGradeCounts } from "./useGradeCount";
+import { useFilteredTableData } from "./useTableFiltering";
 
 export function Table<K extends keyof TableRowByType>({
   type,
@@ -23,37 +25,12 @@ export function Table<K extends keyof TableRowByType>({
     useState<availabilities>("all");
 
   // compuiting filtered data
-  const filteredData = useMemo(() => {
-    let filtered = data;
-
-    // availability filter first
-    if (type === "tutors") {
-      const tutorData = data as TableRowByType["tutors"][];
-
-      if (availabilityFilter !== "all") {
-        filtered = tutorData.filter((row) => {
-          const isActive = row.unavailable_slots > 0;
-          return availabilityFilter === "active" ? isActive : !isActive;
-        });
-      }
-    }
-
-    // search filter
-    if (search.trim()) {
-      const lower = search.toLowerCase();
-      filtered = filtered.filter((row) =>
-        Object.entries(row).some(([key, value]) => {
-          const val = String(value).toLowerCase();
-
-          if (key === "full_name") return val.startsWith(lower);
-          if (key === "grade") return val === lower;
-          return val.includes(lower);
-        })
-      );
-    }
-
-    return filtered;
-  }, [search, data, availabilityFilter, type]);
+  const filteredData = useFilteredTableData(
+    type,
+    data,
+    search,
+    availabilityFilter
+  );
 
   useEffect(() => {
     if (setRowCount) {
@@ -61,18 +38,12 @@ export function Table<K extends keyof TableRowByType>({
     }
   }, [filteredData, setRowCount]);
 
-  const gradeCounts = useMemo(() => {
-    if (type !== "students" && type !== "tutors") return null;
-
-    const asCount = data.filter((row) => row.grade === "AS").length;
-    const a2Count = data.filter((row) => row.grade === "A2").length;
-
-    return { as: asCount, a2: a2Count };
-  }, [data, type]);
+  const gradeCounts = useGradeCounts(type, data);
 
   return (
-    <div className="w-full text-sm overflow-x-auto">
+    <div className="w-full text-sm overflow-x-auto scroll-x-auto no-scrollbar">
       <TableTopbar
+        rowCount={filteredData.length}
         gradeCounts={gradeCounts}
         type={type}
         searchConfig={{
