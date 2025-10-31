@@ -15,6 +15,7 @@ interface Props {
   info: CardUI;
   count: number;
   loading: boolean;
+  onClick?: () => void;
 }
 
 export default function StatCard({ info, count, loading }: Props) {
