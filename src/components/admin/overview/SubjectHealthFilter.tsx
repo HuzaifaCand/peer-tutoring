@@ -5,18 +5,20 @@ import { titles } from "./SubjectsHealthTable";
 
 export type healths = "all" | "healthy" | "oversupply" | "low-supply";
 interface SubjectHealthFilterProps {
-  healths: {
+  healthFilter: {
     value: healths;
     setValue: (v: healths) => void;
   };
 }
 
-export function SubjectHealthFilter({ healths }: SubjectHealthFilterProps) {
+export function SubjectHealthFilter({
+  healthFilter,
+}: SubjectHealthFilterProps) {
   return (
     <div className="flex items-center gap-2">
       <div className="flex items-center gap-1">
         {["healthy", "low-supply", "oversupply"].map((key) => {
-          const active = healths.value === key;
+          const active = healthFilter.value === key;
           const label =
             key === "healthy"
               ? "Healthy"
@@ -36,7 +38,7 @@ export function SubjectHealthFilter({ healths }: SubjectHealthFilterProps) {
               title={titles[key as SubjectHealthStatus]}
               key={key}
               onClick={() =>
-                healths.setValue(
+                healthFilter.setValue(
                   active
                     ? "all"
                     : (key as "healthy" | "low-supply" | "oversupply")
