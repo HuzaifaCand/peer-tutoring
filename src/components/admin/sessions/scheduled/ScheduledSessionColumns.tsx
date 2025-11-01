@@ -1,6 +1,5 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedScheduledSessionRow } from "./getScheduledSessions";
-import VerificationBadge from "../../tutors/VerificationBadge";
 
 export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[] =
   [
@@ -28,6 +27,9 @@ export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[]
     {
       key: "is_online",
       label: "Type",
+      render: (row) => (
+        <div>{row.is_online === true ? "Online" : "Onsite"}</div>
+      ),
     },
     { key: "scheduled_for", label: "Date" },
 
