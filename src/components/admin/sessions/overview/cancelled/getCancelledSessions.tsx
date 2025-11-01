@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { CancelledSession } from "@/lib/computedtypes";
+import { SessionWithUsers } from "@/lib/computedtypes";
 import { format, parseISO } from "date-fns";
 
 export async function getCancelledSessions() {
@@ -9,7 +9,7 @@ export async function getCancelledSessions() {
       "tutors(users(full_name, email)), students(users(full_name, email)), subject, scheduled_for, cancel_reason"
     )
     .eq("status", "cancelled")
-    .overrideTypes<CancelledSession[]>();
+    .overrideTypes<SessionWithUsers[]>();
 
   if (error) {
     console.error("Error fetching cancelled sessions:", error);
@@ -22,7 +22,7 @@ export async function getCancelledSessions() {
     student_id: s.students.users.email.split("@")[0],
     student_name: s.students.users.full_name.split(" ").slice(0, -1).join(" "),
     cancel_reason: s.cancel_reason,
-    scheduled_when: format(parseISO(s.scheduled_for), "EEE, MMM d, p"),
+    scheduled_for: format(parseISO(s.scheduled_for), "EEE, MMM d, p"),
     subject: s.subject,
   }));
   return formatted;
