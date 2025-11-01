@@ -1,3 +1,4 @@
+import CompletedSessions from "@/components/admin/sessions/completed/CompletedSessions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function CompletedSessionsPage() {
-  return <></>;
+  return <CompletedSessions />;
 }
