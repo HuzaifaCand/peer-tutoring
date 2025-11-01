@@ -10,6 +10,7 @@ import { activities } from "../admin/tutors/ActivityFilter";
 import { useGradeCounts } from "./useGradeCount";
 import { useFilteredTableData } from "./useTableFiltering";
 import { healths } from "../admin/overview/SubjectHealthFilter";
+import { modes } from "../admin/sessions/SessionModeFilter";
 
 export function Table<K extends keyof TableRowByType>({
   type,
@@ -24,6 +25,7 @@ export function Table<K extends keyof TableRowByType>({
   const [search, setSearch] = useState("");
   const [activityFilter, setActivityFilter] = useState<activities>("all");
   const [healthFilter, setHealthFilter] = useState<healths>("all");
+  const [modeFilter, setModeFilter] = useState<modes>("all");
 
   // compuiting filtered data
   const filteredData = useFilteredTableData(
@@ -31,7 +33,8 @@ export function Table<K extends keyof TableRowByType>({
     data,
     search,
     activityFilter,
-    healthFilter
+    healthFilter,
+    modeFilter
   );
 
   useEffect(() => {

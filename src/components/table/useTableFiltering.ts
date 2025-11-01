@@ -4,13 +4,16 @@ import { activities } from "../admin/tutors/ActivityFilter";
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { healths } from "../admin/overview/SubjectHealthFilter";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
+import { modes } from "../admin/sessions/SessionModeFilter";
+import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,
   data: TableRowByType[K][],
   search: string,
   activityFilter?: activities,
-  subjectHealthFilter?: healths
+  subjectHealthFilter?: healths,
+  modeFilter?: modes
 ) {
   return useMemo(() => {
     let filtered = data;
