@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedCompletedSessionRow } from "./getCompletedSessions";
-import VerificationBadge from "../../tutors/VerificationBadge";
+import VerificationBadge from "@/components/admin/tutors/VerificationBadge";
 
 export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[] =
   [
