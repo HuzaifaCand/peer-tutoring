@@ -27,12 +27,7 @@ export async function getTutors() {
     email: t.users.email,
     grade: t.grade,
     subjects: t.subjects.join(" | "),
-    verified:
-      t.approved === false
-        ? "rejected"
-        : t.approved === true
-        ? "verified"
-        : "unverified",
+    verified: t.approved,
     available_slots: t.available_slots
       ? t.available_slots.filter((s) => s.available).length
       : 0, // count only available ones

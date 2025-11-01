@@ -21,7 +21,13 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
         <GradeBadge grade={row.grade} />
         <VerificationBadge
           title={`Status: ${row.verified}`}
-          status={row.verified as verificationStatus}
+          status={
+            row.verified === null
+              ? "unverified"
+              : row.verified === true
+              ? "verified"
+              : "rejected"
+          }
         />
       </div>
     ),
