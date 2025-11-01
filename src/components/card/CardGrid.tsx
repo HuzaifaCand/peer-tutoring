@@ -36,7 +36,7 @@ export function CardGrid<K extends keyof CardByType>({
           <DataRefresh refetch={setRefetchFlag} loading={loading} />
         </div>
       </div>
-      {filteredData.length === 0 && <EmptyTableGrid />}
+      {!loading && filteredData.length === 0 && <EmptyTableGrid />}
       {loading && filteredData.length !== 0 && (
         <CardsLoading count={filteredData.length || 6} />
       )}
