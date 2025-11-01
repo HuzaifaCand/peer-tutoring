@@ -9,7 +9,6 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
     key: "id",
     label: "ID",
-    width: 130,
     render: (row) => (
       <div className="flex items-center gap-2">
         <span
@@ -20,6 +19,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
         <span>{row.id}</span>
         <GradeBadge grade={row.grade} />
         <VerificationBadge
+          type="tutors"
           title={`Status: ${row.verified}`}
           status={
             row.verified === null
@@ -35,14 +35,12 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
     key: "full_name",
     label: "Name ",
-    width: 120,
   },
-  { key: "subjects", label: "Subjects", width: 120 },
+  { key: "subjects", label: "Subjects" },
 
   {
     key: "available_slots",
     label: "Available Slots",
-    width: 150,
     render: (row) => (
       <div
         title={`${

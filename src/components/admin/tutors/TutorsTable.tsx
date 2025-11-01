@@ -28,8 +28,21 @@ export default function TutorsTable({ setRowCount }: TutorsTableProps) {
       // sort by verification status first, then admin_seen
       const sorted = [...formatted].sort((a, b) => {
         // first by verification
-        const aStatus = statusOrder[a.verified as keyof typeof statusOrder];
-        const bStatus = statusOrder[b.verified as keyof typeof statusOrder];
+        const statusA =
+          a.verified === null
+            ? "unverified"
+            : a.verified === true
+            ? "verified"
+            : "rejected";
+        const statusB =
+          b.verified === null
+            ? "unverified"
+            : b.verified === true
+            ? "verified"
+            : "rejected";
+
+        const aStatus = statusOrder[statusA as keyof typeof statusOrder];
+        const bStatus = statusOrder[statusB as keyof typeof statusOrder];
         if (aStatus !== bStatus) return aStatus - bStatus;
 
         // then unseen first within each status group
