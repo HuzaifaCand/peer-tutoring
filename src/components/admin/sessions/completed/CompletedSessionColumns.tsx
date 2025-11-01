@@ -46,7 +46,7 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
         <div className="flex items-center gap-3">
           <div
             className={`${
-              row.is_online ? "bg-blue-500" : "bg-gray-100"
+              row.is_online ? "bg-blue-500" : "bg-yellow-300"
             } w-1 h-1 rounded-full mt-0.5`}
           />
           <VerificationBadge
