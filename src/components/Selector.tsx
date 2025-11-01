@@ -10,7 +10,7 @@ interface SelectorProps<T> {
   className?: string;
 }
 
-export default function Selector<T extends Record<string, any>>({
+export default function Selector<T extends Record<string, unknown>>({
   value,
   handleChange,
   values,
