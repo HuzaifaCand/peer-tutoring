@@ -4,7 +4,6 @@ import {
   getTermFromMonth,
   getYearFromTerm,
 } from "@/utils/months";
-import { ChevronDown } from "lucide-react"; // for dropdown arrow
 import Selector from "./Selector";
 
 interface Props {
@@ -33,6 +32,8 @@ export default function MonthSelector({
       value={monthIndex}
       handleChange={handleChange}
       values={academicMonths}
+      valueKey="index"
+      labelKey="name"
     />
   );
 }

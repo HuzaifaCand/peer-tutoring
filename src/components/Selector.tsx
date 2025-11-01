@@ -1,19 +1,29 @@
 import { ChevronDown } from "lucide-react";
 import { ChangeEventHandler } from "react";
 
-interface SelectorProps {
-  value: number | string;
+interface SelectorProps<T> {
+  value: string | number;
   handleChange: ChangeEventHandler<HTMLSelectElement>;
-  values: { name: string; index: string | number }[];
+  values: T[];
+  valueKey: keyof T;
+  labelKey: keyof T;
+  className?: string;
 }
 
-export default function Selector({
+export default function Selector<T extends Record<string, any>>({
   value,
   handleChange,
   values,
-}: SelectorProps) {
+  valueKey,
+  labelKey,
+  className,
+}: SelectorProps<T>) {
   return (
-    <div className="relative inline-block w-full max-w-[220px]">
+    <div
+      className={`relative inline-block w-full max-w-[220px] ${
+        className ?? ""
+      }`}
+    >
       <select
         value={value}
         onChange={handleChange}
@@ -27,18 +37,17 @@ export default function Selector({
           hover:border-white/30 hover:bg-hoverBg
         "
       >
-        {values.map((value) => (
+        {values.map((item, i) => (
           <option
-            key={value.index}
-            value={value.index}
+            key={String(item[valueKey]) ?? i}
+            value={String(item[valueKey])}
             className="bg-elevatedBg text-textButton"
           >
-            {value.name}
+            {String(item[labelKey])}
           </option>
         ))}
       </select>
 
-      {/* Custom dropdown icon */}
       <ChevronDown
         size={18}
         className="
