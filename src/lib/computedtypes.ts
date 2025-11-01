@@ -29,8 +29,3 @@ export type SessionWithUsers = SessionRow & {
     users: Pick<UserRow, "full_name" | "email">;
   };
 };
-
-export type CancelledSession = SessionWithUsers & {
-  status: "cancelled";
-  cancel_reason: string | null;
-};
