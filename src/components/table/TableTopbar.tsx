@@ -7,6 +7,7 @@ import {
 import { TableSearch } from "./TableSearch";
 import { refetchFlagType, tableTypes } from "./types";
 import { Info, RefreshCcw } from "lucide-react";
+import { ModeFilter, modes } from "../admin/sessions/SessionModeFilter";
 
 interface TopbarProps {
   searchConfig: {
@@ -29,6 +30,10 @@ interface TopbarProps {
     value: healths;
     setValue: (h: healths) => void;
   };
+  modeFilter?: {
+    value: modes;
+    setValue: (h: modes) => void;
+  };
 }
 
 export function TableTopbar({
@@ -38,6 +43,7 @@ export function TableTopbar({
   loadingState,
   activityFilter,
   healthFilter,
+  modeFilter,
   type,
 }: TopbarProps) {
   const { value, setValue, searchable } = searchConfig;
@@ -56,8 +62,12 @@ export function TableTopbar({
             {rowCount} rows shown
           </p>
         )}
+        {type === "scheduledSessions" ||
+          (type === "completedSessions" && modeFilter && (
+            <ModeFilter modeFilter={modeFilter} />
+          ))}
         {healthFilter && type === "subjects" && (
-          <SubjectHealthFilter healths={healthFilter} />
+          <SubjectHealthFilter healthFilter={healthFilter} />
         )}
       </div>
 
