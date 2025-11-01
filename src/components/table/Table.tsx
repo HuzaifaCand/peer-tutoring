@@ -68,6 +68,10 @@ export function Table<K extends keyof TableRowByType>({
           value: activityFilter,
           setValue: setActivityFilter,
         }}
+        modeFilter={{
+          value: modeFilter,
+          setValue: setModeFilter,
+        }}
       />
 
       <div className="relative w-full text-sm overflow-x-auto rounded-t-xl no-scrollbar">

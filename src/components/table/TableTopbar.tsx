@@ -62,10 +62,8 @@ export function TableTopbar({
             {rowCount} rows shown
           </p>
         )}
-        {type === "scheduledSessions" ||
-          (type === "completedSessions" && modeFilter && (
-            <ModeFilter modeFilter={modeFilter} />
-          ))}
+        {(type === "scheduledSessions" || type === "completedSessions") &&
+          modeFilter && <ModeFilter modeFilter={modeFilter} />}
         {healthFilter && type === "subjects" && (
           <SubjectHealthFilter healthFilter={healthFilter} />
         )}

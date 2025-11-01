@@ -6,6 +6,7 @@ import { healths } from "../admin/overview/SubjectHealthFilter";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { modes } from "../admin/sessions/SessionModeFilter";
 import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,
@@ -38,6 +39,18 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
       ) as TableRowByType[K][];
     }
 
+    if (
+      (type === "scheduledSessions" || type === "completedSessions") &&
+      modeFilter &&
+      modeFilter !== "all"
+    ) {
+      filtered = (
+        data as ComputedCompletedSessionRow[] | ComputedScheduledSessionRow[]
+      ).filter(
+        (row) => (row.is_online === false ? "onsite" : "online") === modeFilter
+      ) as TableRowByType[K][];
+    }
+
     // universal search filter
     if (search.trim()) {
       const lower = search.toLowerCase();
@@ -52,5 +65,5 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     }
 
     return filtered;
-  }, [data, type, search, activityFilter, subjectHealthFilter]);
+  }, [data, type, search, activityFilter, subjectHealthFilter, modeFilter]);
 }
