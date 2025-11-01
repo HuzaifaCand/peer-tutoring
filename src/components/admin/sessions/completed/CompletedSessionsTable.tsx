@@ -31,10 +31,6 @@ export default function CompletedSessionsTable({
 
   return (
     <section>
-      <h2 className="text-2xl text-textWhite mb-4 sm:mb-2 md:mb-1 lg:mb-0 font-semibold">
-        Completed Sessions
-      </h2>
-
       <Table
         type="completedSessions"
         data={data}

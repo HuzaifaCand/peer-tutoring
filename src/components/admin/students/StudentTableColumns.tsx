@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedStudentRow } from "./getStudents";
-import { GradeBadge } from "@/components/table/GradeBadge";
+import { GradeBadge } from "@/components/admin/GradeBadge";
 
 export const studentColumns: TableColumn<ComputedStudentRow>[] = [
   {
