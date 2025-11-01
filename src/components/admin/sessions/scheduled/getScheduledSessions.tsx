@@ -1,6 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { SessionWithUsers } from "@/lib/computedtypes";
-import { differenceInMinutes, format, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 
 export async function getScheduledSessions() {
   const { data: scheduled_sessions, error } = await supabase
