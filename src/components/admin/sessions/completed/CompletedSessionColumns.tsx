@@ -43,12 +43,7 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
       key: "status",
       label: "Status",
       render: (row) => (
-        <div className="flex items-center gap-3">
-          <div
-            className={`${
-              row.is_online ? "bg-blue-500" : "bg-yellow-300"
-            } w-1 h-1 rounded-full mt-0.5`}
-          />
+        <div className="">
           <VerificationBadge
             type="completedSessions"
             status={
@@ -66,4 +61,11 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
     { key: "scheduled_for", label: "Date" },
 
     { key: "subject", label: "Subject" },
+    {
+      key: "is_online",
+      label: "Type",
+      render: (row) => (
+        <div>{row.is_online === true ? "Online" : "Onsite"}</div>
+      ),
+    },
   ];
