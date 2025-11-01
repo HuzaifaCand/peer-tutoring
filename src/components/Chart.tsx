@@ -46,7 +46,7 @@ export default function Chart({ data, dataLoading }: WeeklyLineChartProps) {
   if (dataLoading)
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 className="animate-spin w-7 h-7" />
+        <Loader2 className="animate-spin text-textMuted w-7 h-7" />
       </div>
     );
   return (

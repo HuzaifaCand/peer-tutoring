@@ -3,7 +3,7 @@
 interface OptionConfig<T extends string> {
   key: T;
   label: string;
-  color: string; // Tailwind class string
+  color: string;
   title?: string;
 }
 
