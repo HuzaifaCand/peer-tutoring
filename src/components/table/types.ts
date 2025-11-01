@@ -23,6 +23,7 @@ export type tableTypes =
   | "activeSessions"
   | "scheduledSessions"
   | "completedSessions"
+  | "scheduledSessions"
   | "subjects";
 
 export type TableRowByType = {
@@ -32,12 +33,14 @@ export type TableRowByType = {
   subjects: ComputedSubjectHealthView;
   activeSessions: ComputedActiveSessionRow;
   completedSessions: ComputedCompletedSessionRow;
+  scheduledSessions: ComputedScheduledSessionRow;
 };
 
 import { Dispatch, SetStateAction } from "react";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
 import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
 
