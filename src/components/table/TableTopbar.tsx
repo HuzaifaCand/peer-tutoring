@@ -45,7 +45,7 @@ export function TableTopbar({
   };
 
   return (
-    <div className="relative flex justify-between items-center mb-3 overflow-x-auto no-scrollbar">
+    <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">
       <div className="flex items-center gap-3 flex-shrink-0">
         {gradeCounts && <GradeCounts counts={gradeCounts} loading={loading} />}
         {type === "cancelledSessions" && (

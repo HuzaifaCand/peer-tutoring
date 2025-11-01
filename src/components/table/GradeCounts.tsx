@@ -11,7 +11,7 @@ export function GradeCounts({ counts, loading }: CountsProps) {
   ];
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-1">
       {items.map(({ label, value }) => (
         <div
           key={label}
