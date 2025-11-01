@@ -1,6 +1,9 @@
-import { availabilities, AvailabilityFilter } from "./AvailabilityFilter";
-import { GradeCounts } from "./GradeCounts";
-import { healths, SubjectHealthFilter } from "./SubjectHealthFilter";
+import { activities, ActivityFilter } from "../admin/tutors/ActivityFilter";
+import { GradeCounts } from "../admin/GradeCounts";
+import {
+  healths,
+  SubjectHealthFilter,
+} from "../admin/overview/SubjectHealthFilter";
 import { TableSearch } from "./TableSearch";
 import { refetchFlagType, tableTypes } from "./types";
 import { Info, RefreshCcw } from "lucide-react";
@@ -18,9 +21,9 @@ interface TopbarProps {
   gradeCounts?: { as: number; a2: number } | null;
   rowCount: number;
   type: tableTypes;
-  availabilityFilter?: {
-    value: availabilities;
-    setValue: (v: availabilities) => void;
+  activityFilter?: {
+    value: activities;
+    setValue: (v: activities) => void;
   };
   healthFilter?: {
     value: healths;
@@ -33,7 +36,7 @@ export function TableTopbar({
   rowCount,
   searchConfig,
   loadingState,
-  availabilityFilter,
+  activityFilter,
   healthFilter,
   type,
 }: TopbarProps) {
@@ -59,8 +62,8 @@ export function TableTopbar({
       </div>
 
       <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
-        {availabilityFilter && type === "tutors" && (
-          <AvailabilityFilter availabilityFilter={availabilityFilter} />
+        {activityFilter && type === "tutors" && (
+          <ActivityFilter activityFilter={activityFilter} />
         )}
 
         {searchable && (

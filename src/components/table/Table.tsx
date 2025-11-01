@@ -6,10 +6,10 @@ import { TableHeader } from "./TableHeader";
 import { TableBody } from "./TableBody";
 import { TableLoading } from "./TableLoading";
 import { TableTopbar } from "./TableTopbar";
-import { availabilities } from "./AvailabilityFilter";
+import { activities } from "../admin/tutors/ActivityFilter";
 import { useGradeCounts } from "./useGradeCount";
 import { useFilteredTableData } from "./useTableFiltering";
-import { healths } from "./SubjectHealthFilter";
+import { healths } from "../admin/overview/SubjectHealthFilter";
 
 export function Table<K extends keyof TableRowByType>({
   type,
@@ -22,8 +22,7 @@ export function Table<K extends keyof TableRowByType>({
   setRowCount,
 }: DataTableProps<TableRowByType[K]> & { type: K }) {
   const [search, setSearch] = useState("");
-  const [availabilityFilter, setAvailabilityFilter] =
-    useState<availabilities>("all");
+  const [activityFilter, setActivityFilter] = useState<activities>("all");
   const [healthFilter, setHealthFilter] = useState<healths>("all");
 
   // compuiting filtered data
@@ -31,7 +30,7 @@ export function Table<K extends keyof TableRowByType>({
     type,
     data,
     search,
-    availabilityFilter,
+    activityFilter,
     healthFilter
   );
 
@@ -62,9 +61,9 @@ export function Table<K extends keyof TableRowByType>({
           value: healthFilter,
           setValue: setHealthFilter,
         }}
-        availabilityFilter={{
-          value: availabilityFilter,
-          setValue: setAvailabilityFilter,
+        activityFilter={{
+          value: activityFilter,
+          setValue: setActivityFilter,
         }}
       />
 

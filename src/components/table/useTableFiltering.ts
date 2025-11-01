@@ -1,15 +1,15 @@
 import { useMemo } from "react";
 import { TableRowByType } from "./types";
-import { availabilities } from "./AvailabilityFilter";
+import { activities } from "../admin/tutors/ActivityFilter";
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
-import { healths } from "./SubjectHealthFilter";
+import { healths } from "../admin/overview/SubjectHealthFilter";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,
   data: TableRowByType[K][],
   search: string,
-  availabilityFilter?: availabilities,
+  activityFilter?: activities,
   subjectHealthFilter?: healths
 ) {
   return useMemo(() => {
@@ -18,10 +18,10 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     // tutor-specific filter
     if (type === "tutors") {
       const tutors = data as ComputedTutorRow[];
-      if (availabilityFilter !== "all") {
+      if (activityFilter !== "all") {
         filtered = tutors.filter((row) => {
           const isActive = row.unavailable_slots > 0;
-          return availabilityFilter === "active" ? isActive : !isActive;
+          return activityFilter === "active" ? isActive : !isActive;
         }) as TableRowByType[K][];
       }
     }
@@ -49,5 +49,5 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     }
 
     return filtered;
-  }, [data, type, search, availabilityFilter, subjectHealthFilter]);
+  }, [data, type, search, activityFilter, subjectHealthFilter]);
 }
