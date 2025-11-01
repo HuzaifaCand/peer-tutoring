@@ -6,7 +6,6 @@ export const studentColumns: TableColumn<ComputedStudentRow>[] = [
   {
     key: "id",
     label: "ID",
-    width: 80,
     render: (row) => (
       <div className="flex items-center gap-2">
         <span
@@ -23,7 +22,6 @@ export const studentColumns: TableColumn<ComputedStudentRow>[] = [
   {
     key: "full_name",
     label: "Name",
-    width: 120,
   },
-  { key: "subjects", label: "Subjects", width: 150 },
+  { key: "subjects", label: "Subjects" },
 ];
