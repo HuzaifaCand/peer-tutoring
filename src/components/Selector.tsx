@@ -29,7 +29,7 @@ export default function Selector<T extends Record<string, any>>({
         onChange={handleChange}
         className="
           w-full appearance-none
-          bg-elevatedBg text-textButton text-sm font-medium
+          bg-elevatedBg text-textButton text-sm
           border border-white/10
           rounded-xl px-4 py-2 pr-10
           cursor-pointer transition-all duration-200
