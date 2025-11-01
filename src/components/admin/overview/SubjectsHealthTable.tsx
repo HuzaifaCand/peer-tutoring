@@ -17,7 +17,6 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
   {
     key: "subject",
     label: "Subject",
-    width: 80,
     render: (row) => (
       <div className="ml-3">
         <span>{row.subject}</span>
@@ -30,12 +29,10 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
   {
     key: "tutors",
     label: "Tutors",
-    width: 80,
   },
   {
     key: "students",
     label: "Students",
-    width: 80,
   },
 ];
 
