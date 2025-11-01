@@ -5,7 +5,7 @@ import {
   SubjectHealthFilter,
 } from "../admin/overview/SubjectHealthFilter";
 import { refetchFlagType, tableTypes } from "./types";
-import { Info, RefreshCcw } from "lucide-react";
+import { Info } from "lucide-react";
 import { ModeFilter, modes } from "../admin/sessions/SessionModeFilter";
 import { DataSearch } from "../DataSearch";
 import DataRefresh from "../DataRefresh";
