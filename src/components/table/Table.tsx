@@ -68,19 +68,21 @@ export function Table<K extends keyof TableRowByType>({
         }}
       />
 
-      <div className="overflow-hidden rounded-t-xl bg-mainBg shadow-md">
+      <div className="relative w-full text-sm overflow-x-auto rounded-t-xl no-scrollbar">
         {loading && (
           <TableLoading columns={columns} rowCount={filteredData.length || 8} />
         )}
         {!loading && (
-          <table className="w-full border-collapse text-xs text-textWhite">
-            <TableHeader columns={columns} />
-            <TableBody
-              data={filteredData}
-              columns={columns}
-              onRowClick={onRowClick}
-            />
-          </table>
+          <div className="min-w-max">
+            <table className="w-full border-collapse text-xs text-textWhite table-auto">
+              <TableHeader columns={columns} />
+              <TableBody
+                data={filteredData}
+                columns={columns}
+                onRowClick={onRowClick}
+              />
+            </table>
+          </div>
         )}
       </div>
     </div>

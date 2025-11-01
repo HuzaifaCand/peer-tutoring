@@ -19,13 +19,13 @@ export function TableRow<T extends Record<string, unknown>>({
           <td
             key={String(col.key)}
             style={{
-              maxWidth: col.width,
-              overflow: col.truncate ? "hidden" : undefined,
-              textOverflow: col.truncate ? "ellipsis" : undefined,
-              whiteSpace: col.truncate ? "nowrap" : undefined,
+              maxWidth: col.maxWidth ?? "200px", // cap so long text truncates
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
             }}
-            className="p-3 text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis"
-            title={col.truncate && !col.render ? String(value) : undefined}
+            className="p-3 text-gray-300"
+            title={col.truncate ? String(value) : undefined}
           >
             {content}
           </td>

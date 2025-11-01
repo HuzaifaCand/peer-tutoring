@@ -1,7 +1,7 @@
 export interface TableColumn<T> {
   key: keyof T | string;
   label: string;
-  width?: string | number;
+  maxWidth?: string | number;
   truncate?: boolean;
   render?: (row: T) => React.ReactNode; // custom render logic
 }
@@ -24,17 +24,23 @@ export type tableTypes =
   | "scheduledSessions"
   | "completedSessions"
   | "subjects";
+
 export type TableRowByType = {
   tutors: ComputedTutorRow;
   students: ComputedStudentRow;
   cancelledSessions: ComputedCancelledSessionRow;
   subjects: ComputedSubjectHealthView;
+  activeSessions: ComputedActiveSessionRow;
+  completedSessions: ComputedCompletedSessionRow;
 };
 
 import { Dispatch, SetStateAction } from "react";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
+import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
+import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
+
 export interface DataTableProps<T> {
   data: T[];
   columns: TableColumn<T>[];

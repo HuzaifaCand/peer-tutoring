@@ -12,7 +12,7 @@ export function TableLoading<T extends Record<string, unknown>>({
             {columns.map((col, index) => (
               <th
                 key={String(col.key)}
-                style={{ width: col.width }}
+                style={{ width: col.maxWidth }}
                 className={`py-3 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider ${
                   index === 0 ? "pl-6" : "pl-3"
                 }`}
