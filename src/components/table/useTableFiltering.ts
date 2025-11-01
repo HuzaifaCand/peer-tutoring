@@ -57,6 +57,11 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
       filtered = filtered.filter((row) =>
         Object.entries(row).some(([key, value]) => {
           const val = String(value).toLowerCase();
+          if (
+            type.includes("Sessions") &&
+            (key === "tutor_name" || key === "student_name")
+          )
+            return val.startsWith(lower);
           if (key === "full_name") return val.startsWith(lower);
           if (key === "grade") return val === lower;
           return val.includes(lower);
