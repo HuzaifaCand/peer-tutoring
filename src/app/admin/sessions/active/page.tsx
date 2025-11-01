@@ -1,3 +1,4 @@
+import ActiveSessions from "@/components/admin/sessions/active/ActiveSessions";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function ActiveSessionsPage() {
-  return <></>;
+  return <ActiveSessions />;
 }
