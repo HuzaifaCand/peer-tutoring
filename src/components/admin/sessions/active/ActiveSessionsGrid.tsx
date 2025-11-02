@@ -24,7 +24,7 @@ export default function ActiveSessionsList({
       const formatted = await getActiveSessions();
       setData(formatted);
       setLastUpdated(new Date());
-      setCount(data.length);
+      setCount(formatted.length);
       setLoading(false);
     }
 
