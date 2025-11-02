@@ -33,7 +33,7 @@ export function Card<T extends Record<string, unknown>>({
 
       {/* Body */}
       {sections.body.length > 0 && (
-        <div className="mb-2 py-4 flex justify-between items-center gap-y-1">
+        <div className="mb-2 py-4 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-y-1">
           {sections.body.map((field) => (
             <div key={String(field.key)}>
               {field.label && (
