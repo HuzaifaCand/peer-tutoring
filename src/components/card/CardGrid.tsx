@@ -45,7 +45,7 @@ export function CardGrid<K extends keyof CardByType>({
       <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">
         <div>
           {type === "activeSessions" && lastUpdated && (
-            <p className="text-xs text-textMuted transition-opacity duration-500">
+            <p className="text-[10px] text-xs text-textMuted transition-opacity duration-500">
               Last updated:{" "}
               {formatDistanceToNow(lastUpdated, { addSuffix: true })
                 .slice(0, 1)

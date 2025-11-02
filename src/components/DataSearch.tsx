@@ -8,7 +8,7 @@ interface DataSearchProps {
 export function DataSearch({ value, onChange }: DataSearchProps) {
   return (
     <div className="flex items-center justify-end px-1">
-      <div className="relative w-42 sm:w-56">
+      <div className="relative w-36 sm:w-42 md:w-56">
         <Search
           className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
           size={12}
