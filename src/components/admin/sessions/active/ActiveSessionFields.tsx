@@ -8,7 +8,7 @@ export const activeSessionFields: CardField<ComputedActiveSessionRow>[] = [
     key: "subject",
     section: "header",
     render: (row) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         <span className="px-2 py-0.5 rounded-md bg-gray-500/20 text-gray-300 text-[12px] font-medium">
           {row.subject}
         </span>
