@@ -31,4 +31,5 @@ export interface CardField<T> {
 export interface CardProps<T> {
   data: T;
   fields: CardField<T>[];
+  onCardClick?: () => void;
 }
