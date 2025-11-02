@@ -64,7 +64,7 @@ export default function LChart({ data, dataLoading }: WeeklyLineChartProps) {
             tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 12 }}
             axisLine={false}
             tickLine={false}
-            width={40}
+            width={20}
           />
 
           {/* Custom Tooltip */}

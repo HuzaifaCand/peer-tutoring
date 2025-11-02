@@ -24,7 +24,7 @@ export default function BarGraph({
     );
   return (
     <div className="w-full overflow-x-auto no-scrollbar">
-      <div className="min-w-[700px]">
+      <div className="min-w-[500px]">
         <ResponsiveContainer width="100%" height={350}>
           <BarChart margin={{ top: 20 }} data={data}>
             <XAxis
@@ -32,10 +32,7 @@ export default function BarGraph({
               tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 11 }}
               interval={0}
             />
-            <YAxis
-              width={40}
-              tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 12 }}
-            />
+
             <Bar
               dataKey="session_count"
               fill="#50d6ffff"
