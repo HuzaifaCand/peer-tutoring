@@ -34,6 +34,7 @@ export default function BarGraph({
             />
 
             <Bar
+              maxBarSize={120}
               dataKey="session_count"
               fill="#50d6ffff"
               radius={[4, 4, 0, 0]}
@@ -43,7 +44,7 @@ export default function BarGraph({
                 dataKey="session_count"
                 position="top"
                 fill="#fff"
-                fontSize={10}
+                fontSize={12}
               />
             </Bar>
           </BarChart>

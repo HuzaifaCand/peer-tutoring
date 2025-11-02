@@ -40,7 +40,7 @@ export default function SubjectsPopularityGraph() {
   return (
     <section className="space-y-8">
       <h2 className="font-semibold text-2xl text-textWhite">
-        Sessions by Subject
+        Completed Sessions by Subject
       </h2>
       <BarGraph loading={loading} data={data} />
     </section>
