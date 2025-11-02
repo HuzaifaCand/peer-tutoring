@@ -3,6 +3,7 @@ import SessionsChart from "./SessionsChart";
 import SectionDivider from "@/components/SectionDivider";
 import CancelledSessionsTable from "./cancelled/CancelledSessions";
 import OperationalStats from "../../../OperationalStats";
+import SubjectsPopularityGraph from "./SubjectsPopularityGraph";
 
 export default function SessionsOverview() {
   return (
@@ -19,6 +20,8 @@ export default function SessionsOverview() {
       <CancelledSessionsTable />
       <SectionDivider />
       <SessionsChart />
+      <SectionDivider />
+      <SubjectsPopularityGraph />
     </main>
   );
 }
