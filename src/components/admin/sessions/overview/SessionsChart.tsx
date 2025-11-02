@@ -1,6 +1,6 @@
 "use client";
 
-import Chart from "@/components/Chart";
+import LChart from "@/components/LineChart";
 import MonthSelector from "@/components/MonthSelector";
 import { useMonthlySessionData } from "./useMonthlySessions";
 import { getMonthLabel } from "@/utils/months";
@@ -34,7 +34,7 @@ export default function SessionsChart() {
         />
       </div>
 
-      <Chart data={data} dataLoading={loading} />
+      <LChart data={data} dataLoading={loading} />
     </section>
   );
 }
