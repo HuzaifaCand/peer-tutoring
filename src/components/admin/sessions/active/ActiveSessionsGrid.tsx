@@ -8,7 +8,11 @@ import { useEffect, useState } from "react";
 import { CardGrid } from "@/components/card/CardGrid";
 import { activeSessionFields } from "./ActiveSessionFields";
 
-export default function ActiveSessionsList() {
+export default function ActiveSessionsList({
+  setCount,
+}: {
+  setCount: (items: number) => void;
+}) {
   const [data, setData] = useState<ComputedActiveSessionRow[]>([]);
   const [loading, setLoading] = useState(true);
   const [lastUpdated, setLastUpdated] = useState<Date>();
@@ -20,6 +24,7 @@ export default function ActiveSessionsList() {
       const formatted = await getActiveSessions();
       setData(formatted);
       setLastUpdated(new Date());
+      setCount(data.length);
       setLoading(false);
     }
 
