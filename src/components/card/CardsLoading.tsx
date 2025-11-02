@@ -1,6 +1,6 @@
 function CardSkeleton() {
   return (
-    <div className="rounded-xl bg-elevatedBg shadow-md p-4 border border-white/5 text-sm animate-pulse">
+    <div className="rounded-xl bg-elevatedBg shadow-md p-6 border border-white/5 text-sm animate-pulse">
       {/* Header */}
       <div className="mb-2 flex justify-between items-center">
         <div className="h-4 w-24 bg-white/10 rounded"></div>

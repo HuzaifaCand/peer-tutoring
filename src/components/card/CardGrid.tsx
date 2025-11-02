@@ -37,8 +37,11 @@ export function CardGrid<K extends keyof CardByType>({
         </div>
       </div>
       {!loading && filteredData.length === 0 && <EmptyTableGrid />}
-      {loading && filteredData.length !== 0 && (
-        <CardsLoading count={filteredData.length || 6} />
+      {loading && (
+        <CardsLoading
+          count={filteredData.length || 6}
+          layoutClassName={layoutClassName}
+        />
       )}
       {!loading && (
         <div className={layoutClassName}>
