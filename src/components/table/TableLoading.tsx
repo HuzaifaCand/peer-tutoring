@@ -6,14 +6,14 @@ export function TableLoading<T extends Record<string, unknown>>({
 }: TableLoadingProps<T>) {
   return (
     <div className="overflow-hidden rounded-t-xl bg-mainBg shadow-md animate-fadeIn">
-      <table className="w-full border-collapse text-sm text-textWhite">
+      <table className="w-full border-collapse text-[13px] text-textWhite">
         <thead className="bg-gradient-to-r from-elevatedBg to-elevatedBg/50">
           <tr>
             {columns.map((col, index) => (
               <th
                 key={String(col.key)}
                 style={{ width: col.maxWidth }}
-                className={`py-3 text-left text-sm font-semibold text-gray-300 uppercase tracking-wider ${
+                className={`py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider ${
                   index === 0 ? "pl-6" : "pl-3"
                 }`}
               >
@@ -28,7 +28,7 @@ export function TableLoading<T extends Record<string, unknown>>({
               key={i}
               className="border-b border-white/5 hover:bg-transparent transition-all"
             >
-              {columns.map((col, j) => (
+              {columns.map((_, j) => (
                 <td key={j} className={`p-3 ${j === 0 ? "pl-3" : ""}`}>
                   <div className="h-4 w-full max-w-[80%] bg-white/10 rounded-md overflow-hidden relative">
                     <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
