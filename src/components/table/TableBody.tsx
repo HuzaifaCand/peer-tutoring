@@ -19,10 +19,7 @@ export function TableBody<T extends Record<string, unknown>>({
         if (row === null) {
           // phantom row
           return (
-            <tr
-              key={`phantom-${i}`}
-              className="h-[48px] border-b border-muted/40 bg-transparent"
-            >
+            <tr key={`phantom-${i}`} className="h-[48px] bg-mainBg">
               <td colSpan={columns.length} />
             </tr>
           );
