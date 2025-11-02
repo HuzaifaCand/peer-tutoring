@@ -1,12 +1,5 @@
 import { Loader2 } from "lucide-react";
-import {
-  Bar,
-  BarChart,
-  LabelList,
-  ResponsiveContainer,
-  XAxis,
-  YAxis,
-} from "recharts";
+import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis } from "recharts";
 import { ComputedSubjectPopularityView } from "./admin/sessions/overview/SubjectsPopularityGraph";
 
 export default function BarGraph({
