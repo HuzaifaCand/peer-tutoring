@@ -278,6 +278,13 @@ export type Database = {
         };
         Relationships: [];
       };
+      subject_popularity: {
+        Row: {
+          session_count: number | null;
+          subject: string | null;
+        };
+        Relationships: [];
+      };
     };
     Functions: {
       [_ in never]: never;
