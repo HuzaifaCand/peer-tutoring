@@ -13,7 +13,7 @@ export function TableLoading<T extends Record<string, unknown>>({
               <th
                 key={String(col.key)}
                 style={{ width: col.maxWidth }}
-                className={`py-3 text-left text-xs font-semibold text-gray-300 uppercase tracking-wider ${
+                className={`py-3 text-left text-xs font-semibold text-gray-300 ${
                   index === 0 ? "pl-6" : "pl-3"
                 }`}
               >
@@ -29,7 +29,7 @@ export function TableLoading<T extends Record<string, unknown>>({
               className="border-b border-white/5 hover:bg-transparent transition-all"
             >
               {columns.map((_, j) => (
-                <td key={j} className={`p-3 ${j === 0 ? "pl-3" : ""}`}>
+                <td key={j} className={`p-3 ${j === 0 ? "pl-6" : "pl-3"}`}>
                   <div className="h-4 w-full max-w-[80%] bg-white/10 rounded-md overflow-hidden relative">
                     <div className="absolute inset-0 animate-shimmer bg-gradient-to-r from-transparent via-white/20 to-transparent" />
                   </div>
