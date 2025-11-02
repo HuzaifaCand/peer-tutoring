@@ -22,11 +22,16 @@ export function CardGrid<K extends keyof CardByType>({
     if (!search.trim()) return data;
     const lower = search.toLowerCase();
     return data.filter((row) =>
-      Object.values(row).some((v) => String(v).toLowerCase().includes(lower))
+      Object.entries(row).some(([key, value]) => {
+        const val = String(value).toLowerCase();
+        if (key.includes("name") || key.includes("id")) {
+          return val.startsWith(lower);
+        }
+        return val.includes(lower);
+      })
     );
   }, [search, data]);
 
-  // Data state
   return (
     <section>
       <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">

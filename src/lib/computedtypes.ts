@@ -9,7 +9,6 @@ export type UserRow = Database["public"]["Tables"]["users"]["Row"];
 export type SlotsRow = Database["public"]["Tables"]["available_slots"]["Row"];
 export type SubjectHealthView =
   Database["public"]["Views"]["subject_health"]["Row"];
-
 export type SubjectPopularityView =
   Database["public"]["Views"]["subject_popularity"]["Row"];
 
