@@ -64,8 +64,6 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
     {
       key: "is_online",
       label: "Type",
-      render: (row) => (
-        <div>{row.is_online === true ? "Online" : "Onsite"}</div>
-      ),
+      render: (row) => <div>{row.mode}</div>,
     },
   ];

@@ -44,6 +44,7 @@ export async function getScheduledSessions() {
           pure_scheduled_for: parsedDate, // raw for sorting
           subject: s.subject,
           is_online: s.is_online,
+          mode: s.is_online ? "Online" : "Onsite",
           expected_duration: s.duration_minutes,
         };
       })

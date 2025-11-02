@@ -27,9 +27,7 @@ export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[]
     {
       key: "is_online",
       label: "Type",
-      render: (row) => (
-        <div>{row.is_online === true ? "Online" : "Onsite"}</div>
-      ),
+      render: (row) => <div>{row.mode}</div>,
     },
     { key: "scheduled_for", label: "Date" },
 

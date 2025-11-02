@@ -47,6 +47,7 @@ export async function getCompletedSessions() {
         verified: s.verified,
         rejection_reason: s.rejection_reason ?? "",
         is_online: s.is_online,
+        mode: s.is_online === true ? "Online" : "Onsite",
         expected_duration: s.duration_minutes,
         actual_duration: actualDuration,
       };
