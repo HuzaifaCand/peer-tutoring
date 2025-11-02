@@ -12,7 +12,10 @@ export function Card<T extends Record<string, unknown>>({
   };
 
   return (
-    <div className="rounded-xl bg-elevatedBg hover:cursor-pointer hover:bg-hoverBg transition-colors duration-200 shadow-md py-6 px-4 border border-white/5 text-sm text-textWhite">
+    <div
+      className="rounded-xl bg-elevatedBg hover:cursor-pointer hover:bg-hoverBg active:scale-[0.98] active:bg-hoverBg transition-transform transition-colors duration-150 shadow-md py-6 px-4 border border-white/5 text-sm text-textWhite"
+      role="button"
+    >
       {/* Header */}
       {sections.header.length > 0 && (
         <div className="mb-4 flex flex-wrap justify-between items-center">

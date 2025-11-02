@@ -13,6 +13,7 @@ export interface CardGridProps<T> {
   data: T[];
   fields: CardField<T>[];
   loading?: boolean;
+  lastUpdated?: Date;
   layoutClassName?: string;
   emptyMessage?: string;
   countWhenLoading?: number;
