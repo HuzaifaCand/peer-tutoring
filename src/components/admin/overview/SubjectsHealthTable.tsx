@@ -59,7 +59,7 @@ export default function SubjectsHealthTable() {
       </h2>
 
       <Table
-        type="subjects"
+        type="subject"
         data={data}
         columns={columns}
         loading={loading}

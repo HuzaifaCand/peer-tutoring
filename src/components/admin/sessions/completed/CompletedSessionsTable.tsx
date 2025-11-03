@@ -62,7 +62,7 @@ export default function CompletedSessionsTable({
   return (
     <section>
       <Table
-        type="completedSessions"
+        type="completedSession"
         data={data}
         columns={completedSessionColumns}
         loading={loading}

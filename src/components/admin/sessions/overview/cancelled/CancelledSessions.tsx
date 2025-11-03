@@ -32,7 +32,7 @@ export default function CancelledSessionsTable() {
       </h2>
 
       <Table
-        type="cancelledSessions"
+        type="cancelledSession"
         data={data}
         columns={cancelledSessionColumns}
         loading={loading}

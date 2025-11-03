@@ -32,7 +32,7 @@ export default function ScheduledSessionsTable({
   return (
     <section>
       <Table
-        type="scheduledSessions"
+        type="scheduledSession"
         data={data}
         columns={scheduledSessionColumns}
         loading={loading}
