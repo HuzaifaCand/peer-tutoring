@@ -1,4 +1,4 @@
-import VerificationBadge from "@/components/admin/tutors/VerificationBadge";
+import VerificationBadge from "@/components/VerificationBadge";
 import { GradeBadge } from "@/components/admin/GradeBadge";
 import { TableColumn } from "@/components/table/types";
 import { ComputedTutorRow } from "./getTutors";
