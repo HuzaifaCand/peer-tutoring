@@ -1,6 +1,6 @@
 "use client";
 
-import StatCard from "@/components/cards/StatCard";
+import StatCard from "@/components/StatCard";
 import { supabase } from "@/lib/supabase/client";
 import { Activity, ClipboardList, UserCheck2 } from "lucide-react";
 import { useState, useEffect } from "react";

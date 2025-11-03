@@ -1,4 +1,4 @@
-import TextLoader from "../TextLoader";
+import TextLoader from "./TextLoader";
 
 export default function CountCard({
   label,

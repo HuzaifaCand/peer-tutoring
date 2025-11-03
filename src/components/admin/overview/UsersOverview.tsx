@@ -2,7 +2,7 @@
 
 import { supabase } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
-import CountCard from "@/components/cards/CountCard";
+import CountCard from "@/components/CountCard";
 import GradeCount from "./GradeCountCard";
 import Link from "next/link";
 

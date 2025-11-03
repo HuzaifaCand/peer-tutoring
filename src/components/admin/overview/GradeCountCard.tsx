@@ -1,6 +1,6 @@
 "use client";
 
-import CountCard from "@/components/cards/CountCard";
+import CountCard from "@/components/CountCard";
 import { useGradeCount } from "@/components/admin/overview/useGradeCount";
 
 export default function GradeCountCards({
