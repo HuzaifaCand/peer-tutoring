@@ -5,9 +5,11 @@ interface TagProps {
   color?: string;
   textSize?: string;
   className?: string;
+  font?: string;
 }
 
 const colorStyles: Record<string, string> = {
+  muted: "bg-gray-500/10 text-textMuted",
   gray: "bg-gray-500/20 text-gray-300",
   blue: "bg-blue-500/20 text-blue-300",
   yellow: "bg-yellow-500/20 text-yellow-300",
@@ -24,13 +26,15 @@ export function Tag({
   value,
   color = "gray",
   textSize = "text-[12px]",
+  font,
   className,
 }: TagProps) {
   return (
     <span
       className={clsx(
-        "px-2 py-0.5 rounded-md font-medium capitalize",
+        "px-2 py-0.5 rounded-md capitalize",
         textSize,
+        font,
         colorStyles[color],
         className // allows custom
       )}
