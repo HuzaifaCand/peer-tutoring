@@ -1,3 +1,4 @@
+import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
 import ModalBase from "./ModalBase";
 import { SessionModal } from "./SessionModal";
 
@@ -5,7 +6,7 @@ type ModalType = "activeSession";
 
 interface ModalProps {
   type: ModalType;
-  data?: any;
+  data: ComputedActiveSession;
   onClose: () => void;
 }
 
