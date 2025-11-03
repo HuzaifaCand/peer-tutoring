@@ -17,6 +17,7 @@ export function CardGrid<K extends keyof CardByType>({
   layoutClassName = "grid gap-4 md:grid-cols-2 xl:grid-cols-3",
   setRefetchFlag,
   getKey = (_, i) => i,
+  handleCardClick,
 }: CardGridProps<K>) {
   const [search, setSearch] = useState("");
 
@@ -45,7 +46,7 @@ export function CardGrid<K extends keyof CardByType>({
       {/* Top bar */}
       <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">
         <div>
-          {type === "activeSessions" && lastUpdated && (
+          {type === "activeSession" && lastUpdated && (
             <p className="hidden sm:inline text-xs text-textMuted transition-opacity duration-500">
               Last updated:{" "}
               {formatDistanceToNow(lastUpdated, { addSuffix: true }).replace(
@@ -77,11 +78,14 @@ export function CardGrid<K extends keyof CardByType>({
             const key = getKey(item, i);
 
             switch (type) {
-              case "activeSessions":
+              case "activeSession":
                 return (
                   <ActiveSessionCard
+                    handleCardClick={() =>
+                      handleCardClick?.(item as CardByType["activeSession"])
+                    }
                     key={key}
-                    session={item as CardByType["activeSessions"]}
+                    session={item as CardByType["activeSession"]}
                   />
                 );
               default:

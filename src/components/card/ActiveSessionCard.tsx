@@ -1,16 +1,18 @@
 import { CardShell } from "./CardShell";
 import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
 import { ArrowRight } from "lucide-react";
-import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
+import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
 import { Tag } from "../Tag";
 
 export function ActiveSessionCard({
   session,
+  handleCardClick,
 }: {
-  session: ComputedActiveSessionRow;
+  session: ComputedActiveSession;
+  handleCardClick: (s: ComputedActiveSession) => void;
 }) {
   return (
-    <CardShell>
+    <CardShell onClick={() => handleCardClick(session)}>
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-1">
