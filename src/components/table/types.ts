@@ -15,32 +15,32 @@ export interface TableRowProps<T> {
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { ComputedStudentRow } from "../admin/students/getStudents";
 import { ComputedCancelledSessionRow } from "../admin/sessions/overview/cancelled/getCancelledSessions";
+import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
+import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
+import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
 
 export type tableTypes =
-  | "students"
-  | "tutors"
-  | "cancelledSessions"
-  | "activeSessions"
-  | "scheduledSessions"
-  | "completedSessions"
-  | "scheduledSessions"
-  | "subjects";
+  | "student"
+  | "tutor"
+  | "cancelledSession"
+  | "activeSession"
+  | "scheduledSession"
+  | "completedSession"
+  | "scheduledSession"
+  | "subject";
 
 export type TableRowByType = {
-  tutors: ComputedTutorRow;
-  students: ComputedStudentRow;
-  cancelledSessions: ComputedCancelledSessionRow;
-  subjects: ComputedSubjectHealthView;
-  activeSessions: ComputedActiveSessionRow;
-  completedSessions: ComputedCompletedSessionRow;
-  scheduledSessions: ComputedScheduledSessionRow;
+  tutor: ComputedTutorRow;
+  student: ComputedStudentRow;
+  cancelledSession: ComputedCancelledSessionRow;
+  subject: ComputedSubjectHealthView;
+  activeSession: ComputedActiveSession;
+  completedSession: ComputedCompletedSessionRow;
+  scheduledSession: ComputedScheduledSessionRow;
 };
 
 import { Dispatch, SetStateAction } from "react";
-import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
-import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
-import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
-import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
 
