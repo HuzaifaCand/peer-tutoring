@@ -1,4 +1,4 @@
-import Badge from "../../Badge";
+import { Badge } from "../../Badge";
 import { SubjectHealthStatus } from "../overview/getSubjectsHealth";
 
 export default function HealthBadge({

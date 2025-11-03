@@ -1,5 +1,5 @@
 import { tableTypes } from "@/components/table/types";
-import Badge from "../../Badge";
+import { Badge } from "../../Badge";
 import { verificationStatus } from "./TutorTableColumns";
 
 export default function VerificationBadge({

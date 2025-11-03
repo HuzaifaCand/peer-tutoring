@@ -8,7 +8,7 @@ function capitalize(s: string) {
   return s.slice(0, 1).toUpperCase() + s.slice(1);
 }
 
-export default function Badge({ value, styles, title }: BadgeProps) {
+export function Badge({ value, styles, title }: BadgeProps) {
   const capitalizedValue = capitalize(value);
   const formattedValue = value.includes("-")
     ? capitalizedValue.split("-")[0] +
