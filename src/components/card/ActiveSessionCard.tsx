@@ -2,6 +2,7 @@ import { CardShell } from "./CardShell";
 import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
 import { ArrowRight } from "lucide-react";
 import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
+import { Tag } from "../Tag";
 
 export function ActiveSessionCard({
   session,
@@ -13,18 +14,11 @@ export function ActiveSessionCard({
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-1">
-          <span className="px-2 py-0.5 rounded-md bg-gray-500/20 text-gray-300 text-[12px] font-medium">
-            {session.subject}
-          </span>
-          <span
-            className={`px-2 py-0.5 rounded-md text-[12px] font-medium ${
-              session.is_online
-                ? "bg-blue-500/20 text-blue-300"
-                : "bg-yellow-500/20 text-yellow-300"
-            }`}
-          >
-            {session.mode}
-          </span>
+          <Tag value={session.subject} color="gray" />
+          <Tag
+            value={session.mode}
+            color={session.is_online ? "blue" : "yellow"}
+          />
         </div>
 
         <div className="flex items-center gap-1.5">
@@ -64,7 +58,7 @@ export function ActiveSessionCard({
           <span className="px-2 py-0.5 rounded-md bg-gray-500/10 text-gray-300 font-medium">
             {session.duration_minutes} mins booked
           </span>
-          <span className="text-[11px] text-textMuted/90 ml-2 sm:ml-0">
+          <span className="text-[11px] text-textMuted/90">
             Started <span className="font-medium">{session.start_time}</span>
           </span>
         </div>
