@@ -34,7 +34,7 @@ export function ActiveSessionCard({
       </div>
 
       {/* Body */}
-      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-y-3 mb-4  py-2 px-1">
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-y-3 mb-4 py-2 px-1">
         <div className="flex flex-col">
           <span className="text-[11px] text-textMuted font-medium mb-0.5">
             Tutor
@@ -63,7 +63,7 @@ export function ActiveSessionCard({
         <button
           className="
       inline-flex items-center gap-1 hover:cursor-pointer
-      text-textButton border border-white/10 rounded-md px-2.5 py-1
+      text-textButton border border-white/10 rounded-md px-2 sm:px-3 py-1
       transition-all text-xs font-medium
     "
         >
@@ -75,14 +75,16 @@ export function ActiveSessionCard({
           <Tag
             color="muted"
             textSize="text-[11px]"
-            value={`${session.duration_minutes} mins booked`}
+            value={`${session.start_time}`}
             font="font-medium"
+            title={`Started at ${session.start_time}`}
           />
           <Tag
             color="muted"
             textSize="text-[11px]"
-            value={`Started ${session.start_time}`}
+            value={`${session.duration_minutes} mins`}
             font="font-medium"
+            title={`${session.duration_minutes} minutes booked`}
           />
         </div>
       </div>
