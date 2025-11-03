@@ -1,0 +1,41 @@
+import clsx from "clsx";
+
+interface TagProps {
+  value: string;
+  color?: string;
+  textSize?: string;
+  className?: string;
+}
+
+const colorStyles: Record<string, string> = {
+  gray: "bg-gray-500/20 text-gray-300",
+  blue: "bg-blue-500/20 text-blue-300",
+  yellow: "bg-yellow-500/20 text-yellow-300",
+  red: "bg-red-500/20 text-red-300",
+  green: "bg-green-500/20 text-green-300",
+  purple: "bg-purple-500/20 text-purple-300",
+  pink: "bg-pink-500/20 text-pink-300",
+  orange: "bg-orange-500/20 text-orange-300",
+  teal: "bg-teal-500/20 text-teal-300",
+  custom: "",
+};
+
+export function Tag({
+  value,
+  color = "gray",
+  textSize = "text-[12px]",
+  className,
+}: TagProps) {
+  return (
+    <span
+      className={clsx(
+        "px-2 py-0.5 rounded-md font-medium capitalize",
+        textSize,
+        colorStyles[color],
+        className // allows custom
+      )}
+    >
+      {value}
+    </span>
+  );
+}
