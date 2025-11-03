@@ -31,7 +31,7 @@ export default function ActiveSessionsList({
     load();
 
     const interval = setInterval(() => {
-      load(); // background refresh
+      load();
     }, 5 * 60 * 1000);
 
     return () => clearInterval(interval);
