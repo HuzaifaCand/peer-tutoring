@@ -4,7 +4,7 @@ import {
   getTermFromMonth,
   getYearFromTerm,
 } from "@/utils/months";
-import Selector from "./Selector";
+import Selector from "../../Selector";
 
 interface Props {
   monthIndex: number;

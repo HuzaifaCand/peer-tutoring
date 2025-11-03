@@ -6,7 +6,7 @@ import {
   getSubjectsHealth,
   SubjectHealthStatus,
 } from "./getSubjectsHealth";
-import { Tag } from "@/components/Tag";
+import { Tag } from "@/components/ui/Tag";
 
 export const titles: Record<SubjectHealthStatus, string> = {
   healthy: "Good Student-Teacher Ratio",

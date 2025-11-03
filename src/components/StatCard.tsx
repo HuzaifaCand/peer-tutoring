@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import TextLoader from "./TextLoader";
+import TextLoader from "./ui/TextLoader";
 
 type CardUI = {
   label: string;

@@ -1,9 +1,9 @@
 "use client";
 
-import SectionHeader from "@/components/SectionHeader";
+import SectionHeader from "@/components/ui/SectionHeader";
 import OperationalStats from "@/components/OperationalStats";
 import UsersOverview from "./UsersOverview";
-import SectionDivider from "@/components/SectionDivider";
+import SectionDivider from "@/components/ui/SectionDivider";
 import SubjectsHealthTable from "./SubjectsHealthTable";
 
 export default function OverviewPage() {

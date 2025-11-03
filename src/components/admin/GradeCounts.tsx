@@ -1,4 +1,4 @@
-import TextLoader from "../TextLoader";
+import TextLoader from "../ui/TextLoader";
 
 interface CountsProps {
   counts: { as: number; a2: number };

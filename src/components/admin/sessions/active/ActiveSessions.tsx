@@ -1,7 +1,7 @@
 "use client";
 
 import ActiveSessionsGrid from "@/components/admin/sessions/active/ActiveSessionsGrid";
-import SectionHeader from "@/components/SectionHeader";
+import SectionHeader from "@/components/ui/SectionHeader";
 import { useState } from "react";
 import { ComputedActiveSession } from "@/components/admin/sessions/active/getActiveSessions";
 import { Modal } from "@/components/modal/ModalComponent";

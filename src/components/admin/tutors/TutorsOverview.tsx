@@ -1,6 +1,6 @@
 "use client";
 
-import SectionHeader from "@/components/SectionHeader";
+import SectionHeader from "@/components/ui/SectionHeader";
 import TutorsTable from "./TutorsTable";
 import { useState } from "react";
 

@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedCompletedSessionRow } from "./getCompletedSessions";
-import { Tag } from "@/components/Tag";
+import { Tag } from "@/components/ui/Tag";
 
 export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[] =
   [

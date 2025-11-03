@@ -21,7 +21,6 @@ const colorStyles: Record<string, string> = {
   pink: "bg-pink-500/20 text-pink-300",
   orange: "bg-orange-500/20 text-orange-300",
   teal: "bg-teal-500/20 text-teal-300",
-  custom: "",
 };
 
 function formatValue(value: string, capitalize = true) {
@@ -51,7 +50,7 @@ export function Tag({
         textSize,
         font,
         colorStyles[color],
-        className // allows custom
+        className // allows custom styles
       )}
     >
       {formatValue(value)}

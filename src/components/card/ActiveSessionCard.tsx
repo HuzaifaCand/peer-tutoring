@@ -2,7 +2,7 @@ import { CardShell } from "./CardShell";
 import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
 import { ArrowRight } from "lucide-react";
 import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
-import { Tag } from "../Tag";
+import { Tag } from "../ui/Tag";
 
 export function ActiveSessionCard({
   session,

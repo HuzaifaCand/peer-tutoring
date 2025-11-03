@@ -1,7 +1,7 @@
 "use client";
 
 import LChart from "@/components/LineChart";
-import MonthSelector from "@/components/MonthSelector";
+import MonthSelector from "@/components/admin/overview/MonthSelector";
 import { useMonthlySessionData } from "./useMonthlySessions";
 import { getMonthLabel } from "@/utils/months";
 

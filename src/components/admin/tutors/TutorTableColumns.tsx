@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedTutorRow } from "./getTutors";
-import { Tag } from "@/components/Tag";
+import { Tag } from "@/components/ui/Tag";
 
 export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
