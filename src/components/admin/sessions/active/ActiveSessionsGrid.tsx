@@ -6,7 +6,6 @@ import {
 } from "./getActiveSessions";
 import { useEffect, useState } from "react";
 import { CardGrid } from "@/components/card/CardGrid";
-import { activeSessionFields } from "./ActiveSessionFields";
 
 export default function ActiveSessionsList({
   setCount,
@@ -43,7 +42,6 @@ export default function ActiveSessionsList({
       lastUpdated={lastUpdated}
       data={data}
       loading={loading}
-      fields={activeSessionFields}
       layoutClassName="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
       setRefetchFlag={setRefetchFlag}
     />
