@@ -19,7 +19,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
         <span>{row.id}</span>
         <GradeBadge grade={row.grade} />
         <VerificationBadge
-          type="tutors"
+          type="tutor"
           title={`Status: ${row.verified}`}
           status={
             row.verified === null

@@ -27,7 +27,7 @@ export default function StudentsTable({ setRowCount }: StudentsTableProps) {
 
   return (
     <Table
-      type="students"
+      type="student"
       data={data}
       columns={studentColumns}
       loading={loading}

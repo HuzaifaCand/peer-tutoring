@@ -11,7 +11,7 @@ export default function VerificationBadge({
   title?: string;
   type: tableTypes;
 }) {
-  if (type === "tutors" && status === "verified") return;
+  if (type === "tutor" && status === "verified") return;
   const styles =
     status === "unverified"
       ? "bg-gray-500/20 text-gray-400 border border-gray-500/40"

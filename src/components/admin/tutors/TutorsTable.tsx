@@ -63,7 +63,7 @@ export default function TutorsTable({ setRowCount }: TutorsTableProps) {
 
   return (
     <Table
-      type="tutors"
+      type="tutor"
       data={tutors}
       columns={tutorColumns}
       loading={loading}

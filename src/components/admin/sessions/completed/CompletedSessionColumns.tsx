@@ -45,7 +45,7 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
       render: (row) => (
         <div className="">
           <VerificationBadge
-            type="completedSessions"
+            type="completedSession"
             status={
               row.verified === null
                 ? "unverified"
