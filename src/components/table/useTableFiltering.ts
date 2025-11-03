@@ -20,7 +20,7 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     let filtered = data;
 
     // tutor-specific filter
-    if (type === "tutors") {
+    if (type === "tutor") {
       const tutors = data as ComputedTutorRow[];
       if (activityFilter !== "all") {
         filtered = tutors.filter((row) => {
@@ -30,7 +30,7 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
       }
     }
     if (
-      type === "subjects" &&
+      type === "subject" &&
       subjectHealthFilter &&
       subjectHealthFilter !== "all"
     ) {
@@ -40,7 +40,7 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     }
 
     if (
-      (type === "scheduledSessions" || type === "completedSessions") &&
+      (type === "scheduledSession" || type === "completedSession") &&
       modeFilter &&
       modeFilter !== "all"
     ) {

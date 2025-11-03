@@ -8,7 +8,7 @@ export function useGradeCounts<K extends keyof TableRowByType>(
   data: TableRowByType[K][]
 ) {
   return useMemo(() => {
-    if (type === "tutors" || type === "students") {
+    if (type === "tutor" || type === "student") {
       const typedData = data as (ComputedStudentRow | ComputedTutorRow)[];
       const asCount = typedData.filter((r) => r.grade === "AS").length;
       const a2Count = typedData.filter((r) => r.grade === "A2").length;

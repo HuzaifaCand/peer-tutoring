@@ -54,20 +54,20 @@ export function TableTopbar({
     <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">
       <div className="flex items-center gap-3 flex-shrink-0">
         {gradeCounts && <GradeCounts counts={gradeCounts} loading={loading} />}
-        {type === "cancelledSessions" && (
+        {type === "cancelledSession" && (
           <p className="text-xs text-textMuted whitespace-nowrap">
             {rowCount} rows shown
           </p>
         )}
-        {(type === "scheduledSessions" || type === "completedSessions") &&
+        {(type === "scheduledSession" || type === "completedSession") &&
           modeFilter && <ModeFilter modeFilter={modeFilter} />}
-        {healthFilter && type === "subjects" && (
+        {healthFilter && type === "subject" && (
           <SubjectHealthFilter healthFilter={healthFilter} />
         )}
       </div>
 
       <div className="flex items-center gap-2 flex-shrink-0 ml-auto">
-        {activityFilter && type === "tutors" && (
+        {activityFilter && type === "tutor" && (
           <ActivityFilter activityFilter={activityFilter} />
         )}
 
