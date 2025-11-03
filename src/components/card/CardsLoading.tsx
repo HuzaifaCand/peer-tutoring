@@ -8,11 +8,15 @@ function CardSkeleton() {
       </div>
 
       {/* Body */}
-      <div className="grid grid-cols-2 gap-2 mb-2">
-        <div className="h-3 w-16 bg-white/10 rounded"></div>
-        <div className="h-3 w-24 bg-white/10 rounded"></div>
-        <div className="h-3 w-28 bg-white/10 rounded"></div>
-        <div className="h-3 w-20 bg-white/10 rounded"></div>
+      <div className="grid grid-cols-1 sm:flex sm:justify-between sm:items-center space-y-2 py-3">
+        <div className="space-y-2">
+          <div className="h-3 w-16 bg-white/10 rounded"></div>
+          <div className="h-3 w-28 bg-white/10 rounded"></div>
+        </div>
+        <div className="space-y-2">
+          <div className="h-3 w-16 bg-white/10 rounded"></div>
+          <div className="h-3 w-28 bg-white/10 rounded"></div>
+        </div>
       </div>
 
       {/* Footer */}

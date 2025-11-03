@@ -13,7 +13,6 @@ export interface CardGridProps<K extends keyof CardByType> {
   lastUpdated?: Date;
   layoutClassName?: string;
   emptyMessage?: string;
-  countWhenLoading?: number;
   getKey?: (item: CardByType[K], index: number) => string | number;
   setRefetchFlag: refetchFlagType;
 }
