@@ -1,36 +1,19 @@
 import { ComputedActiveSessionRow } from "../admin/sessions/active/getActiveSessions";
 import { refetchFlagType } from "../table/types";
 
-export type CardSection = "header" | "body" | "footer";
-
-type cardGridTypes = "activeSessions";
-
 export type CardByType = {
   activeSessions: ComputedActiveSessionRow;
+  // later: tutors: ComputedTutorRow, etc.
 };
 
-export interface CardGridProps<T> {
-  data: T[];
-  fields: CardField<T>[];
+export interface CardGridProps<K extends keyof CardByType> {
+  type: K;
+  data: CardByType[K][];
   loading?: boolean;
   lastUpdated?: Date;
   layoutClassName?: string;
   emptyMessage?: string;
   countWhenLoading?: number;
-  getKey?: (item: T, index: number) => string | number;
-  type: cardGridTypes;
+  getKey?: (item: CardByType[K], index: number) => string | number;
   setRefetchFlag: refetchFlagType;
-}
-
-export interface CardField<T> {
-  key: keyof T;
-  label?: string;
-  section?: CardSection;
-  render?: (item: T) => React.ReactNode;
-}
-
-export interface CardProps<T> {
-  data: T;
-  fields: CardField<T>[];
-  onCardClick?: () => void;
 }
