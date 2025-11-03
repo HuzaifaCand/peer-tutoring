@@ -23,9 +23,10 @@ export function CardGrid<K extends keyof CardByType>({
   const filteredData = useMemo(() => {
     if (!search.trim()) return data;
     const lower = search.toLowerCase();
-    return data.filter((row: any) =>
-      Object.entries(row).some(([key, value]) => {
-        const val = String(value).toLowerCase();
+
+    return data.filter((row) =>
+      Object.entries(row as Record<string, unknown>).some(([key, value]) => {
+        const val = String(value ?? "").toLowerCase();
         if (key.includes("name") || key.includes("id"))
           return val.startsWith(lower);
         return val.includes(lower);
