@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedCompletedSessionRow } from "./getCompletedSessions";
-import VerificationBadge from "@/components/VerificationBadge";
+import { Tag } from "@/components/Tag";
 
 export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[] =
   [
@@ -24,7 +24,32 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
         </div>
       ),
     },
-
+    {
+      key: "status",
+      label: "Status",
+      render: (row) => (
+        <div className="">
+          <Tag
+            textSize="text-[11px]"
+            className="mt-0.5"
+            value={
+              row.verified === false
+                ? "rejected"
+                : row.verified === true
+                ? "verified"
+                : "unverified"
+            }
+            color={
+              row.verified === null
+                ? "gray"
+                : row.verified === true
+                ? "green"
+                : "red"
+            }
+          />
+        </div>
+      ),
+    },
     {
       key: "duration",
       label: "Duration",
@@ -39,31 +64,21 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
       ),
     },
 
-    {
-      key: "status",
-      label: "Status",
-      render: (row) => (
-        <div className="">
-          <VerificationBadge
-            type="completedSession"
-            status={
-              row.verified === null
-                ? "unverified"
-                : row.verified === true
-                ? "verified"
-                : "rejected"
-            }
-            title={row.verified === false ? `${row.rejection_reason}` : ""}
-          />
-        </div>
-      ),
-    },
     { key: "scheduled_for", label: "Date" },
 
     { key: "subject", label: "Subject" },
     {
       key: "is_online",
       label: "Type",
-      render: (row) => <div>{row.mode}</div>,
+      render: (row) => (
+        <div className="">
+          <Tag
+            textSize="text-[11px]"
+            className="mt-0.5"
+            value={row.is_online === false ? "onsite" : "online"}
+            color={row.is_online === false ? "yellow" : "blue"}
+          />
+        </div>
+      ),
     },
   ];

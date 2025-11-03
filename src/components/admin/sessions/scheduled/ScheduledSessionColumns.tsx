@@ -1,5 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedScheduledSessionRow } from "./getScheduledSessions";
+import { Tag } from "@/components/Tag";
 
 export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[] =
   [
@@ -24,12 +25,21 @@ export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[]
       ),
     },
 
-    {
-      key: "is_online",
-      label: "Type",
-      render: (row) => <div>{row.mode}</div>,
-    },
     { key: "scheduled_for", label: "Date" },
 
     { key: "subject", label: "Subject" },
+    {
+      key: "is_online",
+      label: "Type",
+      render: (row) => (
+        <div className="">
+          <Tag
+            textSize="text-[11px]"
+            className="mt-0.5"
+            value={row.is_online === false ? "onsite" : "online"}
+            color={row.is_online === false ? "yellow" : "blue"}
+          />
+        </div>
+      ),
+    },
   ];

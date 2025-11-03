@@ -1,9 +1,6 @@
-import VerificationBadge from "@/components/VerificationBadge";
-import { GradeBadge } from "@/components/admin/GradeBadge";
 import { TableColumn } from "@/components/table/types";
 import { ComputedTutorRow } from "./getTutors";
-
-export type verificationStatus = "verified" | "rejected" | "unverified";
+import { Tag } from "@/components/Tag";
 
 export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
@@ -17,18 +14,31 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
           }`}
         />
         <span>{row.id}</span>
-        <GradeBadge grade={row.grade} />
-        <VerificationBadge
-          type="tutor"
-          title={`Status: ${row.verified}`}
-          status={
-            row.verified === null
-              ? "unverified"
-              : row.verified === true
-              ? "verified"
-              : "rejected"
-          }
-        />
+        <div className="space-x-1">
+          <Tag
+            textSize="text-[10px]"
+            value={row.grade}
+            color={row.grade === "AS" ? "blue" : "yellow"}
+            className="leading-tight"
+          />
+          <Tag
+            textSize="text-[10px]"
+            value={
+              row.verified === false
+                ? "rejected"
+                : row.verified !== true
+                ? "unverified"
+                : ""
+            }
+            color={
+              row.verified === null
+                ? "gray"
+                : row.verified === true
+                ? ""
+                : "red"
+            }
+          />
+        </div>
       </div>
     ),
   },

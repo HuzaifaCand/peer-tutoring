@@ -7,6 +7,7 @@ interface TagProps {
   className?: string;
   font?: string;
   title?: string;
+  capitalize?: boolean;
 }
 
 const colorStyles: Record<string, string> = {
@@ -22,6 +23,17 @@ const colorStyles: Record<string, string> = {
   teal: "bg-teal-500/20 text-teal-300",
   custom: "",
 };
+
+function formatValue(value: string, capitalize = true) {
+  if (!capitalize) return value;
+  const formatted = value.includes("-")
+    ? value
+        .split("-")
+        .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+        .join(" ")
+    : value.charAt(0).toUpperCase() + value.slice(1);
+  return formatted;
+}
 
 export function Tag({
   value,
@@ -42,7 +54,7 @@ export function Tag({
         className // allows custom
       )}
     >
-      {value}
+      {formatValue(value)}
     </span>
   );
 }

@@ -6,7 +6,7 @@ import {
   getSubjectsHealth,
   SubjectHealthStatus,
 } from "./getSubjectsHealth";
-import HealthBadge from "../tutors/HealthBadge";
+import { Tag } from "@/components/Tag";
 
 export const titles: Record<SubjectHealthStatus, string> = {
   healthy: "Good Student-Teacher Ratio",
@@ -21,7 +21,19 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
       <div className="ml-3">
         <span>{row.subject}</span>
         <span className="ml-2">
-          <HealthBadge title={titles[row.health]} status={row.health} />
+          <Tag
+            textSize="text-[10px]"
+            className="mt-0.5"
+            title={titles[row.health]}
+            value={row.health}
+            color={
+              row.health === "healthy"
+                ? "green"
+                : row.health === "low-supply"
+                ? "red"
+                : "yellow"
+            }
+          />
         </span>
       </div>
     ),

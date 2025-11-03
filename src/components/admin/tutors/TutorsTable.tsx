@@ -2,12 +2,14 @@
 
 import { Table } from "@/components/table/Table";
 import { getTutors, ComputedTutorRow } from "./getTutors";
-import { tutorColumns, verificationStatus } from "./TutorTableColumns";
+import { tutorColumns } from "./TutorTableColumns";
 import { useEffect, useState } from "react";
 
 interface TutorsTableProps {
   setRowCount: (rows: number) => void;
 }
+
+type verificationStatus = "unverified" | "rejected" | "verified";
 
 export default function TutorsTable({ setRowCount }: TutorsTableProps) {
   const [tutors, setTutors] = useState<ComputedTutorRow[]>([]);

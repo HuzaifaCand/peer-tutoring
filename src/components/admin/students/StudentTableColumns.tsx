@@ -1,6 +1,6 @@
 import { TableColumn } from "@/components/table/types";
 import { ComputedStudentRow } from "./getStudents";
-import { GradeBadge } from "@/components/admin/GradeBadge";
+import { Tag } from "@/components/Tag";
 
 export const studentColumns: TableColumn<ComputedStudentRow>[] = [
   {
@@ -14,7 +14,12 @@ export const studentColumns: TableColumn<ComputedStudentRow>[] = [
           }`}
         />
         <span>{row.id}</span>
-        <GradeBadge grade={row.grade} />
+        <Tag
+          textSize="text-[10px]"
+          value={row.grade}
+          color={row.grade === "AS" ? "blue" : "yellow"}
+          className="leading-tight"
+        />
       </div>
     ),
   },
