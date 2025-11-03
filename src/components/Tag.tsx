@@ -6,6 +6,7 @@ interface TagProps {
   textSize?: string;
   className?: string;
   font?: string;
+  title?: string;
 }
 
 const colorStyles: Record<string, string> = {
@@ -28,9 +29,11 @@ export function Tag({
   textSize = "text-[12px]",
   font,
   className,
+  title,
 }: TagProps) {
   return (
     <span
+      title={title}
       className={clsx(
         "px-2 py-0.5 rounded-md capitalize",
         textSize,
