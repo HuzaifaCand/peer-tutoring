@@ -9,7 +9,7 @@ interface TutorsTableProps {
   setRowCount: (rows: number) => void;
 }
 
-type verificationStatus = "unverified" | "rejected" | "verified";
+export type verificationStatus = "unverified" | "rejected" | "verified";
 
 export default function TutorsTable({ setRowCount }: TutorsTableProps) {
   const [tutors, setTutors] = useState<ComputedTutorRow[]>([]);

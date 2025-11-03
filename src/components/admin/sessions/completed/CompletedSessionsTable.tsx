@@ -8,7 +8,7 @@ import {
   getCompletedSessions,
 } from "./getCompletedSessions";
 import { completedSessionColumns } from "./CompletedSessionColumns";
-import { verificationStatus } from "../../tutors/TutorTableColumns";
+import { verificationStatus } from "../../tutors/TutorsTable";
 
 export default function CompletedSessionsTable({
   setRowCount,
