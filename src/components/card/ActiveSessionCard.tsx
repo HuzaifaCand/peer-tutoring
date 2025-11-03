@@ -14,10 +14,11 @@ export function ActiveSessionCard({
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-1">
-          <Tag value={session.subject} color="gray" />
+          <Tag value={session.subject} color="gray" font="font-medium" />
           <Tag
             value={session.mode}
             color={session.is_online ? "blue" : "yellow"}
+            font="font-medium"
           />
         </div>
 
@@ -54,17 +55,24 @@ export function ActiveSessionCard({
 
       {/* Footer */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-t border-white/10 pt-3 text-textMuted">
-        <div className="flex items-center gap-1 flex-wrap text-[11px]">
-          <span className="px-2 py-0.5 rounded-md bg-gray-500/10 text-gray-300 font-medium">
-            {session.duration_minutes} mins booked
-          </span>
-          <span className="text-[11px] text-textMuted/90">
-            Started <span className="font-medium">{session.start_time}</span>
-          </span>
+        <div className="flex items-center gap-1 flex-wrap mt-1">
+          <Tag
+            color="muted"
+            textSize="text-[11px]"
+            value={`${session.duration_minutes} mins booked`}
+            font="font-medium"
+          />
+
+          <Tag
+            color="muted"
+            textSize="text-[11px]"
+            value={`Started ${session.start_time}`}
+            font="font-medium"
+          />
         </div>
 
-        <button className="inline-flex items-center gap-1 text-textButton border border-white/10 rounded-md px-3 py-1 hover:bg-hoverBg/80 transition-all text-xs font-medium self-end sm:self-auto">
-          <span>{session.cta}</span>
+        <button className="inline-flex items-center gap-1 hover:cursor-pointer text-textButton border border-white/10 rounded-md px-3 py-1 transition-all text-xs font-medium self-end sm:self-auto">
+          <span className="whitespace-nowrap">{session.cta}</span>
           <ArrowRight className="h-3 w-3" />
         </button>
       </div>
