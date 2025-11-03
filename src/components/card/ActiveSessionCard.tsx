@@ -53,31 +53,31 @@ export function ActiveSessionCard({
         </div>
       </div>
 
-      <div className="flex sm:hidden border-b border-white/10 pb-3 sm:pb-0 sm:border-elevatedBg items-center gap-1 flex-wrap mt-1">
-        <Tag
-          color="muted"
-          textSize="text-[11px]"
-          value={`${session.duration_minutes} mins booked`}
-          font="font-medium"
-        />
-
-        <Tag
-          color="muted"
-          textSize="text-[11px]"
-          value={`Started ${session.start_time}`}
-          font="font-medium"
-        />
-      </div>
       {/* Footer */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:border-t sm:border-white/10 pt-3 text-textMuted">
-        <div className="hidden sm:flex items-center gap-1 flex-wrap mt-1 ">
+      <div
+        className="
+    flex flex-wrap items-center justify-between gap-x-2 gap-y-2
+    border-t border-white/10 pt-3 text-textMuted
+  "
+      >
+        <button
+          className="
+      inline-flex items-center gap-1 hover:cursor-pointer
+      text-textButton border border-white/10 rounded-md px-2.5 py-1
+      transition-all text-xs font-medium
+    "
+        >
+          <span className="whitespace-nowrap">{session.cta}</span>
+          <ArrowRight className="h-3 w-3" />
+        </button>
+
+        <div className="flex flex-wrap items-center gap-1.5">
           <Tag
             color="muted"
             textSize="text-[11px]"
             value={`${session.duration_minutes} mins booked`}
             font="font-medium"
           />
-
           <Tag
             color="muted"
             textSize="text-[11px]"
@@ -85,11 +85,6 @@ export function ActiveSessionCard({
             font="font-medium"
           />
         </div>
-
-        <button className="inline-flex items-center gap-1 hover:cursor-pointer text-textButton border border-white/10 rounded-md px-3 py-1 transition-all text-xs font-medium self-end sm:self-auto">
-          <span className="whitespace-nowrap">{session.cta}</span>
-          <ArrowRight className="h-3 w-3" />
-        </button>
       </div>
     </CardShell>
   );
