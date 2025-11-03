@@ -15,6 +15,7 @@ export async function getActiveSessions() {
   if (error) throw error;
 
   const formatted = (active_sessions || []).map((s) => ({
+    session_id: s.id,
     tutor_id: s.tutors.users.email.split("@")[0],
     tutor_name: s.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
     student_id: s.students.users.email.split("@")[0],
@@ -30,6 +31,6 @@ export async function getActiveSessions() {
   return formatted;
 }
 
-export type ComputedActiveSessionRow = Awaited<
+export type ComputedActiveSession = Awaited<
   ReturnType<typeof getActiveSessions>
 >[number];
