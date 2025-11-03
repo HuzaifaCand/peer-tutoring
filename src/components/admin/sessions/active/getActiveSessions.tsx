@@ -25,6 +25,7 @@ export async function getActiveSessions() {
     subject: s.subject,
     is_online: s.is_online,
     mode: s.is_online === true ? "Online" : "Onsite",
+    cta: "View Details",
   }));
   return formatted;
 }
