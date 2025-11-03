@@ -23,7 +23,6 @@ export default function ActiveSessionsList({
       const formatted = await getActiveSessions();
       setData(formatted);
       setLastUpdated(new Date());
-      setCount(formatted.length);
       setLoading(false);
     }
 
@@ -35,6 +34,10 @@ export default function ActiveSessionsList({
 
     return () => clearInterval(interval);
   }, [refetchFlag]);
+
+  useEffect(() => {
+    setCount(data.length);
+  }, [data, setCount]);
 
   return (
     <CardGrid
