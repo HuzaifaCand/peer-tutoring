@@ -1,7 +1,7 @@
 "use client";
 
-import DesktopSidebar from "@/components/admin/sidebar/DesktopSidebar";
-import MobileSidebar from "@/components/admin/sidebar/MobileSidebar";
+import DesktopSidebar from "@/components/sidebar/DesktopSidebar";
+import MobileSidebar from "@/components/sidebar/MobileSidebar";
 
 export default function AdminLayout({
   children,

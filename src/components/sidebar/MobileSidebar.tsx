@@ -2,7 +2,7 @@
 
 import { X, AlignJustify } from "lucide-react";
 import { useEffect, useState } from "react";
-import SidebarContent from "./SidebarContent";
+import SidebarContent from "./AdminSidebarContent";
 
 export default function MobileSidebar() {
   const [open, setOpen] = useState(false);
