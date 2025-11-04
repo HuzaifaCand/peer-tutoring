@@ -3,6 +3,7 @@ import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
 import { ArrowRight } from "lucide-react";
 import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
 import { Tag } from "../ui/Tag";
+import { CardCTA } from "../ui/CardCTA";
 
 export function ActiveSessionCard({
   session,
@@ -62,16 +63,7 @@ export function ActiveSessionCard({
     border-t border-white/10 pt-3 text-textMuted
   "
       >
-        <button
-          className="
-      inline-flex items-center gap-1 hover:cursor-pointer
-      text-textButton border border-white/10 rounded-md px-2 sm:px-3 py-1
-      transition-all text-xs font-medium
-    "
-        >
-          <span className="whitespace-nowrap">{session.cta}</span>
-          <ArrowRight className="h-3 w-3" />
-        </button>
+        <CardCTA cta={session.cta} />
 
         <div className="flex flex-wrap items-center gap-1.5">
           <Tag

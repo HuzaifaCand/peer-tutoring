@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import TextLoader from "./ui/TextLoader";
+import { CardCTA } from "./ui/CardCTA";
 
 type CardUI = {
   label: string;
@@ -50,12 +51,7 @@ export default function StatCard({ info, count, loading }: Props) {
 
       {/* Footer (CTA) */}
       <div className="flex justify-end">
-        <span className="text-xs flex items-center gap-1 text-textButton border border-white/10 rounded-md px-3 py-1.5 group-hover:bg-hoverBg transition-all">
-          {info.cta}{" "}
-          <span>
-            <ArrowRight className="w-3 h-3" />
-          </span>
-        </span>
+        <CardCTA cta={info.cta} padding="px-3 py-1.5" />
       </div>
     </Link>
   );
