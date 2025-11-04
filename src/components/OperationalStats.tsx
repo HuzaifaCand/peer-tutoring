@@ -2,7 +2,12 @@
 
 import StatCard from "@/components/StatCard";
 import { supabase } from "@/lib/supabase/client";
-import { Activity, ClipboardList, UserCheck2 } from "lucide-react";
+import {
+  Activity,
+  CalendarClock,
+  ClipboardList,
+  UserCheck2,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 
 const STAT_INFO = {
@@ -33,7 +38,7 @@ const STAT_INFO = {
     label: "Recently Scheduled Sessions",
     cta: "View Booked Sessions",
     href: "/admin/sessions/scheduled",
-    icon: ClipboardList,
+    icon: CalendarClock,
     fetch: async () =>
       supabase
         .from("sessions")
