@@ -28,7 +28,7 @@ export function Filter<T extends string>({
               key={key}
               title={title}
               onClick={() => setValue(active ? "all" : key)}
-              className={`px-3 py-1 text-xs rounded-md border transition
+              className={`px-3 py-1 text-[11px] sm:text-xs rounded-md border transition
                 ${
                   active
                     ? `${color} font-semibold`

@@ -66,7 +66,7 @@ export default function SubjectsHealthTable() {
 
   return (
     <section>
-      <h2 className="text-2xl text-textWhite mb-4 font-semibold">
+      <h2 className="text-2xl text-textWhite mb-6 font-semibold">
         Subjects Overview
       </h2>
 
