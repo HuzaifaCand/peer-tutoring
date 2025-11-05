@@ -1,15 +1,10 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-import { ComputedStudentRow, getStudents } from "./getStudents";
+import { getStudents } from "./getStudents";
 import { studentColumns } from "./StudentTableColumns";
 import { Dispatch, SetStateAction } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import {
-  chainSorters,
-  sortByAdminSeen,
-  sortByTimestamp,
-} from "@/utils/sortUtils";
 import { defaultSorters } from "@/utils/sorters";
 
 interface StudentsTableProps {

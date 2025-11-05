@@ -1,15 +1,9 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-import { getTutors, ComputedTutorRow } from "./getTutors";
+import { getTutors } from "./getTutors";
 import { tutorColumns } from "./TutorTableColumns";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import {
-  chainSorters,
-  sortByVerification,
-  sortByAdminSeen,
-  sortByTimestamp,
-} from "@/utils/sortUtils";
 import { Dispatch, SetStateAction } from "react";
 import { defaultSorters } from "@/utils/sorters";
 

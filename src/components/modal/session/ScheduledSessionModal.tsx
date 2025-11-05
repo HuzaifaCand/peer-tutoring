@@ -1,10 +1,4 @@
-import {
-  Clock,
-  Timer,
-  Hourglass,
-  CalendarClock,
-  CalendarDays,
-} from "lucide-react";
+import { Timer, CalendarClock, CalendarDays } from "lucide-react";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
 import { CloseButton } from "../CloseButton";
