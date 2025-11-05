@@ -60,6 +60,9 @@ export type Database = {
           academic_year: string;
           booked_at: string;
           cancel_reason: string | null;
+          cancellation_source: string | null;
+          cancelled_at: string | null;
+          cancelled_by: string | null;
           completed_at: string | null;
           created_at: string;
           duration_minutes: number;
@@ -83,6 +86,9 @@ export type Database = {
           academic_year: string;
           booked_at?: string;
           cancel_reason?: string | null;
+          cancellation_source?: string | null;
+          cancelled_at?: string | null;
+          cancelled_by?: string | null;
           completed_at?: string | null;
           created_at?: string;
           duration_minutes?: number;
@@ -106,6 +112,9 @@ export type Database = {
           academic_year?: string;
           booked_at?: string;
           cancel_reason?: string | null;
+          cancellation_source?: string | null;
+          cancelled_at?: string | null;
+          cancelled_by?: string | null;
           completed_at?: string | null;
           created_at?: string;
           duration_minutes?: number;
@@ -126,6 +135,13 @@ export type Database = {
           verified_by?: string | null;
         };
         Relationships: [
+          {
+            foreignKeyName: "sessions_cancelled_by_fkey";
+            columns: ["cancelled_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
           {
             foreignKeyName: "sessions_slot_id_fkey";
             columns: ["slot_id"];
