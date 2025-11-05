@@ -1,18 +1,25 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-import { getStudents } from "./getStudents";
+import { ComputedStudentRow, getStudents } from "./getStudents";
 import { studentColumns } from "./StudentTableColumns";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { sortByAdminSeen } from "@/utils/sortUtils";
+import {
+  chainSorters,
+  sortByAdminSeen,
+  sortByTimestamp,
+} from "@/utils/sortUtils";
 
 interface StudentsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
 }
 
 export default function StudentsTable({ setRowCount }: StudentsTableProps) {
-  const sortFn = sortByAdminSeen;
+  const sortFn = chainSorters(
+    sortByAdminSeen,
+    sortByTimestamp<ComputedStudentRow>("created_at", "desc")
+  );
   const { data, loading, setRefetchFlag } = useDataFetch(getStudents, {
     sortFn,
   });

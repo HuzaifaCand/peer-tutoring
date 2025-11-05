@@ -4,7 +4,7 @@ import { StudentUser } from "@/lib/computedtypes";
 export async function getStudents() {
   const { data: students, error } = await supabase
     .from("students")
-    .select("grade, subjects, admin_seen, users(full_name, email)")
+    .select("grade, subjects, admin_seen, users(full_name, email), created_at")
     .overrideTypes<StudentUser[]>();
 
   if (error) {
@@ -19,6 +19,7 @@ export async function getStudents() {
     grade: s.grade,
     subjects: s.subjects.join(" | ") || [],
     admin_seen: s.admin_seen,
+    created_at: s.created_at,
   }));
   return formatted;
 }
