@@ -40,7 +40,7 @@ export const cancelledSessionColumns: TableColumn<ComputedCancelledSessionRow>[]
               ? "yellow"
               : "gray"
           }
-          textSize="text-[12px]"
+          textSize="text-[11px]"
         />
       ),
     },
