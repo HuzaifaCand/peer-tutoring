@@ -2,6 +2,13 @@
 
 export type VerificationStatus = "unverified" | "verified" | "rejected";
 
+export function sortByCreatedAt<T extends { created_at: string | Date }>(
+  a: T,
+  b: T
+) {
+  return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+}
+
 /**
  * Converts a verified flag into a normalized string status.
  */
