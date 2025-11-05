@@ -1,5 +1,12 @@
 import { Loader2 } from "lucide-react";
-import { Bar, BarChart, LabelList, ResponsiveContainer, XAxis } from "recharts";
+import {
+  Bar,
+  BarChart,
+  LabelList,
+  ResponsiveContainer,
+  XAxis,
+  YAxis,
+} from "recharts";
 import { ComputedSubjectPopularityView } from "./admin/sessions/overview/SubjectsPopularityGraph";
 
 export default function BarGraph({
@@ -24,6 +31,12 @@ export default function BarGraph({
               dataKey="subject"
               tick={{ fill: "rgba(255,255,255,0.6)", fontSize: 11 }}
               interval={0}
+            />
+
+            <YAxis
+              dataKey="session_count"
+              width={30}
+              tick={{ fill: "rgba(255,255,255,0.3)", fontSize: 11 }}
             />
 
             <Bar
