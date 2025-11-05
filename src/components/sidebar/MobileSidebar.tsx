@@ -2,9 +2,13 @@
 
 import { X, AlignJustify } from "lucide-react";
 import { useEffect, useState } from "react";
-import SidebarContent from "./AdminSidebarContent";
+import SidebarContent from "./SidebarContent";
 
-export default function MobileSidebar() {
+export default function MobileSidebar({
+  type,
+}: {
+  type: "admin" | "student" | "tutor";
+}) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -38,7 +42,7 @@ export default function MobileSidebar() {
             <X size={20} />
           </button>
         </div>
-        <SidebarContent onClose={() => setOpen(false)} />
+        <SidebarContent type={type} onClose={() => setOpen(false)} />
       </div>
     </div>
   );
