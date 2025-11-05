@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import TextLoader from "./ui/TextLoader";
 import { CardCTA } from "./ui/CardCTA";
 
