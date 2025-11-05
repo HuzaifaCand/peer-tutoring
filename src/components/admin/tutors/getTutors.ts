@@ -11,7 +11,8 @@ export async function getTutors() {
       approved,
       admin_seen,
       users(full_name, email),
-      available_slots(id, available)
+      available_slots(id, available),
+      created_at
     `
     )
     .overrideTypes<TutorUser[]>();
@@ -35,6 +36,7 @@ export async function getTutors() {
       ? t.available_slots.filter((s) => s.available === false).length
       : 0, // count only unavailable ones to compute activity -- slot is unavailable if session is "scheduled" or "in_progress" at that slot time
     admin_seen: t.admin_seen,
+    created_at: t.created_at,
   }));
 
   return formatted;

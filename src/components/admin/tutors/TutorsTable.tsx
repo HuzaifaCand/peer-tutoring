@@ -8,6 +8,7 @@ import {
   chainSorters,
   sortByVerification,
   sortByAdminSeen,
+  sortByTimestamp,
 } from "@/utils/sortUtils";
 import { Dispatch, SetStateAction } from "react";
 
@@ -18,7 +19,8 @@ interface TutorsTableProps {
 export default function TutorsTable({ setRowCount }: TutorsTableProps) {
   const sortFn = chainSorters<ComputedTutorRow>(
     sortByVerification,
-    sortByAdminSeen
+    sortByAdminSeen,
+    sortByTimestamp<ComputedTutorRow>("created_at", "desc")
   );
 
   const { data, loading, setRefetchFlag } = useDataFetch(getTutors, { sortFn });
