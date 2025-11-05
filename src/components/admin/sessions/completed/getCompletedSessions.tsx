@@ -50,7 +50,8 @@ export async function getCompletedSessions() {
         date: format(parseISO(s.completed_at ?? ""), "EEE, MMM d"),
         start_time: format(parseISO(s.start_time ?? ""), "p"),
 
-        completed_at: format(parseISO(s.completed_at ?? ""), "p"),
+        completed_at: s.completed_at,
+        completed_at_time: format(parseISO(s.completed_at ?? ""), "p"),
         subject: s.subject,
         verified: s.verified,
         rejection_reason: s.rejection_reason ?? "",
