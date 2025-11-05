@@ -109,7 +109,7 @@ export default function OperationalStats({ config }: OperationalStatsProps) {
 
   return (
     <section>
-      <div className={`grid grid-cols-1 ${gridColsClass} gap-3`}>
+      <div className={`grid grid-cols-1 ${gridColsClass} gap-4`}>
         {Object.entries(config)
           .filter(([_, enabled]) => enabled)
           .map(([key]) => {
