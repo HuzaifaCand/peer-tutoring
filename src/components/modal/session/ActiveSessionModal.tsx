@@ -35,7 +35,7 @@ export function ActiveSessionModal({
       />
 
       {/* Session Details */}
-      <section className="grid grid-cols-3 gap-3 mb-6 py-4 text-sm max-w-4xl mx-auto">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 py-4 text-sm max-w-4xl mx-auto">
         {/* Started */}
         <InfoCard
           item={{
