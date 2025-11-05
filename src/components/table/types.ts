@@ -14,11 +14,11 @@ export interface TableRowProps<T> {
 
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { ComputedStudentRow } from "../admin/students/getStudents";
-import { ComputedCancelledSessionRow } from "../admin/sessions/cancelled/getCancelledSessions";
+import { ComputedCancelledSessionRow } from "../../lib/sessions/cancelled/getCancelledSessions";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
-import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
-import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
-import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
+import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
+import { ComputedCompletedSessionRow } from "../../lib/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../../lib/sessions/scheduled/getScheduledSessions";
 
 export type tableTypes =
   | "student"

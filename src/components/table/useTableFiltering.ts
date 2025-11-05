@@ -5,9 +5,8 @@ import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { healths } from "../admin/overview/SubjectHealthFilter";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { modes } from "../admin/sessions/SessionModeFilter";
-import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
-import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
-import { ComputedCancelledSessionRow } from "../admin/sessions/cancelled/getCancelledSessions";
+import { ComputedCompletedSessionRow } from "../../lib/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../../lib/sessions/scheduled/getScheduledSessions";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,

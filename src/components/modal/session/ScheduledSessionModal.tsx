@@ -8,7 +8,7 @@ import {
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
 import { CloseButton } from "../CloseButton";
-import { ComputedScheduledSessionRow } from "@/components/admin/sessions/scheduled/getScheduledSessions";
+import { ComputedScheduledSessionRow } from "@/lib/sessions/scheduled/getScheduledSessions";
 import { InfoCard } from "../InfoCard";
 
 export function ScheduledSessionModal({

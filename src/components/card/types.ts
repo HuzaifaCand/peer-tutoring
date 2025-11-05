@@ -1,4 +1,4 @@
-import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
+import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
 import { refetchFlagType } from "../table/types";
 
 export type CardByType = {

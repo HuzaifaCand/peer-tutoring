@@ -2,7 +2,7 @@ import { Timer, CalendarClock, CalendarDays } from "lucide-react";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
 import { CloseButton } from "../CloseButton";
-import { ComputedCompletedSessionRow } from "@/components/admin/sessions/completed/getCompletedSessions";
+import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getCompletedSessions";
 import { InfoCard } from "../InfoCard";
 
 export function CompletedSessionModal({

@@ -1,6 +1,6 @@
 import { CardShell } from "./CardShell";
 import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
-import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
+import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
 import { Tag } from "../ui/Tag";
 import { CardCTA } from "../ui/CardCTA";
 
@@ -25,13 +25,15 @@ export function ActiveSessionCard({
         </div>
 
         <div className="flex items-center gap-1.5">
-          <span className="text-[11px] text-textMuted uppercase font-medium">
+          <span className="text-textMuted uppercase text-[11px] font-medium">
             Elapsed
           </span>
-          <ElapsedTime
-            start={session.start_time_iso}
-            expectedMinutes={session.duration_minutes}
-          />
+          <span className="text-[12px] mt-[1.5px]">
+            <ElapsedTime
+              start={session.start_time_iso}
+              expectedMinutes={session.duration_minutes}
+            />
+          </span>
         </div>
       </div>
 

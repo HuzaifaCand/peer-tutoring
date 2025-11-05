@@ -5,10 +5,10 @@ import {
   sortByTimestamp,
   sortByVerification,
 } from "./sortUtils";
-import { ComputedCompletedSessionRow } from "@/components/admin/sessions/completed/getCompletedSessions";
-import { ComputedCancelledSessionRow } from "@/components/admin/sessions/cancelled/getCancelledSessions";
-import { ComputedActiveSession } from "@/components/admin/sessions/active/getActiveSessions";
-import { ComputedScheduledSessionRow } from "@/components/admin/sessions/scheduled/getScheduledSessions";
+import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getCompletedSessions";
+import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
+import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
+import { ComputedScheduledSessionRow } from "@/lib/sessions/scheduled/getScheduledSessions";
 import { ComputedStudentRow } from "@/components/admin/students/getStudents";
 
 export const defaultSorters = {
@@ -38,6 +38,6 @@ export const defaultSorters = {
   ),
   scheduledSession: sortByTimestamp<
     ComputedScheduledSessionRow,
-    "pure_scheduled_for"
-  >("pure_scheduled_for", "asc"),
+    "scheduled_for_iso"
+  >("scheduled_for_iso", "asc"),
 };

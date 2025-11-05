@@ -1,4 +1,4 @@
-import { ComputedCancelledSessionRow } from "@/components/admin/sessions/cancelled/getCancelledSessions";
+import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
 import { CloseButton } from "../CloseButton";

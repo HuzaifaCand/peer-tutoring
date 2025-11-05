@@ -1,7 +1,7 @@
-import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
-import { ComputedCancelledSessionRow } from "../admin/sessions/cancelled/getCancelledSessions";
-import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
-import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
+import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
+import { ComputedCancelledSessionRow } from "../../lib/sessions/cancelled/getCancelledSessions";
+import { ComputedCompletedSessionRow } from "../../lib/sessions/completed/getCompletedSessions";
+import { ComputedScheduledSessionRow } from "../../lib/sessions/scheduled/getScheduledSessions";
 import ModalBase from "./ModalBase";
 import { ActiveSessionModal } from "./session/ActiveSessionModal";
 import { CancelledSessionModal } from "./session/CancelledSessionModal";

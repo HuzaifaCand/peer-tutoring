@@ -1,5 +1,5 @@
 import { ElapsedTime } from "../../admin/sessions/active/ElapsedTime";
-import { ComputedActiveSession } from "../../admin/sessions/active/getActiveSessions";
+import { ComputedActiveSession } from "../../../lib/sessions/active/getActiveSessions";
 import { Clock, Timer, Hourglass } from "lucide-react";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
