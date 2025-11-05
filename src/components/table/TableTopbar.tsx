@@ -21,7 +21,7 @@ interface TopbarProps {
     refetch: refetchFlagType;
   };
   gradeCounts?: { as: number; a2: number } | null;
-  rowCount: number;
+
   type: tableTypes;
   activityFilter?: {
     value: activities;
@@ -39,7 +39,6 @@ interface TopbarProps {
 
 export function TableTopbar({
   gradeCounts,
-  rowCount,
   searchConfig,
   loadingState,
   activityFilter,
@@ -54,12 +53,9 @@ export function TableTopbar({
     <div className="relative flex justify-between items-center mb-3 gap-2 overflow-x-auto no-scrollbar">
       <div className="flex items-center gap-3 flex-shrink-0">
         {gradeCounts && <GradeCounts counts={gradeCounts} loading={loading} />}
-        {type === "cancelledSession" && (
-          <p className="text-xs text-textMuted whitespace-nowrap">
-            {rowCount} rows shown
-          </p>
-        )}
-        {(type === "scheduledSession" || type === "completedSession") &&
+
+        {type.includes("Session") &&
+          !type.startsWith("active") &&
           modeFilter && <ModeFilter modeFilter={modeFilter} />}
         {healthFilter && type === "subject" && (
           <SubjectHealthFilter healthFilter={healthFilter} />

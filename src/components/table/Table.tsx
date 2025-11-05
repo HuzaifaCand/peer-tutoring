@@ -48,7 +48,6 @@ export function Table<K extends keyof TableRowByType>({
   return (
     <div className="w-full text-sm overflow-x-auto scroll-x-auto no-scrollbar">
       <TableTopbar
-        rowCount={filteredData.length}
         gradeCounts={gradeCounts}
         type={type}
         searchConfig={{

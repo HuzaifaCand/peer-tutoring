@@ -14,7 +14,7 @@ export interface TableRowProps<T> {
 
 import { ComputedTutorRow } from "../admin/tutors/getTutors";
 import { ComputedStudentRow } from "../admin/students/getStudents";
-import { ComputedCancelledSessionRow } from "../admin/sessions/overview/cancelled/getCancelledSessions";
+import { ComputedCancelledSessionRow } from "../admin/sessions/cancelled/getCancelledSessions";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { ComputedActiveSession } from "../admin/sessions/active/getActiveSessions";
 import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
@@ -52,7 +52,7 @@ export interface DataTableProps<T> {
   type: tableTypes;
   loading: boolean;
   setRefetchFlag: refetchFlagType;
-  setRowCount?: (rows: number) => void;
+  setRowCount?: Dispatch<SetStateAction<number>>;
 }
 
 export interface TableLoadingProps<T> {
