@@ -5,15 +5,21 @@ import { getActiveSessions, ComputedActiveSession } from "./getActiveSessions";
 import { useEffect } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
+import { sortByTimestamp } from "@/utils/sortUtils";
 
 export default function ActiveSessionsGrid({
   setCount,
   setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedActiveSession>) {
+  const sortFn = sortByTimestamp<ComputedActiveSession>(
+    "start_time_iso",
+    "asc"
+  );
+
   const { data, loading, setRefetchFlag, lastUpdated } = useDataFetch(
     getActiveSessions,
-    { autoRefresh: true }
+    { autoRefresh: true, sortFn }
   );
 
   useEffect(() => {
