@@ -1,8 +1,8 @@
-import { CardShell } from "./CardShell";
 import { ElapsedTime } from "../admin/sessions/active/ElapsedTime";
 import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
 import { Tag } from "../ui/Tag";
 import { CardCTA } from "../ui/CardCTA";
+import { CardShell } from "./CardShell";
 
 export function ActiveSessionCard({
   session,
