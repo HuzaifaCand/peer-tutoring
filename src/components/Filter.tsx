@@ -32,7 +32,7 @@ export function Filter<T extends string>({
                 ${
                   active
                     ? `${color} font-semibold`
-                    : "bg-elevatedBg/50 text-textWhite/70 border-white/10 hover:bg-elevatedBg/70"
+                    : "bg-elevatedBg/50 text-textWhite/70 border-white/10 hover:bg-hoverBg"
                 }`}
             >
               {label}
