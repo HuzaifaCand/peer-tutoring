@@ -26,39 +26,29 @@ export async function getScheduledSessions() {
     throw error;
   }
 
-  const formatted =
-    scheduled_sessions
-      ?.map((s) => {
-        const parsedDate = parseISO(s.scheduled_for);
+  const formatted = scheduled_sessions?.map((s) => {
+    const parsedDate = parseISO(s.scheduled_for);
 
-        return {
-          id: s.id,
-          tutor_id: s.tutors.users.email.split("@")[0],
-          tutor_name: s.tutors.users.full_name
-            .split(" ")
-            .slice(0, -1)
-            .join(" "),
-          tutor_grade: s.tutors.grade,
-          student_id: s.students.users.email.split("@")[0],
-          student_name: s.students.users.full_name
-            .split(" ")
-            .slice(0, -1)
-            .join(" "),
-          student_grade: s.students.grade,
-          scheduled_for: format(parsedDate, "EEE, MMM d, p"), // display version
-          pure_scheduled_for: parsedDate, // raw for sorting
-          subject: s.subject,
-          is_online: s.is_online,
-          mode: s.is_online === true ? "Online" : "Onsite",
-          duration_minutes: s.duration_minutes,
-          booked_at: s.booked_at,
-        };
-      })
-      // sort by soonest
-      .sort(
-        (a, b) =>
-          a.pure_scheduled_for.getTime() - b.pure_scheduled_for.getTime()
-      ) ?? [];
+    return {
+      id: s.id,
+      tutor_id: s.tutors.users.email.split("@")[0],
+      tutor_name: s.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
+      tutor_grade: s.tutors.grade,
+      student_id: s.students.users.email.split("@")[0],
+      student_name: s.students.users.full_name
+        .split(" ")
+        .slice(0, -1)
+        .join(" "),
+      student_grade: s.students.grade,
+      scheduled_for: format(parsedDate, "EEE, MMM d, p"), // display version
+      pure_scheduled_for: parsedDate, // raw for sorting
+      subject: s.subject,
+      is_online: s.is_online,
+      mode: s.is_online === true ? "Online" : "Onsite",
+      duration_minutes: s.duration_minutes,
+      booked_at: s.booked_at,
+    };
+  });
 
   return formatted;
 }

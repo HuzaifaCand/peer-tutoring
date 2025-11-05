@@ -1,17 +1,39 @@
 // src/utils/sortUtils.ts
 
-export type VerificationStatus = "unverified" | "verified" | "rejected";
-
-export function sortByCreatedAt<T extends { created_at: string | Date }>(
-  a: T,
-  b: T
+/**
+ * Generic timestamp sorter.
+ *
+ * @param key - The field name of the timestamp (string key of the object)
+ * @param order - "asc" for earliest first, "desc" for latest first
+ *
+ * Handles:
+ *  - ISO strings, Date objects, or null/undefined values
+ *  - Safe even if the field doesn't exist (returns 0)
+ */
+export function sortByTimestamp<T>(
+  key: keyof T,
+  order: "asc" | "desc" = "desc"
 ) {
-  return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  return (a: T, b: T) => {
+    const aValue = a[key];
+    const bValue = b[key];
+
+    // Guard for missing fields or invalid timestamps
+    if (!aValue || !bValue) return 0;
+
+    const aDate = new Date(aValue as any).getTime();
+    const bDate = new Date(bValue as any).getTime();
+
+    if (isNaN(aDate) || isNaN(bDate)) return 0;
+
+    return order === "asc" ? aDate - bDate : bDate - aDate;
+  };
 }
 
 /**
  * Converts a verified flag into a normalized string status.
  */
+export type VerificationStatus = "unverified" | "verified" | "rejected";
 export function getVerificationStatus(v: boolean | null): VerificationStatus {
   if (v === null) return "unverified";
   return v ? "verified" : "rejected";
