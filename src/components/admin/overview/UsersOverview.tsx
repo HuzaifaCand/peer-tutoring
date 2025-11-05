@@ -57,10 +57,7 @@ export default function UsersOverview() {
     <section>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {items.map((item) => (
-          <div
-            key={item.type}
-            className="flex flex-col gap-4 w-full p-4 rounded-2xl bg-elevatedBg/50"
-          >
+          <div key={item.type} className="flex flex-col gap-4 w-full">
             <CountCard
               loading={loading}
               count={item.value}
