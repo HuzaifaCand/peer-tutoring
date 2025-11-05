@@ -41,15 +41,17 @@ export function Tag({
   font,
   className,
   title,
+  capitalize,
 }: TagProps) {
   return (
     <span
       title={title}
       className={clsx(
-        "px-2 py-0.5 rounded-md capitalize",
+        "px-2 py-0.5 rounded-md",
         textSize,
         font,
         colorStyles[color],
+        capitalize === true ? "capitalize" : "",
         className // allows custom styles
       )}
     >
