@@ -25,21 +25,24 @@ export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[]
       ),
     },
 
-    { key: "scheduled_for", label: "Date" },
+    { key: "scheduled_for", label: "Scheduled" },
+    {
+      key: "duration_minutes",
+      label: "Expected Duration",
+      render: (row) => <span>{row.duration_minutes + " mins"}</span>,
+    },
 
     { key: "subject", label: "Subject" },
     {
       key: "is_online",
-      label: "Type",
+      label: "Mode",
       render: (row) => (
-        <div className="">
-          <Tag
-            textSize="text-[11px]"
-            className="mt-0.5"
-            value={row.is_online === false ? "onsite" : "online"}
-            color={row.is_online === false ? "yellow" : "blue"}
-          />
-        </div>
+        <Tag
+          textSize="text-[11px]"
+          className="mt-0.5"
+          value={row.is_online === false ? "onsite" : "online"}
+          color={row.is_online === false ? "yellow" : "blue"}
+        />
       ),
     },
   ];

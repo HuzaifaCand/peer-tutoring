@@ -7,7 +7,7 @@ export async function getActiveSessions() {
   const { data: active_sessions, error } = await supabase
     .from("sessions")
     .select(
-      "tutors(users(full_name, email)), students(users(full_name, email)), subject, start_time, duration_minutes, is_online"
+      "id, tutors(grade, users(full_name, email)), students(grade, users(full_name, email)), subject, start_time, duration_minutes, is_online"
     )
     .eq("status", "in_progress")
     .overrideTypes<SessionWithUsers[]>();
@@ -15,11 +15,13 @@ export async function getActiveSessions() {
   if (error) throw error;
 
   const formatted = (active_sessions || []).map((s) => ({
-    session_id: s.id,
+    id: s.id,
     tutor_id: s.tutors.users.email.split("@")[0],
     tutor_name: s.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
+    tutor_grade: s.tutors.grade,
     student_id: s.students.users.email.split("@")[0],
     student_name: s.students.users.full_name.split(" ").slice(0, -1).join(" "),
+    student_grade: s.students.grade,
     start_time: format(parseISO(s.start_time ?? ""), "p"),
     start_time_iso: s.start_time,
     duration_minutes: s.duration_minutes,

@@ -7,8 +7,9 @@ export async function getCompletedSessions() {
     .from("sessions")
     .select(
       `
-      tutors(users(full_name, email)),
-      students(users(full_name, email)),
+      id,
+      tutors(grade, users(full_name, email)),
+      students(grade, users(full_name, email)),
       subject,
       scheduled_for,
       verified,
@@ -35,14 +36,21 @@ export async function getCompletedSessions() {
         start && end ? differenceInMinutes(end, start) : null;
 
       return {
+        id: s.id,
         tutor_id: s.tutors.users.email.split("@")[0],
         tutor_name: s.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
+        tutor_grade: s.tutors.grade,
         student_id: s.students.users.email.split("@")[0],
         student_name: s.students.users.full_name
           .split(" ")
           .slice(0, -1)
           .join(" "),
-        scheduled_for: format(parseISO(s.scheduled_for), "EEE, MMM d, p"),
+        student_grade: s.students.grade,
+
+        date: format(parseISO(s.completed_at ?? ""), "EEE, MMM d"),
+        start_time: format(parseISO(s.start_time ?? ""), "p"),
+
+        completed_at: format(parseISO(s.completed_at ?? ""), "p"),
         subject: s.subject,
         verified: s.verified,
         rejection_reason: s.rejection_reason ?? "",

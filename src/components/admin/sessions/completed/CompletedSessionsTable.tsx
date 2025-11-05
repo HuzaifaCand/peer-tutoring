@@ -1,74 +1,43 @@
 "use client";
-
 import { Table } from "@/components/table/Table";
-
-import { useEffect, useState } from "react";
 import {
-  ComputedCompletedSessionRow,
   getCompletedSessions,
+  ComputedCompletedSessionRow,
 } from "./getCompletedSessions";
 import { completedSessionColumns } from "./CompletedSessionColumns";
-import { verificationStatus } from "../../tutors/TutorsTable";
+import { useModalOpener } from "@/components/modal/useModalOpener";
+import { useDataFetch } from "@/hooks/useDataFetch";
+import { SessionDataProps } from "../types";
 
 export default function CompletedSessionsTable({
-  setRowCount,
-}: {
-  setRowCount: (rows: number) => void;
-}) {
-  const [data, setData] = useState<ComputedCompletedSessionRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
+  setCount,
+  setShowModal,
+  setSelectedSession,
+}: SessionDataProps<ComputedCompletedSessionRow>) {
+  const statusOrder = { unverified: 0, verified: 1, rejected: 2 };
+  const sortFn = (
+    a: ComputedCompletedSessionRow,
+    b: ComputedCompletedSessionRow
+  ) => {
+    const status = (v: boolean | null) =>
+      v === null ? "unverified" : v ? "verified" : "rejected";
+    return statusOrder[status(a.verified)] - statusOrder[status(b.verified)];
+  };
 
-  useEffect(() => {
-    async function load() {
-      setLoading(true);
-      const formatted = await getCompletedSessions();
-      const statusOrder: Record<verificationStatus, number> = {
-        unverified: 0,
-        verified: 1,
-        rejected: 2,
-      };
-
-      // sort by verification status first, then admin_seen
-      const sorted = [...formatted].sort((a, b) => {
-        // first by verification
-        const statusA =
-          a.verified === null
-            ? "unverified"
-            : a.verified === true
-            ? "verified"
-            : "rejected";
-        const statusB =
-          b.verified === null
-            ? "unverified"
-            : b.verified === true
-            ? "verified"
-            : "rejected";
-
-        const aStatus = statusOrder[statusA as keyof typeof statusOrder];
-        const bStatus = statusOrder[statusB as keyof typeof statusOrder];
-        if (aStatus !== bStatus) return aStatus - bStatus;
-
-        return 0;
-      });
-
-      setData(sorted);
-      setLoading(false);
-    }
-
-    load();
-  }, [refetchFlag]);
+  const { data, loading, setRefetchFlag } = useDataFetch(getCompletedSessions, {
+    sortFn,
+  });
+  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
 
   return (
-    <section>
-      <Table
-        type="completedSession"
-        data={data}
-        columns={completedSessionColumns}
-        loading={loading}
-        setRefetchFlag={setRefetchFlag}
-        setRowCount={setRowCount}
-      />
-    </section>
+    <Table
+      type="completedSession"
+      data={data}
+      columns={completedSessionColumns}
+      loading={loading}
+      setRefetchFlag={setRefetchFlag}
+      onRowClick={handleOpen}
+      setRowCount={setCount}
+    />
   );
 }

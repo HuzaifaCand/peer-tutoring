@@ -1,33 +1,25 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-
-import { useEffect, useState } from "react";
 import {
   ComputedScheduledSessionRow,
   getScheduledSessions,
 } from "./getScheduledSessions";
 import { scheduledSessionColumns } from "./ScheduledSessionColumns";
+import { useModalOpener } from "@/components/modal/useModalOpener";
+import { useDataFetch } from "@/hooks/useDataFetch";
+import { SessionDataProps } from "../types";
 
 export default function ScheduledSessionsTable({
-  setRowCount,
-}: {
-  setRowCount: (rows: number) => void;
-}) {
-  const [data, setData] = useState<ComputedScheduledSessionRow[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
+  setCount,
+  setSelectedSession,
+  setShowModal,
+}: SessionDataProps<ComputedScheduledSessionRow>) {
+  const { data, loading, setRefetchFlag } = useDataFetch(getScheduledSessions);
 
-  useEffect(() => {
-    async function load() {
-      setLoading(true);
-      const formatted = await getScheduledSessions();
-      setData(formatted);
-      setLoading(false);
-    }
+  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
 
-    load();
-  }, [refetchFlag]);
+  const handleClick = (s: ComputedScheduledSessionRow) => handleOpen(s);
 
   return (
     <section>
@@ -37,7 +29,8 @@ export default function ScheduledSessionsTable({
         columns={scheduledSessionColumns}
         loading={loading}
         setRefetchFlag={setRefetchFlag}
-        setRowCount={setRowCount}
+        onRowClick={handleClick}
+        setRowCount={setCount}
       />
     </section>
   );

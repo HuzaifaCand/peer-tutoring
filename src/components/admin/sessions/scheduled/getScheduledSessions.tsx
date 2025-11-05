@@ -7,13 +7,15 @@ export async function getScheduledSessions() {
     .from("sessions")
     .select(
       `
-      tutors(users(full_name, email)),
-      students(users(full_name, email)),
+      id,
+      tutors(grade, users(full_name, email)),
+      students(grade, users(full_name, email)),
       subject,
       scheduled_for,
       rejection_reason,
       is_online,
-      duration_minutes
+      duration_minutes,
+      booked_at
     `
     )
     .eq("status", "scheduled")
@@ -30,22 +32,26 @@ export async function getScheduledSessions() {
         const parsedDate = parseISO(s.scheduled_for);
 
         return {
+          id: s.id,
           tutor_id: s.tutors.users.email.split("@")[0],
           tutor_name: s.tutors.users.full_name
             .split(" ")
             .slice(0, -1)
             .join(" "),
+          tutor_grade: s.tutors.grade,
           student_id: s.students.users.email.split("@")[0],
           student_name: s.students.users.full_name
             .split(" ")
             .slice(0, -1)
             .join(" "),
+          student_grade: s.students.grade,
           scheduled_for: format(parsedDate, "EEE, MMM d, p"), // display version
           pure_scheduled_for: parsedDate, // raw for sorting
           subject: s.subject,
           is_online: s.is_online,
-          mode: s.is_online ? "Online" : "Onsite",
-          expected_duration: s.duration_minutes,
+          mode: s.is_online === true ? "Online" : "Onsite",
+          duration_minutes: s.duration_minutes,
+          booked_at: s.booked_at,
         };
       })
       // sort by soonest

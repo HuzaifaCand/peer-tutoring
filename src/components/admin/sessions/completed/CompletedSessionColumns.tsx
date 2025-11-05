@@ -25,6 +25,20 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
       ),
     },
     {
+      key: "subject",
+      label: "Subject",
+      render: (row) => (
+        <div className="flex items-center gap-2">
+          <Tag
+            textSize="text-[11px]"
+            value={row.is_online === false ? "onsite" : "online"}
+            color={row.is_online === false ? "yellow" : "blue"}
+          />
+          <span>{row.subject}</span>
+        </div>
+      ),
+    },
+    {
       key: "status",
       label: "Status",
       render: (row) => (
@@ -50,6 +64,11 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
         </div>
       ),
     },
+
+    { key: "date", label: "Date" },
+    { key: "start_time", label: "Started" },
+    { key: "completed_at", label: "Ended" },
+
     {
       key: "duration",
       label: "Duration",
@@ -58,25 +77,19 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
           title="Actual duration upon the expected duration of the session"
           className="flex items-center leading-tight"
         >
-          <span>{row.actual_duration ?? "-"}/</span>
-          <span>{row.expected_duration} min</span>
-        </div>
-      ),
-    },
-
-    { key: "scheduled_for", label: "Date" },
-
-    { key: "subject", label: "Subject" },
-    {
-      key: "is_online",
-      label: "Type",
-      render: (row) => (
-        <div className="">
           <Tag
+            color={
+              row.actual_duration && row.expected_duration
+                ? row.actual_duration / row.expected_duration < 0.6
+                  ? "red"
+                  : "green"
+                : "muted"
+            }
+            value={`${row.actual_duration ?? "-"} / ${
+              row.expected_duration
+            } min`}
+            capitalize={false}
             textSize="text-[11px]"
-            className="mt-0.5"
-            value={row.is_online === false ? "onsite" : "online"}
-            color={row.is_online === false ? "yellow" : "blue"}
           />
         </div>
       ),
