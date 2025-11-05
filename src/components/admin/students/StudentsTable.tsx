@@ -10,16 +10,14 @@ import {
   sortByAdminSeen,
   sortByTimestamp,
 } from "@/utils/sortUtils";
+import { defaultSorters } from "@/utils/sorters";
 
 interface StudentsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
 }
 
 export default function StudentsTable({ setRowCount }: StudentsTableProps) {
-  const sortFn = chainSorters(
-    sortByAdminSeen,
-    sortByTimestamp<ComputedStudentRow>("created_at", "desc")
-  );
+  const sortFn = defaultSorters.student;
   const { data, loading, setRefetchFlag } = useDataFetch(getStudents, {
     sortFn,
   });

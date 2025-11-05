@@ -9,21 +9,15 @@ import { completedSessionColumns } from "./CompletedSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
-import {
-  chainSorters,
-  sortByTimestamp,
-  sortByVerification,
-} from "@/utils/sortUtils";
+
+import { defaultSorters } from "@/utils/sorters";
 
 export default function CompletedSessionsTable({
   setCount,
   setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedCompletedSessionRow>) {
-  const sortFn = chainSorters(
-    sortByVerification,
-    sortByTimestamp<ComputedCompletedSessionRow>("completed_at", "desc")
-  );
+  const sortFn = defaultSorters.completedSession;
 
   const { data, loading, setRefetchFlag } = useDataFetch(getCompletedSessions, {
     sortFn,

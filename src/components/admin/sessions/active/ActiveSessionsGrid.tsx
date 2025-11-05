@@ -6,16 +6,14 @@ import { useEffect } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
 import { sortByTimestamp } from "@/utils/sortUtils";
+import { defaultSorters } from "@/utils/sorters";
 
 export default function ActiveSessionsGrid({
   setCount,
   setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedActiveSession>) {
-  const sortFn = sortByTimestamp<ComputedActiveSession>(
-    "start_time_iso",
-    "asc"
-  );
+  const sortFn = defaultSorters.activeSession;
 
   const { data, loading, setRefetchFlag, lastUpdated } = useDataFetch(
     getActiveSessions,

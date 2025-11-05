@@ -9,17 +9,14 @@ import { scheduledSessionColumns } from "./ScheduledSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
-import { sortByTimestamp } from "@/utils/sortUtils";
+import { defaultSorters } from "@/utils/sorters";
 
 export default function ScheduledSessionsTable({
   setCount,
   setSelectedSession,
   setShowModal,
 }: SessionDataProps<ComputedScheduledSessionRow>) {
-  const sortFn = sortByTimestamp<ComputedScheduledSessionRow>(
-    "scheduled_for",
-    "asc"
-  );
+  const sortFn = defaultSorters.scheduledSession;
 
   const { data, loading, setRefetchFlag } = useDataFetch(getScheduledSessions, {
     sortFn,

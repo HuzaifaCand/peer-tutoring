@@ -11,17 +11,14 @@ import {
   sortByTimestamp,
 } from "@/utils/sortUtils";
 import { Dispatch, SetStateAction } from "react";
+import { defaultSorters } from "@/utils/sorters";
 
 interface TutorsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
 }
 
 export default function TutorsTable({ setRowCount }: TutorsTableProps) {
-  const sortFn = chainSorters<ComputedTutorRow>(
-    sortByVerification,
-    sortByAdminSeen,
-    sortByTimestamp<ComputedTutorRow>("created_at", "desc")
-  );
+  const sortFn = defaultSorters.tutor;
 
   const { data, loading, setRefetchFlag } = useDataFetch(getTutors, { sortFn });
 

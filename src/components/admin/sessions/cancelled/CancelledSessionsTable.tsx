@@ -12,16 +12,15 @@ import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
 import { sortByTimestamp } from "@/utils/sortUtils";
+import { defaultSorters } from "@/utils/sorters";
 
 export default function CancelledSessionsTable({
   setCount,
   setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedCancelledSessionRow>) {
-  const sortFn = sortByTimestamp<ComputedCancelledSessionRow>(
-    "cancelled_at",
-    "desc"
-  );
+  const sortFn = defaultSorters.cancelledSession;
+
   const { data, loading, setRefetchFlag } = useDataFetch(getCancelledSessions, {
     sortFn,
   });
