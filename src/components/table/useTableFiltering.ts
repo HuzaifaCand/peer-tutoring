@@ -7,6 +7,7 @@ import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { modes } from "../admin/sessions/SessionModeFilter";
 import { ComputedCompletedSessionRow } from "../admin/sessions/completed/getCompletedSessions";
 import { ComputedScheduledSessionRow } from "../admin/sessions/scheduled/getScheduledSessions";
+import { ComputedCancelledSessionRow } from "../admin/sessions/cancelled/getCancelledSessions";
 
 export function useFilteredTableData<K extends keyof TableRowByType>(
   type: K,
@@ -40,7 +41,8 @@ export function useFilteredTableData<K extends keyof TableRowByType>(
     }
 
     if (
-      (type === "scheduledSession" || type === "completedSession") &&
+      type.includes("Session") &&
+      !type.startsWith("active") &&
       modeFilter &&
       modeFilter !== "all"
     ) {
