@@ -24,10 +24,10 @@ export type TutorUser = TutorRow & {
 };
 
 export type SessionWithUsers = SessionRow & {
-  tutors: {
+  tutors: TutorRow & {
     users: Pick<UserRow, "full_name" | "email">;
   };
-  students: {
+  students: StudentRow & {
     users: Pick<UserRow, "full_name" | "email">;
   };
 };
