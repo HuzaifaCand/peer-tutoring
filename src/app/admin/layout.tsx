@@ -1,5 +1,3 @@
-"use client";
-
 import DesktopSidebar from "@/components/sidebar/DesktopSidebar";
 import MobileSidebar from "@/components/sidebar/MobileSidebar";
 
@@ -11,12 +9,12 @@ export default function AdminLayout({
   return (
     <div className="relative min-h-screen">
       {/* Mobile sidebar */}
-      <MobileSidebar />
+      <MobileSidebar type="admin" />
 
       {/* Desktop layout */}
       <div className="flex">
         <div className="hidden lg:block fixed inset-y-0 left-0 w-64">
-          <DesktopSidebar />
+          <DesktopSidebar type="admin" />
         </div>
 
         {/* Main content */}
