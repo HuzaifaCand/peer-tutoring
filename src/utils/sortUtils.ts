@@ -1,35 +1,38 @@
-// src/utils/sortUtils.ts
-
 /**
- * Generic timestamp sorter.
+ * Generic timestamp sorter that safely handles null/undefined timestamps.
  *
- * @param key - The field name of the timestamp (string key of the object)
+ * @param key   - field name containing a timestamp (string or Date)
  * @param order - "asc" for earliest first, "desc" for latest first
  *
- * Handles:
- *  - ISO strings, Date objects, or null/undefined values
- *  - Safe even if the field doesn't exist (returns 0)
+ * Works with nullable fields and won't throw for missing timestamps.
  */
-export function sortByTimestamp<T>(
-  key: keyof T,
-  order: "asc" | "desc" = "desc"
-) {
+export function sortByTimestamp<
+  T extends Record<string, unknown>,
+  K extends keyof T
+>(key: K, order: "asc" | "desc" = "desc") {
   return (a: T, b: T) => {
     const aValue = a[key];
     const bValue = b[key];
 
-    // Guard for missing fields or invalid timestamps
-    if (!aValue || !bValue) return 0;
+    // Handle null or undefined safely
+    if (aValue == null && bValue == null) return 0;
+    if (aValue == null) return 1; // nulls go last
+    if (bValue == null) return -1;
 
-    const aDate = new Date(aValue as any).getTime();
-    const bDate = new Date(bValue as any).getTime();
+    const aDate =
+      aValue instanceof Date
+        ? aValue.getTime()
+        : new Date(aValue as string).getTime();
+    const bDate =
+      bValue instanceof Date
+        ? bValue.getTime()
+        : new Date(bValue as string).getTime();
 
     if (isNaN(aDate) || isNaN(bDate)) return 0;
 
     return order === "asc" ? aDate - bDate : bDate - aDate;
   };
 }
-
 /**
  * Converts a verified flag into a normalized string status.
  */

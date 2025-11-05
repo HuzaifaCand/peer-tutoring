@@ -14,27 +14,30 @@ import { ComputedStudentRow } from "@/components/admin/students/getStudents";
 export const defaultSorters = {
   student: chainSorters(
     sortByAdminSeen,
-    sortByTimestamp<ComputedStudentRow>("created_at", "desc")
+    sortByTimestamp<ComputedStudentRow, "created_at">("created_at", "desc")
   ),
   tutor: chainSorters(
     sortByVerification,
     sortByAdminSeen,
-    sortByTimestamp<ComputedTutorRow>("created_at", "desc")
+    sortByTimestamp<ComputedTutorRow, "created_at">("created_at", "desc")
   ),
   completedSession: chainSorters(
     sortByVerification,
-    sortByTimestamp<ComputedCompletedSessionRow>("completed_at", "desc")
+    sortByTimestamp<ComputedCompletedSessionRow, "completed_at">(
+      "completed_at",
+      "desc"
+    )
   ),
-  cancelledSession: sortByTimestamp<ComputedCancelledSessionRow>(
-    "cancelled_at",
-    "desc"
-  ),
-  activeSession: sortByTimestamp<ComputedActiveSession>(
+  cancelledSession: sortByTimestamp<
+    ComputedCancelledSessionRow,
+    "cancelled_at"
+  >("cancelled_at", "desc"),
+  activeSession: sortByTimestamp<ComputedActiveSession, "start_time_iso">(
     "start_time_iso",
     "asc"
   ),
-  scheduledSession: sortByTimestamp<ComputedScheduledSessionRow>(
-    "pure_scheduled_for",
-    "asc"
-  ),
+  scheduledSession: sortByTimestamp<
+    ComputedScheduledSessionRow,
+    "pure_scheduled_for"
+  >("pure_scheduled_for", "asc"),
 };
