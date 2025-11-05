@@ -1,17 +1,14 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import {
   ComputedCancelledSessionRow,
   getCancelledSessions,
-} from "./getCancelledSessions";
+} from "@/lib/sessions/cancelled/getCancelledSessions";
 import { cancelledSessionColumns } from "./CancelledSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SessionDataProps } from "../types";
-import { sortByTimestamp } from "@/utils/sortUtils";
+import { SessionDataProps } from "../../../../lib/sessions/types";
 import { defaultSorters } from "@/utils/sorters";
 
 export default function CancelledSessionsTable({

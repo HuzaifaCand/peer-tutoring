@@ -44,7 +44,7 @@ export function ElapsedTime({
   const color = getElapsedColor(elapsed, expectedMinutes);
 
   return (
-    <span className={`font-medium ${color}`}>
+    <span className={`font-semibold ${color}`}>
       {minutes}:{seconds.toString().padStart(2, "0")}{" "}
     </span>
   );

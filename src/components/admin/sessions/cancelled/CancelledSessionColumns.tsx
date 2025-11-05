@@ -1,5 +1,5 @@
 import { TableColumn } from "@/components/table/types";
-import { ComputedCancelledSessionRow } from "./getCancelledSessions";
+import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { Tag } from "@/components/ui/Tag";
 
 export const cancelledSessionColumns: TableColumn<ComputedCancelledSessionRow>[] =

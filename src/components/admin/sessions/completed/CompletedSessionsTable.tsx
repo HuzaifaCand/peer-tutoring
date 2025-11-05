@@ -4,11 +4,11 @@ import { Table } from "@/components/table/Table";
 import {
   getCompletedSessions,
   ComputedCompletedSessionRow,
-} from "./getCompletedSessions";
+} from "../../../../lib/sessions/completed/getCompletedSessions";
 import { completedSessionColumns } from "./CompletedSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SessionDataProps } from "../types";
+import { SessionDataProps } from "../../../../lib/sessions/types";
 
 import { defaultSorters } from "@/utils/sorters";
 

@@ -1,10 +1,13 @@
 "use client";
 import { CardGrid } from "@/components/card/CardGrid";
 import { useModalOpener } from "@/components/modal/useModalOpener";
-import { getActiveSessions, ComputedActiveSession } from "./getActiveSessions";
+import {
+  getActiveSessions,
+  ComputedActiveSession,
+} from "../../../../lib/sessions/active/getActiveSessions";
 import { useEffect } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SessionDataProps } from "../types";
+import { SessionDataProps } from "../../../../lib/sessions/types";
 import { sortByTimestamp } from "@/utils/sortUtils";
 import { defaultSorters } from "@/utils/sorters";
 

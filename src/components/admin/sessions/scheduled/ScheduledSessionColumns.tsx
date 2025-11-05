@@ -1,5 +1,5 @@
 import { TableColumn } from "@/components/table/types";
-import { ComputedScheduledSessionRow } from "./getScheduledSessions";
+import { ComputedScheduledSessionRow } from "../../../../lib/sessions/scheduled/getScheduledSessions";
 import { Tag } from "@/components/ui/Tag";
 
 export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[] =

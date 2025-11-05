@@ -2,10 +2,12 @@
 
 import ActiveSessionsGrid from "@/components/admin/sessions/active/ActiveSessionsGrid";
 import SectionHeader from "@/components/ui/SectionHeader";
-import { useState } from "react";
-import { ComputedActiveSession } from "@/components/admin/sessions/active/getActiveSessions";
+import { useEffect, useState } from "react";
+import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
+import { getSessionTypeById } from "../../../../lib/sessions/getSessionTypeById";
+import { formatActiveSession } from "../../../../lib/sessions/active/formatActiveSession";
 
 export default function ActiveSessions() {
   const [count, setCount] = useState(0);
@@ -14,6 +16,29 @@ export default function ActiveSessions() {
     useState<ComputedActiveSession | null>(null);
 
   const closeModal = useCloseModal(setShowModal);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+
+    if (id) {
+      setShowModal(true);
+      const getSession = async () => {
+        const data = await getSessionTypeById({
+          id,
+          status: "in_progress",
+          extendSelect: `
+          start_time,
+          duration_minutes
+        `,
+        });
+
+        const formatted = formatActiveSession(data);
+        setSelectedSession(formatted);
+      };
+      getSession();
+    }
+  }, []);
 
   return (
     <main>

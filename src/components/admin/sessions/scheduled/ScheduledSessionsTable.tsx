@@ -4,11 +4,11 @@ import { Table } from "@/components/table/Table";
 import {
   ComputedScheduledSessionRow,
   getScheduledSessions,
-} from "./getScheduledSessions";
+} from "../../../../lib/sessions/scheduled/getScheduledSessions";
 import { scheduledSessionColumns } from "./ScheduledSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SessionDataProps } from "../types";
+import { SessionDataProps } from "../../../../lib/sessions/types";
 import { defaultSorters } from "@/utils/sorters";
 
 export default function ScheduledSessionsTable({
