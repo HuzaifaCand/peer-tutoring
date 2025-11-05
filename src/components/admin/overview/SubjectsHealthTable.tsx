@@ -20,21 +20,6 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
     render: (row) => (
       <div className="ml-3">
         <span>{row.subject}</span>
-        <span className="ml-2">
-          <Tag
-            textSize="text-[10px]"
-            className="mt-0.5"
-            title={titles[row.health]}
-            value={row.health}
-            color={
-              row.health === "healthy"
-                ? "green"
-                : row.health === "low-supply"
-                ? "red"
-                : "yellow"
-            }
-          />
-        </span>
       </div>
     ),
   },
@@ -45,6 +30,25 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
   {
     key: "students",
     label: "Students",
+  },
+  {
+    key: "health",
+    label: "Status",
+    render: (row) => (
+      <Tag
+        textSize="text-[10px]"
+        className="mt-0.5"
+        title={titles[row.health]}
+        value={row.health}
+        color={
+          row.health === "healthy"
+            ? "green"
+            : row.health === "low-supply"
+            ? "red"
+            : "yellow"
+        }
+      />
+    ),
   },
 ];
 
@@ -57,7 +61,7 @@ export default function SubjectsHealthTable() {
         <h2 className="text-2xl text-textWhite font-semibold">
           Subjects Overview
         </h2>
-        <p className="text-textMuted text-xs">Total Sessions: {data.length}</p>
+        <p className="text-textMuted text-xs">Subjects: {data.length}</p>
       </div>
       <Table
         type="subject"
