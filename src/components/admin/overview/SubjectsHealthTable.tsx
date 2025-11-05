@@ -1,5 +1,4 @@
 import { TableColumn } from "@/components/table/types";
-import { useEffect, useState } from "react";
 import { Table } from "@/components/table/Table";
 import {
   ComputedSubjectHealthView,
@@ -7,6 +6,7 @@ import {
   SubjectHealthStatus,
 } from "./getSubjectsHealth";
 import { Tag } from "@/components/ui/Tag";
+import { useDataFetch } from "@/hooks/useDataFetch";
 
 export const titles: Record<SubjectHealthStatus, string> = {
   healthy: "Good Student-Teacher Ratio",
@@ -49,27 +49,16 @@ const columns: TableColumn<ComputedSubjectHealthView>[] = [
 ];
 
 export default function SubjectsHealthTable() {
-  const [data, setData] = useState<ComputedSubjectHealthView[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [refetchFlag, setRefetchFlag] = useState<boolean>(false);
-
-  useEffect(() => {
-    async function load() {
-      setLoading(true);
-      const formatted = await getSubjectsHealth();
-      setData(formatted);
-      setLoading(false);
-    }
-
-    load();
-  }, [refetchFlag]);
+  const { data, loading, setRefetchFlag } = useDataFetch(getSubjectsHealth);
 
   return (
     <section>
-      <h2 className="text-2xl text-textWhite mb-6 font-semibold">
-        Subjects Overview
-      </h2>
-
+      <div className="mb-4 flex flex-col gap-1">
+        <h2 className="text-2xl text-textWhite font-semibold">
+          Subjects Overview
+        </h2>
+        <p className="text-textMuted text-xs">Total Sessions: {data.length}</p>
+      </div>
       <Table
         type="subject"
         data={data}
