@@ -27,10 +27,12 @@ export async function getCancelledSessions() {
     is_online: s.is_online,
     mode: s.is_online === true ? "Online" : "Onsite",
     cancel_reason: s.cancel_reason,
-    cancelled_at: format(
+    cancelled_at: s.cancelled_at,
+    formatted_cancelled_at: format(
       parseISO(s.cancelled_at ?? s.scheduled_for),
       "dd/LL/yy, p"
     ),
+
     cancellation_source: s.cancellation_source,
     scheduled_for: format(parseISO(s.scheduled_for), "dd/LL/yy, p"),
     cancelled_by:

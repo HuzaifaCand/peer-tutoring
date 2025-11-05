@@ -48,7 +48,7 @@ export const cancelledSessionColumns: TableColumn<ComputedCancelledSessionRow>[]
       key: "cancelled_by",
       label: "Cancelled By",
     },
-    { key: "cancelled_at", label: "Cancelled At" },
+    { key: "formatted_cancelled_at", label: "Cancelled At" },
 
     {
       key: "scheduled_for",

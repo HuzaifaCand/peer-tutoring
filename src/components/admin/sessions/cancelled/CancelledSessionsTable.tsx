@@ -11,13 +11,20 @@ import { cancelledSessionColumns } from "./CancelledSessionColumns";
 import { useModalOpener } from "@/components/modal/useModalOpener";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { SessionDataProps } from "../types";
+import { sortByTimestamp } from "@/utils/sortUtils";
 
 export default function CancelledSessionsTable({
   setCount,
   setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedCancelledSessionRow>) {
-  const { data, loading, setRefetchFlag } = useDataFetch(getCancelledSessions);
+  const sortFn = sortByTimestamp<ComputedCancelledSessionRow>(
+    "cancelled_at",
+    "desc"
+  );
+  const { data, loading, setRefetchFlag } = useDataFetch(getCancelledSessions, {
+    sortFn,
+  });
 
   const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
   const handleClick = (s: ComputedCancelledSessionRow) => handleOpen(s);
