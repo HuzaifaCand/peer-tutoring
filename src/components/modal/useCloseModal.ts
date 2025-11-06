@@ -1,7 +1,10 @@
 import { useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback } from "react";
 
-export function useCloseModal(setShowModal: Dispatch<SetStateAction<boolean>>) {
+export function useCloseModal<T>(
+  setShowModal: Dispatch<SetStateAction<boolean>>,
+  setSelected: Dispatch<SetStateAction<T | null>>
+) {
   const router = useRouter();
 
   return useCallback(() => {
