@@ -20,7 +20,7 @@ export type StudentUser = StudentRow & {
 
 export type TutorUser = TutorRow & {
   users: Pick<UserRow, "full_name" | "email">; // student table on admins/tutor
-  avaialble_slots: SlotsRow[];
+  available_slots: SlotsRow[];
 };
 
 export type SessionWithUsers = SessionRow & {
