@@ -1,4 +1,4 @@
-import { ComputedTutorRow } from "@/components/admin/tutors/getTutors";
+import { ComputedTutorRow } from "@/lib/users/getTutors";
 import {
   chainSorters,
   sortByAdminSeen,
@@ -9,7 +9,7 @@ import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getComplet
 import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
 import { ComputedScheduledSessionRow } from "@/lib/sessions/scheduled/getScheduledSessions";
-import { ComputedStudentRow } from "@/components/admin/students/getStudents";
+import { ComputedStudentRow } from "@/lib/users/getStudents";
 
 export const defaultSorters = {
   student: chainSorters(
