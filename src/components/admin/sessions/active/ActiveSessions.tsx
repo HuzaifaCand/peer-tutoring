@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
-import { getSessionTypeById } from "../../../../lib/sessions/getSessionTypeById";
+import { getSessionById } from "../../../../lib/sessions/getSessionById";
 import { formatActiveSession } from "../../../../lib/sessions/active/formatActiveSession";
 
 export default function ActiveSessions() {
@@ -15,7 +15,7 @@ export default function ActiveSessions() {
   const [selectedSession, setSelectedSession] =
     useState<ComputedActiveSession | null>(null);
 
-  const closeModal = useCloseModal(setShowModal);
+  const closeModal = useCloseModal(setShowModal, setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -24,13 +24,9 @@ export default function ActiveSessions() {
     if (id) {
       setShowModal(true);
       const getSession = async () => {
-        const data = await getSessionTypeById({
+        const data = await getSessionById({
           id,
           status: "in_progress",
-          extendSelect: `
-          start_time,
-          duration_minutes
-        `,
         });
 
         const formatted = formatActiveSession(data);

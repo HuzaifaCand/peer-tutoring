@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
-import { getSessionTypeById } from "@/lib/sessions/getSessionTypeById";
+import { getSessionById } from "@/lib/sessions/getSessionById";
 import { formatCancelledSession } from "@/lib/sessions/cancelled/formatCancelledSession";
 
 export default function CancelledSessions() {
@@ -15,7 +15,7 @@ export default function CancelledSessions() {
   const [selectedSession, setSelectedSession] =
     useState<ComputedCancelledSessionRow | null>(null);
 
-  const closeModal = useCloseModal(setShowModal);
+  const closeModal = useCloseModal(setShowModal, setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -24,16 +24,9 @@ export default function CancelledSessions() {
     if (id) {
       setShowModal(true);
       const getSession = async () => {
-        const data = await getSessionTypeById({
+        const data = await getSessionById({
           id,
           status: "cancelled",
-          extendSelect: `
-            cancel_reason,
-            cancelled_at,
-            cancellation_source,
-            cancelled_by,
-            scheduled_for
-          `,
         });
 
         const formatted = formatCancelledSession(data);

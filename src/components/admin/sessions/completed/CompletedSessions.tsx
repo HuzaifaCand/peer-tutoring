@@ -6,7 +6,7 @@ import CompletedSessionsTable from "./CompletedSessionsTable";
 import { ComputedCompletedSessionRow } from "../../../../lib/sessions/completed/getCompletedSessions";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
-import { getSessionTypeById } from "@/lib/sessions/getSessionTypeById";
+import { getSessionById } from "@/lib/sessions/getSessionById";
 import { formatCompletedSession } from "@/lib/sessions/completed/formatCompletedSession";
 
 export default function CompletedSessions() {
@@ -22,17 +22,9 @@ export default function CompletedSessions() {
     if (id) {
       setShowModal(true);
       const getSession = async () => {
-        const data = await getSessionTypeById({
+        const data = await getSessionById({
           id,
           status: "completed",
-          extendSelect: `
-            scheduled_for,
-            verified,
-            rejection_reason,
-            start_time,
-            completed_at,
-            duration_minutes
-          `,
         });
 
         const formatted = formatCompletedSession(data);
@@ -42,7 +34,7 @@ export default function CompletedSessions() {
     }
   }, []);
 
-  const closeModal = useCloseModal(setShowModal);
+  const closeModal = useCloseModal(setShowModal, setSelectedSession);
   return (
     <main>
       {showModal && selectedSession && (

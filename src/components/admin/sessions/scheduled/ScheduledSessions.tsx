@@ -6,7 +6,7 @@ import ScheduledSessionsTable from "./ScheduledSessionsTable";
 import { ComputedScheduledSessionRow } from "../../../../lib/sessions/scheduled/getScheduledSessions";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
-import { getSessionTypeById } from "@/lib/sessions/getSessionTypeById";
+import { getSessionById } from "@/lib/sessions/getSessionById";
 import { formatScheduledSession } from "@/lib/sessions/scheduled/formatScheduledSession";
 
 export default function ScheduledSessions() {
@@ -15,7 +15,7 @@ export default function ScheduledSessions() {
   const [selectedSession, setSelectedSession] =
     useState<ComputedScheduledSessionRow | null>(null);
 
-  const closeModal = useCloseModal(setShowModal);
+  const closeModal = useCloseModal(setShowModal, setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
@@ -24,14 +24,9 @@ export default function ScheduledSessions() {
     if (id) {
       setShowModal(true);
       const getSession = async () => {
-        const data = await getSessionTypeById({
+        const data = await getSessionById({
           id,
           status: "scheduled",
-          extendSelect: `
-            duration_minutes,
-            scheduled_for,
-            booked_at
-          `,
         });
 
         const formatted = formatScheduledSession(data);
@@ -40,6 +35,7 @@ export default function ScheduledSessions() {
       getSession();
     }
   }, []);
+
   return (
     <main>
       {showModal && selectedSession && (
