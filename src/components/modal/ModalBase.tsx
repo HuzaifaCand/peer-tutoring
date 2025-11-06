@@ -8,9 +8,15 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
+  autoFocus?: boolean;
 }
 
-export default function ModalBase({ isOpen, onClose, children }: ModalProps) {
+export default function ModalBase({
+  isOpen,
+  onClose,
+  children,
+  autoFocus,
+}: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -45,6 +51,7 @@ export default function ModalBase({ isOpen, onClose, children }: ModalProps) {
             focusTrapOptions={{
               clickOutsideDeactivates: true,
               escapeDeactivates: false,
+              initialFocus: autoFocus ? undefined : false,
               fallbackFocus: ".modal-content",
             }}
           >

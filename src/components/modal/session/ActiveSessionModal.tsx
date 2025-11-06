@@ -35,7 +35,7 @@ export function ActiveSessionModal({
       />
 
       {/* Session Details */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 py-4 text-sm max-w-4xl mx-auto">
+      <section className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-6 py-4 sm:py-6 text-sm max-w-4xl mx-auto">
         {/* Started */}
         <InfoCard
           item={{
@@ -70,7 +70,16 @@ export function ActiveSessionModal({
       </section>
 
       {/* Footer */}
-      <footer className="flex justify-end items-center">
+      <footer className="flex justify-between items-center">
+        <div className="flex items-center gap-3">
+          <button className="bg-green-600/30 text-green-400 hover:cursor-pointer hover:bg-green-600/60 transition-colors duration-150 font-semibold border border-green-900 text-xs px-4 py-1.5 rounded-md">
+            End and Verify
+          </button>
+          <button className="bg-red-600/30 text-red-400 hover:cursor-pointer hover:bg-red-600/60 transition-colors duration-150 font-semibold border border-red-900 text-xs px-4 py-1.5 rounded-md">
+            End and Reject
+          </button>
+        </div>
+
         <CloseButton onClose={onClose} />
       </footer>
     </div>
