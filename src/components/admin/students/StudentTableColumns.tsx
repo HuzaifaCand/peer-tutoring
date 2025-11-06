@@ -1,10 +1,10 @@
 import { TableColumn } from "@/components/table/types";
-import { ComputedStudentRow } from "./getStudents";
+import { ComputedStudentRow } from "../../../lib/users/getStudents";
 import { Tag } from "@/components/ui/Tag";
 
 export const studentColumns: TableColumn<ComputedStudentRow>[] = [
   {
-    key: "id",
+    key: "s_id",
     label: "ID",
     render: (row) => (
       <div className="flex items-center gap-2">
@@ -13,7 +13,7 @@ export const studentColumns: TableColumn<ComputedStudentRow>[] = [
             row.admin_seen === false ? "bg-yellow-400" : "invisible"
           }`}
         />
-        <span>{row.id}</span>
+        <span>{row.s_id}</span>
         <Tag
           textSize="text-[10px]"
           value={row.grade}

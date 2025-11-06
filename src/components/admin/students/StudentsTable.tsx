@@ -1,21 +1,34 @@
 "use client";
 
 import { Table } from "@/components/table/Table";
-import { getStudents } from "./getStudents";
+import {
+  ComputedStudentRow,
+  getStudents,
+} from "../../../lib/users/getStudents";
 import { studentColumns } from "./StudentTableColumns";
 import { Dispatch, SetStateAction } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { defaultSorters } from "@/utils/sorters";
+import { useModalOpener } from "@/components/modal/useModalOpener";
 
 interface StudentsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
+  setStudent: Dispatch<SetStateAction<ComputedStudentRow | null>>;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
-export default function StudentsTable({ setRowCount }: StudentsTableProps) {
+export default function StudentsTable({
+  setRowCount,
+  setStudent,
+  setShowModal,
+}: StudentsTableProps) {
   const sortFn = defaultSorters.student;
   const { data, loading, setRefetchFlag } = useDataFetch(getStudents, {
     sortFn,
   });
+
+  const { handleOpen } = useModalOpener(setShowModal, setStudent);
+  const handleClick = (s: ComputedStudentRow) => handleOpen(s);
 
   return (
     <Table
@@ -25,6 +38,7 @@ export default function StudentsTable({ setRowCount }: StudentsTableProps) {
       loading={loading}
       setRefetchFlag={setRefetchFlag}
       setRowCount={setRowCount}
+      onRowClick={handleClick}
     />
   );
 }

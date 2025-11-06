@@ -1,10 +1,10 @@
 import { TableColumn } from "@/components/table/types";
-import { ComputedTutorRow } from "./getTutors";
+import { ComputedTutorRow } from "../../../lib/users/getTutors";
 import { Tag } from "@/components/ui/Tag";
 
 export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
-    key: "id",
+    key: "s_id",
     label: "ID",
     render: (row) => (
       <div className="flex items-center gap-2">
@@ -13,7 +13,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
             row.admin_seen === false ? "bg-yellow-400" : "invisible"
           }`}
         />
-        <span>{row.id}</span>
+        <span>{row.s_id}</span>
         <div className="space-x-1">
           <Tag
             textSize="text-[10px]"
