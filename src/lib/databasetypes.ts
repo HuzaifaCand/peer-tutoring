@@ -55,6 +55,67 @@ export type Database = {
           }
         ];
       };
+      resources: {
+        Row: {
+          added_by: string;
+          created_at: string;
+          description: string | null;
+          id: string;
+          link: string;
+          subject: string;
+          title: string;
+          updated_at: string;
+          verified: boolean;
+          verified_by: string | null;
+        };
+        Insert: {
+          added_by: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          link: string;
+          subject: string;
+          title: string;
+          updated_at?: string;
+          verified?: boolean;
+          verified_by?: string | null;
+        };
+        Update: {
+          added_by?: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          link?: string;
+          subject?: string;
+          title?: string;
+          updated_at?: string;
+          verified?: boolean;
+          verified_by?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "resources_added_by_fkey";
+            columns: ["added_by"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "resources_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "resources_verified_by_fkey";
+            columns: ["verified_by"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       sessions: {
         Row: {
           academic_year: string;
@@ -157,6 +218,13 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
+            foreignKeyName: "sessions_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "sessions_tutor_id_fkey";
             columns: ["tutor_id"];
             isOneToOne: false;
@@ -172,6 +240,39 @@ export type Database = {
           }
         ];
       };
+      student_subjects: {
+        Row: {
+          created_at: string;
+          student_id: string;
+          subject_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          student_id: string;
+          subject_id: string;
+        };
+        Update: {
+          created_at?: string;
+          student_id?: string;
+          subject_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "student_subjects_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "student_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       students: {
         Row: {
           admin_seen: boolean;
@@ -179,7 +280,6 @@ export type Database = {
           extra_info: string | null;
           grade: string;
           id: string;
-          subjects: string[];
           updated_at: string;
         };
         Insert: {
@@ -188,7 +288,6 @@ export type Database = {
           extra_info?: string | null;
           grade: string;
           id: string;
-          subjects: string[];
           updated_at?: string;
         };
         Update: {
@@ -197,7 +296,6 @@ export type Database = {
           extra_info?: string | null;
           grade?: string;
           id?: string;
-          subjects?: string[];
           updated_at?: string;
         };
         Relationships: [
@@ -206,6 +304,69 @@ export type Database = {
             columns: ["id"];
             isOneToOne: true;
             referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      subjects: {
+        Row: {
+          code: string;
+          created_at: string;
+          grade: string;
+          id: string;
+          label: string;
+          name: string;
+          slug: string;
+        };
+        Insert: {
+          code: string;
+          created_at?: string;
+          grade: string;
+          id: string;
+          label: string;
+          name: string;
+          slug: string;
+        };
+        Update: {
+          code?: string;
+          created_at?: string;
+          grade?: string;
+          id?: string;
+          label?: string;
+          name?: string;
+          slug?: string;
+        };
+        Relationships: [];
+      };
+      tutor_subjects: {
+        Row: {
+          created_at: string;
+          subject_id: string;
+          tutor_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          subject_id: string;
+          tutor_id: string;
+        };
+        Update: {
+          created_at?: string;
+          subject_id?: string;
+          tutor_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tutor_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tutor_subjects_tutor_id_fkey";
+            columns: ["tutor_id"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
             referencedColumns: ["id"];
           }
         ];
@@ -220,7 +381,6 @@ export type Database = {
           grade: string;
           id: string;
           rejection_reason: string | null;
-          subjects: string[];
           updated_at: string;
         };
         Insert: {
@@ -232,7 +392,6 @@ export type Database = {
           grade: string;
           id: string;
           rejection_reason?: string | null;
-          subjects: string[];
           updated_at?: string;
         };
         Update: {
@@ -244,7 +403,6 @@ export type Database = {
           grade?: string;
           id?: string;
           rejection_reason?: string | null;
-          subjects?: string[];
           updated_at?: string;
         };
         Relationships: [
@@ -289,7 +447,7 @@ export type Database = {
       subject_health: {
         Row: {
           student_count: number | null;
-          subject: string | null;
+          subject_label: string | null;
           tutor_count: number | null;
         };
         Relationships: [];
@@ -299,7 +457,15 @@ export type Database = {
           session_count: number | null;
           subject: string | null;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "sessions_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          }
+        ];
       };
     };
     Functions: {
