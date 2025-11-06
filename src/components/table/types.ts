@@ -12,8 +12,8 @@ export interface TableRowProps<T> {
   onClick?: () => void;
 }
 
-import { ComputedTutorRow } from "../admin/tutors/getTutors";
-import { ComputedStudentRow } from "../admin/students/getStudents";
+import { ComputedTutorRow } from "../../lib/users/getTutors";
+import { ComputedStudentRow } from "../../lib/users/getStudents";
 import { ComputedCancelledSessionRow } from "../../lib/sessions/cancelled/getCancelledSessions";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";

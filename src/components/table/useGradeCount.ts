@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { TableRowByType } from "./types";
-import { ComputedTutorRow } from "../admin/tutors/getTutors";
-import { ComputedStudentRow } from "../admin/students/getStudents";
+import { ComputedTutorRow } from "../../lib/users/getTutors";
+import { ComputedStudentRow } from "../../lib/users/getStudents";
 
 export function useGradeCounts<K extends keyof TableRowByType>(
   type: K,

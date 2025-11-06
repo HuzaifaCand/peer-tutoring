@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { TableRowByType } from "./types";
 import { activities } from "../admin/tutors/ActivityFilter";
-import { ComputedTutorRow } from "../admin/tutors/getTutors";
+import { ComputedTutorRow } from "../../lib/users/getTutors";
 import { healths } from "../admin/overview/SubjectHealthFilter";
 import { ComputedSubjectHealthView } from "../admin/overview/getSubjectsHealth";
 import { modes } from "../admin/sessions/SessionModeFilter";
