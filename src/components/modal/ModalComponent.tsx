@@ -1,18 +1,20 @@
-import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
-import { ComputedCancelledSessionRow } from "../../lib/sessions/cancelled/getCancelledSessions";
-import { ComputedCompletedSessionRow } from "../../lib/sessions/completed/getCompletedSessions";
-import { ComputedScheduledSessionRow } from "../../lib/sessions/scheduled/getScheduledSessions";
+import { CardByType } from "../card/types";
+import { TableRowByType } from "../table/types";
 import ModalBase from "./ModalBase";
 import { ActiveSessionModal } from "./session/ActiveSessionModal";
 import { CancelledSessionModal } from "./session/CancelledSessionModal";
 import { CompletedSessionModal } from "./session/CompletedSessionModal";
 import { ScheduledSessionModal } from "./session/ScheduledSessionModal";
+import { StudentModal } from "./StudentModal";
+import { TutorModal } from "./TutorModal";
 
 type ModalType =
   | "activeSession"
   | "cancelledSession"
   | "scheduledSession"
-  | "completedSession";
+  | "completedSession"
+  | "student"
+  | "tutor";
 
 interface ModalProps {
   type: ModalType;
@@ -24,41 +26,56 @@ export function Modal({ type, data, onClose }: ModalProps) {
   if (!type) return null;
 
   let content: React.ReactNode = null;
-  if (type === "activeSession") {
-    content = (
-      <ActiveSessionModal
-        session={data as ComputedActiveSession}
-        onClose={onClose}
-      />
-    );
-  }
-  if (type === "cancelledSession") {
-    content = (
-      <CancelledSessionModal
-        session={data as ComputedCancelledSessionRow}
-        onClose={onClose}
-      />
-    );
-  }
-  if (type === "scheduledSession") {
-    content = (
-      <ScheduledSessionModal
-        session={data as ComputedScheduledSessionRow}
-        onClose={onClose}
-      />
-    );
-  }
-  if (type === "completedSession") {
-    content = (
-      <CompletedSessionModal
-        session={data as ComputedCompletedSessionRow}
-        onClose={onClose}
-      />
-    );
+  switch (type) {
+    case "activeSession":
+      content = (
+        <ActiveSessionModal
+          session={data as CardByType["activeSession"]}
+          onClose={onClose}
+        />
+      );
+      break;
+    case "cancelledSession":
+      content = (
+        <CancelledSessionModal
+          session={data as TableRowByType["cancelledSession"]}
+          onClose={onClose}
+        />
+      );
+      break;
+    case "scheduledSession":
+      content = (
+        <ScheduledSessionModal
+          session={data as TableRowByType["scheduledSession"]}
+          onClose={onClose}
+        />
+      );
+      break;
+    case "completedSession":
+      content = (
+        <CompletedSessionModal
+          session={data as TableRowByType["completedSession"]}
+          onClose={onClose}
+        />
+      );
+      break;
+    case "student":
+      content = (
+        <StudentModal
+          student={data as TableRowByType["student"]}
+          onClose={onClose}
+        />
+      );
+      break;
+    case "tutor":
+      content = (
+        <TutorModal tutor={data as TableRowByType["tutor"]} onClose={onClose} />
+      );
+      break;
   }
 
   return (
-    <ModalBase isOpen={!!type} onClose={onClose}>
+    <ModalBase isOpen={!!type} onClose={onClose} autoFocus={false}>
       {content}
     </ModalBase>
   );
