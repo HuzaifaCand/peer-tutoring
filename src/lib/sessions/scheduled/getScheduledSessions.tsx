@@ -2,14 +2,7 @@ import { fetchSessions } from "../fetchSessions";
 import { formatScheduledSession } from "./formatScheduledSession";
 
 export async function getScheduledSessions() {
-  const sessions = await fetchSessions({
-    status: "scheduled",
-    extendSelect: `
-      duration_minutes,
-      scheduled_for,
-      booked_at
-    `,
-  });
+  const sessions = await fetchSessions("scheduled");
 
   return sessions.map(formatScheduledSession);
 }

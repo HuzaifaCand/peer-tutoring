@@ -1,17 +1,16 @@
 import { supabase } from "@/lib/supabase/client";
 import { baseSelect, SessionStatus } from "./fetchSessions";
 import { SessionWithUsers } from "@/lib/computedtypes";
+import { sessionExtendSelects } from "./fetchSessions";
 
-export async function getSessionTypeById({
+export async function getSessionById({
   id,
   status,
-  extendSelect,
 }: {
   id: string;
   status: SessionStatus;
-  extendSelect: string;
-}) {
-  const fullSelect = `${baseSelect}, ${extendSelect}`;
+}): Promise<SessionWithUsers> {
+  const fullSelect = `${baseSelect}, ${sessionExtendSelects[status]}`;
 
   const query = supabase
     .from("sessions")

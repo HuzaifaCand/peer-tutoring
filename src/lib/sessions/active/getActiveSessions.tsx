@@ -2,13 +2,7 @@ import { fetchSessions } from "../fetchSessions";
 import { formatActiveSession } from "./formatActiveSession";
 
 export async function getActiveSessions() {
-  const active_sessions = await fetchSessions({
-    status: "in_progress",
-    extendSelect: `
-      start_time,
-      duration_minutes
-    `,
-  });
+  const active_sessions = await fetchSessions("in_progress");
 
   return active_sessions.map(formatActiveSession);
 }

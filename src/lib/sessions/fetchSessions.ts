@@ -7,10 +7,32 @@ export type SessionStatus =
   | "cancelled"
   | "in_progress";
 
-interface BaseSessionQueryOptions {
-  status: SessionStatus;
-  extendSelect: string;
-}
+export const sessionExtendSelects: Record<SessionStatus, string> = {
+  scheduled: `
+      duration_minutes,
+      scheduled_for,
+      booked_at
+    `,
+  cancelled: `
+      cancel_reason,
+      cancelled_at,
+      cancellation_source,
+      cancelled_by,
+      scheduled_for
+    `,
+  in_progress: `
+      start_time,
+      duration_minutes
+    `,
+  completed: `
+      scheduled_for,
+      verified,
+      rejection_reason,
+      start_time,
+      completed_at,
+      duration_minutes
+    `,
+};
 
 export const baseSelect = `
   id,
@@ -20,13 +42,10 @@ export const baseSelect = `
   students(grade, users(full_name, email))
 `;
 
-export async function fetchSessions({
-  status,
-  extendSelect,
-}: BaseSessionQueryOptions): Promise<SessionWithUsers[]> {
-  const fullSelect = extendSelect
-    ? `${baseSelect}, ${extendSelect}`
-    : baseSelect;
+export async function fetchSessions(
+  status: SessionStatus
+): Promise<SessionWithUsers[]> {
+  const fullSelect = `${baseSelect}, ${sessionExtendSelects[status]}`;
 
   const { data, error } = await supabase
     .from("sessions")

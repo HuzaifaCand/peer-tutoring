@@ -2,17 +2,7 @@ import { fetchSessions } from "../fetchSessions";
 import { formatCompletedSession } from "./formatCompletedSession";
 
 export async function getCompletedSessions() {
-  const completed_sessions = await fetchSessions({
-    status: "completed",
-    extendSelect: `
-      scheduled_for,
-      verified,
-      rejection_reason,
-      start_time,
-      completed_at,
-      duration_minutes
-    `,
-  });
+  const completed_sessions = await fetchSessions("completed");
 
   return completed_sessions.map(formatCompletedSession);
 }
