@@ -24,15 +24,24 @@ export const scheduledSessionColumns: TableColumn<ComputedScheduledSessionRow>[]
         </div>
       ),
     },
+    { key: "subject", label: "Subject" },
 
-    { key: "scheduled_for", label: "Scheduled" },
     {
-      key: "duration_minutes",
-      label: "Expected Duration",
-      render: (row) => <span>{row.duration_minutes + " mins"}</span>,
+      key: "scheduled_for",
+      label: "Scheduled",
+      render: (row) => (
+        <div className="flex items-center gap-2">
+          <span>{row.scheduled_for}</span>
+          <Tag
+            color="gray"
+            capitalize={false}
+            value={row.duration_minutes + " mins"}
+            textSize="text-[11px]"
+          />
+        </div>
+      ),
     },
 
-    { key: "subject", label: "Subject" },
     {
       key: "is_online",
       label: "Mode",
