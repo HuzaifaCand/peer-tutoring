@@ -4,10 +4,10 @@ import { useModalOpener } from "@/components/modal/useModalOpener";
 import {
   getActiveSessions,
   ComputedActiveSession,
-} from "../../../../lib/sessions/active/getActiveSessions";
+} from "@/lib/sessions/active/getActiveSessions";
 import { useEffect } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SessionDataProps } from "../../../../lib/sessions/types";
+import { SessionDataProps } from "@/lib/sessions/types";
 import { defaultSorters } from "@/utils/sorters";
 
 export default function ActiveSessionsGrid({
