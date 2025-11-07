@@ -22,7 +22,6 @@ export type Database = {
           duration_minutes: number;
           hour: string;
           id: string;
-          is_online: boolean | null;
           tutor_id: string | null;
         };
         Insert: {
@@ -32,7 +31,6 @@ export type Database = {
           duration_minutes?: number;
           hour: string;
           id?: string;
-          is_online?: boolean | null;
           tutor_id?: string | null;
         };
         Update: {
@@ -42,7 +40,6 @@ export type Database = {
           duration_minutes?: number;
           hour?: string;
           id?: string;
-          is_online?: boolean | null;
           tutor_id?: string | null;
         };
         Relationships: [
@@ -60,6 +57,7 @@ export type Database = {
           added_by: string;
           created_at: string;
           description: string | null;
+          featured: boolean;
           id: string;
           link: string;
           subject: string;
@@ -67,11 +65,13 @@ export type Database = {
           updated_at: string;
           verified: boolean;
           verified_by: string | null;
+          view_count: number;
         };
         Insert: {
           added_by: string;
           created_at?: string;
           description?: string | null;
+          featured?: boolean;
           id?: string;
           link: string;
           subject: string;
@@ -79,11 +79,13 @@ export type Database = {
           updated_at?: string;
           verified?: boolean;
           verified_by?: string | null;
+          view_count?: number;
         };
         Update: {
           added_by?: string;
           created_at?: string;
           description?: string | null;
+          featured?: boolean;
           id?: string;
           link?: string;
           subject?: string;
@@ -91,6 +93,7 @@ export type Database = {
           updated_at?: string;
           verified?: boolean;
           verified_by?: string | null;
+          view_count?: number;
         };
         Relationships: [
           {
@@ -99,6 +102,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "resources_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
           },
           {
             foreignKeyName: "resources_subject_fkey";
@@ -221,6 +231,13 @@ export type Database = {
             foreignKeyName: "sessions_subject_fkey";
             columns: ["subject"];
             isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
+          },
+          {
+            foreignKeyName: "sessions_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
             referencedRelation: "subjects";
             referencedColumns: ["id"];
           },
@@ -263,6 +280,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "students";
             referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "student_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
           },
           {
             foreignKeyName: "student_subjects_subject_id_fkey";
@@ -355,6 +379,13 @@ export type Database = {
           tutor_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "tutor_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
+          },
           {
             foreignKeyName: "tutor_subjects_subject_id_fkey";
             columns: ["subject_id"];
@@ -456,20 +487,13 @@ export type Database = {
         Row: {
           session_count: number | null;
           subject: string | null;
+          subject_id: string | null;
         };
-        Relationships: [
-          {
-            foreignKeyName: "sessions_subject_fkey";
-            columns: ["subject"];
-            isOneToOne: false;
-            referencedRelation: "subjects";
-            referencedColumns: ["id"];
-          }
-        ];
+        Relationships: [];
       };
     };
     Functions: {
-      [_ in never]: never;
+      increment_resource_view: { Args: { rid: string }; Returns: undefined };
     };
     Enums: {
       [_ in never]: never;
