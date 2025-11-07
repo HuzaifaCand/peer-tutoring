@@ -1,12 +1,25 @@
+import clsx from "clsx";
+
+interface SectionHeaderProps {
+  title: string;
+  rightSlot?: React.ReactNode;
+  becomesCol?: boolean;
+}
+
 export default function SectionHeader({
   title,
   rightSlot,
-}: {
-  title: string;
-  rightSlot?: React.ReactNode;
-}) {
+  becomesCol = true,
+}: SectionHeaderProps) {
   return (
-    <div className="pb-4 border-b border-textWhite/10 flex text-textWhite flex-col gap-2 sm:gap-0 sm:flex-row sm:justify-between sm:items-end mb-8">
+    <div
+      className={clsx(
+        "pb-4 border-b border-textWhite/10 flex text-textWhite mb-8",
+        becomesCol === true
+          ? "flex-col gap-2 sm:gap-0 sm:flex-row sm:justify-between sm:items-end"
+          : "justify-between items-end"
+      )}
+    >
       <h1 className="text-[1.6875rem] sm:text-3xl font-semibold">{title}</h1>
       {rightSlot && (
         <div className="text-xs md:text-sm text-textMuted">{rightSlot}</div>
