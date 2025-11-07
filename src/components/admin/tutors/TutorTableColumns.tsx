@@ -34,7 +34,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
               row.verified === null
                 ? "gray"
                 : row.verified === true
-                ? ""
+                ? "invisible"
                 : "red"
             }
           />

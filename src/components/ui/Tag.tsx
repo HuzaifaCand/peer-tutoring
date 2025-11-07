@@ -20,7 +20,8 @@ type colors =
   | "purple"
   | "pink"
   | "orange"
-  | "teal";
+  | "teal"
+  | "invisible";
 
 const colorStyles: Record<colors, string> = {
   muted: "bg-gray-500/10 text-textMuted",
@@ -33,6 +34,7 @@ const colorStyles: Record<colors, string> = {
   pink: "bg-pink-500/20 text-pink-300",
   orange: "bg-orange-500/20 text-orange-300",
   teal: "bg-teal-500/20 text-teal-300",
+  invisible: "invisible",
 };
 
 function formatValue(value: string, capitalize = true) {
