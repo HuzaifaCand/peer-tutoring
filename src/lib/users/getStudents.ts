@@ -3,48 +3,49 @@ import { StudentUser } from "@/lib/computedtypes";
 import { formatStudent } from "./userFormatters";
 import { fullStudentSelect } from "./userSelects";
 
+export function logSupabaseError(context: string, error: any) {
+  console.groupCollapsed(`[Supabase Error] ${context}`);
+  console.error("Message:", error.message);
+  if (error.details) console.error("Details:", error.details);
+  if (error.hint) console.error("Hint:", error.hint);
+  if (error.code) console.error("Code:", error.code);
+  console.groupEnd();
+}
+
 export async function getStudents() {
-  const { data: students, error } = await supabase
+  const { data, error } = await supabase
     .from("students")
     .select(fullStudentSelect)
-    .overrideTypes<StudentUser[]>();
+    .returns<StudentUser[]>();
 
   if (error) {
-    console.error("Error fetching students:", error);
-    throw error;
+    logSupabaseError("getStudents()", error);
+    throw new Error(`Failed to fetch students: ${error.message}`);
   }
 
-  const normalizedStudents = (students ?? []).map((s) => ({
-    ...s,
-    subjects: Array.isArray(s.subjects) ? (s.subjects as string[]) : [], // defensive fallback
-  }));
-
-  const formatted = normalizedStudents.map(formatStudent);
-  return formatted;
+  return (data ?? []).map(formatStudent);
 }
 export type ComputedStudentRow = Awaited<
   ReturnType<typeof getStudents>
 >[number];
 
-export async function getStudentById(id: string): Promise<ComputedStudentRow> {
-  const { data: student, error } = await supabase
+export async function getStudentById(id: string) {
+  const { data, error } = await supabase
     .from("students")
     .select(fullStudentSelect)
     .eq("id", id)
     .single()
-    .overrideTypes<StudentUser>();
+    .returns<StudentUser>();
 
   if (error) {
-    console.error("Failed to fetch student with id:", id);
-    throw error;
+    logSupabaseError(`getStudentById(${id})`, error);
+    throw new Error(`Failed to fetch student ${id}: ${error.message}`);
   }
 
-  const normalizedStudent = {
-    ...student,
-    subjects: Array.isArray(student.subjects)
-      ? (student.subjects as string[])
-      : [],
-  };
+  if (!data) {
+    console.warn(`No student found for ID: ${id}`);
+    return null as any;
+  }
 
-  return formatStudent(normalizedStudent);
+  return formatStudent(data);
 }

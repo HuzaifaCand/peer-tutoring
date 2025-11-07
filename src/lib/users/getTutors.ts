@@ -14,12 +14,7 @@ export async function getTutors() {
     throw error;
   }
 
-  const normalizedTutors = (tutors ?? []).map((t) => ({
-    ...t,
-    subjects: Array.isArray(t.subjects) ? (t.subjects as string[]) : [], // defensive fallback
-  }));
-
-  const formatted = normalizedTutors.map(formatTutor);
+  const formatted = tutors.map(formatTutor);
   return formatted;
 }
 
@@ -38,10 +33,5 @@ export async function getTutorById(id: string) {
     throw error;
   }
 
-  const normalizedTutor = {
-    ...tutor,
-    subjects: Array.isArray(tutor.subjects) ? (tutor.subjects as string[]) : [],
-  };
-
-  return formatTutor(normalizedTutor);
+  return formatTutor(tutor);
 }

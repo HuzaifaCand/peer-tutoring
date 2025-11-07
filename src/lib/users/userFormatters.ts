@@ -11,11 +11,14 @@ export function extractUserInfo(user: { full_name: string; email: string }) {
 export function formatTutor(t: TutorUser) {
   const userInfo = extractUserInfo(t.users);
 
+  const subjects =
+    t.tutor_subjects?.map((ts) => ts.subjects?.label).filter(Boolean) ?? [];
+
   return {
     ...userInfo,
     id: t.id,
     grade: t.grade,
-    subjects: t.subjects.join(" | "),
+    subjects: subjects.join(" | "),
     verified: t.approved,
     available_slots: t.available_slots?.filter((s) => s.available).length ?? 0,
     unavailable_slots:
@@ -28,11 +31,14 @@ export function formatTutor(t: TutorUser) {
 export function formatStudent(s: StudentUser) {
   const userInfo = extractUserInfo(s.users);
 
+  const subjects =
+    s.student_subjects?.map((ss) => ss.subjects?.label).filter(Boolean) ?? [];
+
   return {
     ...userInfo,
     id: s.id,
     grade: s.grade,
-    subjects: s.subjects.join(" | "),
+    subjects: subjects.join(" | "),
     admin_seen: s.admin_seen,
     created_at: s.created_at,
   };
