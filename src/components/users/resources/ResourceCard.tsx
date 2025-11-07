@@ -2,9 +2,10 @@
 
 import { CardShell } from "@/components/card/CardShell";
 import { colors, Tag } from "@/components/ui/Tag";
-import { ExternalLink, Verified, Clock } from "lucide-react";
+import { ExternalLink, Verified, Clock, Copy } from "lucide-react";
 import { ComputedResourceType } from "./getResources";
 import { supabase } from "@/lib/supabase/client";
+import { toast } from "sonner";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -20,6 +21,16 @@ async function incrementResourceView(resourceId: string) {
 }
 
 export function ResourceCard({ resource }: ResourceCardProps) {
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(resource.link);
+      toast.success("Link copied!");
+    } catch (err) {
+      toast.error("Failed to copy link. Try Again");
+      console.error("Clipboard error:", err);
+    }
+  }
+
   const isTutor = resource.added_by_role === "tutor";
   const isVerified = resource.verified || isTutor;
 
@@ -35,16 +46,17 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           />
           <Tag value={resource.subject_code} color="gray" font="font-medium" />
         </div>
-
-        {isVerified ? (
-          <div title="Verified Resource">
-            <Verified className="text-green-400 w-4.5 h-4.5" />
-          </div>
-        ) : (
-          <div title="Pending Verification">
-            <Clock className="text-yellow-400 w-4.5 h-4.5" />
-          </div>
-        )}
+        <div className="flex items-center gap-3">
+          {isVerified ? (
+            <div title="Verified Resource">
+              <Verified className="text-green-400 w-4.5 h-4.5" />
+            </div>
+          ) : (
+            <div title="Pending Verification">
+              <Clock className="text-yellow-400 w-4.5 h-4.5" />
+            </div>
+          )}
+        </div>
       </header>
 
       {/* Body */}
@@ -99,6 +111,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           >
             Verify
           </button> */}
+
           <a
             href={resource.link}
             target="_blank"
@@ -107,12 +120,15 @@ export function ResourceCard({ resource }: ResourceCardProps) {
               incrementResourceView(resource.id).catch(console.error)
             }
             className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
-               text-white bg-elevatedBg border border-white/10 rounded-md
+               text-textButton/90 bg-elevatedBg border border-white/10 rounded-md
                hover:bg-hoverBg transition-all duration-200"
           >
             <ExternalLink size={14} />
             View
           </a>
+          <div title="Copy Link" onClick={handleCopy}>
+            <Copy size={14} className="text-textWhite" />
+          </div>
         </div>
       </footer>
     </CardShell>
