@@ -7,14 +7,15 @@ import { DataSearch } from "../DataSearch";
 import { EmptyGrid } from "./EmptyCardGrid";
 import DataRefresh from "../DataRefresh";
 import { formatDistanceToNow } from "date-fns";
-import { ActiveSessionCard } from "./ActiveSessionCard"; // import our new card
+import { ActiveSessionCard } from "../admin/sessions/active/ActiveSessionCard"; // import our new card
+import { ResourceCard } from "../users/resources/ResourceCard";
 
 export function CardGrid<K extends keyof CardByType>({
   type,
   lastUpdated,
   data,
   loading = false,
-  layoutClassName = "grid gap-4 md:grid-cols-2 xl:grid-cols-3",
+  layoutClassName,
   setRefetchFlag,
   getKey = (_, i) => i,
   handleCardClick,
@@ -81,13 +82,19 @@ export function CardGrid<K extends keyof CardByType>({
               case "activeSession":
                 return (
                   <ActiveSessionCard
-                    handleCardClick={() =>
-                      handleCardClick?.(item as CardByType["activeSession"])
-                    }
+                    handleCardClick={() => handleCardClick?.(item)}
                     key={key}
                     session={item as CardByType["activeSession"]}
                   />
                 );
+              case "resource":
+                return (
+                  <ResourceCard
+                    key={key}
+                    resource={item as CardByType["resource"]}
+                  />
+                );
+
               default:
                 return null;
             }
