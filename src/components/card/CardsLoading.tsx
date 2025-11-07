@@ -30,13 +30,10 @@ function CardSkeleton() {
 
 interface CardLoadingProps {
   count?: number;
-  layoutClassName?: string;
+  layoutClassName: string;
 }
 
-export function CardsLoading({
-  count = 6,
-  layoutClassName = "grid gap-3 md:grid-cols-2 xl:grid-cols-3",
-}: CardLoadingProps) {
+export function CardsLoading({ count = 6, layoutClassName }: CardLoadingProps) {
   return (
     <div className={layoutClassName}>
       {Array.from({ length: count }).map((_, i) => (
