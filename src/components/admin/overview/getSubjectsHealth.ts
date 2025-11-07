@@ -27,7 +27,7 @@ export async function getSubjectsHealth() {
     throw error;
   }
   const formatted = (subjects || []).map((s) => ({
-    subject: s.subject,
+    subject_label: s.subject_label,
     tutors: s.tutor_count,
     students: s.student_count,
     health: computeHealth(s.tutor_count, s.student_count),

@@ -15,11 +15,11 @@ export const titles: Record<SubjectHealthStatus, string> = {
 };
 const columns: TableColumn<ComputedSubjectHealthView>[] = [
   {
-    key: "subject",
+    key: "subject_label",
     label: "Subject",
     render: (row) => (
       <div className="ml-3">
-        <span>{row.subject}</span>
+        <span>{row.subject_label}</span>
       </div>
     ),
   },
