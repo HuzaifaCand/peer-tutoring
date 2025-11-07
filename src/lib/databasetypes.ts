@@ -335,6 +335,7 @@ export type Database = {
       subjects: {
         Row: {
           code: string;
+          color: string;
           created_at: string;
           grade: string;
           id: string;
@@ -344,6 +345,7 @@ export type Database = {
         };
         Insert: {
           code: string;
+          color?: string;
           created_at?: string;
           grade: string;
           id: string;
@@ -353,6 +355,7 @@ export type Database = {
         };
         Update: {
           code?: string;
+          color?: string;
           created_at?: string;
           grade?: string;
           id?: string;

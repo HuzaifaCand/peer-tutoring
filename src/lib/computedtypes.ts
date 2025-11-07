@@ -11,12 +11,13 @@ export type SubjectHealthView =
   Database["public"]["Views"]["subject_health"]["Row"];
 export type SubjectPopularityView =
   Database["public"]["Views"]["subject_popularity"]["Row"];
-
 export type SubjectRow = Database["public"]["Tables"]["subjects"]["Row"];
 export type TutorSubject =
   Database["public"]["Tables"]["tutor_subjects"]["Row"];
 export type StudentSubject =
   Database["public"]["Tables"]["student_subjects"]["Row"];
+
+export type ResourceRow = Database["public"]["Tables"]["resources"]["Row"];
 
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 
@@ -43,4 +44,12 @@ export type SessionWithUsers = SessionRow & {
     users: Pick<UserRow, "full_name" | "email">;
   };
   subjects: SubjectRow;
+};
+
+export type Resource = ResourceRow & {
+  subjects: SubjectRow;
+  users: Pick<UserRow, "full_name" | "role">;
+  verified_by_tutor?: {
+    users: Pick<UserRow, "full_name">;
+  } | null;
 };

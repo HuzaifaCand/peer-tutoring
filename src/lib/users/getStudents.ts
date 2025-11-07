@@ -7,7 +7,7 @@ export async function getStudents() {
   const { data, error } = await supabase
     .from("students")
     .select(fullStudentSelect)
-    .returns<StudentUser[]>();
+    .overrideTypes<StudentUser[]>();
 
   if (error) {
     console.error("getStudents()", error);
@@ -26,7 +26,7 @@ export async function getStudentById(id: string) {
     .select(fullStudentSelect)
     .eq("id", id)
     .single()
-    .returns<StudentUser>();
+    .overrideTypes<StudentUser>();
 
   if (error) {
     console.error(`getStudentById(${id})`, error);
