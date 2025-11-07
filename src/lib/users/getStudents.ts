@@ -42,10 +42,5 @@ export async function getStudentById(id: string) {
     throw new Error(`Failed to fetch student ${id}: ${error.message}`);
   }
 
-  if (!data) {
-    console.warn(`No student found for ID: ${id}`);
-    return null as any;
-  }
-
   return formatStudent(data);
 }
