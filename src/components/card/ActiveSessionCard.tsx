@@ -16,11 +16,17 @@ export function ActiveSessionCard({
       {/* Header */}
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-1">
-          <Tag value={session.subject} color="gray" font="font-medium" />
+          <Tag
+            value={session.subject_id}
+            color="gray"
+            font="font-medium"
+            textSize="text-[11px]"
+          />
           <Tag
             value={session.mode}
             color={session.is_online ? "blue" : "yellow"}
             font="font-medium"
+            textSize="text-[11px]"
           />
         </div>
 
@@ -28,7 +34,7 @@ export function ActiveSessionCard({
           <span className="text-textMuted uppercase text-[11px] font-medium">
             Elapsed
           </span>
-          <span className="text-[12px] mt-[1.5px]">
+          <span className="text-[12px]">
             <ElapsedTime
               start={session.start_time_iso}
               expectedMinutes={session.duration_minutes}
@@ -43,7 +49,7 @@ export function ActiveSessionCard({
           <span className="text-[11px] text-textMuted font-medium mb-0.5">
             Tutor
           </span>
-          <span className="font-medium text-textWhite leading-tight">
+          <span className="font-medium text-textWhite text-sm leading-tight">
             {session.tutor_name}
           </span>
         </div>
@@ -51,7 +57,7 @@ export function ActiveSessionCard({
           <span className="text-[11px] text-textMuted font-medium mb-0.5">
             Student
           </span>
-          <span className="font-medium text-textWhite leading-tight">
+          <span className="font-medium text-textWhite text-sm leading-tight">
             {session.student_name}
           </span>
         </div>
