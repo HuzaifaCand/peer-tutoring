@@ -11,7 +11,7 @@ import {
   CalendarDays,
   Verified,
   LogOut,
-  BookOpen,
+  Library,
   MessageSquare,
   Clock,
   CalendarX,
@@ -57,13 +57,14 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/tutor", label: "Overview", icon: LayoutDashboard },
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/tutor/availability", label: "Availability", icon: Clock },
-    { href: "/tutor/resources", label: "Resources", icon: BookOpen },
+    { href: "/tutor/resources", label: "Resources", icon: Library },
   ],
   student: [
     { href: "/student", label: "Overview", icon: LayoutDashboard },
     { href: "/student/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/student/tutors", label: "Tutors", icon: GraduationCap },
     { href: "/student/messages", label: "Messages", icon: MessageSquare },
+    { href: "/student/resources", label: "Resources", icon: Library },
   ],
 };
 

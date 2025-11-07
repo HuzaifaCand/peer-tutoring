@@ -10,7 +10,7 @@ interface TagProps {
   capitalize?: boolean;
 }
 
-type colors =
+export type colors =
   | "muted"
   | "gray"
   | "blue"
