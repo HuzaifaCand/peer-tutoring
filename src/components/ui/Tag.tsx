@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 interface TagProps {
   value: string;
-  color?: string;
+  color?: colors;
   textSize?: string;
   className?: string;
   font?: string;
