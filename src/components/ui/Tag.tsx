@@ -10,7 +10,19 @@ interface TagProps {
   capitalize?: boolean;
 }
 
-const colorStyles: Record<string, string> = {
+type colors =
+  | "muted"
+  | "gray"
+  | "blue"
+  | "yellow"
+  | "red"
+  | "green"
+  | "purple"
+  | "pink"
+  | "orange"
+  | "teal";
+
+const colorStyles: Record<colors, string> = {
   muted: "bg-gray-500/10 text-textMuted",
   gray: "bg-gray-500/20 text-gray-300",
   blue: "bg-blue-500/20 text-blue-300",
@@ -50,7 +62,7 @@ export function Tag({
         "px-2 py-0.5 rounded-md",
         textSize,
         font,
-        colorStyles[color],
+        colorStyles[color as colors],
         capitalize === true ? "capitalize" : "",
         className // allows custom styles
       )}
