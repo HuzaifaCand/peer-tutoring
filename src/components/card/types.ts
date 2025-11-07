@@ -1,9 +1,10 @@
 import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessions";
 import { refetchFlagType } from "../table/types";
+import { ComputedResourceType } from "../users/resources/getResources";
 
 export type CardByType = {
   activeSession: ComputedActiveSession;
-  // later: tutors: ComputedTutorRow, etc.
+  resource: ComputedResourceType;
 };
 
 export interface CardGridProps<K extends keyof CardByType> {
@@ -11,9 +12,9 @@ export interface CardGridProps<K extends keyof CardByType> {
   data: CardByType[K][];
   loading?: boolean;
   lastUpdated?: Date;
-  layoutClassName?: string;
+  layoutClassName: string;
   emptyMessage?: string;
-  handleCardClick: (item: CardByType[K]) => void;
+  handleCardClick?: (item: CardByType[K]) => void;
   getKey?: (item: CardByType[K], index: number) => string | number;
   setRefetchFlag: refetchFlagType;
 }
