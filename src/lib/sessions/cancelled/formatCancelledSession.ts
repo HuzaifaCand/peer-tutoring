@@ -24,7 +24,7 @@ export function formatCancelledSession(s: SessionWithUsers) {
     id: s.id,
     ...info,
     ...mode,
-    subject: s.subject,
+    subject: s.subjects.label,
 
     cancel_reason: s.cancel_reason ?? "",
     cancellation_source: s.cancellation_source,

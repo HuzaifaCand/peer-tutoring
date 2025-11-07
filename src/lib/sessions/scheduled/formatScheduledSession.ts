@@ -11,7 +11,7 @@ export function formatScheduledSession(s: SessionWithUsers) {
     ...info,
     ...mode,
     id: s.id,
-    subject: s.subject,
+    subject: s.subjects.label,
     duration_minutes: s.duration_minutes,
     booked_at: s.booked_at,
     scheduled_for_iso: s.scheduled_for,

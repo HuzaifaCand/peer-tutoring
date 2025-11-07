@@ -21,7 +21,7 @@ export function formatCompletedSession(s: SessionWithUsers) {
     completed_at: s.completed_at,
     completed_at_time: format(parseISO(s.completed_at ?? ""), "p"),
 
-    subject: s.subject,
+    subject: s.subjects.label,
     verified: s.verified,
     rejection_reason: s.rejection_reason ?? "",
 

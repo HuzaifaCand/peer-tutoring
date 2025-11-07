@@ -1,5 +1,6 @@
 import { supabase } from "@/lib/supabase/client";
 import { SessionWithUsers } from "@/lib/computedtypes";
+import { logSupabaseError } from "../users/getStudents";
 
 export type SessionStatus =
   | "scheduled"
@@ -36,7 +37,7 @@ export const sessionExtendSelects: Record<SessionStatus, string> = {
 
 export const baseSelect = `
   id,
-  subject,
+  subjects(id, label, code),
   is_online,
   tutors(grade, users(full_name, email)),
   students(grade, users(full_name, email))
@@ -54,7 +55,7 @@ export async function fetchSessions(
     .overrideTypes<SessionWithUsers[]>();
 
   if (error) {
-    console.error(`Error fetching ${status} sessions:`, error);
+    logSupabaseError(`${status} error with fetchSessions`, error);
     throw error;
   }
 
