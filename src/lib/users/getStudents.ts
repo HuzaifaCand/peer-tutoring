@@ -3,15 +3,6 @@ import { StudentUser } from "@/lib/computedtypes";
 import { formatStudent } from "./userFormatters";
 import { fullStudentSelect } from "./userSelects";
 
-export function logSupabaseError(context: string, error: any) {
-  console.groupCollapsed(`[Supabase Error] ${context}`);
-  console.error("Message:", error.message);
-  if (error.details) console.error("Details:", error.details);
-  if (error.hint) console.error("Hint:", error.hint);
-  if (error.code) console.error("Code:", error.code);
-  console.groupEnd();
-}
-
 export async function getStudents() {
   const { data, error } = await supabase
     .from("students")
@@ -19,7 +10,7 @@ export async function getStudents() {
     .returns<StudentUser[]>();
 
   if (error) {
-    logSupabaseError("getStudents()", error);
+    console.error("getStudents()", error);
     throw new Error(`Failed to fetch students: ${error.message}`);
   }
 
@@ -38,7 +29,7 @@ export async function getStudentById(id: string) {
     .returns<StudentUser>();
 
   if (error) {
-    logSupabaseError(`getStudentById(${id})`, error);
+    console.error(`getStudentById(${id})`, error);
     throw new Error(`Failed to fetch student ${id}: ${error.message}`);
   }
 

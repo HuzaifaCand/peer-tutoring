@@ -9,7 +9,6 @@ import {
 } from "../../../lib/users/getStudents";
 import { Modal } from "@/components/modal/ModalComponent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
-import { formatStudent } from "@/lib/users/userFormatters";
 
 export default function StudentsOverview() {
   const [rowCount, setRowCount] = useState(0);

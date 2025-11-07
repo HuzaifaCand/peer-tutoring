@@ -2,7 +2,6 @@ import { supabase } from "@/lib/supabase/client";
 import { baseSelect, SessionStatus } from "./fetchSessions";
 import { SessionWithUsers } from "@/lib/computedtypes";
 import { sessionExtendSelects } from "./fetchSessions";
-import { logSupabaseError } from "../users/getStudents";
 
 export async function getSessionById({
   id,
@@ -24,7 +23,7 @@ export async function getSessionById({
   const { data, error } = await query;
 
   if (error) {
-    logSupabaseError(`Error fetching session ${id}:`, error);
+    console.error(`Error fetching session ${id}:`, error);
     throw error;
   }
 

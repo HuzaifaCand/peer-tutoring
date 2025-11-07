@@ -1,6 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
 import { SessionWithUsers } from "@/lib/computedtypes";
-import { logSupabaseError } from "../users/getStudents";
 
 export type SessionStatus =
   | "scheduled"
@@ -55,7 +54,7 @@ export async function fetchSessions(
     .overrideTypes<SessionWithUsers[]>();
 
   if (error) {
-    logSupabaseError(`${status} error with fetchSessions`, error);
+    console.error(`${status} error with fetchSessions`, error);
     throw error;
   }
 
