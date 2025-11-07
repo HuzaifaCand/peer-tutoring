@@ -12,15 +12,27 @@ export type SubjectHealthView =
 export type SubjectPopularityView =
   Database["public"]["Views"]["subject_popularity"]["Row"];
 
+export type SubjectRow = Database["public"]["Tables"]["subjects"]["Row"];
+export type TutorSubject =
+  Database["public"]["Tables"]["tutor_subjects"]["Row"];
+export type StudentSubject =
+  Database["public"]["Tables"]["student_subjects"]["Row"];
+
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 
 export type StudentUser = StudentRow & {
-  users: Pick<UserRow, "full_name" | "email">; // student table on admins/student
+  users: Pick<UserRow, "full_name" | "email">;
+  student_subjects: {
+    subjects: SubjectRow;
+  }[];
 };
 
 export type TutorUser = TutorRow & {
-  users: Pick<UserRow, "full_name" | "email">; // student table on admins/tutor
+  users: Pick<UserRow, "full_name" | "email">;
   available_slots: SlotsRow[];
+  tutor_subjects: {
+    subjects: SubjectRow;
+  }[];
 };
 
 export type SessionWithUsers = SessionRow & {
@@ -30,4 +42,5 @@ export type SessionWithUsers = SessionRow & {
   students: StudentRow & {
     users: Pick<UserRow, "full_name" | "email">;
   };
+  subjects: SubjectRow;
 };
