@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect } from "react";
 import { FocusTrap } from "focus-trap-react";
+import { X } from "lucide-react";
 
 interface ModalProps {
   isOpen: boolean;
@@ -56,7 +57,7 @@ export default function ModalBase({
             }}
           >
             <motion.div
-              className="modal-content bg-mainBg border border-white/10 focus:outline-none rounded-2xl shadow-2xl overflow-y-auto
+              className="modal-content bg-mainBg border border-white/10 relative focus:outline-none rounded-2xl shadow-2xl overflow-y-auto
              w-[90vw] md:w-[80vw] xl:w-[70vw] max-w-6xl max-h-[90vh]"
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.95, opacity: 0 }}
@@ -64,6 +65,12 @@ export default function ModalBase({
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
+              <div className="absolute top-8 right-8" onClick={onClose}>
+                <X
+                  className="text-textWhite/80 transition hover:cursor-pointer hover:text-textButton "
+                  size={16}
+                />
+              </div>
               <div className="p-6">{children}</div>
             </motion.div>
           </FocusTrap>
