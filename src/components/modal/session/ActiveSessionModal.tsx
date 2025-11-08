@@ -3,7 +3,6 @@ import { ComputedActiveSession } from "../../../lib/sessions/active/getActiveSes
 import { Clock, Timer, Hourglass } from "lucide-react";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
-import { CloseButton } from "../CloseButton";
 import { InfoCard } from "../InfoCard";
 
 export function ActiveSessionModal({
@@ -79,8 +78,6 @@ export function ActiveSessionModal({
             End and Reject
           </button>
         </div>
-
-        <CloseButton onClose={onClose} />
       </footer>
     </div>
   );

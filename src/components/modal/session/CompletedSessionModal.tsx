@@ -1,7 +1,6 @@
 import { CalendarClock, CalendarDays } from "lucide-react";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
-import { CloseButton } from "../CloseButton";
 import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getCompletedSessions";
 import { InfoCard } from "../InfoCard";
 
@@ -56,9 +55,7 @@ export function CompletedSessionModal({
       </section>
 
       {/* Footer */}
-      <footer className="flex justify-end items-center">
-        <CloseButton onClose={onClose} />
-      </footer>
+      <footer className="flex justify-end items-center"></footer>
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { HeaderTags } from "./SessionHeaderTags";
 import { TutorStudentSection } from "./TutorStudentSection";
-import { CloseButton } from "../CloseButton";
 
 export function CancelledSessionModal({
   session,
@@ -36,9 +35,7 @@ export function CancelledSessionModal({
           {session.cancel_reason}
         </p>
       </section>
-      <footer className="flex justify-end mt-6">
-        <CloseButton onClose={onClose} />
-      </footer>
+      <footer className="flex justify-end mt-6"></footer>
     </div>
   );
 }
