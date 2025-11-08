@@ -30,9 +30,8 @@ export default function StudentsOverview() {
   }, []);
   return (
     <main>
-      {selectedStudent && (
-        <Modal type="student" onClose={closeModal} data={selectedStudent} />
-      )}
+      <Modal type="student" onClose={closeModal} data={selectedStudent} />
+
       <SectionHeader
         title="Registered Students"
         rightSlot={`${rowCount} rows shown`}
