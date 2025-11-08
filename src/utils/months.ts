@@ -1,4 +1,4 @@
-import { CURRENT_ACADEMIC_YEAR } from "@/lib/constants";
+import { CURRENT_ACADEMIC_YEAR } from "@/lib/constants/academicYear";
 
 export const academicMonths = [
   { name: "August", index: 7, term: 1 },
