@@ -6,6 +6,10 @@ import { ExternalLink, Verified, Clock, Copy } from "lucide-react";
 import { ComputedResourceType } from "./getResources";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import ModalBase from "@/components/modal/ModalBase";
+import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -30,13 +34,37 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       console.error("Clipboard error:", err);
     }
   }
+  const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
+    null
+  );
 
-  const isTutor = resource.added_by_role === "tutor";
-  const isVerified = resource.verified || isTutor;
+  const route = usePathname();
+  const isTutorUser = route.includes("tutor");
+
+  const addedByTutor = resource.added_by_role === "tutor";
+  const isVerified = resource.verified || addedByTutor;
 
   return (
     <CardShell>
       {/* Header */}
+
+      <ModalBase
+        autoFocus={true}
+        onClose={() => setResourceData(null)}
+        isOpen={!!resourceData && isTutorUser}
+      >
+        <ConfirmationModal
+          type="positive"
+          title="Are you sure you want to verify this resource?"
+          description="This will mark the resource as verified and your name will be visible as the verifier."
+          onCancel={() => setResourceData(null)}
+          onConfirm={() => {
+            toast.success("Thanks for verifying that resource!");
+            setResourceData(null);
+          }}
+        />
+      </ModalBase>
+
       <header className="flex justify-between items-center mb-2">
         <div className="flex flex-wrap items-center gap-1">
           <Tag
@@ -81,7 +109,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           ({resource.added_by_role})
         </span>
 
-        {!isTutor && resource.verified_by && (
+        {!addedByTutor && resource.verified_by && (
           <span>
             Verified by{" "}
             <span className="font-medium text-textWhite">
@@ -101,16 +129,16 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         />
 
         <div className="flex items-center gap-2">
-          {/**user.role === "tutor" && resource.verified !== true && (
-         * 
-        ) */}
-          {/* <button
-            className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
-               text-green-400 bg-green-500/20 border border-white/10 rounded-md
-               hover:bg-green-700/60 transition-all duration-200"
-          >
-            Verify
-          </button> */}
+          {isTutorUser && !resource.verified && setResourceData && (
+            <button
+              onClick={() => setResourceData(resource)}
+              className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
+               text-green-400 bg-green-500/10 focus:outline-none focus:bg-green-400/20 border border-white/10 rounded-md
+               hover:bg-green-700/60 transition-all duration-200 hover:cursor-pointer"
+            >
+              Verify
+            </button>
+          )}
 
           <a
             href={resource.link}
@@ -121,13 +149,16 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             }
             className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
                text-textButton/90 bg-elevatedBg border border-white/10 rounded-md
-               hover:bg-hoverBg transition-all duration-200"
+               hover:bg-hoverBg transition-all duration-200 focus:outline-none focus:bg-hoverBg focus:ring-2 focus:ring-white/10"
           >
             <ExternalLink size={14} />
             View
           </a>
           <div title="Copy Link" onClick={handleCopy}>
-            <Copy size={14} className="text-textWhite" />
+            <Copy
+              size={14}
+              className="text-textWhite hover:cursor-pointer hover:text-textButton"
+            />
           </div>
         </div>
       </footer>
