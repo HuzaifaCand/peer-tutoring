@@ -8,8 +8,8 @@ export function AppToaster() {
       closeButton={false}
       toastOptions={{
         style: {
-          background: "#1e1e1e", // solid dark grey
-          color: "#f1f1f1", // subtle white text
+          background: "#12171c", // solid dark grey
+          color: "#e6e9ec", // subtle white text
           border: "1px solid #2b2b2b",
           borderRadius: "0.75rem",
           padding: "0.75rem 1rem",
