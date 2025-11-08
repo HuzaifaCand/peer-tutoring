@@ -75,7 +75,7 @@ export function Modal({ type, data, onClose }: ModalProps) {
   }
 
   return (
-    <ModalBase isOpen={!!type} onClose={onClose} autoFocus={false}>
+    <ModalBase isOpen={!!data} onClose={onClose} autoFocus={false}>
       {content}
     </ModalBase>
   );
