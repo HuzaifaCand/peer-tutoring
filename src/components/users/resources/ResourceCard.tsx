@@ -72,7 +72,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             color={resource.subject_color as colors}
             font="font-medium"
           />
-          <Tag value={resource.subject_code} color="gray" font="font-medium" />
+          <Tag value={resource.subject_code} color="muted" font="font-medium" />
         </div>
         <div className="flex items-center gap-3">
           {isVerified ? (
@@ -125,7 +125,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         <Tag
           textSize="text-[11px]"
           value={`${resource.views} views`}
-          color="teal"
+          color="gray"
         />
 
         <div className="flex items-center gap-2">
