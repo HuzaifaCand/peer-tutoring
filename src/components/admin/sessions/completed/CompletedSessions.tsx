@@ -11,7 +11,6 @@ import { formatCompletedSession } from "@/lib/sessions/completed/formatCompleted
 
 export default function CompletedSessions() {
   const [rowCount, setRowCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedSession, setSelectedSession] =
     useState<ComputedCompletedSessionRow | null>(null);
 
@@ -20,7 +19,6 @@ export default function CompletedSessions() {
     const id = url.searchParams.get("id");
 
     if (id) {
-      setShowModal(true);
       const getSession = async () => {
         const data = await getSessionById({
           id,
@@ -34,10 +32,10 @@ export default function CompletedSessions() {
     }
   }, []);
 
-  const closeModal = useCloseModal(setShowModal, setSelectedSession);
+  const closeModal = useCloseModal(setSelectedSession);
   return (
     <main>
-      {showModal && selectedSession && (
+      {selectedSession && (
         <Modal
           data={selectedSession}
           type="completedSession"
@@ -50,7 +48,6 @@ export default function CompletedSessions() {
       />
       <CompletedSessionsTable
         setCount={setRowCount}
-        setShowModal={setShowModal}
         setSelectedSession={setSelectedSession}
       />
     </main>

@@ -14,7 +14,6 @@ import { defaultSorters } from "@/utils/sorters";
 export default function ScheduledSessionsTable({
   setCount,
   setSelectedSession,
-  setShowModal,
 }: SessionDataProps<ComputedScheduledSessionRow>) {
   const sortFn = defaultSorters.scheduledSession;
 
@@ -22,7 +21,7 @@ export default function ScheduledSessionsTable({
     sortFn,
   });
 
-  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
+  const { handleOpen } = useModalOpener(setSelectedSession, "id");
 
   const handleClick = (s: ComputedScheduledSessionRow) => handleOpen(s);
 

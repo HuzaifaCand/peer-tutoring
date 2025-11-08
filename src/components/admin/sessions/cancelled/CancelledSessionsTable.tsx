@@ -13,7 +13,6 @@ import { defaultSorters } from "@/utils/sorters";
 
 export default function CancelledSessionsTable({
   setCount,
-  setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedCancelledSessionRow>) {
   const sortFn = defaultSorters.cancelledSession;
@@ -22,7 +21,7 @@ export default function CancelledSessionsTable({
     sortFn,
   });
 
-  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
+  const { handleOpen } = useModalOpener(setSelectedSession, "id");
   const handleClick = (s: ComputedCancelledSessionRow) => handleOpen(s);
 
   return (

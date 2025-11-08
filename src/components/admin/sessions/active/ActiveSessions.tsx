@@ -11,18 +11,16 @@ import { formatActiveSession } from "../../../../lib/sessions/active/formatActiv
 
 export default function ActiveSessions() {
   const [count, setCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedSession, setSelectedSession] =
     useState<ComputedActiveSession | null>(null);
 
-  const closeModal = useCloseModal(setShowModal, setSelectedSession);
+  const closeModal = useCloseModal(setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
 
     if (id) {
-      setShowModal(true);
       const getSession = async () => {
         const data = await getSessionById({
           id,
@@ -38,7 +36,7 @@ export default function ActiveSessions() {
 
   return (
     <main>
-      {showModal && selectedSession && (
+      {selectedSession && (
         <Modal
           type="activeSession"
           onClose={closeModal}
@@ -53,7 +51,6 @@ export default function ActiveSessions() {
 
       <ActiveSessionsGrid
         setCount={setCount}
-        setShowModal={setShowModal}
         setSelectedSession={setSelectedSession}
       />
     </main>

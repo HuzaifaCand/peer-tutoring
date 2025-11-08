@@ -14,7 +14,6 @@ import { defaultSorters } from "@/utils/sorters";
 
 export default function CompletedSessionsTable({
   setCount,
-  setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedCompletedSessionRow>) {
   const sortFn = defaultSorters.completedSession;
@@ -22,7 +21,7 @@ export default function CompletedSessionsTable({
   const { data, loading, setRefetchFlag } = useDataFetch(getCompletedSessions, {
     sortFn,
   });
-  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
+  const { handleOpen } = useModalOpener(setSelectedSession, "id");
 
   return (
     <Table

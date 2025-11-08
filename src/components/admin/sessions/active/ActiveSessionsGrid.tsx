@@ -12,7 +12,6 @@ import { defaultSorters } from "@/utils/sorters";
 
 export default function ActiveSessionsGrid({
   setCount,
-  setShowModal,
   setSelectedSession,
 }: SessionDataProps<ComputedActiveSession>) {
   const sortFn = defaultSorters.activeSession;
@@ -26,7 +25,7 @@ export default function ActiveSessionsGrid({
     setCount(data.length);
   }, [data.length, setCount]);
 
-  const { handleOpen } = useModalOpener(setShowModal, setSelectedSession, "id");
+  const { handleOpen } = useModalOpener(setSelectedSession, "id");
 
   return (
     <CardGrid

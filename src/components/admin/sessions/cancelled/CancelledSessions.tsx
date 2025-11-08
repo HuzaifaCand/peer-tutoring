@@ -11,18 +11,16 @@ import { formatCancelledSession } from "@/lib/sessions/cancelled/formatCancelled
 
 export default function CancelledSessions() {
   const [count, setCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedSession, setSelectedSession] =
     useState<ComputedCancelledSessionRow | null>(null);
 
-  const closeModal = useCloseModal(setShowModal, setSelectedSession);
+  const closeModal = useCloseModal(setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
 
     if (id) {
-      setShowModal(true);
       const getSession = async () => {
         const data = await getSessionById({
           id,
@@ -38,13 +36,11 @@ export default function CancelledSessions() {
 
   return (
     <main>
-      {showModal && selectedSession && (
-        <Modal
-          type="cancelledSession"
-          onClose={closeModal}
-          data={selectedSession}
-        />
-      )}
+      <Modal
+        type="cancelledSession"
+        onClose={closeModal}
+        data={selectedSession}
+      />
 
       <SectionHeader
         title="Cancelled Sessions"
@@ -53,7 +49,6 @@ export default function CancelledSessions() {
 
       <CancelledSessionsTable
         setCount={setCount}
-        setShowModal={setShowModal}
         setSelectedSession={setSelectedSession}
       />
     </main>

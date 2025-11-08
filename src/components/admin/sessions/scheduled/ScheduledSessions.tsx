@@ -11,18 +11,16 @@ import { formatScheduledSession } from "@/lib/sessions/scheduled/formatScheduled
 
 export default function ScheduledSessions() {
   const [rowCount, setRowCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedSession, setSelectedSession] =
     useState<ComputedScheduledSessionRow | null>(null);
 
-  const closeModal = useCloseModal(setShowModal, setSelectedSession);
+  const closeModal = useCloseModal(setSelectedSession);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
 
     if (id) {
-      setShowModal(true);
       const getSession = async () => {
         const data = await getSessionById({
           id,
@@ -38,7 +36,7 @@ export default function ScheduledSessions() {
 
   return (
     <main>
-      {showModal && selectedSession && (
+      {selectedSession && (
         <Modal
           data={selectedSession}
           type="scheduledSession"
@@ -52,7 +50,6 @@ export default function ScheduledSessions() {
       <ScheduledSessionsTable
         setCount={setRowCount}
         setSelectedSession={setSelectedSession}
-        setShowModal={setShowModal}
       />
     </main>
   );
