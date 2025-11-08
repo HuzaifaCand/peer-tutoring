@@ -21,6 +21,7 @@ export type colors =
   | "pink"
   | "orange"
   | "teal"
+  | "amber"
   | "invisible";
 
 const colorStyles: Record<colors, string> = {
@@ -34,6 +35,7 @@ const colorStyles: Record<colors, string> = {
   pink: "bg-pink-500/20 text-pink-300",
   orange: "bg-orange-500/20 text-orange-300",
   teal: "bg-teal-500/20 text-teal-300",
+  amber: "bg-amber-500/20 text-amber-300",
   invisible: "invisible",
 };
 
