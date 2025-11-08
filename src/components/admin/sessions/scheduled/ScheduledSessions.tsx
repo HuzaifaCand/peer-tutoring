@@ -36,13 +36,12 @@ export default function ScheduledSessions() {
 
   return (
     <main>
-      {selectedSession && (
-        <Modal
-          data={selectedSession}
-          type="scheduledSession"
-          onClose={closeModal}
-        />
-      )}
+      <Modal
+        data={selectedSession}
+        type="scheduledSession"
+        onClose={closeModal}
+      />
+
       <SectionHeader
         title="Scheduled Sessions"
         rightSlot={`${rowCount} rows shown`}

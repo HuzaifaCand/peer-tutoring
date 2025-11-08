@@ -36,13 +36,7 @@ export default function ActiveSessions() {
 
   return (
     <main>
-      {selectedSession && (
-        <Modal
-          type="activeSession"
-          onClose={closeModal}
-          data={selectedSession}
-        />
-      )}
+      <Modal type="activeSession" onClose={closeModal} data={selectedSession} />
 
       <SectionHeader
         title="Active Sessions"

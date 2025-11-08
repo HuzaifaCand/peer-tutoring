@@ -35,13 +35,12 @@ export default function CompletedSessions() {
   const closeModal = useCloseModal(setSelectedSession);
   return (
     <main>
-      {selectedSession && (
-        <Modal
-          data={selectedSession}
-          type="completedSession"
-          onClose={closeModal}
-        />
-      )}
+      <Modal
+        data={selectedSession}
+        type="completedSession"
+        onClose={closeModal}
+      />
+
       <SectionHeader
         title="Completed Sessions"
         rightSlot={`${rowCount} rows shown`}
