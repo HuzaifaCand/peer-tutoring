@@ -14,20 +14,18 @@ import { useModalOpener } from "@/components/modal/useModalOpener";
 interface StudentsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
   setStudent: Dispatch<SetStateAction<ComputedStudentRow | null>>;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function StudentsTable({
   setRowCount,
   setStudent,
-  setShowModal,
 }: StudentsTableProps) {
   const sortFn = defaultSorters.student;
   const { data, loading, setRefetchFlag } = useDataFetch(getStudents, {
     sortFn,
   });
 
-  const { handleOpen } = useModalOpener(setShowModal, setStudent);
+  const { handleOpen } = useModalOpener(setStudent);
   const handleClick = (s: ComputedStudentRow) => handleOpen(s);
 
   return (

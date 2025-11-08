@@ -9,18 +9,16 @@ import { useCloseModal } from "@/components/modal/useCloseModal";
 
 export default function TutorsOverview() {
   const [rowCount, setRowCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedTutor, setSelectedTutor] = useState<ComputedTutorRow | null>(
     null
   );
 
-  const closeModal = useCloseModal(setShowModal, setSelectedTutor);
+  const closeModal = useCloseModal(setSelectedTutor);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
     if (id) {
-      setShowModal(true);
       const getTutor = async () => {
         const data = await getTutorById(id);
         setSelectedTutor(data);
@@ -31,7 +29,7 @@ export default function TutorsOverview() {
 
   return (
     <main>
-      {showModal && selectedTutor && (
+      {selectedTutor && (
         <Modal type="tutor" onClose={closeModal} data={selectedTutor} />
       )}
       <SectionHeader
@@ -39,11 +37,7 @@ export default function TutorsOverview() {
         rightSlot={`${rowCount} rows shown`}
       />
 
-      <TutorsTable
-        setShowModal={setShowModal}
-        setTutor={setSelectedTutor}
-        setRowCount={setRowCount}
-      />
+      <TutorsTable setTutor={setSelectedTutor} setRowCount={setRowCount} />
     </main>
   );
 }

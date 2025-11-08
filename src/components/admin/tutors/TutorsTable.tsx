@@ -11,19 +11,17 @@ import { useModalOpener } from "@/components/modal/useModalOpener";
 interface TutorsTableProps {
   setRowCount: Dispatch<SetStateAction<number>>;
   setTutor: Dispatch<SetStateAction<ComputedTutorRow | null>>;
-  setShowModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function TutorsTable({
   setRowCount,
-  setShowModal,
   setTutor,
 }: TutorsTableProps) {
   const sortFn = defaultSorters.tutor;
 
   const { data, loading, setRefetchFlag } = useDataFetch(getTutors, { sortFn });
 
-  const { handleOpen } = useModalOpener(setShowModal, setTutor);
+  const { handleOpen } = useModalOpener(setTutor);
 
   const handleClick = (t: ComputedTutorRow) => handleOpen(t);
 

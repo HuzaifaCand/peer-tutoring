@@ -12,17 +12,15 @@ import { useCloseModal } from "@/components/modal/useCloseModal";
 
 export default function StudentsOverview() {
   const [rowCount, setRowCount] = useState(0);
-  const [showModal, setShowModal] = useState(false);
   const [selectedStudent, setSelectedStudent] =
     useState<ComputedStudentRow | null>(null);
 
-  const closeModal = useCloseModal(setShowModal, setSelectedStudent);
+  const closeModal = useCloseModal(setSelectedStudent);
 
   useEffect(() => {
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
     if (id) {
-      setShowModal(true);
       const getStudent = async () => {
         const data = await getStudentById(id);
         setSelectedStudent(data);
@@ -32,7 +30,7 @@ export default function StudentsOverview() {
   }, []);
   return (
     <main>
-      {showModal && selectedStudent && (
+      {selectedStudent && (
         <Modal type="student" onClose={closeModal} data={selectedStudent} />
       )}
       <SectionHeader
@@ -41,7 +39,6 @@ export default function StudentsOverview() {
       />
 
       <StudentsTable
-        setShowModal={setShowModal}
         setStudent={setSelectedStudent}
         setRowCount={setRowCount}
       />
