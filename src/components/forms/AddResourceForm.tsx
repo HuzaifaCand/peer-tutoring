@@ -60,12 +60,14 @@ export function AddResourceForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 text-sm text-textWhite px-3 py-2"
+      className="space-y-4 text-sm text-textWhite px-4 py-3"
     >
       {/* Header */}
-      <div className="space-y-1">
-        <h2 className="text-xl font-semibold text-textWhite">Add Resource</h2>
-        <p className="text-[11px] sm:text-xs text-textMuted/80">
+      <div className="space-y-1 mb-4">
+        <h2 className="text-xl sm:text-2xl font-semibold text-textWhite">
+          Add Resource
+        </h2>
+        <p className="text-[10px] sm:text-xs text-textMuted/80">
           Help out your peers by sharing a useful resource, your name will be
           listed as the contributor!
         </p>
@@ -141,7 +143,7 @@ export function AddResourceForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-4 py-1.5 bg-hoverBg hover:bg-white/10 hover:cursor-pointer text-textWhite/90 border border-white/10 text-sm rounded-md font-medium transition-all duration-200 disabled:opacity-50"
+          className="px-4 py-1.5 bg-hoverBg hover:bg-white/10 hover:cursor-pointer text-textWhite/90 border border-white/10 text-xs rounded-md font-medium transition-all duration-200 disabled:opacity-50"
         >
           {isSubmitting ? "Submitting..." : "Add Resource"}
         </button>

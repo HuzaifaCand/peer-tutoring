@@ -50,10 +50,22 @@ export default function SubjectInput({
     setHighlightedIndex(0);
   }, [inputValue]);
 
+  useEffect(() => {
+    const matched = options.find((opt) => opt.id === value);
+    setInputValue(matched ? matched.labelDisplay : "");
+  }, [value, options]);
+
   return (
     <div className="relative">
       <input
-        onBlur={() => setTimeout(() => setShowDropdown(false), 150)}
+        onBlur={() => {
+          setTimeout(() => setShowDropdown(false), 150);
+          const matched = options.find((opt) => opt.id === value);
+          if (!matched) {
+            setInputValue("");
+            setValue("");
+          }
+        }}
         onFocus={() => setShowDropdown(true)}
         onChange={(e: ChangeEvent<HTMLInputElement>) => {
           setInputValue(e.target.value);
