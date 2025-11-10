@@ -1,14 +1,21 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { CardGridProps, CardByType } from "./types";
+import { CardGridProps, CardByType, cardTypes } from "./types";
 import { CardsLoading } from "./CardsLoading";
 import { DataSearch } from "../DataSearch";
 import { EmptyGrid } from "./EmptyCardGrid";
 import DataRefresh from "../DataRefresh";
 import { formatDistanceToNow } from "date-fns";
-import { ActiveSessionCard } from "../admin/sessions/active/ActiveSessionCard"; // import our new card
+import { ActiveSessionCard } from "../admin/sessions/active/ActiveSessionCard";
 import { ResourceCard } from "../users/resources/ResourceCard";
+import { SubjectFilter } from "../users/SubjectFilter";
+import { useUserSubjects } from "@/hooks/useUserSubjects";
+
+const typeEmptyGridMap: Record<cardTypes, string> = {
+  activeSession: "No sessions are active right now",
+  resource: "No resources exist for this subject yet",
+};
 
 export function CardGrid<K extends keyof CardByType>({
   type,
@@ -21,20 +28,44 @@ export function CardGrid<K extends keyof CardByType>({
   handleCardClick,
 }: CardGridProps<K>) {
   const [search, setSearch] = useState("");
+  const [subjectFilter, setSubjectFilter] = useState<"all" | string>("all");
+
+  // const {
+  //   loading: subjectsLoading,
+  //   subjects,
+  //   error: subjectError,
+  // } = useUserSubjects();
+
+  // if (subjectError) console.error(subjectError);
+
+  const subjects = [
+    { id: "as-9709", label: "AS Mathematics", color: "blue" },
+    { id: "a2-9709", label: "A2 Mathematics", color: "blue" },
+  ];
 
   const filteredData = useMemo(() => {
-    if (!search.trim()) return data;
-    const lower = search.toLowerCase();
+    let result = data;
 
-    return data.filter((row) =>
-      Object.entries(row as Record<string, unknown>).some(([key, value]) => {
-        const val = String(value ?? "").toLowerCase();
-        if (key.includes("name") || key.includes("id"))
-          return val.startsWith(lower);
-        return val.includes(lower);
-      })
-    );
-  }, [search, data]);
+    if (search.trim()) {
+      const lower = search.toLowerCase();
+      result = result.filter((row) =>
+        Object.entries(row as Record<string, unknown>).some(([key, value]) => {
+          const val = String(value ?? "").toLowerCase();
+          if (key.includes("name") || key.includes("id"))
+            return val.startsWith(lower);
+          return val.includes(lower);
+        })
+      );
+    }
+
+    if (subjectFilter !== "all" && type === "resource") {
+      result = result.filter(
+        (r) => (r as CardByType["resource"]).subject_id === subjectFilter
+      );
+    }
+
+    return result;
+  }, [search, data, subjectFilter]);
 
   const [, setNow] = useState(Date.now());
   useEffect(() => {
@@ -56,6 +87,15 @@ export function CardGrid<K extends keyof CardByType>({
               )}
             </p>
           )}
+          {type === "resource" && (
+            <SubjectFilter
+              subjectFilter={{
+                value: subjectFilter,
+                setValue: setSubjectFilter,
+              }}
+              subjectOptions={subjects}
+            />
+          )}
         </div>
 
         <div className="flex items-center gap-1">
@@ -65,7 +105,9 @@ export function CardGrid<K extends keyof CardByType>({
       </div>
 
       {/* Empty / Loading / Cards */}
-      {!loading && filteredData.length === 0 && <EmptyGrid />}
+      {!loading && filteredData.length === 0 && (
+        <EmptyGrid text={typeEmptyGridMap[type]} />
+      )}
       {loading && (
         <CardsLoading
           count={filteredData.length || 6}
