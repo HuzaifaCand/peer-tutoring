@@ -3,17 +3,17 @@ import { useUserRole } from "./useUserRole";
 import { supabase } from "@/lib/supabase/client";
 import { SubjectRow } from "@/lib/computedtypes";
 
-export function useUserSubjects(explicitRole?: "tutor" | "student") {
+export function useUserSubjects() {
   const [subjects, setSubjects] = useState<
     { id: string; label: string; color: string }[]
   >([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  const role = explicitRole ?? useUserRole();
+  const role = useUserRole();
 
   useEffect(() => {
-    if (!role) return;
+    if (!role || role === "admin") return;
     setLoading(true);
 
     async function fetchSubjects() {
