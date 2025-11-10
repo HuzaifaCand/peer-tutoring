@@ -4,12 +4,14 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ReactNode, useEffect } from "react";
 import { FocusTrap } from "focus-trap-react";
 import { X } from "lucide-react";
+import clsx from "clsx";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: ReactNode;
   autoFocus?: boolean;
+  width?: "tight" | "wide";
 }
 
 export default function ModalBase({
@@ -17,6 +19,7 @@ export default function ModalBase({
   onClose,
   children,
   autoFocus,
+  width,
 }: ModalProps) {
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -57,8 +60,11 @@ export default function ModalBase({
             }}
           >
             <motion.div
-              className="modal-content bg-mainBg border border-white/10 relative focus:outline-none rounded-2xl shadow-2xl overflow-y-auto
-             w-[90vw] md:w-[80vw] xl:w-[70vw] max-w-6xl max-h-[90vh]"
+              className={clsx(
+                "modal-content bg-mainBg border border-white/10 relative focus:outline-none rounded-2xl shadow-2xl",
+                "overflow-y-auto w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
+                width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
+              )}
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
