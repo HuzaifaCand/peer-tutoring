@@ -10,6 +10,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import ModalBase from "@/components/modal/ModalBase";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
+import { useUserRole } from "@/hooks/useUserRole";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -38,8 +39,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     null
   );
 
-  const route = usePathname();
-  const isTutorUser = route.includes("tutor");
+  const isTutorUser = useUserRole() === "tutor";
 
   const addedByTutor = resource.added_by_role === "tutor";
   const isVerified = resource.verified || addedByTutor;
@@ -72,7 +72,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             color={resource.subject_color as colors}
             font="font-medium"
           />
-          <Tag value={resource.subject_code} color="muted" font="font-medium" />
+          <Tag value={resource.subject_code} color="muted" font="font-mono" />
         </div>
         <div className="flex items-center gap-3">
           {isVerified ? (
