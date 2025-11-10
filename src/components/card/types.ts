@@ -2,6 +2,8 @@ import { ComputedActiveSession } from "../../lib/sessions/active/getActiveSessio
 import { refetchFlagType } from "../table/types";
 import { ComputedResourceType } from "../users/resources/getResources";
 
+export type cardTypes = "activeSession" | "resource";
+
 export type CardByType = {
   activeSession: ComputedActiveSession;
   resource: ComputedResourceType;
