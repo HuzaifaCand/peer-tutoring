@@ -107,6 +107,13 @@ export type Database = {
             foreignKeyName: "resources_subject_fkey";
             columns: ["subject"];
             isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "resources_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
             referencedRelation: "subject_popularity";
             referencedColumns: ["subject_id"];
           },
@@ -120,6 +127,107 @@ export type Database = {
           {
             foreignKeyName: "resources_verified_by_fkey";
             columns: ["verified_by"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      session_requests: {
+        Row: {
+          available_slot_id: string | null;
+          created_at: string;
+          duration_minutes: number;
+          id: string;
+          message: string | null;
+          mode: string;
+          session_id: string | null;
+          slot_end: string;
+          slot_start: string;
+          status: string;
+          student_id: string;
+          subject_id: string;
+          tutor_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          available_slot_id?: string | null;
+          created_at?: string;
+          duration_minutes?: number;
+          id?: string;
+          message?: string | null;
+          mode: string;
+          session_id?: string | null;
+          slot_end: string;
+          slot_start: string;
+          status?: string;
+          student_id: string;
+          subject_id: string;
+          tutor_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          available_slot_id?: string | null;
+          created_at?: string;
+          duration_minutes?: number;
+          id?: string;
+          message?: string | null;
+          mode?: string;
+          session_id?: string | null;
+          slot_end?: string;
+          slot_start?: string;
+          status?: string;
+          student_id?: string;
+          subject_id?: string;
+          tutor_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "session_requests_available_slot_id_fkey";
+            columns: ["available_slot_id"];
+            isOneToOne: false;
+            referencedRelation: "available_slots";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "session_requests_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "session_requests_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
+          },
+          {
+            foreignKeyName: "session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "session_requests_tutor_id_fkey";
+            columns: ["tutor_id"];
             isOneToOne: false;
             referencedRelation: "tutors";
             referencedColumns: ["id"];
@@ -231,6 +339,13 @@ export type Database = {
             foreignKeyName: "sessions_subject_fkey";
             columns: ["subject"];
             isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "sessions_subject_fkey";
+            columns: ["subject"];
+            isOneToOne: false;
             referencedRelation: "subject_popularity";
             referencedColumns: ["subject_id"];
           },
@@ -260,16 +375,19 @@ export type Database = {
       student_subjects: {
         Row: {
           created_at: string;
+          note: string | null;
           student_id: string;
           subject_id: string;
         };
         Insert: {
           created_at?: string;
+          note?: string | null;
           student_id: string;
           subject_id: string;
         };
         Update: {
           created_at?: string;
+          note?: string | null;
           student_id?: string;
           subject_id?: string;
         };
@@ -279,6 +397,13 @@ export type Database = {
             columns: ["student_id"];
             isOneToOne: false;
             referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "student_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_health";
             referencedColumns: ["id"];
           },
           {
@@ -299,25 +424,25 @@ export type Database = {
       };
       students: {
         Row: {
+          about: string | null;
           admin_seen: boolean;
           created_at: string;
-          extra_info: string | null;
           grade: string;
           id: string;
           updated_at: string;
         };
         Insert: {
+          about?: string | null;
           admin_seen?: boolean;
           created_at?: string;
-          extra_info?: string | null;
           grade: string;
           id: string;
           updated_at?: string;
         };
         Update: {
+          about?: string | null;
           admin_seen?: boolean;
           created_at?: string;
-          extra_info?: string | null;
           grade?: string;
           id?: string;
           updated_at?: string;
@@ -368,20 +493,30 @@ export type Database = {
       tutor_subjects: {
         Row: {
           created_at: string;
+          credentials: string | null;
           subject_id: string;
           tutor_id: string;
         };
         Insert: {
           created_at?: string;
+          credentials?: string | null;
           subject_id: string;
           tutor_id: string;
         };
         Update: {
           created_at?: string;
+          credentials?: string | null;
           subject_id?: string;
           tutor_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "tutor_subjects_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
           {
             foreignKeyName: "tutor_subjects_subject_id_fkey";
             columns: ["subject_id"];
@@ -411,7 +546,6 @@ export type Database = {
           admin_seen: boolean;
           approved: boolean | null;
           created_at: string;
-          credentials: string | null;
           grade: string;
           id: string;
           rejection_reason: string | null;
@@ -422,7 +556,6 @@ export type Database = {
           admin_seen?: boolean;
           approved?: boolean | null;
           created_at?: string;
-          credentials?: string | null;
           grade: string;
           id: string;
           rejection_reason?: string | null;
@@ -433,7 +566,6 @@ export type Database = {
           admin_seen?: boolean;
           approved?: boolean | null;
           created_at?: string;
-          credentials?: string | null;
           grade?: string;
           id?: string;
           rejection_reason?: string | null;
@@ -455,7 +587,7 @@ export type Database = {
           email: string;
           full_name: string;
           id: string;
-          role: string;
+          role: string | null;
           updated_at: string;
         };
         Insert: {
@@ -463,7 +595,7 @@ export type Database = {
           email: string;
           full_name: string;
           id: string;
-          role: string;
+          role?: string | null;
           updated_at?: string;
         };
         Update: {
@@ -471,7 +603,7 @@ export type Database = {
           email?: string;
           full_name?: string;
           id?: string;
-          role?: string;
+          role?: string | null;
           updated_at?: string;
         };
         Relationships: [];
@@ -480,6 +612,8 @@ export type Database = {
     Views: {
       subject_health: {
         Row: {
+          code: string | null;
+          id: string | null;
           student_count: number | null;
           subject_label: string | null;
           tutor_count: number | null;
@@ -497,6 +631,16 @@ export type Database = {
     };
     Functions: {
       increment_resource_view: { Args: { rid: string }; Returns: undefined };
+      onboard_user: {
+        Args: {
+          _about: string;
+          _grade: string;
+          _role: string;
+          _subjects: Json;
+          _user_id: string;
+        };
+        Returns: undefined;
+      };
     };
     Enums: {
       [_ in never]: never;
