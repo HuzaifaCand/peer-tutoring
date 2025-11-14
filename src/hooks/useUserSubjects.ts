@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useUserRole } from "./useUserRole";
 import { supabase } from "@/lib/supabase/client";
 import { SubjectRow } from "@/lib/computedtypes";
+import { useAuthUser } from "./useAuthUser";
 
 export function useUserSubjects() {
   const [subjects, setSubjects] = useState<
@@ -11,17 +12,20 @@ export function useUserSubjects() {
   const [error, setError] = useState<Error | null>(null);
 
   const role = useUserRole();
+  const { user, userLoading } = useAuthUser();
 
   useEffect(() => {
-    if (!role || role === "admin") return;
+    if (userLoading || !role || role === "admin" || !user) return;
     setLoading(true);
 
     async function fetchSubjects() {
       const table = role === "tutor" ? "tutor_subjects" : "student_subjects";
+      const idType = role === "tutor" ? "tutor_id" : "student_id";
 
       const { data, error } = await supabase
         .from(table)
         .select("subjects(id, label, color)")
+        .eq(idType, user?.id)
         .overrideTypes<{ subjects: SubjectRow }[]>();
 
       if (error) {
@@ -41,7 +45,7 @@ export function useUserSubjects() {
     }
 
     fetchSubjects();
-  }, [role]);
+  }, [role, userLoading, user]);
 
   return { subjects, loading, error };
 }
