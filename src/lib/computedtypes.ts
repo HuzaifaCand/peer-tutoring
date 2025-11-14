@@ -53,3 +53,7 @@ export type Resource = ResourceRow & {
     users: Pick<UserRow, "full_name">;
   } | null;
 };
+
+export type SubjectWithUserCount = SubjectHealthView & {
+  subjects: SubjectRow;
+};
