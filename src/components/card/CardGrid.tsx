@@ -30,18 +30,13 @@ export function CardGrid<K extends keyof CardByType>({
   const [search, setSearch] = useState("");
   const [subjectFilter, setSubjectFilter] = useState<"all" | string>("all");
 
-  // const {
-  //   loading: subjectsLoading,
-  //   subjects,
-  //   error: subjectError,
-  // } = useUserSubjects();
+  const {
+    loading: subjectsLoading,
+    subjects,
+    error: subjectError,
+  } = useUserSubjects();
 
-  // if (subjectError) console.error(subjectError);
-
-  const subjects = [
-    { id: "as-9709", label: "AS Mathematics", color: "blue" },
-    { id: "a2-9709", label: "A2 Mathematics", color: "blue" },
-  ];
+  if (subjectError) console.error(subjectError);
 
   const filteredData = useMemo(() => {
     let result = data;
@@ -108,7 +103,7 @@ export function CardGrid<K extends keyof CardByType>({
       {!loading && filteredData.length === 0 && (
         <EmptyGrid text={typeEmptyGridMap[type]} />
       )}
-      {loading && (
+      {(loading || subjectsLoading) && (
         <CardsLoading
           count={filteredData.length || 6}
           layoutClassName={layoutClassName}
