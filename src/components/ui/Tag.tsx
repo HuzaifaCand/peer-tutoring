@@ -25,7 +25,7 @@ export type colors =
   | "invisible";
 
 const colorStyles: Record<colors, string> = {
-  muted: "bg-gray-500/10 text-textMuted",
+  muted: "bg-gray-500/10 text-textMuted border border-gray-400/10",
   gray: "bg-gray-500/20 text-gray-300",
   blue: "bg-blue-500/20 text-blue-300",
   yellow: "bg-yellow-500/20 text-yellow-300",
