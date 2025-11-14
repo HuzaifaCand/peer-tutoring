@@ -81,6 +81,43 @@ const STAT_INFO = {
         .eq("student_id", uid)
         .eq("status", "pending"),
   },
+  tutorScheduledSessions: {
+    label: "Upcoming Sessions",
+    cta: "View Scheduled Sessions",
+    href: "/tutor/sessions/scheduled",
+    icon: CalendarClock,
+    fetch: async (uid: string) =>
+      supabase
+        .from("sessions")
+        .select("*", { count: "exact", head: true })
+        .eq("tutor_id", uid)
+        .eq("status", "scheduled"),
+  },
+  tutorSessionRequests: {
+    label: "Your Session Requests",
+    cta: "Session Requests",
+    href: "/tutor/sessions/scheduled",
+    icon: CalendarCheck2,
+    fetch: async (uid: string) =>
+      supabase
+        .from("session_requests")
+        .select("*", { count: "exact", head: true })
+        .eq("tutor_id", uid)
+        .eq("status", "pending"),
+  },
+  tutorPendingSessionVerifications: {
+    label: "Pending Session Verifications",
+    cta: "Review Completed Sessions",
+    href: "/admin/sessions/completed",
+    icon: ClipboardList,
+    fetch: async (uid: string) =>
+      supabase
+        .from("sessions")
+        .select("*", { count: "exact", head: true })
+        .eq("tutor_id", uid)
+        .eq("status", "completed")
+        .is("verified", null),
+  },
 };
 
 // config that  toggles which stats to show
