@@ -31,7 +31,7 @@ export function Filter<T extends string>({
               className={`px-3 py-1 text-[11px] hover:cursor-pointer whitespace-nowrap sm:text-xs rounded-md border transition
                 ${
                   active
-                    ? `${color} font-semibold`
+                    ? `${color}`
                     : "bg-elevatedBg/50 text-textWhite/70 border-white/10 hover:bg-hoverBg"
                 }`}
             >
