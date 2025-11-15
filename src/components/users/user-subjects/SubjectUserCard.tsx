@@ -76,7 +76,7 @@ export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
               </Link>
             ) : (
               <button
-                className="cursor-pointer hidden text-left"
+                className="cursor-pointer text-left"
                 onClick={() => toast.warning("Admins have been notified!")}
               >
                 <CardCTA
