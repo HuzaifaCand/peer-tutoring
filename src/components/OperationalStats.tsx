@@ -75,7 +75,7 @@ const STAT_INFO = {
   },
   studentSessionRequests: {
     label: "Your Session Requests",
-    cta: "Session Requests",
+    cta: "View Session Requests",
     href: "/student/sessions/scheduled",
     icon: Send,
     fetch: async () =>
@@ -98,8 +98,8 @@ const STAT_INFO = {
         .eq("status", "scheduled"),
   },
   tutorSessionRequests: {
-    label: "Your Session Requests",
-    cta: "Session Requests",
+    label: "New Session Requests",
+    cta: "View Session Requests",
     href: "/tutor/sessions/scheduled",
     icon: Inbox,
     fetch: async () =>
