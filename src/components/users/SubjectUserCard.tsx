@@ -25,7 +25,7 @@ export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
 
   return (
     <CardShell>
-      <div className="flex flex-col gap-4 sm:gap-2 p-1">
+      <div className="flex flex-col gap-4 sm:gap-2 p-0 sm:p-1">
         {/* Header */}
         <div className="flex items-center justify-between">
           <h3 className={`text-xl font-semibold text-white leading-tight`}>
