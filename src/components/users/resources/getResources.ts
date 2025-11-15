@@ -12,6 +12,7 @@ export async function getResources() {
         verified_by_tutor:verified_by(users(full_name))
     `
     )
+    .order("view_count", { ascending: false })
 
     .overrideTypes<Resource[]>();
 

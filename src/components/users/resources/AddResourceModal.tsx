@@ -9,7 +9,7 @@ export function AddResourceModal({
   closeModal: () => void;
 }) {
   return (
-    <ModalBase width="tight" onClose={closeModal} isOpen={open}>
+    <ModalBase onClose={closeModal} isOpen={open}>
       <AddResourceForm />
     </ModalBase>
   );
