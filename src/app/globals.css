@@ -10,9 +10,8 @@
   --color-textMuted: #9aa0a6;
 
   /* yellow  */
-  --color-accent: #ebff10;
-  --color-highlight: #f4f870;
-  --color-dimAccent: #d1e60a;
+  --color-yellow: #ffcb08;
+  --color-blue: #24d7ff;
 }
 
 ::-webkit-scrollbar {
@@ -74,4 +73,10 @@
 .no-scrollbar {
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+@layer utilities {
+  .shadow-glow {
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.15);
+  }
 }
