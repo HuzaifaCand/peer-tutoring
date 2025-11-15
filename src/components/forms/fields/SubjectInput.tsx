@@ -8,7 +8,7 @@ export interface SubjectOption {
 }
 
 interface Props {
-  value: string; // this will store subject_id
+  value?: string; // this will store subject_id
   setValue: (id: string) => void;
   options: SubjectOption[];
   inputClass: string;
@@ -88,7 +88,7 @@ export default function SubjectInput({
                 setShowDropdown(false);
               }}
               className={`px-3 py-1.5 cursor-pointer hover:bg-hoverBg ${
-                i === highlightedIndex ? "bg-hoverBg text-blue-300" : ""
+                i === highlightedIndex ? "bg-hoverBg text-blue" : ""
               }`}
             >
               {opt.labelDisplay}
