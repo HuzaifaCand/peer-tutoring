@@ -2,8 +2,19 @@ import { Filter } from "@/components/Filter";
 
 export type subjects = "all" | string;
 
-const colorMap = {
-  muted: "bg-gray-500/10 border border-gray-500/10 text-textMuted",
+export type subjectColors =
+  | "gray"
+  | "blue"
+  | "yellow"
+  | "red"
+  | "green"
+  | "purple"
+  | "pink"
+  | "orange"
+  | "teal"
+  | "amber";
+
+export const subjectColorMap: Record<subjectColors, string> = {
   gray: "bg-gray-500/20  border border-gray-500/20 text-gray-300",
   blue: "bg-blue-500/20  border border-blue-500/20 text-blue-300",
   yellow: "bg-yellow-500/20  border border-yellow-500/20 text-yellow-300",
@@ -14,7 +25,6 @@ const colorMap = {
   orange: "bg-orange-500/20  border border-orange-500/20 text-orange-300",
   teal: "bg-teal-500/20  border border-teal-500/20 text-teal-300",
   amber: "bg-amber-500/20  border border-amber-500/20 text-amber-300",
-  invisible: "invisible",
 };
 
 export function SubjectFilter({
@@ -27,14 +37,16 @@ export function SubjectFilter({
   const dynamicOptions = subjectOptions.map((subject) => ({
     key: subject.id,
     label: subject.label,
-    color: colorMap[subject.color as keyof typeof colorMap] ?? colorMap.gray,
+    color:
+      subjectColorMap[subject.color as keyof typeof subjectColorMap] ??
+      subjectColorMap.gray,
   }));
 
   const options = [
     {
       key: "all",
       label: "All Subjects",
-      color: colorMap.gray,
+      color: subjectColorMap.gray,
     },
     ...dynamicOptions,
   ] as const;
