@@ -5,12 +5,17 @@ import { Plus } from "lucide-react";
 import ResourcesGrid from "./ResourcesGrid";
 import { useState } from "react";
 import { AddResourceModal } from "./AddResourceModal";
+import { useDataFetch } from "@/hooks/useDataFetch";
+import { getResources } from "./getResources";
 
 export default function ResourcesPageComponent() {
   const [showAddModal, setShowAddModal] = useState(false);
+  const { data, loading, setRefetchFlag } = useDataFetch(getResources);
+
   return (
     <main>
       <AddResourceModal
+        setRefetchFlag={setRefetchFlag}
         open={showAddModal}
         closeModal={() => setShowAddModal(false)}
       />
@@ -28,7 +33,11 @@ export default function ResourcesPageComponent() {
         }
         becomesCol={false}
       />
-      <ResourcesGrid />
+      <ResourcesGrid
+        data={data}
+        loading={loading}
+        setRefetchFlag={setRefetchFlag}
+      />
     </main>
   );
 }
