@@ -14,7 +14,12 @@ export function LoginComponent({
   loading: boolean;
 }) {
   return (
-    <div className={clsx("flex h-screen items-center justify-center px-6", bg)}>
+    <div
+      className={clsx(
+        "flex h-screen items-center justify-center px-4 sm:px-6",
+        bg
+      )}
+    >
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
