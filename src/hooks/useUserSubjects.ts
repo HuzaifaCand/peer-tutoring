@@ -12,11 +12,11 @@ export function useUserSubjects() {
   const [error, setError] = useState<Error | null>(null);
 
   const role = useUserRole();
-  const { user, userLoading } = useAuthUser();
 
   useEffect(() => {
-    if (userLoading || !role || role === "admin" || !user) return;
+    if (!role || role === "admin") return;
     setLoading(true);
+    console.log("new hook running bro :D");
 
     async function fetchSubjects() {
       const table = role === "tutor" ? "tutor_subjects" : "student_subjects";
@@ -25,7 +25,6 @@ export function useUserSubjects() {
       const { data, error } = await supabase
         .from(table)
         .select("subjects(id, label, color)")
-        .eq(idType, user?.id)
         .overrideTypes<{ subjects: SubjectRow }[]>();
 
       if (error) {
@@ -45,7 +44,7 @@ export function useUserSubjects() {
     }
 
     fetchSubjects();
-  }, [role, userLoading, user]);
+  }, [role]);
 
   return { subjects, loading, error };
 }
