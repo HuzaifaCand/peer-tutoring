@@ -4,9 +4,12 @@ import StatCard from "@/components/StatCard";
 import { supabase } from "@/lib/supabase/client";
 import {
   Activity,
-  CalendarCheck2,
   CalendarClock,
+  CalendarDays,
+  ClipboardCheck,
   ClipboardList,
+  Inbox,
+  Send,
   UserCheck2,
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -17,7 +20,7 @@ const STAT_INFO = {
     cta: "Manage Active Sessions",
     href: "/admin/sessions/active",
     icon: Activity,
-    fetch: async (_uid: string) =>
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -28,7 +31,7 @@ const STAT_INFO = {
     cta: "Review Completed Sessions",
     href: "/admin/sessions/completed",
     icon: ClipboardList,
-    fetch: async (_uid: string) =>
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -40,7 +43,7 @@ const STAT_INFO = {
     cta: "View Booked Sessions",
     href: "/admin/sessions/scheduled",
     icon: CalendarClock,
-    fetch: async (_uid: string) =>
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -51,70 +54,69 @@ const STAT_INFO = {
     cta: "Verify New Tutors",
     href: "/admin/tutors",
     icon: UserCheck2,
-    fetch: async (_uid: string) =>
+    fetch: async () =>
       supabase
         .from("tutors")
         .select("*", { count: "exact", head: true })
         .is("approved", null),
   },
+
+  // student
   studentScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
     href: "/student/sessions/scheduled",
-    icon: CalendarClock,
-    fetch: async (uid: string) =>
+    icon: CalendarDays,
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
-        .eq("student_id", uid)
         .eq("status", "scheduled"),
   },
   studentSessionRequests: {
     label: "Your Session Requests",
     cta: "Session Requests",
     href: "/student/sessions/scheduled",
-    icon: CalendarCheck2,
-    fetch: async (uid: string) =>
+    icon: Send,
+    fetch: async () =>
       supabase
         .from("session_requests")
         .select("*", { count: "exact", head: true })
-        .eq("student_id", uid)
         .eq("status", "pending"),
   },
+
+  //tutor
   tutorScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
     href: "/tutor/sessions/scheduled",
-    icon: CalendarClock,
-    fetch: async (uid: string) =>
+    icon: CalendarDays,
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
-        .eq("tutor_id", uid)
         .eq("status", "scheduled"),
   },
   tutorSessionRequests: {
     label: "Your Session Requests",
     cta: "Session Requests",
     href: "/tutor/sessions/scheduled",
-    icon: CalendarCheck2,
-    fetch: async (uid: string) =>
+    icon: Inbox,
+    fetch: async () =>
       supabase
         .from("session_requests")
         .select("*", { count: "exact", head: true })
-        .eq("tutor_id", uid)
         .eq("status", "pending"),
   },
   tutorPendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
     href: "/admin/sessions/completed",
-    icon: ClipboardList,
-    fetch: async (uid: string) =>
+    icon: ClipboardCheck,
+    fetch: async () =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
-        .eq("tutor_id", uid)
         .eq("status", "completed")
         .is("verified", null),
   },
@@ -125,13 +127,9 @@ type OperationalStatsConfig = Partial<Record<keyof typeof STAT_INFO, boolean>>;
 
 interface OperationalStatsProps {
   config: OperationalStatsConfig;
-  uid?: string;
 }
 
-export default function OperationalStats({
-  config,
-  uid,
-}: OperationalStatsProps) {
+export default function OperationalStats({ config }: OperationalStatsProps) {
   const [stats, setStats] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
 
@@ -148,7 +146,7 @@ export default function OperationalStats({
         // enabled queries
         const results = await Promise.all(
           enabledKeys.map(async (key) => {
-            const { count, error } = await STAT_INFO[key].fetch(uid ?? "");
+            const { count, error } = await STAT_INFO[key].fetch();
             if (error) throw error;
             return [key, count ?? 0] as const;
           })
@@ -165,7 +163,7 @@ export default function OperationalStats({
     };
 
     fetchStats();
-  }, [config, uid]);
+  }, [config]);
 
   const enabledCount = Object.entries(config).filter(
     ([_, enabled]) => enabled
