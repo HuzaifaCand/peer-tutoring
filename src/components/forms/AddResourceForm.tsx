@@ -6,9 +6,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import SubjectInput from "./fields/SubjectInput";
 import { subjectOptions } from "@/lib/constants/subjects";
+import { getButtonClass, getInputClass, getLabelClass } from "./classes";
 
-const inputClass =
-  "w-full rounded-md bg-elevatedBg px-2.5 py-1.5 text-xs text-textWhite focus:outline-none focus:ring-1 focus:ring-white/10";
+const inputClass = getInputClass("xs");
+const labelClass = getLabelClass("xs");
+const buttonClass = getButtonClass("xs");
 
 const addResourceSchema = z.object({
   subject_id: z
@@ -63,20 +65,18 @@ export function AddResourceForm() {
       className="space-y-4 text-sm text-textWhite px-4 py-3"
     >
       {/* Header */}
-      <div className="space-y-1 mb-4">
+      <div className="space-y-1 mb-6">
         <h2 className="text-xl sm:text-2xl font-semibold text-textWhite">
           Add Resource
         </h2>
-        <p className="text-[10px] sm:text-xs text-textMuted/80">
+        <p className="text-xs sm:text-sm text-textMuted/80">
           Help out your peers by sharing a useful resource, your name will be
           listed as the contributor!
         </p>
       </div>
       {/* Subject Input */}
       <div className="space-y-1.5">
-        <label className="block text-textMuted text-xs font-medium">
-          Subject
-        </label>
+        <label className={labelClass}>Subject</label>
         <SubjectInput
           value={selectedSubjectId}
           setValue={(id) =>
@@ -94,9 +94,7 @@ export function AddResourceForm() {
 
       {/* Title */}
       <div className="space-y-1.5">
-        <label className="block text-textMuted text-xs font-medium">
-          Title
-        </label>
+        <label className={labelClass}>Title</label>
         <input
           {...register("title")}
           placeholder="Resource title"
@@ -109,7 +107,7 @@ export function AddResourceForm() {
 
       {/* Link */}
       <div className="space-y-1.5">
-        <label className="block text-textMuted text-xs font-medium">Link</label>
+        <label className={labelClass}>Link</label>
         <input
           {...register("link")}
           placeholder="https://example.com"
@@ -122,9 +120,7 @@ export function AddResourceForm() {
 
       {/* Description */}
       <div className="space-y-1.5">
-        <label className="block text-textMuted text-xs font-medium">
-          Description (Optional)
-        </label>
+        <label className={labelClass}>Description (Optional)</label>
         <textarea
           {...register("description")}
           placeholder="Short description..."
@@ -140,11 +136,7 @@ export function AddResourceForm() {
 
       {/* Submit */}
       <div className="flex justify-end pt-2">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className="px-4 py-1.5 bg-hoverBg hover:bg-white/10 hover:cursor-pointer text-textWhite/90 border border-white/10 text-xs rounded-md font-medium transition-all duration-200 disabled:opacity-50"
-        >
+        <button type="submit" disabled={isSubmitting} className={buttonClass}>
           {isSubmitting ? "Submitting..." : "Add Resource"}
         </button>
       </div>
