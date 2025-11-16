@@ -34,7 +34,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
       >
         <div className="flex flex-col gap-3 sm:p-1">
           {/* HEADER SECTION */}
-          <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
               <h3 className="text-xl font-semibold text-textWhite">{name}</h3>
               <Tag color="muted" value={grade} textSize="text-[11px]" />
@@ -59,40 +59,41 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
           </div>
 
           {/* AVAILABILITY */}
-          <div className="flex items-center justify-between pt-4 border-t border-textMuted/20">
-            <div className="flex items-center gap-2">
+          <div className="flex flex-col [@media(min-width:420px)]:flex-row [@media(min-width:420px)]:items-center [@media(min-width:420px)]:justify-between gap-3 [@media(min-width:420px)]:gap-2 pt-4 border-t border-textMuted/20">
+            <div className="flex items-center gap-1 self-start">
               {available_slots > 0 ? (
                 <Tag
                   value={`${available_slots} slot${
                     available_slots !== 1 ? "s" : ""
                   } available`}
                   color="green"
-                  textSize="text-[12px]"
-                  className="px-3 py-1"
+                  textSize="text-[10px] sm:text-[12px]"
+                  className="px-1 sm:px-3 py-1"
                 />
               ) : (
                 <Tag
                   value={"No onsite slots available"}
                   color="gray"
-                  textSize="text-[12px]"
-                  className="px-3 py-1"
+                  textSize="text-[10px] sm:text-[12px]"
+                  className="px-1 sm:px-3 py-1"
                 />
               )}
               {available_online === true && (
                 <Tag
                   value="Available Online"
                   color="green"
-                  className="px-3 py-1"
-                  textSize="text-[12px]"
+                  className="px-1 sm:px-3 py-1"
+                  textSize="text-[10px] sm:text-[12px]"
                 />
               )}
             </div>
-
-            <CardCTA
-              cta="View Details"
-              textSize="text-[12px]"
-              padding="py-1.5 px-4"
-            />
+            <div className="self-end">
+              <CardCTA
+                cta="View Details"
+                textSize="text-[10px] sm:text-[12px]"
+                padding="py-1 sm:py-1.5 px-2 sm:px-4"
+              />
+            </div>
           </div>
         </div>
       </CardShell>
