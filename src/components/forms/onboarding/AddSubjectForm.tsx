@@ -80,11 +80,6 @@ export default function AddSubjectForm({
             ? "Add a Subject to Teach"
             : "Add a Subject to Learn"}
         </h2>
-        <p className="text-sm text-textMuted">
-          {role === "tutor"
-            ? "Add your subject and credentials below. You can change these later."
-            : "Add your subject and mention anything . You can change these later."}
-        </p>
       </header>
 
       {/* Subject Picker */}
@@ -109,7 +104,9 @@ export default function AddSubjectForm({
         <div className="flex gap-2 items-center">
           <label className={clsx(labelClass)}>
             {role === "tutor" ? "Credentials" : "Notes"}{" "}
-            <span className="text-textMuted/70">(Optional)</span>
+            <span className="text-textMuted/70">
+              {role === "tutor" ? "(Recommended)" : "(Optional)"}
+            </span>
           </label>
           {errors.subtitle && (
             <span className="text-xs text-red-400">{errors.subtitle}</span>
