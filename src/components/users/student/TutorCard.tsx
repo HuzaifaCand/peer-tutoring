@@ -32,7 +32,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
         onClick={() => setShowModal(true)}
         className="cursor-pointer hover:bg-cardHover transition-colors"
       >
-        <div className="flex flex-col gap-3 sm:p-1">
+        <div className="flex flex-col gap-4 sm:p-1">
           {/* HEADER SECTION */}
           <div className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
@@ -49,11 +49,11 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
 
           {/* GRADE & CREDENTIALS */}
 
-          <div className="block text-xs sm:text-[13px] pb-1 text-textMuted">
+          <div className="block flex flex-col sm:flex-row gap-1 sm:items-center text-xs sm:text-[13px] pb-1 text-textMuted/80">
             Subject Credentials:{" "}
             <span className="text-textWhite/80">
               {subject_credentials === "" || subject_credentials === null
-                ? "None currently"
+                ? "Not added yet"
                 : subject_credentials}
             </span>
           </div>
