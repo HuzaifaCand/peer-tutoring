@@ -141,7 +141,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
             onClick={() => {
               setSignOutModal(true);
             }}
-            className={`flex items-center w-full cursor-pointer gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium`}
+            className={`flex items-center w-full hover:bg-white/5 cursor-pointer gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium`}
           >
             <LogOut size={15} className="text-gray-400" />
             <span>Sign Out</span>
