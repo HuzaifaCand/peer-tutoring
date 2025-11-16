@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import clsx from "clsx";
 
 export function CardShell({
@@ -12,18 +13,23 @@ export function CardShell({
   const clickable = onClick !== undefined;
 
   return (
-    <div
+    <motion.div
       onClick={onClick}
+      whileHover={clickable ? { backgroundColor: "var(--color-hoverBg)" } : {}}
+      whileTap={
+        clickable
+          ? { scale: 0.99, backgroundColor: "var(--color-hoverBg)" }
+          : {}
+      }
+      transition={{ duration: 0.12, ease: "easeOut" }}
       className={clsx(
-        "rounded-xl bg-elevatedBg border border-white/5 transition-all duration-200 shadow-sm",
-        clickable === true
-          ? "hover:bg-hoverBg cursor-pointer active:scale-[0.99] active:bg-hoverBg"
-          : "hover:bg-hoverBg/60",
+        "rounded-xl bg-elevatedBg border border-white/5 shadow-sm",
         "p-5 text-sm",
+        clickable ? "cursor-pointer" : "",
         className
       )}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
