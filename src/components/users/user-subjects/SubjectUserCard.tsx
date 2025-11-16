@@ -51,7 +51,7 @@ export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
               value={
                 resource_count !== 1
                   ? resource_count + " Resources"
-                  : 1 + " Resource"
+                  : "1 Resource"
               }
               color={resource_count === 0 ? "orange" : "muted"}
               textSize="text-[10px] sm:text-[12px]"
@@ -66,7 +66,7 @@ export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
                 textSize="text-[10px] sm:text-xs"
               />
             </Link>
-            {count !== 0 && role === "student" ? (
+            {count !== 0 && role === "student" && (
               <Link href={`/student/tutors?sub=${subject.subject_id}`}>
                 <CardCTA
                   cta="Browse tutors"
@@ -74,9 +74,10 @@ export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
                   textSize="text-[10px] sm:text-xs"
                 />
               </Link>
-            ) : (
+            )}
+            {count === 0 && (
               <button
-                className="cursor-pointer text-left"
+                className="cursor-pointer"
                 onClick={() => toast.warning("Admins have been notified!")}
               >
                 <CardCTA
