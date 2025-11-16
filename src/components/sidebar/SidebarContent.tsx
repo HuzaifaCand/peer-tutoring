@@ -12,9 +12,11 @@ import {
   Verified,
   LogOut,
   Library,
-  MessageSquare,
   Clock,
   CalendarX,
+  UserSearch,
+  Bell,
+  UserCircle2,
 } from "lucide-react";
 
 type UserType = "admin" | "tutor" | "student";
@@ -55,16 +57,20 @@ const navItemsByType: Record<UserType, NavItem[]> = {
   ],
   tutor: [
     { href: "/tutor", label: "Overview", icon: LayoutDashboard },
+    { href: "/tutor/profile", label: "Profile", icon: UserCircle2 },
+
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/tutor/availability", label: "Availability", icon: Clock },
     { href: "/tutor/resources", label: "Resources", icon: Library },
+    { href: "/student/notifications", label: "Notifications", icon: Bell },
   ],
   student: [
     { href: "/student", label: "Overview", icon: LayoutDashboard },
+    { href: "/student/profile", label: "Profile", icon: UserCircle2 },
     { href: "/student/sessions", label: "My Sessions", icon: CalendarClock },
-    { href: "/student/tutors", label: "Tutors", icon: GraduationCap },
-    { href: "/student/messages", label: "Messages", icon: MessageSquare },
+    { href: "/student/tutors", label: "Browse Tutors", icon: UserSearch },
     { href: "/student/resources", label: "Resources", icon: Library },
+    { href: "/student/notifications", label: "Notifications", icon: Bell },
   ],
 };
 
