@@ -5,9 +5,11 @@ import { ReactNode, useEffect } from "react";
 import { FocusTrap } from "focus-trap-react";
 import { X } from "lucide-react";
 import clsx from "clsx";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   isOpen: boolean;
+  noX?: boolean;
   onClose: () => void;
   children: ReactNode;
   autoFocus?: boolean;
@@ -15,12 +17,14 @@ interface ModalProps {
 }
 
 export default function ModalBase({
+  noX = false,
   isOpen,
   onClose,
   children,
   autoFocus,
   width,
 }: ModalProps) {
+  // Escape key
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -30,18 +34,23 @@ export default function ModalBase({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
 
+  // Body scroll lock
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
+
     return () => {
       document.body.style.overflow = "";
     };
   }, [isOpen]);
 
-  return (
+  // If not mounted yet (Next.js SSR), avoid errors
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {isOpen && (
         <motion.div
@@ -71,17 +80,20 @@ export default function ModalBase({
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="absolute top-8 right-8" onClick={onClose}>
-                <X
-                  className="text-textWhite/80 transition hover:cursor-pointer hover:text-textButton "
-                  size={16}
-                />
-              </div>
+              {!noX && (
+                <div className="absolute top-8 right-8" onClick={onClose}>
+                  <X
+                    className="text-textWhite/80 transition hover:cursor-pointer hover:text-textButton"
+                    size={16}
+                  />
+                </div>
+              )}
               <div className="p-6">{children}</div>
             </motion.div>
           </FocusTrap>
         </motion.div>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 }
