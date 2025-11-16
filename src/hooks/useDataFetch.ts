@@ -34,7 +34,7 @@ export function useDataFetch<T>(
       );
       return () => clearInterval(interval);
     }
-  }, [refetchFlag]);
+  }, [refetchFlag, fetchFn]);
 
   return { data, loading, refetchFlag, setRefetchFlag, lastUpdated };
 }
