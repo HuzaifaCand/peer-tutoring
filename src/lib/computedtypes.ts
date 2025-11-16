@@ -57,3 +57,9 @@ export type Resource = ResourceRow & {
 export type SubjectWithUserCount = SubjectHealthView & {
   subjects: SubjectRow;
 };
+
+export type SubjectTutors = TutorSubject & {
+  tutors: TutorRow & { users: Pick<UserRow, "full_name"> } & {
+    availability: SlotsRow;
+  };
+};
