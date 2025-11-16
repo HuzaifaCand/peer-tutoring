@@ -4,7 +4,7 @@ import { SubjectTutorType } from "./getSubjectTutors";
 import { CardShell } from "@/components/card/CardShell";
 import { useState } from "react";
 import { TutorModal } from "./TutorModal";
-import { Badge, BadgeCheck, CheckCircle2, Info } from "lucide-react"; // if lucide-react is installed
+import { BadgeCheck } from "lucide-react";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
 
@@ -39,15 +39,10 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
               <h3 className="text-xl font-semibold text-textWhite">{name}</h3>
               <Tag color="muted" value={grade} textSize="text-[11px]" />
             </div>
-            {verified && (
-              <span className="flex items-center gap-1 text-green-400 text-xs">
-                <BadgeCheck size={14} />
-                Verified
-              </span>
-            )}
+            {verified && <BadgeCheck className="text-green-400" size={16} />}
           </div>
 
-          {/* GRADE & CREDENTIALS */}
+          {/* CREDENTIALS */}
 
           <div className="block flex flex-col sm:flex-row gap-1 sm:items-center text-xs sm:text-[13px] pb-1 text-textMuted/80">
             Subject Credentials:{" "}
