@@ -15,9 +15,9 @@ export function CardShell({
     <div
       onClick={onClick}
       className={clsx(
-        "rounded-xl bg-elevatedBg border border-white/5 transition-all duration-150 shadow-sm",
+        "rounded-xl bg-elevatedBg border border-white/5 transition-all duration-200 shadow-sm",
         clickable === true
-          ? "hover:border-white/10 hover:bg-hoverBg/70 cursor-pointer active:scale-[0.99] active:bg-hoverBg"
+          ? "hover:bg-hoverBg cursor-pointer active:scale-[0.99] active:bg-hoverBg"
           : "hover:bg-hoverBg/60",
         "p-5 text-sm",
         className
