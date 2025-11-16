@@ -36,14 +36,14 @@ export function ResourceForm({
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="space-y-4 text-sm text-textWhite px-4 py-3"
+      className="space-y-4 text-sm text-textWhite sm:px-4 py-3"
     >
       {/* Header */}
       <div className="space-y-1 mb-6">
         <h2 className="text-xl sm:text-2xl font-semibold text-textWhite">
           Add Resource
         </h2>
-        <p className="text-xs sm:text-sm text-textMuted/80">
+        <p className="text-[11px] pr-4 sm:text-xs text-textMuted/80">
           Help out your peers by sharing a useful resource, your name will be
           listed as the contributor!
         </p>
