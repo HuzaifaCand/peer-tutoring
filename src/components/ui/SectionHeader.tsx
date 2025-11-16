@@ -21,9 +21,7 @@ export default function SectionHeader({
       )}
     >
       <h1 className="text-[1.6875rem] sm:text-3xl font-semibold">{title}</h1>
-      {rightSlot && (
-        <div className="text-xs md:text-sm text-textMuted">{rightSlot}</div>
-      )}
+      {rightSlot && <div className="text-sm text-textMuted">{rightSlot}</div>}
     </div>
   );
 }

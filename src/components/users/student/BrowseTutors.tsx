@@ -5,9 +5,9 @@ import { subject, useUserSubjects } from "@/hooks/useUserSubjects";
 import { useState, useEffect } from "react";
 import SubjectTabs from "./SubjectTabs";
 import { TutorCards } from "./TutorCards";
-import TextLoader from "@/components/ui/TextLoader";
 
 export default function BrowseTutors() {
+  const [tutorCount, setTutorCount] = useState(0);
   const { subjects, loading: subjectLoading, error } = useUserSubjects();
   const [selectedSubject, setSelectedSubject] = useState<subject | null>(null);
 
@@ -21,7 +21,11 @@ export default function BrowseTutors() {
 
   return (
     <main>
-      <SectionHeader title="Browse Tutors" />
+      <SectionHeader
+        title="Browse Tutors"
+        rightSlot={`${tutorCount} tutor${tutorCount !== 1 ? "s" : ""} found`}
+      />
+
       {!subjectLoading && (
         <SubjectTabs
           subjectTab={selectedSubject}
@@ -31,7 +35,7 @@ export default function BrowseTutors() {
       )}
 
       {selectedSubject?.id && !subjectLoading && (
-        <TutorCards sid={selectedSubject.id} />
+        <TutorCards setTutorCount={setTutorCount} sid={selectedSubject.id} />
       )}
     </main>
   );

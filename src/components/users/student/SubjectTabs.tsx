@@ -3,7 +3,6 @@
 import { subject } from "@/hooks/useUserSubjects";
 import clsx from "clsx";
 import { subjectColorMap, subjectColors } from "../SubjectFilter";
-import TextLoader from "@/components/ui/TextLoader";
 
 interface SubjectTabsProps {
   subjectTab: subject | null;
