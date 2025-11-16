@@ -5,9 +5,21 @@ export async function getSubjectTutors(subject_id: string) {
   const { data, error } = await supabase
     .from("tutor_subjects")
     .select(
-      "tutors(grade, about, users(full_name), approved, available_online, available_slots(*)), tutor_id, credentials"
+      `
+    tutor_id,
+    credentials,
+    tutors!inner(
+      grade,
+      about,
+      users(full_name),
+      approved,
+      available_online,
+      available_slots(*)
+    )
+  `
     )
     .eq("subject_id", subject_id)
+    .eq("tutors.approved", true)
     .overrideTypes<SubjectTutor[]>();
 
   if (error) console.error("Subject Tutors error", error);
