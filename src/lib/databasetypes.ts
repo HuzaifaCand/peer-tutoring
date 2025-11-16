@@ -545,6 +545,7 @@ export type Database = {
           about: string | null;
           admin_seen: boolean;
           approved: boolean | null;
+          available_online: boolean;
           created_at: string;
           grade: string;
           id: string;
@@ -555,6 +556,7 @@ export type Database = {
           about?: string | null;
           admin_seen?: boolean;
           approved?: boolean | null;
+          available_online?: boolean;
           created_at?: string;
           grade: string;
           id: string;
@@ -565,6 +567,7 @@ export type Database = {
           about?: string | null;
           admin_seen?: boolean;
           approved?: boolean | null;
+          available_online?: boolean;
           created_at?: string;
           grade?: string;
           id?: string;
