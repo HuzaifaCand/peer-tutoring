@@ -3,10 +3,10 @@ import { useUserRole } from "./useUserRole";
 import { supabase } from "@/lib/supabase/client";
 import { SubjectRow } from "@/lib/computedtypes";
 
+export type subject = { id: string; label: string; color: string };
+
 export function useUserSubjects() {
-  const [subjects, setSubjects] = useState<
-    { id: string; label: string; color: string }[]
-  >([]);
+  const [subjects, setSubjects] = useState<subject[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
