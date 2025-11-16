@@ -33,7 +33,8 @@ export default function UserOverview({ role }: { role: "student" | "tutor" }) {
     <TextLoader width="width-5" height="height-2" />
   ) : (
     <span>
-      Welcome, <span className="text-yellow">{displayName}</span> 👋
+      Welcome,{" "}
+      <span className="text-yellow whitespace-nowrap">{displayName} 👋</span>
     </span>
   );
 
