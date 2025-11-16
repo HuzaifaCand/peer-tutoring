@@ -59,7 +59,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
           </div>
 
           {/* AVAILABILITY */}
-          <div className="flex flex-col [@media(min-width:420px)]:flex-row [@media(min-width:420px)]:items-center [@media(min-width:420px)]:justify-between gap-3 [@media(min-width:420px)]:gap-2 pt-4 border-t border-textMuted/20">
+          <div className="flex flex-col [@media(min-width:420px)]:flex-row [@media(min-width:420px)]:items-center [@media(min-width:420px)]:justify-between gap-2 pt-4 border-t border-textMuted/20">
             <div className="flex items-center gap-1 self-start">
               {available_slots > 0 ? (
                 <Tag
@@ -82,12 +82,22 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
                 <Tag
                   value="Available Online"
                   color="green"
-                  className="px-1 sm:px-3 py-1"
+                  className="px-1 sm:px-3 py-1 hidden [@media(min-width:420px)]:block"
                   textSize="text-[10px] sm:text-[12px]"
                 />
               )}
             </div>
-            <div className="self-end">
+
+            <div className="flex items-center justify-between gap-2">
+              {available_online === true && (
+                <Tag
+                  value="Available Online"
+                  color="green"
+                  className="px-1 sm:px-3 py-1 [@media(min-width:420px)]:hidden "
+                  textSize="text-[10px] sm:text-[12px]"
+                />
+              )}
+
               <CardCTA
                 cta="View Details"
                 textSize="text-[10px] sm:text-[12px]"
