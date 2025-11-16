@@ -43,9 +43,8 @@ export function ResourceForm({
         <h2 className="text-xl sm:text-2xl font-semibold text-textWhite">
           Add Resource
         </h2>
-        <p className="text-[11px] pr-4 sm:text-xs text-textMuted/80">
-          Help out your peers by sharing a useful resource, your name will be
-          listed as the contributor!
+        <p className="text-[11px] pr-16 sm:text-xs text-textMuted/80">
+          Help out by sharing resources, you will be listed as the contributor!
         </p>
       </div>
       {/* Subject Input */}
