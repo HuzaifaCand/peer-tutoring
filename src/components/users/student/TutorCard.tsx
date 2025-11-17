@@ -1,16 +1,20 @@
 "use client";
 
-import { SubjectTutorType } from "./getSubjectTutors";
+import { getSubjectTutor, SubjectTutorType } from "./getSubjectTutors";
 import { CardShell } from "@/components/card/CardShell";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BadgeCheck } from "lucide-react";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
 import ModalBase from "@/components/modal/ModalBase";
 import { TutorModalContent } from "./TutorModalContent";
+import { useCloseModal } from "@/components/modal/useCloseModal";
+import { useModalOpener } from "@/components/modal/useModalOpener";
 
 export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
-  const [showModal, setShowModal] = useState(false);
+  const [selectedTutor, setSelectedTutor] = useState<SubjectTutorType | null>(
+    null
+  );
 
   const {
     name,
@@ -19,16 +23,35 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
     verified,
     available_slots,
     available_online,
+    subject,
   } = tutor;
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const id = url.searchParams.get("id");
+    if (id) {
+      const getTutor = async () => {
+        const data = await getSubjectTutor(id, subject.id);
+        setSelectedTutor(data);
+      };
+      getTutor();
+    }
+  }, []);
+
+  const closeModal = useCloseModal(setSelectedTutor);
+  const { handleOpen } = useModalOpener<SubjectTutorType>(
+    setSelectedTutor,
+    "id"
+  );
 
   return (
     <>
-      <ModalBase isOpen={showModal} onClose={() => setShowModal(false)}>
-        <TutorModalContent tutor={tutor} />
+      <ModalBase isOpen={!!selectedTutor} onClose={closeModal}>
+        <TutorModalContent tutor={selectedTutor} />
       </ModalBase>
 
       <CardShell
-        onClick={() => setShowModal(true)}
+        onClick={() => handleOpen(tutor)}
         className="cursor-pointer hover:bg-cardHover transition-colors"
       >
         <div className="flex flex-col gap-4 sm:p-1">
