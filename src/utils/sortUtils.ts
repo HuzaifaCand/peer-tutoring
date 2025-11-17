@@ -62,15 +62,6 @@ export function sortByVerification<T extends { verified: boolean | null }>(
 }
 
 /**
- * Sorts by admin_seen flag (false → true)
- * meaning unseen items appear first.
- */
-export function sortByAdminSeen<T extends { admin_seen: boolean }>(a: T, b: T) {
-  if (a.admin_seen === b.admin_seen) return 0;
-  return a.admin_seen ? 1 : -1;
-}
-
-/**
  * Combines multiple sort functions into one chained sorter.
  * (like SQL ORDER BY col1, col2, ...)
  */
