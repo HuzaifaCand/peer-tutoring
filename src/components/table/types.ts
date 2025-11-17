@@ -28,7 +28,8 @@ export type tableTypes =
   | "scheduledSession"
   | "completedSession"
   | "scheduledSession"
-  | "subject";
+  | "subject"
+  | "editRequest";
 
 export type TableRowByType = {
   tutor: ComputedTutorRow;
@@ -38,9 +39,11 @@ export type TableRowByType = {
   activeSession: ComputedActiveSession;
   completedSession: ComputedCompletedSessionRow;
   scheduledSession: ComputedScheduledSessionRow;
+  editRequest: ComputedEditRequest;
 };
 
 import { Dispatch, SetStateAction } from "react";
+import { ComputedEditRequest } from "../admin/edit-requests/getEditRequests";
 
 export type refetchFlagType = Dispatch<SetStateAction<boolean>>;
 
