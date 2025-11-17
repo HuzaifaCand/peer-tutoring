@@ -5,6 +5,7 @@ import { getSubjectTutors } from "./getSubjectTutors";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { CardsLoading } from "@/components/card/CardsLoading";
 import { TutorCard } from "./TutorCard";
+import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 
 interface TutorCardProps {
   sid: string;
@@ -23,6 +24,8 @@ export function TutorCards({ sid, setTutorCount }: TutorCardProps) {
 
   if (loading)
     return <CardsLoading count={4} layoutClassName="grid grid-cols-1 gap-3" />;
+
+  if (data.length === 0) return <EmptyGrid text="No tutors found" />;
 
   return (
     <div className="grid grid-cols-1 gap-3">
