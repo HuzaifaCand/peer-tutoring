@@ -61,6 +61,7 @@ export type SubjectWithUserCount = SubjectHealthView & {
 };
 
 export type SubjectTutor = TutorSubject & {
+  subjects: SubjectRow;
   tutors: TutorRow & {
     users: Pick<UserRow, "full_name">;
     available_slots: SlotsRow[];
