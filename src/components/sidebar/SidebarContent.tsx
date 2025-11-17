@@ -17,6 +17,7 @@ import {
   UserSearch,
   Bell,
   UserCircle2,
+  Edit,
 } from "lucide-react";
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
@@ -37,6 +38,7 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/admin", label: "Overview", icon: LayoutDashboard },
     { href: "/admin/students", label: "Students", icon: Users },
     { href: "/admin/tutors", label: "Tutors", icon: GraduationCap },
+    { href: "/admin/edit-requests", label: "Edit Requests", icon: Edit },
     { href: "/admin/sessions", label: "Sessions", icon: CalendarDays },
     {
       href: "/admin/sessions/active",
