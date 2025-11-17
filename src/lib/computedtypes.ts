@@ -19,6 +19,8 @@ export type StudentSubject =
 
 export type ResourceRow = Database["public"]["Tables"]["resources"]["Row"];
 
+export type Notification = Database["public"]["Tables"]["notifications"]["Row"];
+
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 
 export type StudentUser = StudentRow & {
