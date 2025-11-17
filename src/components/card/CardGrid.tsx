@@ -103,7 +103,7 @@ export function CardGrid<K extends keyof CardByType>({
       {!loading && filteredData.length === 0 && (
         <EmptyGrid text={typeEmptyGridMap[type]} />
       )}
-      {(loading || subjectsLoading) && (
+      {loading && (
         <CardsLoading
           count={filteredData.length || 6}
           layoutClassName={layoutClassName}
