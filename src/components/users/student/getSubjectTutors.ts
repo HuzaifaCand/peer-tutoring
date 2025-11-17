@@ -6,6 +6,7 @@ export async function getSubjectTutors(subject_id: string) {
     .from("tutor_subjects")
     .select(
       `
+      subjects(*),
     tutor_id,
     credentials,
     tutors!inner(
@@ -31,10 +32,12 @@ export async function getSubjectTutors(subject_id: string) {
     subject_credentials: t.credentials,
     about: t.tutors.about,
     verified: t.tutors.approved,
+    slots: t.tutors.available_slots,
     total_slots: t.tutors.available_slots.length,
     available_slots:
       t.tutors.available_slots?.filter((s) => s.available).length ?? 0,
     available_online: t.tutors.available_online,
+    subject: t.subjects,
   }));
 
   return tutors ?? [];
