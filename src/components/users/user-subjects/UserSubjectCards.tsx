@@ -2,11 +2,11 @@
 
 import { useCallback } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { getUsersForSubjects } from "./getSubjectUsers";
+import { getUsersForSubjects } from "./getUserSubjects";
 import { CardsLoading } from "@/components/card/CardsLoading";
-import { SubjectUserCard } from "./SubjectUserCard";
+import { UserSubjectCard } from "./UserSubjectCard";
 
-export default function SubjectUserCards({
+export default function UserSubjectCards({
   uid,
   role,
 }: {
@@ -30,7 +30,7 @@ export default function SubjectUserCards({
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {data.map((subject) => (
-            <SubjectUserCard
+            <UserSubjectCard
               key={subject?.subject_id}
               subject={subject}
               role={role}

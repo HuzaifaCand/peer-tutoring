@@ -2,17 +2,17 @@
 
 import { CardShell } from "@/components/card/CardShell";
 import { CardCTA } from "@/components/ui/CardCTA";
-import { ComputedSubjectUserCard } from "./getSubjectUsers";
+import { ComputedUserSubjectCard } from "./getUserSubjects";
 import { colors, Tag } from "@/components/ui/Tag";
 import { toast } from "sonner";
 import Link from "next/link";
 
-interface SubjectUserCardProps {
-  subject: ComputedSubjectUserCard | null;
+interface UserSubjectCardProps {
+  subject: ComputedUserSubjectCard | null;
   role: "tutor" | "student";
 }
 
-export function SubjectUserCard({ subject, role }: SubjectUserCardProps) {
+export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
   if (!subject) return null;
   const { name, grade, color, code, count, resource_count } = subject;
 

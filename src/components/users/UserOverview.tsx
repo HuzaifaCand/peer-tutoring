@@ -3,7 +3,7 @@
 import { useAuthUser } from "@/hooks/useAuthUser";
 import TextLoader from "../ui/TextLoader";
 import SectionHeader from "../ui/SectionHeader";
-import SubjectUserCards from "./user-subjects/SubjectUserCards";
+import SubjectUserCards from "./user-subjects/UserSubjectCards";
 import SectionDivider from "../ui/SectionDivider";
 import OperationalStats from "../OperationalStats";
 

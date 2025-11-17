@@ -93,6 +93,6 @@ export async function getUsersForSubjects(
   return results.filter(Boolean);
 }
 
-export type ComputedSubjectUserCard = Awaited<
+export type ComputedUserSubjectCard = Awaited<
   ReturnType<typeof getUsersForSubjects>
 >[number];
