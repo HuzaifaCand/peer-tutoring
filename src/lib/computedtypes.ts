@@ -69,6 +69,7 @@ export type SubjectTutor = TutorSubject & {
   };
 };
 
-export type EditRequestWithUser = EditRequest & {
+export type EditRequestWithUserWithAdmin = EditRequest & {
   users: UserRow;
+  admin: UserRow | null;
 };
