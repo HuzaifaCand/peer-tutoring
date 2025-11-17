@@ -1,19 +1,16 @@
-import { SlotsRow } from "@/lib/computedtypes";
 import { SubjectTutorType } from "./getSubjectTutors";
 import { BadgeCheck, GraduationCap } from "lucide-react";
 import { colors, Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
-import clsx from "clsx";
+import { OnsiteAvailablity } from "./OnsiteAvailability";
 
-type dayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday";
+export function TutorModalContent({
+  tutor,
+}: {
+  tutor: SubjectTutorType | null;
+}) {
+  if (!tutor) return null;
 
-const dayOrder: Record<dayOfWeek, number> = {
-  Monday: 1,
-  Tuesday: 2,
-  Wednesday: 3,
-  Thursday: 4,
-};
-export function TutorModalContent({ tutor }: { tutor: SubjectTutorType }) {
   const {
     name,
     grade,
@@ -24,12 +21,6 @@ export function TutorModalContent({ tutor }: { tutor: SubjectTutorType }) {
     slots,
     subject,
   } = tutor;
-
-  // Group slots by day
-  const grouped = slots.reduce((acc: any, slot: any) => {
-    (acc[slot.day] ||= []).push(slot);
-    return acc;
-  }, {});
 
   return (
     <div className="space-y-8 p-4">
@@ -94,48 +85,7 @@ export function TutorModalContent({ tutor }: { tutor: SubjectTutorType }) {
       <div className="h-px bg-white/5" />
 
       {/* AVAILABILITY */}
-      <div className="space-y-4">
-        <h3 className="text-textWhite font-semibold text-lg">
-          Onsite Availability
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {Object.keys(grouped)
-            .sort((a, b) => dayOrder[a as dayOfWeek] - dayOrder[b as dayOfWeek])
-            .map((day) => (
-              <div key={day} className="space-y-2">
-                <p className="text-textWhite/90 text-sm font-medium">{day}</p>
-
-                <div className="grid grid-cols-2 gap-2">
-                  {grouped[day]
-                    .sort(
-                      (a: SlotsRow, b: SlotsRow) =>
-                        parseInt(a.hour.split(":")[0]) -
-                        parseInt(b.hour.split(":")[0])
-                    )
-                    .map((slot: SlotsRow) => {
-                      const start = slot.hour.slice(0, 5);
-
-                      return (
-                        <div
-                          title={`${!slot.available ? "Booked" : "Available "}`}
-                          key={`${slot.day}-${slot.hour}`}
-                          className={clsx(
-                            "px-3 py-1.5 rounded-md text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
-                            slot.available
-                              ? "bg-green-500/15 border-green-600/40 text-green-300 hover:bg-green-500/25"
-                              : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
-                          )}
-                        >
-                          {start}
-                        </div>
-                      );
-                    })}
-                </div>
-              </div>
-            ))}
-        </div>
-      </div>
+      <OnsiteAvailablity slots={slots} />
 
       {/* CTA */}
       <div className="pt-4 flex justify-end">
