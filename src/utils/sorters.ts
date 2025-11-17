@@ -7,8 +7,9 @@ import { ComputedScheduledSessionRow } from "@/lib/sessions/scheduled/getSchedul
 import { ComputedStudentRow } from "@/lib/users/getStudents";
 
 export const defaultSorters = {
-  student: chainSorters(
-    sortByTimestamp<ComputedStudentRow, "created_at">("created_at", "desc")
+  student: sortByTimestamp<ComputedStudentRow, "created_at">(
+    "created_at",
+    "desc"
   ),
   tutor: chainSorters(
     sortByVerification,
