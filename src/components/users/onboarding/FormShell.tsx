@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { bg } from "../LoginComponent";
+import { bg } from "../../LoginComponent";
 
 export function FormShell({ children }: { children: React.ReactNode }) {
   return (

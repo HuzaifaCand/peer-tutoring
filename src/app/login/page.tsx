@@ -1,7 +1,7 @@
 "use client";
 
 import { supabase } from "@/lib/supabase/client";
-import { LoginComponent } from "@/components/users/LoginComponent";
+import { LoginComponent } from "@/components/LoginComponent";
 import { useState } from "react";
 
 export default function LoginPage() {

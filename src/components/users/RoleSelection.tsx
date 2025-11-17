@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Loading from "@/components/Loading";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { toast } from "sonner";
-import { bg } from "@/components/users/LoginComponent";
+import { bg } from "@/components/LoginComponent";
 
 export default function RoleSelection() {
   const { user, userLoading, userError } = useAuthUser();

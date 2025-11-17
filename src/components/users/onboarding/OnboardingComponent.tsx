@@ -1,7 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading";
-import { bg } from "../LoginComponent";
+import { bg } from "../../LoginComponent";
 import { TopSection } from "./TopSection";
 import { AvailableSlots } from "./AvailableSlots";
 import { SubjectsSelection } from "./SubjectsSelection";

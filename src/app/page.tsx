@@ -1,5 +1,5 @@
 import Loading from "@/components/Loading";
-import { bg } from "@/components/users/LoginComponent";
+import { bg } from "@/components/LoginComponent";
 
 export default function Home() {
   return (
