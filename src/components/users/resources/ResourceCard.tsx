@@ -48,22 +48,17 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     <CardShell>
       {/* Header */}
 
-      <ModalBase
-        autoFocus={true}
-        onClose={() => setResourceData(null)}
+      <ConfirmationModal
         isOpen={!!resourceData && isTutorUser}
-      >
-        <ConfirmationModal
-          type="positive"
-          title="Are you sure you want to verify this resource?"
-          description="This will mark the resource as verified and your name will be visible as the verifier."
-          onCancel={() => setResourceData(null)}
-          onConfirm={() => {
-            toast.success("Thanks for verifying that resource!");
-            setResourceData(null);
-          }}
-        />
-      </ModalBase>
+        type="positive"
+        title="Are you sure you want to verify this resource?"
+        description="This will mark the resource as verified and your name will be visible as the verifier."
+        onCancel={() => setResourceData(null)}
+        onConfirm={() => {
+          toast.success("Thanks for verifying that resource!");
+          setResourceData(null);
+        }}
+      />
 
       <header className="flex justify-between items-center mb-2">
         <div className="flex flex-wrap items-center gap-1">
