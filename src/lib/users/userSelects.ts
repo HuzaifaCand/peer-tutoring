@@ -1,5 +1,4 @@
-export const baseUserSelect =
-  "id, grade, admin_seen, users(full_name, email), created_at";
+export const baseUserSelect = "id, grade, users(full_name, email), created_at";
 
 export const extendedStudentSelect =
   "student_subjects(subjects(id, label, code, grade))";

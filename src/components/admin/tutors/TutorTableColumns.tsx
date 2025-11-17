@@ -8,12 +8,7 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
     label: "ID",
     render: (row) => (
       <div className="flex items-center gap-2">
-        <span
-          className={`h-1 w-1 rounded-full ${
-            row.admin_seen === false ? "bg-yellow-400" : "invisible"
-          }`}
-        />
-        <span>{row.s_id}</span>
+        <span className="ml-3">{row.s_id}</span>
         <div className="space-x-1">
           <Tag
             textSize="text-[10px]"

@@ -23,7 +23,6 @@ export function formatTutor(t: TutorUser) {
     available_slots: t.available_slots?.filter((s) => s.available).length ?? 0,
     unavailable_slots:
       t.available_slots?.filter((s) => !s.available).length ?? 0,
-    admin_seen: t.admin_seen,
     created_at: t.created_at,
   };
 }
@@ -39,7 +38,6 @@ export function formatStudent(s: StudentUser) {
     id: s.id,
     grade: s.grade,
     subjects: subjects.join(" | "),
-    admin_seen: s.admin_seen,
     created_at: s.created_at,
   };
 }

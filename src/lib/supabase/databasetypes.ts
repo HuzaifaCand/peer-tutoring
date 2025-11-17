@@ -461,7 +461,6 @@ export type Database = {
       students: {
         Row: {
           about: string | null;
-          admin_seen: boolean;
           created_at: string;
           grade: string;
           id: string;
@@ -469,7 +468,6 @@ export type Database = {
         };
         Insert: {
           about?: string | null;
-          admin_seen?: boolean;
           created_at?: string;
           grade: string;
           id: string;
@@ -477,7 +475,6 @@ export type Database = {
         };
         Update: {
           about?: string | null;
-          admin_seen?: boolean;
           created_at?: string;
           grade?: string;
           id?: string;
@@ -579,7 +576,6 @@ export type Database = {
       tutors: {
         Row: {
           about: string | null;
-          admin_seen: boolean;
           approved: boolean | null;
           available_online: boolean;
           created_at: string;
@@ -590,7 +586,6 @@ export type Database = {
         };
         Insert: {
           about?: string | null;
-          admin_seen?: boolean;
           approved?: boolean | null;
           available_online?: boolean;
           created_at?: string;
@@ -601,7 +596,6 @@ export type Database = {
         };
         Update: {
           about?: string | null;
-          admin_seen?: boolean;
           approved?: boolean | null;
           available_online?: boolean;
           created_at?: string;
