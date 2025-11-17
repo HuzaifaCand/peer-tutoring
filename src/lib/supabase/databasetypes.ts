@@ -55,33 +55,33 @@ export type Database = {
       edit_requests: {
         Row: {
           admin_id: string | null;
+          approved: boolean | null;
           created_at: string;
           id: string;
           payload: Json;
           rejection_reason: string | null;
-          resolved: boolean | null;
           type: string;
           updated_at: string | null;
           user_id: string;
         };
         Insert: {
           admin_id?: string | null;
+          approved?: boolean | null;
           created_at?: string;
           id?: string;
           payload: Json;
           rejection_reason?: string | null;
-          resolved?: boolean | null;
           type: string;
           updated_at?: string | null;
           user_id: string;
         };
         Update: {
           admin_id?: string | null;
+          approved?: boolean | null;
           created_at?: string;
           id?: string;
           payload?: Json;
           rejection_reason?: string | null;
-          resolved?: boolean | null;
           type?: string;
           updated_at?: string | null;
           user_id?: string;
