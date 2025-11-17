@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import ModalBase from "./ModalBase";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface ConfirmationModalProps {
   type: "positive" | "destructive";
@@ -10,12 +11,14 @@ interface ConfirmationModalProps {
   onConfirm: () => void | Promise<void>;
   onCancel: () => void;
   isOpen: boolean;
+  successMessage?: string;
 
   inputConfig?: {
     inputLabel: string;
     inputValue: string;
     onInputChange: (v: string) => void;
     inputRequired: boolean;
+    placeholder?: string;
   };
 }
 
@@ -28,6 +31,7 @@ export function ConfirmationModal({
   onConfirm,
   onCancel,
   inputConfig,
+  successMessage,
 }: ConfirmationModalProps) {
   const [loading, setLoading] = useState(false);
 
@@ -38,6 +42,7 @@ export function ConfirmationModal({
     try {
       setLoading(true);
       await onConfirm();
+      toast.success(successMessage);
     } finally {
       setLoading(false);
     }
@@ -66,8 +71,9 @@ export function ConfirmationModal({
             <textarea
               value={inputConfig.inputValue}
               onChange={(e) => inputConfig.onInputChange(e.target.value)}
-              className="w-full bg-elevatedBg border border-white/10 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-white/20 text-sm text-textWhite resize-none"
-              rows={4}
+              placeholder={inputConfig.placeholder}
+              className="w-full bg-elevatedBg border placeholder-textMuted/80 mt-2 border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/20 text-xs text-textWhite resize-none"
+              rows={1}
             />
 
             {inputConfig.inputRequired && !inputConfig.inputValue && (
