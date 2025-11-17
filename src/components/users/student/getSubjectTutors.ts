@@ -1,31 +1,8 @@
 import { SubjectTutor } from "@/lib/computedtypes";
 import { supabase } from "@/lib/supabase/client";
 
-export async function getSubjectTutors(subject_id: string) {
-  const { data, error } = await supabase
-    .from("tutor_subjects")
-    .select(
-      `
-      subjects(*),
-    tutor_id,
-    credentials,
-    tutors!inner(
-      grade,
-      about,
-      users(full_name),
-      approved,
-      available_online,
-      available_slots(*)
-    )
-  `
-    )
-    .eq("subject_id", subject_id)
-    .eq("tutors.approved", true)
-    .overrideTypes<SubjectTutor[]>();
-
-  if (error) console.error("Subject Tutors error", error);
-
-  const tutors = data?.map((t) => ({
+const formatSubjectTutor = (t: SubjectTutor) => {
+  return {
     name: t.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
     id: t.tutor_id,
     grade: t.tutors.grade,
@@ -38,7 +15,31 @@ export async function getSubjectTutors(subject_id: string) {
       t.tutors.available_slots?.filter((s) => s.available).length ?? 0,
     available_online: t.tutors.available_online,
     subject: t.subjects,
-  }));
+  };
+};
+
+const select = `subjects(*),
+      tutor_id,
+      credentials,
+      tutors!inner(
+      grade,
+      about,
+      users(full_name),
+      approved,
+      available_online,
+      available_slots(*))`;
+
+export async function getSubjectTutors(subject_id: string) {
+  const { data, error } = await supabase
+    .from("tutor_subjects")
+    .select(select)
+    .eq("subject_id", subject_id)
+    .eq("tutors.approved", true)
+    .overrideTypes<SubjectTutor[]>();
+
+  if (error) console.error("Subject Tutors error", error);
+
+  const tutors = data?.map((t) => formatSubjectTutor(t));
 
   return tutors ?? [];
 }
@@ -46,3 +47,18 @@ export async function getSubjectTutors(subject_id: string) {
 export type SubjectTutorType = Awaited<
   ReturnType<typeof getSubjectTutors>
 >[number];
+
+export async function getSubjectTutor(tutor_id: string, subject_id: string) {
+  const { data, error } = await supabase
+    .from("tutor_subjects")
+    .select(select)
+    .eq("subject_id", subject_id)
+    .eq("tutor_id", tutor_id)
+    .single()
+    .overrideTypes<SubjectTutor>();
+
+  if (error) console.error("Subject Tutor error", error);
+
+  if (!data) return null;
+  return formatSubjectTutor(data);
+}
