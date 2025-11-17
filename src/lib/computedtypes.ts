@@ -1,6 +1,6 @@
 // --base types -- these wont ever change could even put them in constants if i wanted
 
-import { Database } from "./databasetypes";
+import { Database } from "./supabase/databasetypes";
 
 export type StudentRow = Database["public"]["Tables"]["students"]["Row"];
 export type TutorRow = Database["public"]["Tables"]["tutors"]["Row"];
