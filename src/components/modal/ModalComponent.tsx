@@ -22,9 +22,10 @@ interface ModalProps {
   type: ModalType;
   data: unknown;
   onClose: () => void;
+  refetchTable?: () => void;
 }
 
-export function Modal({ type, data, onClose }: ModalProps) {
+export function Modal({ type, data, onClose, refetchTable }: ModalProps) {
   if (!type) return null;
 
   let content: React.ReactNode = null;
@@ -75,12 +76,14 @@ export function Modal({ type, data, onClose }: ModalProps) {
       );
       break;
     case "editRequest":
-      content = (
-        <RequestModal
-          request={data as TableRowByType["editRequest"]}
-          onClose={onClose}
-        />
-      );
+      refetchTable &&
+        (content = (
+          <RequestModal
+            request={data as TableRowByType["editRequest"]}
+            onClose={onClose}
+            refetchTable={refetchTable}
+          />
+        ));
   }
 
   return (
