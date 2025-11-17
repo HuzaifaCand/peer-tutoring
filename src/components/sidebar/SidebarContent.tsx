@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
-import { useSignOut } from "@/utils/signout";
+import { useSignOut } from "@/hooks/signout";
 import ModalBase from "../modal/ModalBase";
 
 type UserType = "admin" | "tutor" | "student";
@@ -62,7 +62,6 @@ const navItemsByType: Record<UserType, NavItem[]> = {
   tutor: [
     { href: "/tutor", label: "Overview", icon: LayoutDashboard },
     { href: "/tutor/profile", label: "Profile", icon: UserCircle2 },
-
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/tutor/availability", label: "Availability", icon: Clock },
     { href: "/tutor/resources", label: "Resources", icon: Library },
@@ -90,18 +89,13 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
 
   return (
     <>
-      <ModalBase
-        noX={true}
-        onClose={() => setSignOutModal(false)}
+      <ConfirmationModal
         isOpen={signOutModal}
-      >
-        <ConfirmationModal
-          onCancel={() => setSignOutModal(false)}
-          type="positive"
-          title="Are you sure you want to sign out?"
-          onConfirm={useSignOut()}
-        />
-      </ModalBase>
+        onCancel={() => setSignOutModal(false)}
+        type="positive"
+        title="Are you sure you want to sign out?"
+        onConfirm={useSignOut()}
+      />
 
       <section className="flex flex-col min-h-full">
         <div className="px-4 lg:pt-13 pb-3 text-xl font-bold border-b border-white/5">
