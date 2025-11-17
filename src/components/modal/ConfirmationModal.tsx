@@ -10,6 +10,13 @@ interface ConfirmationModalProps {
   onConfirm: () => void | Promise<void>;
   onCancel: () => void;
   isOpen: boolean;
+
+  inputConfig?: {
+    inputLabel: string;
+    inputValue: string;
+    onInputChange: (v: string) => void;
+    inputRequired: boolean;
+  };
 }
 
 export function ConfirmationModal({
@@ -20,6 +27,7 @@ export function ConfirmationModal({
   description,
   onConfirm,
   onCancel,
+  inputConfig,
 }: ConfirmationModalProps) {
   const [loading, setLoading] = useState(false);
 
@@ -45,6 +53,27 @@ export function ConfirmationModal({
             </p>
           )}
         </div>
+
+        {inputConfig && (
+          <div className="space-y-1">
+            <label className="text-textWhite/90 text-sm font-medium">
+              {inputConfig.inputLabel}
+            </label>
+
+            <textarea
+              value={inputConfig.inputValue}
+              onChange={(e) => inputConfig.onInputChange(e.target.value)}
+              className="w-full bg-elevatedBg border border-white/10 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-white/20 text-sm text-textWhite resize-none"
+              rows={4}
+            />
+
+            {inputConfig.inputRequired && !inputConfig.inputValue && (
+              <p className="text-xs text-red-300 mt-1">
+                This field is required.
+              </p>
+            )}
+          </div>
+        )}
 
         <div className="flex justify-end text-sm items-center gap-2">
           <button
