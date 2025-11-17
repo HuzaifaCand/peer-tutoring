@@ -59,8 +59,7 @@ export type Database = {
           id: string;
           payload: Json;
           rejection_reason: string | null;
-          resolved: boolean;
-          status: string;
+          resolved: boolean | null;
           type: string;
           updated_at: string | null;
           user_id: string;
@@ -71,8 +70,7 @@ export type Database = {
           id?: string;
           payload: Json;
           rejection_reason?: string | null;
-          resolved?: boolean;
-          status?: string;
+          resolved?: boolean | null;
           type: string;
           updated_at?: string | null;
           user_id: string;
@@ -83,8 +81,7 @@ export type Database = {
           id?: string;
           payload?: Json;
           rejection_reason?: string | null;
-          resolved?: boolean;
-          status?: string;
+          resolved?: boolean | null;
           type?: string;
           updated_at?: string | null;
           user_id?: string;
