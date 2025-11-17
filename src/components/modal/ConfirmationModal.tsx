@@ -32,6 +32,9 @@ export function ConfirmationModal({
   const [loading, setLoading] = useState(false);
 
   async function handleConfirm() {
+    if (inputConfig?.inputRequired && !inputConfig.inputValue.trim()) {
+      return;
+    }
     try {
       setLoading(true);
       await onConfirm();
