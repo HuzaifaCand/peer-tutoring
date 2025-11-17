@@ -21,6 +21,7 @@ export type ResourceRow = Database["public"]["Tables"]["resources"]["Row"];
 
 export type Notification = Database["public"]["Tables"]["notifications"]["Row"];
 
+export type EditRequest = Database["public"]["Tables"]["edit_requests"]["Row"];
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 
 export type StudentUser = StudentRow & {
@@ -66,4 +67,8 @@ export type SubjectTutor = TutorSubject & {
     users: Pick<UserRow, "full_name">;
     available_slots: SlotsRow[];
   };
+};
+
+export type EditRequestWithUser = EditRequest & {
+  users: UserRow;
 };
