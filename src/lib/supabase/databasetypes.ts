@@ -52,6 +52,60 @@ export type Database = {
           }
         ];
       };
+      edit_requests: {
+        Row: {
+          admin_id: string | null;
+          created_at: string | null;
+          id: string;
+          payload: Json;
+          rejection_reason: string | null;
+          resolved: boolean;
+          status: string;
+          type: string;
+          updated_at: string | null;
+          user_id: string;
+        };
+        Insert: {
+          admin_id?: string | null;
+          created_at?: string | null;
+          id?: string;
+          payload: Json;
+          rejection_reason?: string | null;
+          resolved?: boolean;
+          status?: string;
+          type: string;
+          updated_at?: string | null;
+          user_id: string;
+        };
+        Update: {
+          admin_id?: string | null;
+          created_at?: string | null;
+          id?: string;
+          payload?: Json;
+          rejection_reason?: string | null;
+          resolved?: boolean;
+          status?: string;
+          type?: string;
+          updated_at?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "edit_requests_admin_id_fkey";
+            columns: ["admin_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "edit_requests_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       notifications: {
         Row: {
           body: string | null;
