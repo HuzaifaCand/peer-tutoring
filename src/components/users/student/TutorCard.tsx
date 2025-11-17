@@ -3,10 +3,11 @@
 import { SubjectTutorType } from "./getSubjectTutors";
 import { CardShell } from "@/components/card/CardShell";
 import { useState } from "react";
-import { TutorModal } from "./TutorModal";
 import { BadgeCheck } from "lucide-react";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
+import ModalBase from "@/components/modal/ModalBase";
+import { TutorModalContent } from "./TutorModalContent";
 
 export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
   const [showModal, setShowModal] = useState(false);
@@ -22,11 +23,9 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
 
   return (
     <>
-      <TutorModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        tutor={tutor}
-      />
+      <ModalBase isOpen={showModal} onClose={() => setShowModal(false)}>
+        <TutorModalContent tutor={tutor} />
+      </ModalBase>
 
       <CardShell
         onClick={() => setShowModal(true)}
