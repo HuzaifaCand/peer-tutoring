@@ -23,11 +23,12 @@ export default function SubjectTabs({
             key={s.id}
             onClick={() => setSubjectTab(s)}
             className={`px-3 py-1 text-xs hover:cursor-pointer whitespace-nowrap sm:text-sm rounded-md border transition
-                ${
-                  subjectTab === s
-                    ? `${subjectColorMap[subjectTab.color as subjectColors]}`
-                    : "bg-elevatedBg/50 text-textWhite/70 border-white/10 hover:bg-hoverBg"
-                }`}
+            ${
+              subjectTab?.id === s.id
+                ? `${subjectColorMap[s.color as subjectColors]}`
+                : "bg-elevatedBg/50 text-textWhite/70 border-white/10 hover:bg-hoverBg"
+            }
+          `}
           >
             {s.label}
           </button>
