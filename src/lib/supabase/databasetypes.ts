@@ -55,7 +55,7 @@ export type Database = {
       edit_requests: {
         Row: {
           admin_id: string | null;
-          created_at: string | null;
+          created_at: string;
           id: string;
           payload: Json;
           rejection_reason: string | null;
@@ -67,7 +67,7 @@ export type Database = {
         };
         Insert: {
           admin_id?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           id?: string;
           payload: Json;
           rejection_reason?: string | null;
@@ -79,7 +79,7 @@ export type Database = {
         };
         Update: {
           admin_id?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           id?: string;
           payload?: Json;
           rejection_reason?: string | null;
