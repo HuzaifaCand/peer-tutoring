@@ -1,3 +1,4 @@
+import { RequestModal } from "../admin/edit-requests/RequestModal";
 import { CardByType } from "../card/types";
 import { TableRowByType } from "../table/types";
 import ModalBase from "./ModalBase";
@@ -14,7 +15,8 @@ type ModalType =
   | "scheduledSession"
   | "completedSession"
   | "student"
-  | "tutor";
+  | "tutor"
+  | "editRequest";
 
 interface ModalProps {
   type: ModalType;
@@ -72,6 +74,13 @@ export function Modal({ type, data, onClose }: ModalProps) {
         <TutorModal tutor={data as TableRowByType["tutor"]} onClose={onClose} />
       );
       break;
+    case "editRequest":
+      content = (
+        <RequestModal
+          request={data as TableRowByType["editRequest"]}
+          onClose={onClose}
+        />
+      );
   }
 
   return (
