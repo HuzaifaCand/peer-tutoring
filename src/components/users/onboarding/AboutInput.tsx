@@ -11,7 +11,7 @@ export function AboutInput({ role }: { role: "student" | "tutor" }) {
       </label>
       <textarea
         {...register("about")}
-        placeholder={`You can enter some information about yourself that will other ${role}s discover you`}
+        placeholder={`Enter some information about yourself that will help other ${role}s discover you`}
         className={clsx(
           "w-full rounded-lg placeholder-textMuted/60 border-2 border-hoverBg p-2.5 text-sm text-textWhite focus:outline-none focus:ring-1 focus:ring-white/10",
           "min-h-30 py-2 px-2 mt-4"
