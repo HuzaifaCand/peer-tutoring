@@ -80,7 +80,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
             <div className="flex items-center gap-1 self-start">
               {available_slots > 0 ? (
                 <Tag
-                  value={`${available_slots} slot${
+                  value={`${available_slots} onsite slot${
                     available_slots !== 1 ? "s" : ""
                   } available`}
                   color="green"
