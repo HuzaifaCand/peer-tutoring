@@ -11,15 +11,18 @@ export default function Profile({ role }: { role: "student" | "tutor" }) {
 
   if (!user || userLoading) return <Loading bg="bg-mainBg" />;
 
-  const { displayName, studentId } = getUserMetadata(user);
+  const { displayName, email, studentId } = getUserMetadata(user);
+
   return (
     <main>
       <SectionHeader title="Profile" />
       <UserInfoSection
         name={displayName}
+        email={email}
         studentId={studentId}
         role={role}
         isOnboarding={false}
+        grade="AS" // temporary
       />
     </main>
   );
