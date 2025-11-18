@@ -69,9 +69,7 @@ export function TutorModalContent({
           </div>
         </div>
       </div>
-
       <div className="h-px bg-white/5" />
-
       {/* ABOUT SECTION */}
       <div className="space-y-3">
         <h3 className="text-textWhite font-semibold text-lg">
@@ -81,12 +79,14 @@ export function TutorModalContent({
           {about || "No description provided."}
         </p>
       </div>
-
       <div className="h-px bg-white/5" />
-
       {/* AVAILABILITY */}
-      <OnsiteAvailablity slots={slots} />
-
+      <div className="space-y-4">
+        <h3 className="text-textWhite font-semibold text-lg">
+          Onsite Availability
+        </h3>
+        <OnsiteAvailablity slots={slots} />
+      </div>
       {/* CTA */}
       <div className="pt-4 flex justify-end">
         <button className="cursor-pointer">

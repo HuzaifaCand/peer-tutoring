@@ -19,49 +19,41 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
   }, {} as Partial<Record<dayOfWeek, SlotsRow[]>>);
 
   return (
-    <div className="space-y-4">
-      <h3 className="text-textWhite font-semibold text-lg">
-        Onsite Availability
-      </h3>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {Object.entries(grouped)
+        .sort(([a], [b]) => dayOrder[a as dayOfWeek] - dayOrder[b as dayOfWeek])
+        .map(([day, daySlots]) => (
+          <div key={day} className="space-y-2">
+            <p className="text-textWhite/90 text-sm font-medium">{day}</p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {Object.entries(grouped)
-          .sort(
-            ([a], [b]) => dayOrder[a as dayOfWeek] - dayOrder[b as dayOfWeek]
-          )
-          .map(([day, daySlots]) => (
-            <div key={day} className="space-y-2">
-              <p className="text-textWhite/90 text-sm font-medium">{day}</p>
+            <div className="grid grid-cols-2 gap-2">
+              {daySlots!
+                .sort(
+                  (a, b) =>
+                    parseInt(a.hour.split(":")[0]) -
+                    parseInt(b.hour.split(":")[0])
+                )
+                .map((slot) => {
+                  const start = slot.hour.slice(0, 5);
 
-              <div className="grid grid-cols-2 gap-2">
-                {daySlots!
-                  .sort(
-                    (a, b) =>
-                      parseInt(a.hour.split(":")[0]) -
-                      parseInt(b.hour.split(":")[0])
-                  )
-                  .map((slot) => {
-                    const start = slot.hour.slice(0, 5);
-
-                    return (
-                      <div
-                        key={`${slot.day}-${slot.hour}`}
-                        title={!slot.available ? "Booked" : "Available"}
-                        className={clsx(
-                          "px-3 py-1.5 rounded-md text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
-                          slot.available
-                            ? "bg-green-500/15 border-green-600/40 text-green-300 hover:bg-green-500/25"
-                            : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
-                        )}
-                      >
-                        {start}
-                      </div>
-                    );
-                  })}
-              </div>
+                  return (
+                    <div
+                      key={`${slot.day}-${slot.hour}`}
+                      title={!slot.available ? "Booked" : "Available"}
+                      className={clsx(
+                        "px-3 py-1.5 rounded-md text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
+                        slot.available
+                          ? "bg-green-500/15 border-green-600/40 text-green-300 hover:bg-green-500/25"
+                          : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
+                      )}
+                    >
+                      {start}
+                    </div>
+                  );
+                })}
             </div>
-          ))}
-      </div>
+          </div>
+        ))}
     </div>
   );
 }
