@@ -97,6 +97,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
         type="positive"
         title="Are you sure you want to sign out?"
         onConfirm={useSignOut()}
+        successMessage="Signed out Successfully!"
       />
 
       <section className="flex flex-col min-h-full">
