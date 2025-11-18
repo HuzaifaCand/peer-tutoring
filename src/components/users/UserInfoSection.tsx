@@ -4,14 +4,18 @@ import GradeRadioField from "./onboarding/GradeRadio";
 
 interface Props {
   name: string;
+  email: string;
   studentId: string;
+  grade?: string;
   role: "tutor" | "student";
   isOnboarding: boolean;
 }
 export function UserInfoSection({
   name,
+  email,
   studentId,
   role,
+  grade,
   isOnboarding,
 }: Props) {
   return (
@@ -29,8 +33,15 @@ export function UserInfoSection({
           <FilledField label="Name" value={name} />
           <FilledField label="ID" value={studentId} />
         </div>
-        <FilledField label="Role" value={role} />
-        {isOnboarding && <GradeRadioField />}
+        <FilledField label="Email" value={email} capitalize={false} />
+        {isOnboarding ? (
+          <GradeRadioField />
+        ) : (
+          <div className="flex items-center gap-2">
+            <FilledField label="Role" value={role} />
+            {grade && <FilledField label="Grade" value={grade} />}
+          </div>
+        )}
       </div>
     </div>
   );
