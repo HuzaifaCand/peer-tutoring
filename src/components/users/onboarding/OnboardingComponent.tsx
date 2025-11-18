@@ -2,7 +2,6 @@
 
 import Loading from "@/components/Loading";
 import { bg } from "../../LoginComponent";
-import { TopSection } from "./TopSection";
 import { AvailableSlots } from "./AvailableSlots";
 import { SubjectsSelection } from "./SubjectsSelection";
 import { AboutInput } from "./AboutInput";
@@ -19,6 +18,8 @@ import { submitOnboarding } from "@/components/forms/onboarding/submitOnboarding
 import { useRouter } from "next/navigation";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { SubmitButton } from "./SubmitButton";
+import { getUserMetadata } from "../getUserMetadata";
+import { UserInfoSection } from "../UserInfoSection";
 
 export type SubjectSelect = {
   subject: {
@@ -67,12 +68,19 @@ export default function OnboardingComponent({
     router.replace(`/${role}`);
   }
 
+  const { displayName, studentId } = getUserMetadata(user);
+
   return (
     <FormProvider {...methods}>
       <FormShell>
         <FormHeader role={role} />
         <form onSubmit={handleSubmit(onSubmit)}>
-          <TopSection role={role} user={user} />
+          <UserInfoSection
+            name={displayName}
+            studentId={studentId}
+            role={role}
+            isOnboarding={true}
+          />
           <SubjectsSelection role={role} />
           {role === "tutor" && <AvailableSlots />}
           <AboutInput role={role} />
