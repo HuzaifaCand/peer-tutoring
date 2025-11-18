@@ -72,9 +72,9 @@ export default function AddSubjectForm({
   };
 
   return (
-    <div className="space-y-5 py-4 px-6 text-textWhite">
+    <div className="space-y-5 py-4 px-2 sm:px-6 text-textWhite">
       <header className="space-y-1">
-        <h2 className="text-2xl font-semibold">Add a Subject</h2>
+        <h2 className="text-xl sm:text-2xl font-semibold">Add a Subject</h2>
       </header>
 
       {/* Subject Picker */}
