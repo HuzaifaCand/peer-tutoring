@@ -68,18 +68,13 @@ export default function AddSubjectForm({
       subtitle: cleanSubtitle ?? null,
     });
 
-    toast.success(`${subject?.label} added`);
     onClose();
   };
 
   return (
     <div className="space-y-5 py-4 px-6 text-textWhite">
       <header className="space-y-1">
-        <h2 className="text-2xl font-semibold">
-          {role === "tutor"
-            ? "Add a Subject to Teach"
-            : "Add a Subject to Learn"}
-        </h2>
+        <h2 className="text-2xl font-semibold">Add a Subject</h2>
       </header>
 
       {/* Subject Picker */}
