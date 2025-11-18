@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 
 interface UserSubjectCardProps {
-  subject: ComputedUserSubjectCard | null;
+  subject: ComputedUserSubjectCard;
   role: "tutor" | "student";
 }
 
