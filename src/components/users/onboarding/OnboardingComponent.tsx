@@ -68,7 +68,7 @@ export default function OnboardingComponent({
     router.replace(`/${role}`);
   }
 
-  const { displayName, studentId } = getUserMetadata(user);
+  const { displayName, email, studentId } = getUserMetadata(user);
 
   return (
     <FormProvider {...methods}>
@@ -77,6 +77,7 @@ export default function OnboardingComponent({
         <form onSubmit={handleSubmit(onSubmit)}>
           <UserInfoSection
             name={displayName}
+            email={email}
             studentId={studentId}
             role={role}
             isOnboarding={true}
