@@ -20,7 +20,7 @@ export function UserInfoSection({
 }: Props) {
   return (
     <div className="flex flex-col lg:flex-row lg:gap-6 items-center lg:items-start">
-      <div className="flex items-center justify-center bg-gradient-to-l from-[#0f0f12] via-[#16161a] to-[#1b1b1f] border border-6 border-hoverBg rounded-sm w-full h-32 lg:w-50 lg:h-50 shrink-0">
+      <div className="flex items-center justify-center bg-mainBg border border-4 border-hoverBg rounded-sm w-full h-32 lg:w-50 lg:h-50 shrink-0">
         {role === "tutor" ? (
           <GraduationCap className="w-12 h-12 text-blue" />
         ) : (
