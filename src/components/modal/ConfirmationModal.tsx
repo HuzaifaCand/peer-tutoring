@@ -43,6 +43,9 @@ export function ConfirmationModal({
       setLoading(true);
       await onConfirm();
       toast.success(successMessage);
+    } catch (err) {
+      console.error(err, "confirmation modal");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
