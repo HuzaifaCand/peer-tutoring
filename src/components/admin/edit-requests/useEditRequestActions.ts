@@ -6,7 +6,7 @@ export function useEditRequestActions(requestId: string) {
 
   async function approve() {
     if (!user || userLoading) return;
-    return supabase
+    const { error } = await supabase
       .from("edit_requests")
       .update({
         approved: true,
@@ -14,11 +14,12 @@ export function useEditRequestActions(requestId: string) {
         rejection_reason: null,
       })
       .eq("id", requestId);
+    return error;
   }
 
   async function reject(reason: string) {
     if (!user || userLoading) return;
-    return supabase
+    const { error } = await supabase
       .from("edit_requests")
       .update({
         approved: false,
@@ -26,6 +27,8 @@ export function useEditRequestActions(requestId: string) {
         rejection_reason: reason.trim(),
       })
       .eq("id", requestId);
+
+    return error;
   }
 
   return { approve, reject };
