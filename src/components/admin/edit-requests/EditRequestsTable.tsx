@@ -38,7 +38,6 @@ export default function EditRequestsTable({
   const [selectedRequest, setSelectedRequest] =
     useState<ComputedEditRequest | null>(null);
 
-  // create sort fn, resolved = null at the top, resolved = false in the middle, resolved = true at the bottom and then sort by created_at
   const { data, loading, setRefetchFlag } = useDataFetch(getEditRequests, {
     sortFn: editRequestSorter,
   });

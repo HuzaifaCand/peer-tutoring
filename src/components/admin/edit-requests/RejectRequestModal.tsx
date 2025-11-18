@@ -32,6 +32,8 @@ export function RejectRequestModal({ modalConfig }: Props) {
       return;
     }
 
+    await new Promise((r) => setTimeout(r, 75)); // delay to make sure database fully updated
+
     refetchTable();
     setIsOpen(false);
     onClose();
