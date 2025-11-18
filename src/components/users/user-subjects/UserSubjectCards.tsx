@@ -2,7 +2,7 @@
 
 import { useCallback } from "react";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { getUsersForSubjects } from "./getUserSubjects";
+import { getUserSubjects } from "./getUserSubjects";
 import { CardsLoading } from "@/components/card/CardsLoading";
 import { UserSubjectCard } from "./UserSubjectCard";
 
@@ -13,10 +13,7 @@ export default function UserSubjectCards({
   uid: string;
   role: "tutor" | "student";
 }) {
-  const fetchFn = useCallback(
-    () => getUsersForSubjects(role, uid),
-    [role, uid]
-  );
+  const fetchFn = useCallback(() => getUserSubjects(role, uid), [role, uid]);
   const { data, loading } = useDataFetch(fetchFn);
 
   return (

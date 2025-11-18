@@ -50,10 +50,7 @@ async function getSubjectUsers(role: "tutor" | "student", subject_id: string) {
   return result;
 }
 
-export async function getUsersForSubjects(
-  role: "tutor" | "student",
-  uid: string
-) {
+export async function getUserSubjects(role: "tutor" | "student", uid: string) {
   const idColumn = role === "tutor" ? "tutor_id" : "student_id";
   const table = role === "tutor" ? "tutor_subjects" : "student_subjects";
 
@@ -94,5 +91,5 @@ export async function getUsersForSubjects(
 }
 
 export type ComputedUserSubjectCard = Awaited<
-  ReturnType<typeof getUsersForSubjects>
+  ReturnType<typeof getUserSubjects>
 >[number];
