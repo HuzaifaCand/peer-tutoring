@@ -53,7 +53,7 @@ function SubjectCard({
       <div
         onClick={() => onClick?.(subject)}
         className={clsx(
-          " rounded-xl w-full px-6 py-4 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
+          "rounded-xl w-full px-6 py-3 sm:py-4 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
         )}
       >
         <div className="flex items-center justify-between">
@@ -109,11 +109,13 @@ function AddSubjectCard({ onAdd }: { onAdd: () => void }) {
           "rounded-xl border-2 border-dashed border-white/10",
           "bg-transparent hover:bg-white/5",
           "text-textMuted hover:text-textWhite",
-          "py-4 transition-all cursor-pointer active:scale-[0.98]"
+          "py-3 sm:py-4 transition-all cursor-pointer active:scale-[0.98]"
         )}
       >
-        <Plus className="w-5 h-5" />
-        <span className="text-sm font-medium tracking-wide">Add Subject</span>
+        <Plus className="w-4 h-4" />
+        <span className="text-xs sm:text-sm font-medium tracking-wide">
+          Add Subject
+        </span>
       </button>
 
       <X className="w-3.5 h-3.5 invisible" />
