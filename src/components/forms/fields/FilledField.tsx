@@ -21,7 +21,7 @@ export default function FilledField({
       {/* "Input-looking" value */}
       <div
         className={clsx(
-          "bg-hoverBg border border-elevatedBg text-textMuted/90 text-xs sm:text-sm rounded px-3 py-1",
+          "bg-hoverBg border border-elevatedBg text-textMuted/80 text-xs sm:text-sm rounded px-3 py-1",
           capitalize ? "capitalize" : ""
         )}
       >
