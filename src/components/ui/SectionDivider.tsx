@@ -9,7 +9,7 @@ export default function SectionDivider({
     <div
       className={clsx(
         "my-8",
-        invisible === true ? "invisible" : "border-b border-textWhite/10"
+        invisible ? "invisible" : "border-b border-textWhite/10"
       )}
     />
   );
