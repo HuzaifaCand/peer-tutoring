@@ -59,7 +59,7 @@ function SubjectCard({
         <div className="flex items-center justify-between">
           <div className="flex gap-0.5 md:gap-2 md:items-end md:flex-row flex-col">
             <h3 className="text-md sm:text-lg font-semibold text-textWhite">
-              {subject.subject?.label?.split(" ")[1]}
+              {subject.subject?.label?.split(" ").slice(1, 3).join(" ")}
             </h3>
             {subject.subtitle && (
               <p className="text-xs md:text-sm text-textMuted">
