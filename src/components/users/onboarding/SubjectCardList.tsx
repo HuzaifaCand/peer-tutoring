@@ -53,10 +53,10 @@ function SubjectCard({
       <div
         onClick={() => onClick?.(subject)}
         className={clsx(
-          "rounded-xl w-full px-6 py-3 sm:py-4 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
+          "rounded-xl w-full px-4 sm:px-6 py-3 sm:py-4 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
         )}
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <div className="flex gap-0.5 md:gap-2 md:items-end md:flex-row flex-col">
             <h3 className="text-md sm:text-lg font-semibold text-textWhite">
               {subject.subject?.label?.split(" ").slice(1, 3).join(" ")}
