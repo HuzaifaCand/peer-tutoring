@@ -3,9 +3,7 @@ import { bg } from "../../LoginComponent";
 
 export function FormShell({ children }: { children: React.ReactNode }) {
   return (
-    <main
-      className={`min-h-screen flex items-center justify-center px-6 bg-mainBg`}
-    >
+    <main className={`min-h-screen flex items-center justify-center bg-mainBg`}>
       <div
         className={clsx(
           "min-h-screen shadow-lg rounded-md p-6 lg:p-8 ",
