@@ -29,7 +29,9 @@ export const getAddSubjectSchema = (role: "student" | "tutor") =>
       }),
   });
 
-export const getOnboardingSchema = ({ role }: { role: "student" | "tutor" }) =>
+export const getSlotSchema = () => {};
+
+export const getOnboardingSchema = (role: "student" | "tutor") =>
   z.object({
     grade: z
       .union([z.literal(""), z.enum(["AS", "A2"])])

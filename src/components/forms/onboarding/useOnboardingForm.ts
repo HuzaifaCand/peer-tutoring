@@ -8,7 +8,7 @@ import { z } from "zod";
 export type OnboardingSchema = z.infer<ReturnType<typeof getOnboardingSchema>>;
 
 export function useOnboardingForm(role: "student" | "tutor") {
-  const schema = getOnboardingSchema({ role });
+  const schema = getOnboardingSchema(role);
 
   const methods = useForm<OnboardingSchema>({
     resolver: zodResolver(schema),
