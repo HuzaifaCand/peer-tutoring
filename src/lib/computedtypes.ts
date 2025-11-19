@@ -23,6 +23,7 @@ export type Notification = Database["public"]["Tables"]["notifications"]["Row"];
 
 export type EditRequest = Database["public"]["Tables"]["edit_requests"]["Row"];
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
+// yeah you should fs
 
 export type StudentUser = StudentRow & {
   users: Pick<UserRow, "full_name" | "email">;

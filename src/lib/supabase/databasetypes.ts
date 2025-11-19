@@ -20,7 +20,7 @@ export type Database = {
           created_at: string | null;
           day: string;
           duration_minutes: number;
-          hour: string;
+          hour: number;
           id: string;
           tutor_id: string | null;
         };
@@ -29,7 +29,7 @@ export type Database = {
           created_at?: string | null;
           day: string;
           duration_minutes?: number;
-          hour: string;
+          hour: number;
           id?: string;
           tutor_id?: string | null;
         };
@@ -38,7 +38,7 @@ export type Database = {
           created_at?: string | null;
           day?: string;
           duration_minutes?: number;
-          hour?: string;
+          hour?: number;
           id?: string;
           tutor_id?: string | null;
         };
@@ -271,13 +271,6 @@ export type Database = {
         };
         Relationships: [
           {
-            foreignKeyName: "session_requests_available_slot_id_fkey";
-            columns: ["available_slot_id"];
-            isOneToOne: false;
-            referencedRelation: "available_slots";
-            referencedColumns: ["id"];
-          },
-          {
             foreignKeyName: "session_requests_session_id_fkey";
             columns: ["session_id"];
             isOneToOne: false;
@@ -406,13 +399,6 @@ export type Database = {
             columns: ["cancelled_by"];
             isOneToOne: false;
             referencedRelation: "users";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "sessions_slot_id_fkey";
-            columns: ["slot_id"];
-            isOneToOne: false;
-            referencedRelation: "available_slots";
             referencedColumns: ["id"];
           },
           {
