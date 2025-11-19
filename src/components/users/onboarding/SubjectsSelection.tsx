@@ -42,7 +42,7 @@ export function SubjectsSelection({ role }: SubjectsSelectionProps) {
   };
 
   return (
-    <section className="mt-6 space-y-3">
+    <section className="mt-10 space-y-3">
       <div className="flex md:flex-row flex-col md:items-center gap-0 md:gap-2">
         <h2 className="text-lg sm:text-xl font-medium text-textWhite">
           {role === "student"
