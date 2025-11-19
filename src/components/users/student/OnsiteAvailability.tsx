@@ -1,5 +1,6 @@
 import { SlotsRow } from "@/lib/computedtypes";
 import clsx from "clsx";
+import { formatHour } from "../onboarding/AvailableSlots";
 
 type dayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday";
 
@@ -28,14 +29,8 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
 
             <div className="grid grid-cols-2 gap-2">
               {daySlots!
-                .sort(
-                  (a, b) =>
-                    parseInt(a.hour.split(":")[0]) -
-                    parseInt(b.hour.split(":")[0])
-                )
+                .sort((a, b) => a.hour - b.hour)
                 .map((slot) => {
-                  const start = slot.hour.slice(0, 5);
-
                   return (
                     <div
                       key={`${slot.day}-${slot.hour}`}
@@ -47,7 +42,7 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
                           : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
                       )}
                     >
-                      {start}
+                      {formatHour(slot.hour)}
                     </div>
                   );
                 })}
