@@ -32,7 +32,7 @@ export default function SubjectCardList({
         />
       ))}
 
-      <AddSubjectCard onAdd={onAdd} />
+      <AddSubjectCard length={subjects.length} onAdd={onAdd} />
     </div>
   );
 }
@@ -98,7 +98,13 @@ function SubjectCard({
   );
 }
 
-function AddSubjectCard({ onAdd }: { onAdd: () => void }) {
+function AddSubjectCard({
+  onAdd,
+  length,
+}: {
+  onAdd: () => void;
+  length: number;
+}) {
   return (
     <div className="flex items-center gap-2">
       <button
@@ -118,7 +124,7 @@ function AddSubjectCard({ onAdd }: { onAdd: () => void }) {
         </span>
       </button>
 
-      <X className="w-3.5 h-3.5 invisible" />
+      {length !== 0 && <X className="w-3.5 h-3.5 invisible" />}
     </div>
   );
 }
