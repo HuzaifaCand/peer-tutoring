@@ -35,7 +35,11 @@ export function SubjectSection({
   return (
     <>
       <ModalBase isOpen={modal} onClose={() => setModal(false)}>
-        <EditRequestForm type="subject_change" />
+        <EditRequestForm
+          setModal={setModal}
+          uid={user.id}
+          type="subject_change"
+        />
       </ModalBase>
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
