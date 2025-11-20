@@ -16,6 +16,12 @@ export async function submitOnboarding(data: {
     } | null;
     subtitle: string | null;
   }>;
+  slots?: Array<{
+    day: string;
+    hour: number;
+    duration_minutes: number;
+  }>;
+  available_online?: boolean;
 }) {
   const cookieStore = await cookies();
 
@@ -45,21 +51,38 @@ export async function submitOnboarding(data: {
     return { error: "Not authenticated" };
   }
 
-  const { error } = await supabase.rpc("onboard_user", {
+  const rpcArgs: any = {
     _user_id: user.id,
     _role: data.role,
     _grade: data.grade,
     _about: data.about ?? null,
     _subjects: data.subjects,
-  });
+  };
 
-  if (error) {
-    console.error("Onboarding transaction error:", error);
-    console.log("Onboarding transaction error:", error);
-
-    return { error: "Failed to complete onboarding" };
+  if (data.role === "tutor") {
+    rpcArgs._slots = data.slots ?? [];
+    rpcArgs._available_online = data.available_online ?? false;
   }
 
+  // --- RUN RPC ---
+  const { data: rpcData, error: rpcError } = await supabase.rpc(
+    "onboard_user",
+    rpcArgs
+  );
+
+  // Postgres or Postgrest error???
+  if (rpcError) {
+    console.error("RPC execution error:", rpcError);
+    return { error: "RPC failed to execute" };
+  }
+
+  //  PL/pgSQL exception handler return error
+  if (!rpcData?.success) {
+    console.error("RPC returned failure:", rpcData);
+    return { error: rpcData?.error ?? "Onboarding failed" };
+  }
+
+  // --- UPDATE AUTH METADATA ---
   const { error: metaError } = await supabase.auth.updateUser({
     data: { role: data.role },
   });
