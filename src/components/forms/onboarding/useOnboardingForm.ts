@@ -1,27 +1,35 @@
 "use client";
 
-import { useForm, FormProvider } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { getOnboardingSchema } from "./OnboardingSchema";
 import { z } from "zod";
-
-export type OnboardingSchema = z.infer<ReturnType<typeof getOnboardingSchema>>;
+import {
+  studentOnboardingSchema,
+  tutorOnboardingSchema,
+} from "./OnboardingSchema";
 
 export function useOnboardingForm(role: "student" | "tutor") {
-  const schema = getOnboardingSchema(role);
+  const schema =
+    role === "tutor" ? tutorOnboardingSchema : studentOnboardingSchema;
 
-  const methods = useForm<OnboardingSchema>({
+  type FormType = z.infer<typeof schema>;
+
+  return useForm<FormType>({
     resolver: zodResolver(schema),
-    mode: "onSubmit",
-    defaultValues: {
-      grade: "",
-      subjects: [],
-      about: "",
-      role,
-    },
+    defaultValues: (role === "tutor"
+      ? {
+          grade: "",
+          subjects: [],
+          about: "",
+          slots: [],
+          available_online: true,
+          role,
+        }
+      : {
+          grade: "",
+          subjects: [],
+          about: "",
+          role,
+        }) as FormType,
   });
-
-  return methods;
 }
-
-export { FormProvider };
