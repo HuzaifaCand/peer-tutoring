@@ -30,11 +30,7 @@ export function CardGrid<K extends keyof CardByType>({
   const [search, setSearch] = useState("");
   const [subjectFilter, setSubjectFilter] = useState<"all" | string>("all");
 
-  const {
-    loading: subjectsLoading,
-    subjects,
-    error: subjectError,
-  } = useUserSubjects();
+  const { subjects, error: subjectError } = useUserSubjects();
 
   if (subjectError) console.error(subjectError);
 
