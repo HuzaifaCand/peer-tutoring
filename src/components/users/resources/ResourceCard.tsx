@@ -25,6 +25,9 @@ async function incrementResourceView(resourceId: string) {
 }
 
 export function ResourceCard({ resource }: ResourceCardProps) {
+  const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
+    null
+  );
   const { user } = useAuthUser();
   if (!user) return null;
 
@@ -52,10 +55,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       toast.success("Resource verified successfully");
     }
   }
-
-  const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
-    null
-  );
 
   const isTutorUser = useUserRole() === "tutor";
 
