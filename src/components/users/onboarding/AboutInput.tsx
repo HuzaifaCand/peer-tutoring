@@ -5,7 +5,7 @@ export function AboutInput({ role }: { role: "student" | "tutor" }) {
   const { register } = useFormContext();
 
   return (
-    <section className="mt-10 space-y-3">
+    <section className="mt-6 space-y-3">
       <label className="text-lg sm:text-xl font-medium text-textWhite">
         About <span className="text-textMuted/70">(Optional)</span>
       </label>
