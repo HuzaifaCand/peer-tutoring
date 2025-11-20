@@ -65,7 +65,7 @@ const STAT_INFO = {
   studentScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
-    href: "/student/sessions/scheduled",
+    href: "/student/sessions?tab=scheduled",
     icon: CalendarDays,
     fetch: async () =>
       supabase
@@ -76,7 +76,7 @@ const STAT_INFO = {
   studentSessionRequests: {
     label: "Your Session Requests",
     cta: "View Session Requests",
-    href: "/student/sessions/scheduled",
+    href: "/student/sessions?tab=requests",
     icon: Send,
     fetch: async () =>
       supabase
@@ -89,7 +89,7 @@ const STAT_INFO = {
   tutorScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
-    href: "/tutor/sessions/scheduled",
+    href: "/tutor/sessions?tab=scheduled",
     icon: CalendarDays,
     fetch: async () =>
       supabase
@@ -100,7 +100,7 @@ const STAT_INFO = {
   tutorSessionRequests: {
     label: "New Session Requests",
     cta: "View Session Requests",
-    href: "/tutor/sessions/scheduled",
+    href: "/tutor/sessions?tab=requests",
     icon: Inbox,
     fetch: async () =>
       supabase
@@ -111,7 +111,7 @@ const STAT_INFO = {
   tutorPendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
-    href: "/admin/sessions/completed",
+    href: "/admin/sessions?tab=completed",
     icon: ClipboardCheck,
     fetch: async () =>
       supabase
