@@ -62,6 +62,7 @@ export function SubjectCard({
         />
         {role === "tutor" ? (
           <InlineEditable
+            type="input"
             label="Credentials"
             value={s.subtitle}
             onSave={async (newCred) =>
@@ -70,6 +71,7 @@ export function SubjectCard({
           />
         ) : (
           <InlineEditable
+            type="input"
             label="Note"
             value={s.subtitle}
             onSave={async (newNote) =>
