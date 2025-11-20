@@ -28,6 +28,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
     null
   );
+  const isTutorUser = useUserRole() === "tutor";
   const { user } = useAuthUser();
   if (!user) return null;
 
@@ -55,8 +56,6 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       toast.success("Resource verified successfully");
     }
   }
-
-  const isTutorUser = useUserRole() === "tutor";
 
   const addedByTutor = resource.added_by_role === "tutor";
   const isVerified = resource.verified || addedByTutor;
