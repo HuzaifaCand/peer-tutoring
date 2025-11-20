@@ -3,20 +3,15 @@
 import SectionHeader from "@/components/ui/SectionHeader";
 import { UserInfoSection } from "../UserInfoSection";
 import { useAuthUser } from "@/hooks/useAuthUser";
-import Loading from "@/components/Loading";
 import { getUserMetadata } from "../getUserMetadata";
 import { SubjectSection } from "./SubjectSection";
 import SectionDivider from "@/components/ui/SectionDivider";
-import { TutorSlots } from "./TutorSlots";
-import { OnlineAvailabilityUI } from "../onboarding/OnlineAvailabilityUI";
-import { useState } from "react";
-import { EditRequestButton } from "./EditRequestButton";
 import { AvailabilitySection } from "./AvailabilitySection";
 
 export default function Profile({ role }: { role: "student" | "tutor" }) {
-  const { user, userLoading } = useAuthUser();
+  const { user } = useAuthUser();
 
-  if (!user || userLoading) return <Loading bg="bg-mainBg" />;
+  if (!user) return null;
 
   const { displayName, email, studentId } = getUserMetadata(user);
 
