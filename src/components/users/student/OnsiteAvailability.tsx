@@ -36,9 +36,9 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
                       key={`${slot.day}-${slot.hour}`}
                       title={!slot.available ? "Booked" : "Available"}
                       className={clsx(
-                        "px-3 py-1.5 rounded-md text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
+                        "px-3 py-1.5 rounded-2xl text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
                         slot.available
-                          ? "bg-green-500/15 border-green-600/40 text-green-300 hover:bg-green-500/25"
+                          ? "bg-green-500/15 text-green-300  border-white/5 hover:bg-green-500/25"
                           : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
                       )}
                     >
