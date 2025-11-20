@@ -5,7 +5,7 @@ import { User } from "@supabase/supabase-js";
 import { useCallback, useState } from "react";
 import { getStudentSubjects, getTutorSubjects } from "./getSubjects";
 import { CardsLoading } from "@/components/card/CardsLoading";
-import { SubjectCard } from "./SubejctCard";
+import { SubjectCard } from "./SubjectCard";
 import ModalBase from "@/components/modal/ModalBase";
 import { EditRequestForm } from "./EditRequestForm";
 import { EditRequestButton } from "./EditRequestButton";
