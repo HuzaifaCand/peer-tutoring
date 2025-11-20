@@ -18,6 +18,7 @@ import {
   Bell,
   UserCircle2,
   Edit,
+  BookUser,
 } from "lucide-react";
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
@@ -64,15 +65,17 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/tutor", label: "Overview", icon: LayoutDashboard },
     { href: "/tutor/profile", label: "Profile", icon: UserCircle2 },
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
-    { href: "/tutor/resources", label: "Resources", icon: Library },
-    { href: "/student/notifications", label: "Notifications", icon: Bell },
+    { href: "/tutor/resources", label: "Resource Library", icon: Library },
+    // { href: "/tutor/my-resources", label: "My Resources", icon: BookUser },
+    { href: "/tutor/notifications", label: "Notifications", icon: Bell },
   ],
   student: [
     { href: "/student", label: "Overview", icon: LayoutDashboard },
     { href: "/student/profile", label: "Profile", icon: UserCircle2 },
     { href: "/student/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/student/tutors", label: "Browse Tutors", icon: UserSearch },
-    { href: "/student/resources", label: "Resources", icon: Library },
+    { href: "/student/resources", label: "Resource Library", icon: Library },
+    // { href: "/student/my-resources", label: "My Resources", icon: BookUser },
     { href: "/student/notifications", label: "Notifications", icon: Bell },
   ],
 };
