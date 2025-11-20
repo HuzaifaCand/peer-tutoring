@@ -22,7 +22,7 @@ export function OnlineAvailabilityUI({
         type="button"
         aria-pressed={online}
         onClick={onToggle}
-        className={`relative h-6 w-11 rounded-full transition-colors duration-200 ${
+        className={`relative h-3 sm:h-6 w-6 sm:w-11 rounded-full transition-colors duration-200 ${
           online ? "bg-green-500" : "bg-gray-500"
         }`}
       >
