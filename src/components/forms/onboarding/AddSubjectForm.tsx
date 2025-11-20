@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, CheckCircle } from "lucide-react";
 import SubjectInput, {
   SubjectOption,
 } from "@/components/forms/fields/SubjectInput";
@@ -135,7 +135,7 @@ export default function AddSubjectForm({
             "flex items-center gap-1 bg-green-600 hover:bg-green-700"
           )}
         >
-          <Check className="w-4 h-4" />
+          <CheckCircle className="w-4 h-4" />
           Add
         </button>
       </div>
