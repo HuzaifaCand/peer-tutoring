@@ -7,6 +7,12 @@ type payload = {
   why: string;
 };
 
+export const formatEditType = (type: string) => {
+  return type
+    .split("_")
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+};
 const select = `  
       *, users:users!edit_requests_user_id_fkey(full_name, role, email), admin:users!edit_requests_admin_id_fkey(full_name)
     `;
@@ -18,10 +24,7 @@ const formatEditRequest = (e: EditRequestWithUserWithAdmin) => {
     resolved_by: e.admin?.full_name,
     request: (e.payload as payload)?.what,
     reason: (e.payload as payload)?.why,
-    type: e.type
-      .split("_")
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
-      .join(" "),
+    type: formatEditType(e.type),
     username: e.users.full_name.split(" ").slice(0, -1).join(" "),
     student_id: e.users.email.split("@")[0],
     role: e.users.role,
