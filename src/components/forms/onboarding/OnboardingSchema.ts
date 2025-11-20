@@ -61,9 +61,9 @@ export const tutorOnboardingSchema = z.object({
     .refine((val) => val !== "", { message: "Please select a grade" }),
   subjects: z
     .array(getAddSubjectSchema("tutor"))
-    .min(1, "Please select at least one subject."),
+    .min(1, "Please add at least one subject."),
   about: z.string().optional(),
-  slots: z.array(getSlotSchema()).min(1, "Please add at least one slot."),
+  slots: z.array(getSlotSchema()).min(1, "Please select at least one slot."),
   available_online: z.boolean(),
   role: z.literal("tutor"),
 });
