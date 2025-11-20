@@ -14,6 +14,6 @@ export const getLabelClass = (size: sizes) => {
 
 export const getButtonClass = (size: sizes) => {
   const baseClass =
-    "px-4 py-1.5 bg-hoverBg hover:bg-white/10 hover:cursor-pointer text-textWhite/90 border border-white/10 rounded-md font-medium transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-white/20";
+    "px-3 py-1.5 bg-hoverBg hover:bg-white/10 hover:cursor-pointer text-textWhite/90 border border-white/10 rounded-md font-medium transition-all duration-200 disabled:opacity-50 focus:outline-none focus:ring-1 focus:ring-white/20";
   return baseClass + " " + (size === "sm" ? "text-xs sm:text-sm" : "text-xs");
 };
