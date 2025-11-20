@@ -3,6 +3,28 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 
+type OnboardUserRPCArgs = {
+  _user_id: string; // uuid
+  _role: "student" | "tutor";
+  _grade: string;
+  _about: string | null;
+  _subjects: Array<{
+    subject: {
+      id: string;
+      label: string;
+      code: string;
+      color: string;
+    } | null;
+    subtitle: string | null;
+  }>;
+  _slots?: Array<{
+    day: string;
+    hour: number;
+    duration_minutes: number;
+  }>;
+  _available_online?: boolean;
+};
+
 export async function submitOnboarding(data: {
   role: "student" | "tutor";
   grade: string;
@@ -51,7 +73,7 @@ export async function submitOnboarding(data: {
     return { error: "Not authenticated" };
   }
 
-  const rpcArgs: any = {
+  const rpcArgs: OnboardUserRPCArgs = {
     _user_id: user.id,
     _role: data.role,
     _grade: data.grade,
