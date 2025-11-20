@@ -7,6 +7,7 @@ import { getUserMetadata } from "../getUserMetadata";
 import { SubjectSection } from "./SubjectSection";
 import SectionDivider from "@/components/ui/SectionDivider";
 import { AvailabilitySection } from "./AvailabilitySection";
+import { AboutSection } from "./AboutSection";
 
 export default function Profile({ role }: { role: "student" | "tutor" }) {
   const { user } = useAuthUser();
@@ -34,6 +35,8 @@ export default function Profile({ role }: { role: "student" | "tutor" }) {
           <AvailabilitySection tutorId={user.id} />
         </>
       )}
+      <SectionDivider invisible />
+      <AboutSection uid={user.id} role={role} />
     </main>
   );
 }
