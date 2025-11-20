@@ -7,12 +7,7 @@ import { SubjectsSelection } from "./SubjectsSelection";
 import { AboutInput } from "./AboutInput";
 import { FormShell } from "./FormShell";
 import { FormHeader } from "./Header";
-import {
-  FormProvider,
-  useOnboardingForm,
-} from "@/components/forms/onboarding/useOnboardingForm";
-import { getOnboardingSchema } from "@/components/forms/onboarding/OnboardingSchema";
-import { z } from "zod";
+import { useOnboardingForm } from "@/components/forms/onboarding/useOnboardingForm";
 import { toast } from "sonner";
 import { submitOnboarding } from "@/components/forms/onboarding/submitOnboarding";
 import { useRouter } from "next/navigation";
@@ -20,6 +15,13 @@ import { useAuthUser } from "@/hooks/useAuthUser";
 import { SubmitButton } from "./SubmitButton";
 import { getUserMetadata } from "../getUserMetadata";
 import { UserInfoSection } from "../UserInfoSection";
+import { OnlineAvailability } from "./OnlineAvailability";
+import { FormProvider } from "react-hook-form";
+import z from "zod";
+import {
+  studentOnboardingSchema,
+  tutorOnboardingSchema,
+} from "@/components/forms/onboarding/OnboardingSchema";
 
 export type SubjectSelect = {
   subject: {
@@ -46,13 +48,16 @@ export default function OnboardingComponent({
 
   const { userLoading, user, userError } = useAuthUser();
 
+  const schema =
+    role === "tutor" ? tutorOnboardingSchema : studentOnboardingSchema;
+
+  type FormType = z.infer<typeof schema>;
+
   if (userError) console.error("user loading error:", userError);
-  if (userLoading) return <Loading bg={bg} />;
+  if (userLoading) return <Loading bg="bg-mainBg" />;
   if (!user) return null;
 
-  async function onSubmit(
-    data: z.infer<ReturnType<typeof getOnboardingSchema>>
-  ) {
+  async function onSubmit(data: FormType) {
     const cleaned = {
       ...data,
       about: data.about?.trim() || undefined,
@@ -84,6 +89,8 @@ export default function OnboardingComponent({
           />
           <SubjectsSelection role={role} />
           {role === "tutor" && <AvailableSlots />}
+          {role === "tutor" && <OnlineAvailability />}
+
           <AboutInput role={role} />
           <SubmitButton isSubmitting={isSubmitting} />
         </form>
