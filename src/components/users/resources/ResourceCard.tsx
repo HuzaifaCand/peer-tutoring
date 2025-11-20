@@ -6,11 +6,10 @@ import { ExternalLink, Verified, Clock, Copy } from "lucide-react";
 import { ComputedResourceType } from "./getResources";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
-import { usePathname } from "next/navigation";
 import { useState } from "react";
-import ModalBase from "@/components/modal/ModalBase";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { useUserRole } from "@/hooks/useUserRole";
+import { useAuthUser } from "@/hooks/useAuthUser";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -26,6 +25,9 @@ async function incrementResourceView(resourceId: string) {
 }
 
 export function ResourceCard({ resource }: ResourceCardProps) {
+  const { user } = useAuthUser();
+  if (!user) return null;
+
   async function handleCopy() {
     try {
       await navigator.clipboard.writeText(resource.link);
@@ -35,6 +37,22 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       console.error("Clipboard error:", err);
     }
   }
+
+  async function handleVerify(resourceId: string) {
+    if (!user) return;
+    const { error } = await supabase
+      .from("resources")
+      .update({ verified: true, verified_by: user.id })
+      .eq("id", resourceId);
+
+    if (error) {
+      console.error(error, "updating resources");
+      toast.error("Failed to verify resource");
+    } else {
+      toast.success("Resource verified successfully");
+    }
+  }
+
   const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
     null
   );
@@ -54,10 +72,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         title="Are you sure you want to verify this resource?"
         description="This will mark the resource as verified and your name will be visible as the verifier."
         onCancel={() => setResourceData(null)}
-        onConfirm={() => {
-          toast.success("Thanks for verifying that resource!");
-          setResourceData(null);
-        }}
+        onConfirm={() => handleVerify(resource.id)}
       />
 
       <header className="flex justify-between items-center mb-2">
@@ -127,7 +142,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           {isTutorUser && !resource.verified && setResourceData && (
             <button
               onClick={() => setResourceData(resource)}
-              className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
+              className="flex items-center gap-1 px-3 py-1 text-xs font-medium
                text-green-400 bg-green-500/10 focus:outline-none focus:bg-green-400/20 border border-white/10 rounded-md
                hover:bg-green-700/60 transition-all duration-200 hover:cursor-pointer"
             >
