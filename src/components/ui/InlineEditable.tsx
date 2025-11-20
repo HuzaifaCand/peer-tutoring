@@ -38,7 +38,7 @@ export function InlineEditable({
   return (
     <div className="flex flex-col sm:items-center sm:flex-row gap-2 w-full mt-2">
       {/* Label */}
-      <p className="text-xs text-textMuted">{label}</p>
+      <p className="text-sm sm:mb-0.5 text-textMuted">{label}</p>
 
       <div className="flex items-center gap-2 w-full">
         {/* Text field */}
@@ -47,7 +47,7 @@ export function InlineEditable({
           onBlur={handleBlur}
           onChange={(e) => setLocal(e.target.value)}
           disabled={!editing}
-          className={`w-full px-2 py-1 rounded-md text-xs bg-[#1a1a1a] border border-white/10 text-textWhite
+          className={`w-full px-2 py-1 rounded-md text-xs bg-mainBg border border-white/10 text-textWhite
             disabled:opacity-60 disabled:cursor-default outline-none transition`}
         />
 
