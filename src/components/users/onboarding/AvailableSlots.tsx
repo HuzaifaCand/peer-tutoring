@@ -7,7 +7,11 @@ const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday"] as const;
 const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16];
 
 export function AvailableSlots() {
-  const { watch, setValue } = useFormContext();
+  const {
+    watch,
+    setValue,
+    formState: { errors },
+  } = useFormContext();
 
   const slots = watch("slots") as Array<{
     day: string;
@@ -45,8 +49,15 @@ export function AvailableSlots() {
 
   return (
     <section className="mt-10 space-y-4">
-      <div className="text-lg sm:text-xl font-medium text-textWhite">
-        Available Onsite Slots
+      <div className="flex md:flex-row flex-col md:items-center gap-0 md:gap-2">
+        <h2 className="text-lg sm:text-xl font-medium text-textWhite">
+          Available Onsite Slots
+        </h2>
+        {errors.slots?.message && (
+          <p className="text-red-400 text-xs mt-1">
+            {errors.slots.message.toString()}
+          </p>
+        )}
       </div>
 
       {/* Grid wrapper */}
