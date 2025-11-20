@@ -1,76 +1,139 @@
-import { formatEditType } from "@/components/admin/edit-requests/getEditRequests";
-import {
-  getButtonClass,
-  getInputClass,
-  getLabelClass,
-} from "@/components/forms/classes";
-import clsx from "clsx";
-import { Check } from "lucide-react";
+"use client";
 
-const inputClass = getInputClass("xs");
-const labelClass = getLabelClass("xs");
-const buttonClass = getButtonClass("xs");
+import { supabase } from "@/lib/supabase/client";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { RequestFormUI } from "./RequestFormUI";
+
+export type editReqType = {
+  id: string;
+  payload: { what: string; why: string };
+  approved: boolean | null;
+} | null;
 
 export function EditRequestForm({
   type,
+  uid,
+  setModal,
 }: {
   type: "subject_change" | "availability_change";
+  uid: string;
+  setModal: (modal: boolean) => void;
 }) {
+  const [editReq, setEditReq] = useState<editReqType>(null);
+
+  const [what, setWhat] = useState("");
+  const [why, setWhy] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // ----------------------------
+  // FETCH EXISTING REQUEST
+  // ----------------------------
+  useEffect(() => {
+    let ignore = false;
+
+    async function fetchEditRequest() {
+      const { data, error } = await supabase
+        .from("edit_requests")
+        .select("*")
+        .eq("user_id", uid)
+        .eq("type", type)
+        .is("approved", null) // pending only
+        .order("created_at", { ascending: false })
+        .limit(1);
+
+      if (error) {
+        console.error("edit request fetch error:", error);
+        return;
+      }
+
+      if (!ignore) {
+        const row = data?.[0] ?? null;
+        setEditReq(row);
+
+        if (row) {
+          setWhat(row.payload.what);
+          setWhy(row.payload.why);
+        }
+      }
+    }
+
+    fetchEditRequest();
+    return () => {
+      ignore = true;
+    };
+  }, [uid, type]);
+
+  // ----------------------------
+  // SUBMIT NEW REQUEST
+  // ----------------------------
+  async function handleSubmit() {
+    if (!what.trim() || !why.trim()) {
+      toast.error("Please fill in both fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    const { error } = await supabase
+      .from("edit_requests")
+      .insert({
+        user_id: uid,
+        type,
+        payload: { what, why },
+        approved: null,
+      })
+      .select()
+      .single();
+
+    setLoading(false);
+
+    if (error) {
+      console.error("submit edit request error:", error);
+      toast.error("Failed to submit request.");
+      return;
+    }
+
+    toast.success("Edit request submitted.");
+    setEditReq(null);
+    setModal(false);
+  }
+
+  // ----------------------------
+  // DELETE PENDING REQUEST
+  // ----------------------------
+  async function handleDelete() {
+    if (!editReq) return;
+
+    setLoading(true);
+
+    const { error } = await supabase
+      .from("edit_requests")
+      .delete()
+      .eq("id", editReq.id);
+
+    setLoading(false);
+
+    if (error) {
+      console.error("delete error:", error);
+      toast.error("Failed to delete request.");
+      return;
+    }
+
+    toast.success("Request deleted.");
+    setModal(false);
+  }
+
   return (
-    <div className="space-y-3 py-4 px-2 sm:px-6 text-textWhite">
-      <div className="space-y-1 mb-6">
-        <h2 className="text-xl sm:text-2xl font-semibold">Request an Edit</h2>
-      </div>
-
-      <div className="space-y-2 ">
-        <div className="flex gap-2 items-center">
-          <label className={clsx(labelClass)}>Request Type</label>
-        </div>
-
-        <input
-          disabled
-          value={formatEditType(type)}
-          className={clsx(inputClass)}
-        />
-      </div>
-
-      {/* Subject Picker */}
-      <div className="space-y-2 ">
-        <div className="flex gap-2 items-center">
-          <label className={clsx(labelClass)}>Detailed Changes</label>
-        </div>
-
-        <textarea
-          rows={2}
-          className={clsx(inputClass, "placeholder-textMuted/40")}
-        />
-      </div>
-
-      {/* Credential / Note Area */}
-      <div className="space-y-2">
-        <div className="flex gap-2 items-center">
-          <label className={clsx(labelClass)}>Reasons</label>
-        </div>
-
-        <textarea
-          rows={3}
-          className={clsx(inputClass, "placeholder-textMuted/40")}
-        />
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex justify-end mt-6">
-        <button
-          type="button"
-          className={clsx(
-            buttonClass,
-            "flex items-center gap-1 bg-green-600 hover:bg-green-700"
-          )}
-        >
-          <Check className="w-4 h-4" />
-          Submit
-        </button>
-      </div>
-    </div>
+    <RequestFormUI
+      editReq={editReq}
+      setWhat={setWhat}
+      setWhy={setWhy}
+      payload={{ what, why }}
+      loading={loading}
+      handleDelete={handleDelete}
+      handleSubmit={handleSubmit}
+      type={type}
+    />
   );
 }
