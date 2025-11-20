@@ -70,7 +70,7 @@ export default function ModalBase({
           >
             <motion.div
               className={clsx(
-                "modal-content bg-mainBg border border-white/10 relative focus:outline-none rounded-2xl shadow-2xl",
+                "modal-content bg-mainBg relative focus:outline-none rounded-2xl shadow-2xl",
                 "overflow-y-auto w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
                 width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
               )}
