@@ -23,7 +23,7 @@ export function CardShell({
       }
       transition={{ duration: 0.12, ease: "easeOut" }}
       className={clsx(
-        "rounded-xl bg-elevatedBg border border-white/5 shadow-sm",
+        "rounded-xl bg-elevatedBg shadow-sm",
         "p-5 text-sm",
         clickable ? "cursor-pointer" : "",
         className
