@@ -53,7 +53,7 @@ function SubjectCard({
       <div
         onClick={() => onClick?.(subject)}
         className={clsx(
-          "rounded-xl w-full px-4 sm:px-6 py-3 sm:py-4 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
+          "rounded-xl w-full px-4 sm:px-6 py-3 transition transform shadow-md border border-white/10 bg-opacity-80 hover:bg-hoverBg/80"
         )}
       >
         <div className="flex items-center justify-between gap-4">
@@ -62,7 +62,7 @@ function SubjectCard({
               {subject.subject?.label?.split(" ").slice(1, 3).join(" ")}
             </h3>
             {subject.subtitle && (
-              <p className="text-xs md:text-sm text-textMuted">
+              <p className="text-[10px] md:text-xs text-textMuted">
                 {role === "tutor" ? "Credentials: " : "Note: "}
                 {subject.subtitle}
               </p>
@@ -115,7 +115,7 @@ function AddSubjectCard({
           "rounded-xl border-2 border-dashed border-white/10",
           "bg-transparent hover:bg-white/5",
           "text-textMuted hover:text-textWhite",
-          "py-3 sm:py-4 transition-all cursor-pointer active:scale-[0.98]"
+          "py-3 transition-all cursor-pointer active:scale-[0.98]"
         )}
       >
         <Plus className="w-4 h-4" />
