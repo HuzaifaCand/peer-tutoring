@@ -6,6 +6,7 @@ import SubjectInput from "../fields/SubjectInput";
 import { subjectOptions } from "@/lib/constants/subjects";
 import clsx from "clsx";
 import { User } from "@supabase/supabase-js";
+import { CheckCircle } from "lucide-react";
 
 interface ResourceFormProps {
   onSubmit: (data: AddResourceData) => void;
@@ -108,9 +109,10 @@ export function ResourceForm({
         <button
           type="submit"
           disabled={isSubmitting || userLoading || !user}
-          className={buttonClass}
+          className={clsx(buttonClass, "flex items-center gap-1")}
         >
-          {isSubmitting ? "Submitting..." : "Add Resource"}
+          <CheckCircle className="w-3 h-3" />
+          Submit
         </button>
       </div>
     </form>
