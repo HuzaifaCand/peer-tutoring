@@ -3,9 +3,10 @@
 import { CardShell } from "@/components/card/CardShell";
 import { CardCTA } from "@/components/ui/CardCTA";
 import { ComputedUserSubjectCard } from "./getUserSubjects";
-import { colors, Tag } from "@/components/ui/Tag";
+import { Tag } from "@/components/ui/Tag";
 import { toast } from "sonner";
 import Link from "next/link";
+import { SubjectHeader } from "./SubjectHeader";
 
 interface UserSubjectCardProps {
   subject: ComputedUserSubjectCard;
@@ -25,18 +26,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
     <CardShell>
       <div className="flex flex-col gap-4 p-0 sm:p-1">
         {/* Header */}
-        <div className="flex items-center justify-between">
-          <h3
-            className={`text-xl sm:text-2xl font-semibold text-white leading-tight`}
-          >
-            {name}
-          </h3>
-
-          <div className="flex items-center gap-1">
-            <Tag value={grade} color="muted" textSize="text-[12px]" />
-            <Tag value={code} color={color as colors} textSize="text-[12px]" />
-          </div>
-        </div>
+        <SubjectHeader name={name} code={code} grade={grade} color={color} />
         <div className="bg-hoverBg w-full h-[1px]" />
         {/* Footer */}
         <div className="flex items-end justify-between pt-1 gap-2">
