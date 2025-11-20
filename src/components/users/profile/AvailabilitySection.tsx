@@ -10,11 +10,14 @@ import { EditRequestForm } from "./EditRequestForm";
 
 export function AvailabilitySection({ tutorId }: { tutorId: string }) {
   const [modal, setModal] = useState(false);
-
   return (
     <>
       <ModalBase isOpen={modal} onClose={() => setModal(false)}>
-        <EditRequestForm type="availability_change" />
+        <EditRequestForm
+          uid={tutorId}
+          setModal={setModal}
+          type="availability_change"
+        />
       </ModalBase>
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
