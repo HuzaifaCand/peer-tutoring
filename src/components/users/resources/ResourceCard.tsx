@@ -18,10 +18,15 @@ interface ResourceCardProps {
 // add the verifying ability after adding the auths or at some point later down the line, actually might as well seed it right now
 
 async function incrementResourceView(resourceId: string) {
-  const { error } = await supabase.rpc("increment_resource_views", {
+  const { data, error } = await supabase.rpc("increment_resource_view_count", {
     resource_id: resourceId,
   });
-  if (error) console.error("Failed to increment view count:", error);
+
+  if (error) {
+    console.error("Failed to increment view count:", error);
+  } else {
+    console.log("New view count:", data);
+  }
 }
 
 export function ResourceCard({ resource }: ResourceCardProps) {
