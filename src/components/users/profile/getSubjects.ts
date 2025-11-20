@@ -20,7 +20,7 @@ export async function getStudentSubjects(uid: string) {
 
   const studentSubjects = data?.map((s: StudentSubjects) => ({
     subject_id: s.subject_id,
-    note: s.note,
+    subtitle: s.note,
     label: s.subjects.label,
     name: s.subjects.name,
     code: s.subjects.code,
@@ -46,7 +46,7 @@ export async function getTutorSubjects(uid: string) {
 
   const tutorSubjects = data?.map((s: TutorSubjects) => ({
     subject_id: s.subject_id,
-    note: s.credentials,
+    subtitle: s.credentials,
     label: s.subjects.label,
     name: s.subjects.name,
     code: s.subjects.code,
