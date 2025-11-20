@@ -22,7 +22,6 @@ import {
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
 import { useSignOut } from "@/hooks/signout";
-import ModalBase from "../modal/ModalBase";
 
 type UserType = "admin" | "tutor" | "student";
 
@@ -39,7 +38,7 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/admin/students", label: "Students", icon: Users },
     { href: "/admin/tutors", label: "Tutors", icon: GraduationCap },
     { href: "/admin/edit-requests", label: "Edit Requests", icon: Edit },
-    { href: "/admin/sessions", label: "Sessions", icon: CalendarDays },
+    { href: "/admin/sessions", label: "Session Stats", icon: CalendarDays },
     {
       href: "/admin/sessions/active",
       label: "Active Sessions",
@@ -65,7 +64,6 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/tutor", label: "Overview", icon: LayoutDashboard },
     { href: "/tutor/profile", label: "Profile", icon: UserCircle2 },
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
-    { href: "/tutor/availability", label: "Availability", icon: Clock },
     { href: "/tutor/resources", label: "Resources", icon: Library },
     { href: "/student/notifications", label: "Notifications", icon: Bell },
   ],
