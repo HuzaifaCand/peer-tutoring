@@ -95,7 +95,7 @@ export function InlineEditable({
     <div className="flex flex-col gap-1 w-full mt-2">
       {/* header row */}
       <div className="flex items-center justify-between">
-        <p className="text-md font-medium text-textWhite">{label}</p>
+        <p className="text-lg font-semibold text-textWhite">{label}</p>
         <RenderIcon />
       </div>
 
