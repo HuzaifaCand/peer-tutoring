@@ -23,6 +23,7 @@ import {
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
 import { useSignOut } from "@/hooks/signout";
+import { useNotificationsStore } from "../notifications/notificationsStore";
 
 type UserType = "admin" | "tutor" | "student";
 
@@ -90,6 +91,8 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
   const pathname = usePathname();
   const navItems = navItemsByType[type];
 
+  const { unreadCount } = useNotificationsStore();
+
   return (
     <>
       <ConfirmationModal
@@ -119,15 +122,35 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
               <Link
                 key={href}
                 href={href}
-                className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium ${
+                className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium ${
                   isActive
                     ? "bg-white/5 text-white"
                     : "hover:bg-white/5 text-gray-300"
                 }`}
                 onClick={onClose}
               >
-                <Icon size={16} />
-                <span>{label}</span>
+                <div className="flex items-center gap-3">
+                  <div className="relative w-5 h-5 flex items-center justify-center">
+                    <Icon size={16} />
+                    {label === "Notifications" && unreadCount > 0 && (
+                      <span
+                        className="
+                          absolute -top-1.5 -right-1.5 
+                          bg-red-500 text-white 
+                          text-[9px] font-bold 
+                          rounded-full 
+                          px-1 py-[1px]
+                          shadow-md
+                          ring-1 ring-black/20
+                        "
+                      >
+                        {unreadCount}
+                      </span>
+                    )}
+                  </div>
+
+                  <span>{label}</span>
+                </div>
               </Link>
             );
           })}
