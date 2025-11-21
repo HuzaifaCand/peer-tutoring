@@ -21,7 +21,7 @@ export function AvailabilitySection({ tutorId }: { tutorId: string }) {
       </ModalBase>
       <div className="space-y-3">
         <div className="flex items-center justify-between gap-2">
-          <h2 className="text-xl font-semibold text-textWhite">
+          <h2 className="text-lg font-semibold text-textWhite">
             Your Availability
           </h2>
           <EditRequestButton handleOpen={() => setModal(true)} />
