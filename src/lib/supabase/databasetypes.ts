@@ -110,7 +110,6 @@ export type Database = {
           href: string | null;
           id: string;
           read: boolean | null;
-          read_at: string | null;
           title: string;
           type: string | null;
           user_id: string;
@@ -121,7 +120,6 @@ export type Database = {
           href?: string | null;
           id?: string;
           read?: boolean | null;
-          read_at?: string | null;
           title: string;
           type?: string | null;
           user_id: string;
@@ -132,7 +130,6 @@ export type Database = {
           href?: string | null;
           id?: string;
           read?: boolean | null;
-          read_at?: string | null;
           title?: string;
           type?: string | null;
           user_id?: string;
