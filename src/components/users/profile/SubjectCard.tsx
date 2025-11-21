@@ -55,6 +55,7 @@ export function SubjectCard({
     <CardShell key={s.subject_id}>
       <div className="flex flex-col gap-2">
         <SubjectHeader
+          profile
           name={s.name}
           code={s.code}
           grade={s.grade}
