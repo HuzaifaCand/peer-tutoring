@@ -1,4 +1,4 @@
-import { SessionWithUsers } from "@/lib/computedtypes";
+import { SessionWithUsers } from "./types";
 
 export function extractTutorStudentInfo(s: SessionWithUsers) {
   const tutorEmail = s.tutors.users.email ?? "";
