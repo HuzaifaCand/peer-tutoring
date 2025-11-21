@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import SectionHeader from "@/components/ui/SectionHeader";
+import { NotificationCard } from "./NotificationCard";
 
 export default function NotificationsPage() {
   const notifications = useNotifications();
@@ -34,9 +35,7 @@ export default function NotificationsPage() {
       <SectionHeader title="Notifications" />
       <div className="space-y-3">
         {notifications?.map((n) => (
-          <h1 key={n.id} className="text-2xl font-semibold text-textWhite">
-            {n.title}
-          </h1>
+          <NotificationCard key={n.id} n={n} />
         ))}
       </div>
     </>

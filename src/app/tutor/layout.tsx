@@ -1,6 +1,6 @@
 import DesktopSidebar from "@/components/sidebar/DesktopSidebar";
 import MobileSidebar from "@/components/sidebar/MobileSidebar";
-import { NotificationsProvider } from "@/components/users/notifications/NotificationsProvider";
+import { NotificationsProvider } from "@/components/notifications/NotificationsProvider";
 
 export default function TutorLayout({
   children,
