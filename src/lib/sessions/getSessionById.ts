@@ -1,7 +1,7 @@
 import { supabase } from "@/lib/supabase/client";
 import { baseSelect, SessionStatus } from "./fetchSessions";
-import { SessionWithUsers } from "@/lib/computedtypes";
 import { sessionExtendSelects } from "./fetchSessions";
+import { SessionWithUsers } from "./types";
 
 export async function getSessionById({
   id,

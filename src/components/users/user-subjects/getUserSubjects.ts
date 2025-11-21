@@ -1,9 +1,9 @@
-import {
-  SubjectHealthView,
-  SubjectRow,
-  SubjectWithUserCount,
-} from "@/lib/computedtypes";
+import { SubjectHealthView, SubjectRow } from "@/lib/computedtypes";
 import { supabase } from "@/lib/supabase/client";
+
+export type SubjectWithUserCount = SubjectHealthView & {
+  subjects: SubjectRow;
+};
 
 async function getSubjectUsers(role: "tutor" | "student", subject_id: string) {
   const countColumn = role === "tutor" ? "student_count" : "tutor_count";

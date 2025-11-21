@@ -1,10 +1,15 @@
-import { EditRequestWithUserWithAdmin } from "@/lib/computedtypes";
+import { EditRequest, UserRow } from "@/lib/computedtypes";
 import { supabase } from "@/lib/supabase/client";
 import { format, formatDistanceToNow, parseISO } from "date-fns";
 
 type payload = {
   what: string;
   why: string;
+};
+
+type EditRequestWithUserWithAdmin = EditRequest & {
+  users: UserRow;
+  admin: UserRow | null;
 };
 
 export const formatEditType = (type: string) => {

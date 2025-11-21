@@ -1,5 +1,5 @@
 import { supabase } from "@/lib/supabase/client";
-import { SessionWithUsers } from "@/lib/computedtypes";
+import { SessionWithUsers } from "./types";
 
 export type SessionStatus =
   | "scheduled"

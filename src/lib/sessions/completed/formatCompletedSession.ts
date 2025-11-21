@@ -1,6 +1,6 @@
 import { differenceInMinutes, format, parseISO } from "date-fns";
-import { SessionWithUsers } from "@/lib/computedtypes";
 import { extractTutorStudentInfo, computeMode } from "../sessionFormatters";
+import { SessionWithUsers } from "../types";
 
 export function formatCompletedSession(s: SessionWithUsers) {
   const start = s.start_time ? parseISO(s.start_time) : null;

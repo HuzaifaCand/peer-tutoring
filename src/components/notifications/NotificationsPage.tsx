@@ -35,11 +35,11 @@ export default function NotificationsPage() {
   // ref prevents reruns
 
   return (
-    <>
+    <main>
       <SectionHeader title="Notifications" />
       {notifications?.map((n) => (
         <NotificationCard key={n.id} n={n} />
       ))}
-    </>
+    </main>
   );
 }

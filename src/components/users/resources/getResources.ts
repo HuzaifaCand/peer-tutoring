@@ -1,5 +1,13 @@
-import { Resource } from "@/lib/computedtypes";
+import { ResourceRow, SubjectRow, UserRow } from "@/lib/computedtypes";
 import { supabase } from "@/lib/supabase/client";
+
+export type Resource = ResourceRow & {
+  subjects: SubjectRow;
+  users: Pick<UserRow, "full_name" | "role">;
+  verified_by_tutor?: {
+    users: Pick<UserRow, "full_name">;
+  } | null;
+};
 
 export async function getResources() {
   const { data: resources, error } = await supabase

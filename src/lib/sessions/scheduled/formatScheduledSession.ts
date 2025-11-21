@@ -1,6 +1,6 @@
 import { format, parseISO } from "date-fns";
-import { SessionWithUsers } from "@/lib/computedtypes";
 import { extractTutorStudentInfo, computeMode } from "../sessionFormatters";
+import { SessionWithUsers } from "../types";
 
 export function formatScheduledSession(s: SessionWithUsers) {
   const info = extractTutorStudentInfo(s);

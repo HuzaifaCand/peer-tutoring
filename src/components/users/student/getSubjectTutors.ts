@@ -1,5 +1,19 @@
-import { SubjectTutor } from "@/lib/computedtypes";
+import {
+  SlotsRow,
+  SubjectRow,
+  TutorRow,
+  TutorSubject,
+  UserRow,
+} from "@/lib/computedtypes";
 import { supabase } from "@/lib/supabase/client";
+
+export type SubjectTutor = TutorSubject & {
+  subjects: SubjectRow;
+  tutors: TutorRow & {
+    users: Pick<UserRow, "full_name">;
+    available_slots: SlotsRow[];
+  };
+};
 
 const formatSubjectTutor = (t: SubjectTutor) => {
   return {

@@ -1,7 +1,15 @@
 import { supabase } from "@/lib/supabase/client";
-import { TutorUser } from "@/lib/computedtypes";
+import { SlotsRow, SubjectRow, TutorRow, UserRow } from "@/lib/computedtypes";
 import { formatTutor } from "./userFormatters";
 import { fullTutorSelect } from "./userSelects";
+
+type TutorUser = TutorRow & {
+  users: Pick<UserRow, "full_name" | "email">;
+  available_slots: SlotsRow[];
+  tutor_subjects: {
+    subjects: SubjectRow;
+  }[];
+};
 
 export async function getTutors() {
   const { data: tutors, error } = await supabase
