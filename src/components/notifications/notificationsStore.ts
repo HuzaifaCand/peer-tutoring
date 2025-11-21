@@ -31,16 +31,11 @@ export const useNotificationsStore = create<NotificationsState>((set) => ({
       const hasUnread = state.notifications.some((n) => !n.read);
 
       if (!hasUnread) {
-        // Avoid unnecessary array rebuild
         return { unreadCount: 0 };
       }
 
       return {
-        notifications: state.notifications.map((x) => ({
-          ...x,
-          read: true,
-          read_at: new Date().toISOString(),
-        })),
+        notifications: state.notifications,
         unreadCount: 0,
       };
     }),
