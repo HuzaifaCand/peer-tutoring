@@ -27,7 +27,12 @@ export default function Profile({ role }: { role: "student" | "tutor" }) {
         isOnboarding={false}
         grade="AS" // temporary
       />
-      <SectionDivider />
+      <div className="lg:hidden">
+        <SectionDivider />
+      </div>
+      <div className="hidden lg:block">
+        <SectionDivider invisible />
+      </div>
       <SubjectSection user={user} role={role} />
       {role === "tutor" && (
         <>
