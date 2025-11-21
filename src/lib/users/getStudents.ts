@@ -1,14 +1,7 @@
 import { supabase } from "@/lib/supabase/client";
-import { StudentRow, SubjectRow, UserRow } from "@/lib/computedtypes";
 import { formatStudent } from "./userFormatters";
 import { fullStudentSelect } from "./userSelects";
-
-type StudentUser = StudentRow & {
-  users: Pick<UserRow, "full_name" | "email">;
-  student_subjects: {
-    subjects: SubjectRow;
-  }[];
-};
+import { StudentUser } from "./types";
 
 export async function getStudents() {
   const { data, error } = await supabase

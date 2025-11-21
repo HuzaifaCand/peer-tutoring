@@ -1,4 +1,4 @@
-import { StudentUser, TutorUser } from "../computedtypes";
+import { StudentUser, TutorUser } from "./types";
 
 export function extractUserInfo(user: { full_name: string; email: string }) {
   return {
