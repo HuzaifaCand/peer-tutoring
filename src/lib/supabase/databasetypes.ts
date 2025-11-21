@@ -106,7 +106,7 @@ export type Database = {
       notifications: {
         Row: {
           body: string | null;
-          created_at: string | null;
+          created_at: string;
           href: string | null;
           id: string;
           read: boolean | null;
@@ -117,7 +117,7 @@ export type Database = {
         };
         Insert: {
           body?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           href?: string | null;
           id?: string;
           read?: boolean | null;
@@ -128,7 +128,7 @@ export type Database = {
         };
         Update: {
           body?: string | null;
-          created_at?: string | null;
+          created_at?: string;
           href?: string | null;
           id?: string;
           read?: boolean | null;
@@ -700,16 +700,21 @@ export type Database = {
       };
     };
     Functions: {
-      increment_resource_view: { Args: { rid: string }; Returns: undefined };
+      increment_resource_view_count: {
+        Args: { resource_id: string };
+        Returns: number;
+      };
       onboard_user: {
         Args: {
           _about: string;
+          _available_online?: boolean;
           _grade: string;
           _role: string;
+          _slots?: Json;
           _subjects: Json;
           _user_id: string;
         };
-        Returns: undefined;
+        Returns: Json;
       };
     };
     Enums: {
