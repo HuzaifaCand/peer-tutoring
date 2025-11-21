@@ -27,15 +27,15 @@ export default function Profile({ role }: { role: "student" | "tutor" }) {
         isOnboarding={false}
         grade="AS" // temporary
       />
-      <SectionDivider invisible />
+      <SectionDivider />
       <SubjectSection user={user} role={role} />
       {role === "tutor" && (
         <>
-          <SectionDivider invisible />
+          <SectionDivider />
           <AvailabilitySection tutorId={user.id} />
         </>
       )}
-      <SectionDivider invisible />
+      <SectionDivider />
       <AboutSection uid={user.id} role={role} />
     </main>
   );
