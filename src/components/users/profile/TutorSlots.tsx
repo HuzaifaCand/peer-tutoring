@@ -3,7 +3,7 @@
 import { useCallback } from "react";
 import { getOnsiteSlots } from "./getSlots";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { OnsiteAvailablity } from "../student/OnsiteAvailability";
+import { OnsiteAvailablity } from "../browse-tutors/OnsiteAvailability";
 
 export function TutorSlots({ tutorId }: { tutorId: string }) {
   const fetchFn = useCallback(() => getOnsiteSlots(tutorId), [tutorId]);

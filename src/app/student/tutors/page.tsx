@@ -1,4 +1,4 @@
-import BrowseTutors from "@/components/users/student/BrowseTutors";
+import BrowseTutors from "@/components/users/browse-tutors/BrowseTutors";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
