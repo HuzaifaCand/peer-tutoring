@@ -136,6 +136,45 @@ export type Database = {
         };
         Relationships: [];
       };
+      online_session_messages: {
+        Row: {
+          created_at: string;
+          id: string;
+          message: string;
+          request_id: string;
+          sender_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          message: string;
+          request_id: string;
+          sender_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          message?: string;
+          request_id?: string;
+          sender_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "online_session_messages_request_id_fkey";
+            columns: ["request_id"];
+            isOneToOne: false;
+            referencedRelation: "online_session_requests";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_messages_sender_id_fkey";
+            columns: ["sender_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       online_session_requests: {
         Row: {
           created_at: string;
@@ -404,6 +443,7 @@ export type Database = {
           id: string;
           is_online: boolean;
           meeting_link: string | null;
+          rejection_reason: string | null;
           scheduled_for: string;
           slot_id: string | null;
           start_time: string | null;
@@ -427,6 +467,7 @@ export type Database = {
           id?: string;
           is_online?: boolean;
           meeting_link?: string | null;
+          rejection_reason?: string | null;
           scheduled_for: string;
           slot_id?: string | null;
           start_time?: string | null;
@@ -450,6 +491,7 @@ export type Database = {
           id?: string;
           is_online?: boolean;
           meeting_link?: string | null;
+          rejection_reason?: string | null;
           scheduled_for?: string;
           slot_id?: string | null;
           start_time?: string | null;
