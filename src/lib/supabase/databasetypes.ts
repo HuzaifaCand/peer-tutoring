@@ -136,6 +136,180 @@ export type Database = {
         };
         Relationships: [];
       };
+      online_session_requests: {
+        Row: {
+          created_at: string;
+          id: string;
+          session_id: string | null;
+          status: string;
+          student_id: string;
+          subject_id: string;
+          suggested_date: string;
+          suggested_duration_minutes: number;
+          suggested_time: string | null;
+          tutor_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          session_id?: string | null;
+          status?: string;
+          student_id: string;
+          subject_id: string;
+          suggested_date: string;
+          suggested_duration_minutes?: number;
+          suggested_time?: string | null;
+          tutor_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          session_id?: string | null;
+          status?: string;
+          student_id?: string;
+          subject_id?: string;
+          suggested_date?: string;
+          suggested_duration_minutes?: number;
+          suggested_time?: string | null;
+          tutor_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "online_session_requests_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_requests_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
+          },
+          {
+            foreignKeyName: "online_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_requests_tutor_id_fkey";
+            columns: ["tutor_id"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      onsite_session_requests: {
+        Row: {
+          created_at: string;
+          id: string;
+          rejection_reason: string | null;
+          session_id: string | null;
+          slot_id: string;
+          status: string;
+          student_id: string;
+          subject_id: string;
+          tutor_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          rejection_reason?: string | null;
+          session_id?: string | null;
+          slot_id: string;
+          status?: string;
+          student_id: string;
+          subject_id: string;
+          tutor_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          rejection_reason?: string | null;
+          session_id?: string | null;
+          slot_id?: string;
+          status?: string;
+          student_id?: string;
+          subject_id?: string;
+          tutor_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "onsite_session_requests_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_slot_id_fkey";
+            columns: ["slot_id"];
+            isOneToOne: false;
+            referencedRelation: "available_slots";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_health";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subject_popularity";
+            referencedColumns: ["subject_id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_subject_id_fkey";
+            columns: ["subject_id"];
+            isOneToOne: false;
+            referencedRelation: "subjects";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "onsite_session_requests_tutor_id_fkey";
+            columns: ["tutor_id"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       resources: {
         Row: {
           added_by: string;
@@ -217,100 +391,6 @@ export type Database = {
           }
         ];
       };
-      session_requests: {
-        Row: {
-          available_slot_id: string | null;
-          created_at: string;
-          duration_minutes: number;
-          id: string;
-          message: string | null;
-          mode: string;
-          session_id: string | null;
-          slot_end: string;
-          slot_start: string;
-          status: string;
-          student_id: string;
-          subject_id: string;
-          tutor_id: string;
-          updated_at: string;
-        };
-        Insert: {
-          available_slot_id?: string | null;
-          created_at?: string;
-          duration_minutes?: number;
-          id?: string;
-          message?: string | null;
-          mode: string;
-          session_id?: string | null;
-          slot_end: string;
-          slot_start: string;
-          status?: string;
-          student_id: string;
-          subject_id: string;
-          tutor_id: string;
-          updated_at?: string;
-        };
-        Update: {
-          available_slot_id?: string | null;
-          created_at?: string;
-          duration_minutes?: number;
-          id?: string;
-          message?: string | null;
-          mode?: string;
-          session_id?: string | null;
-          slot_end?: string;
-          slot_start?: string;
-          status?: string;
-          student_id?: string;
-          subject_id?: string;
-          tutor_id?: string;
-          updated_at?: string;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "session_requests_session_id_fkey";
-            columns: ["session_id"];
-            isOneToOne: false;
-            referencedRelation: "sessions";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "session_requests_student_id_fkey";
-            columns: ["student_id"];
-            isOneToOne: false;
-            referencedRelation: "students";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "session_requests_subject_id_fkey";
-            columns: ["subject_id"];
-            isOneToOne: false;
-            referencedRelation: "subject_health";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "session_requests_subject_id_fkey";
-            columns: ["subject_id"];
-            isOneToOne: false;
-            referencedRelation: "subject_popularity";
-            referencedColumns: ["subject_id"];
-          },
-          {
-            foreignKeyName: "session_requests_subject_id_fkey";
-            columns: ["subject_id"];
-            isOneToOne: false;
-            referencedRelation: "subjects";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "session_requests_tutor_id_fkey";
-            columns: ["tutor_id"];
-            isOneToOne: false;
-            referencedRelation: "tutors";
-            referencedColumns: ["id"];
-          }
-        ];
-      };
       sessions: {
         Row: {
           academic_year: string;
@@ -320,45 +400,39 @@ export type Database = {
           cancelled_at: string | null;
           cancelled_by: string | null;
           completed_at: string | null;
-          created_at: string;
           duration_minutes: number;
           id: string;
           is_online: boolean;
-          rejection_reason: string | null;
+          meeting_link: string | null;
           scheduled_for: string;
-          short_reason: string | null;
-          short_session: boolean | null;
           slot_id: string | null;
           start_time: string | null;
           status: string;
           student_id: string;
-          subject: string;
+          subject_id: string;
           tutor_id: string;
           updated_at: string;
           verified: boolean | null;
           verified_by: string | null;
         };
         Insert: {
-          academic_year: string;
+          academic_year?: string;
           booked_at?: string;
           cancel_reason?: string | null;
           cancellation_source?: string | null;
           cancelled_at?: string | null;
           cancelled_by?: string | null;
           completed_at?: string | null;
-          created_at?: string;
           duration_minutes?: number;
           id?: string;
           is_online?: boolean;
-          rejection_reason?: string | null;
+          meeting_link?: string | null;
           scheduled_for: string;
-          short_reason?: string | null;
-          short_session?: boolean | null;
           slot_id?: string | null;
           start_time?: string | null;
           status: string;
           student_id: string;
-          subject: string;
+          subject_id: string;
           tutor_id: string;
           updated_at?: string;
           verified?: boolean | null;
@@ -372,19 +446,16 @@ export type Database = {
           cancelled_at?: string | null;
           cancelled_by?: string | null;
           completed_at?: string | null;
-          created_at?: string;
           duration_minutes?: number;
           id?: string;
           is_online?: boolean;
-          rejection_reason?: string | null;
+          meeting_link?: string | null;
           scheduled_for?: string;
-          short_reason?: string | null;
-          short_session?: boolean | null;
           slot_id?: string | null;
           start_time?: string | null;
           status?: string;
           student_id?: string;
-          subject?: string;
+          subject_id?: string;
           tutor_id?: string;
           updated_at?: string;
           verified?: boolean | null;
@@ -399,6 +470,13 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
+            foreignKeyName: "sessions_slot_id_fkey";
+            columns: ["slot_id"];
+            isOneToOne: false;
+            referencedRelation: "available_slots";
+            referencedColumns: ["id"];
+          },
+          {
             foreignKeyName: "sessions_student_id_fkey";
             columns: ["student_id"];
             isOneToOne: false;
@@ -406,22 +484,22 @@ export type Database = {
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "sessions_subject_fkey";
-            columns: ["subject"];
+            foreignKeyName: "sessions_subject_id_fkey";
+            columns: ["subject_id"];
             isOneToOne: false;
             referencedRelation: "subject_health";
             referencedColumns: ["id"];
           },
           {
-            foreignKeyName: "sessions_subject_fkey";
-            columns: ["subject"];
+            foreignKeyName: "sessions_subject_id_fkey";
+            columns: ["subject_id"];
             isOneToOne: false;
             referencedRelation: "subject_popularity";
             referencedColumns: ["subject_id"];
           },
           {
-            foreignKeyName: "sessions_subject_fkey";
-            columns: ["subject"];
+            foreignKeyName: "sessions_subject_id_fkey";
+            columns: ["subject_id"];
             isOneToOne: false;
             referencedRelation: "subjects";
             referencedColumns: ["id"];
