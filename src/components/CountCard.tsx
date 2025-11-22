@@ -17,7 +17,7 @@ export default function CountCard({
           <TextLoader width="w-16" height="h-7" />
         ) : (
           <h2 className="text-2xl sm:text-3xl font-semibold">
-            {count.toLocaleString()}
+            {count.toString()}
           </h2>
         )}
       </div>
