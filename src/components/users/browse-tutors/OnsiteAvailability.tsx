@@ -2,13 +2,13 @@ import { SlotsRow } from "@/lib/computedtypes";
 import clsx from "clsx";
 import { formatHour } from "../onboarding/AvailableSlots";
 
-type dayOfWeek = "Monday" | "Tuesday" | "Wednesday" | "Thursday";
+type dayOfWeek = "monday" | "tuesday" | "wednesday" | "thursday";
 
 const dayOrder: Record<dayOfWeek, number> = {
-  Monday: 1,
-  Tuesday: 2,
-  Wednesday: 3,
-  Thursday: 4,
+  monday: 1,
+  tuesday: 2,
+  wednesday: 3,
+  thursday: 4,
 };
 
 export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
@@ -25,7 +25,9 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
         .sort(([a], [b]) => dayOrder[a as dayOfWeek] - dayOrder[b as dayOfWeek])
         .map(([day, daySlots]) => (
           <div key={day} className="space-y-2">
-            <p className="text-textWhite/90 text-sm font-medium">{day}</p>
+            <p className="text-textWhite/90 text-sm font-medium">
+              {day.charAt(0).toUpperCase() + day.slice(1)}
+            </p>
 
             <div className="grid grid-cols-2 gap-2">
               {daySlots!
