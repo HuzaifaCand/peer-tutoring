@@ -72,7 +72,8 @@ export default function ModalBase({
               className={clsx(
                 "modal-content bg-mainBg relative focus:outline-none rounded-2xl shadow-2xl",
                 "overflow-y-auto w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
-                width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
+                width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl",
+                "modal-scroll"
               )}
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.95, opacity: 0 }}
