@@ -135,7 +135,7 @@ export default function AddSubjectForm({
             "flex items-center gap-1 bg-green-600 hover:bg-green-700"
           )}
         >
-          <CheckCircle className="w-4 h-4" />
+          <CheckCircle className="w-3 h-3" />
           Add
         </button>
       </div>
