@@ -31,7 +31,12 @@ export const getAddSubjectSchema = (role: "student" | "tutor") =>
 
 // Monday - Thursday [08:00 ---- 04:00] // either i do the range which is one hour or mention the range once (1 hour slots)
 
-const VALID_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday"] as const;
+export const VALID_DAYS = [
+  "monday",
+  "tuesday",
+  "wednesday",
+  "thursday",
+] as const;
 
 export const getSlotSchema = () =>
   z.object({
