@@ -3,8 +3,16 @@
 import { useFormContext } from "react-hook-form";
 import clsx from "clsx";
 
-const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday"] as const;
-const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16];
+const DAYS = [
+  { label: "Monday", value: "monday" },
+  { label: "Tuesday", value: "tuesday" },
+  { label: "Wednesday", value: "wednesday" },
+  { label: "Thursday", value: "thursday" },
+] as const;
+
+const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16] as const;
+
+type ValidDays = (typeof DAYS)[number]["value"];
 
 export function AvailableSlots() {
   const {
@@ -14,15 +22,13 @@ export function AvailableSlots() {
   } = useFormContext();
 
   const slots = watch("slots") as Array<{
-    day: string;
+    day: ValidDays;
     hour: number;
     duration_minutes: number;
   }>;
 
-  function toggleSlot(day: string, hour: number) {
-    const exists = slots.some(
-      (s) => s.day === day && s.hour === hour && s.duration_minutes === 60
-    );
+  function toggleSlot(day: ValidDays, hour: number) {
+    const exists = slots.some((s) => s.day === day && s.hour === hour);
 
     if (exists) {
       setValue(
@@ -30,21 +36,20 @@ export function AvailableSlots() {
         slots.filter((s) => !(s.day === day && s.hour === hour)),
         { shouldValidate: true }
       );
-      return;
+    } else {
+      setValue(
+        "slots",
+        [
+          ...slots,
+          {
+            day,
+            hour,
+            duration_minutes: 60,
+          },
+        ],
+        { shouldValidate: true }
+      );
     }
-
-    setValue(
-      "slots",
-      [
-        ...slots,
-        {
-          day,
-          hour,
-          duration_minutes: 60,
-        },
-      ],
-      { shouldValidate: true }
-    );
   }
 
   return (
@@ -62,24 +67,26 @@ export function AvailableSlots() {
 
       {/* Grid wrapper */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-10">
-        {DAYS.map((day) => (
-          <div key={day}>
+        {DAYS.map(({ label, value }) => (
+          <div key={value}>
             <div className="flex items-center justify-between mb-3">
-              <div className="text-base font-medium text-textWhite">{day}</div>
+              <div className="text-base font-medium text-textWhite">
+                {label}
+              </div>
             </div>
 
             {/* Time chips */}
             <div className="grid grid-cols-3 gap-2">
               {HOURS.map((hour) => {
                 const selected = slots.some(
-                  (s) => s.day === day && s.hour === hour
+                  (s) => s.day === value && s.hour === hour
                 );
 
                 return (
                   <button
                     key={hour}
                     type="button"
-                    onClick={() => toggleSlot(day, hour)}
+                    onClick={() => toggleSlot(value, hour)}
                     className={clsx(
                       "rounded-full p-2 text-xs cursor-pointer font-medium transition border",
                       "hover:opacity-80",
