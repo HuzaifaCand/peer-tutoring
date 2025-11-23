@@ -55,8 +55,8 @@ export function RequestFormUI({
       </div>
 
       {/* Detailed Changes */}
-      <div className="space-y-2 ">
-        <label className={labelClass}>Request</label>
+      <div className="space-y-2">
+        <label className={labelClass}>Changes</label>
         <textarea
           rows={2}
           disabled={!!editReq}
