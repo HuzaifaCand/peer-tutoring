@@ -16,31 +16,31 @@ export type Database = {
     Tables: {
       available_slots: {
         Row: {
-          available: boolean | null;
+          available: boolean;
           created_at: string | null;
           day: string;
           duration_minutes: number;
           hour: number;
           id: string;
-          tutor_id: string | null;
+          tutor_id: string;
         };
         Insert: {
-          available?: boolean | null;
+          available?: boolean;
           created_at?: string | null;
           day: string;
           duration_minutes?: number;
           hour: number;
           id?: string;
-          tutor_id?: string | null;
+          tutor_id: string;
         };
         Update: {
-          available?: boolean | null;
+          available?: boolean;
           created_at?: string | null;
           day?: string;
           duration_minutes?: number;
           hour?: number;
           id?: string;
-          tutor_id?: string | null;
+          tutor_id?: string;
         };
         Relationships: [
           {
@@ -817,9 +817,17 @@ export type Database = {
       };
     };
     Functions: {
+      compute_slot_timestamp: {
+        Args: { _day: string; _hour: number };
+        Returns: string;
+      };
       increment_resource_view_count: {
         Args: { resource_id: string };
         Returns: number;
+      };
+      next_slot_timestamp: {
+        Args: { _day: string; _hour: number };
+        Returns: string;
       };
       onboard_user: {
         Args: {
