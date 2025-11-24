@@ -6,7 +6,7 @@ import { colors, Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
 import { OnsiteAvailablity } from "./OnsiteAvailability";
 import { useState } from "react";
-import { SessionRequestModal } from "./SessionRequestModal";
+import { SessionRequestModal } from "./session-request/SessionRequestModal";
 
 export function TutorModalContent({
   tutor,
@@ -17,6 +17,7 @@ export function TutorModalContent({
 
   if (!tutor) return null;
   const {
+    id: tutorId,
     name,
     grade,
     subject_credentials,
@@ -30,6 +31,9 @@ export function TutorModalContent({
   return (
     <>
       <SessionRequestModal
+        subjectLabel={subject.label}
+        subjectId={subject.id}
+        tutorId={tutorId}
         slots={slots}
         reqModal={reqModal}
         setReqModal={setReqModal}
@@ -118,7 +122,7 @@ export function TutorModalContent({
             <CardCTA
               cta="Book a Session"
               textSize="text-sm sm:text-sm"
-              padding="py-1.5 px-3"
+              padding="py-1.5 sm:py-2 px-3 sm:px-4"
             />
           </button>
         </div>
