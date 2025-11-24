@@ -12,9 +12,9 @@ export function MessageField({
       <textarea
         value={msg.message}
         onChange={(e) => msg.setMessage(e.target.value)}
-        placeholder="Optional, tell the tutor what you need help with"
+        placeholder="Optional: Tell the tutor what you need help with"
         className={clsx(getInputClass("sm"), "mt-2")}
-        rows={3}
+        rows={4}
       />
     </div>
   );
