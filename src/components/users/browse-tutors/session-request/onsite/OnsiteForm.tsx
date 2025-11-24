@@ -85,12 +85,14 @@ export function OnsiteForm({
       toast.error(
         "You have requested this slot already. View it in session requests."
       );
+      setSubmitting(false);
       return;
     }
 
     if (res.error) {
       console.error("Insert error:", res.error);
       toast.error("Something went wrong. Please try again.");
+      setSubmitting(false);
       return;
     }
 
