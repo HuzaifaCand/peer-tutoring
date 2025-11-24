@@ -1,10 +1,16 @@
 import { ComputedTutorRow } from "@/lib/users/getTutors";
-import { chainSorters, sortByTimestamp, sortByVerification } from "./sortUtils";
+import {
+  chainSorters,
+  sortByRequestStats,
+  sortByTimestamp,
+  sortByVerification,
+} from "./sortUtils";
 import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getCompletedSessions";
 import { ComputedCancelledSessionRow } from "@/lib/sessions/cancelled/getCancelledSessions";
 import { ComputedActiveSession } from "@/lib/sessions/active/getActiveSessions";
 import { ComputedScheduledSessionRow } from "@/lib/sessions/scheduled/getScheduledSessions";
 import { ComputedStudentRow } from "@/lib/users/getStudents";
+import { UnifiedRequest } from "@/components/users/sessions/requests/getSessionRequests";
 
 export const defaultSorters = {
   student: sortByTimestamp<ComputedStudentRow, "created_at">(
@@ -34,4 +40,9 @@ export const defaultSorters = {
     ComputedScheduledSessionRow,
     "scheduled_for_iso"
   >("scheduled_for_iso", "asc"),
+
+  sessionRequests: chainSorters(
+    sortByRequestStats,
+    sortByTimestamp<UnifiedRequest, "created_at">("created_at", "desc")
+  ),
 };

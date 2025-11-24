@@ -1,3 +1,5 @@
+import { RequestStatus } from "@/components/users/sessions/requests/getSessionRequests";
+
 /**
  * Generic timestamp sorter that safely handles null/undefined timestamps.
  *
@@ -73,4 +75,16 @@ export function chainSorters<T>(...sortFns: ((a: T, b: T) => number)[]) {
     }
     return 0;
   };
+}
+
+export function sortByRequestStats<T extends { status: RequestStatus }>(
+  a: T,
+  b: T
+) {
+  const order: Record<RequestStatus, number> = {
+    pending: 0,
+    accepted: 1,
+    rejected: 2,
+  };
+  return order[a.status] - order[b.status];
 }
