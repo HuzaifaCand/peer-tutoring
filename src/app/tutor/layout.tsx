@@ -1,6 +1,5 @@
 import DesktopSidebar from "@/components/sidebar/DesktopSidebar";
 import MobileSidebar from "@/components/sidebar/MobileSidebar";
-import { NotificationsProvider } from "@/components/notifications/NotificationsProvider";
 
 export default function TutorLayout({
   children,
@@ -20,7 +19,7 @@ export default function TutorLayout({
 
         {/* Main content */}
         <main className="flex-1 lg:ml-64 p-6 sm:p-8 md:p-10 max-w-7xl mx-auto w-full">
-          <NotificationsProvider>{children}</NotificationsProvider>
+          {children}
         </main>
       </div>
     </div>
