@@ -39,9 +39,9 @@ export function TutorModalContent({
         setReqModal={setReqModal}
         online={available_online}
       />
-      <div className="space-y-8 pt-8 pl-3">
+      <div className="space-y-8 pt-10 pl-3">
         {/* TOP SECTION */}
-        <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start">
+        <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start pr-8 lg:pr-0">
           {/* ICON / AVATAR */}
           <div className="flex items-center justify-center bg-mainBg border border-4 border-hoverBg rounded-sm w-full h-32 lg:w-50 lg:h-50 shrink-0">
             <GraduationCap className="w-12 h-12 text-blue" />
@@ -113,7 +113,7 @@ export function TutorModalContent({
         </div>
 
         {/* CTA */}
-        <div className="pt-6 pb-2 flex justify-end">
+        <div className="pt-8 pb-2 flex justify-end">
           <button
             type="button"
             onClick={() => setReqModal(true)}
