@@ -7,6 +7,7 @@ import {
 import { CheckCircle, Trash2 } from "lucide-react";
 import { editReqType } from "./EditRequestForm";
 import clsx from "clsx";
+import { FormButton } from "@/components/forms/FormButton";
 
 const inputClass = getInputClass("xs");
 const labelClass = getLabelClass("xs");
@@ -82,28 +83,20 @@ export function RequestFormUI({
 
       <div className="flex justify-end items-center gap-2 mt-6">
         {!editReq ? (
-          <button
-            type="button"
+          <FormButton
+            size="xs"
             disabled={loading}
-            onClick={handleSubmit}
-            className={clsx(
-              buttonClass,
-              "flex items-center gap-1 disabled:opacity-50"
-            )}
-          >
-            <CheckCircle className="w-3 h-3" />
-            Submit
-          </button>
+            text="Submit"
+            handleClick={handleSubmit}
+          />
         ) : (
-          <button
-            type="button"
+          <FormButton
+            handleClick={handleDelete}
+            size="xs"
+            text="Delete"
             disabled={loading}
-            onClick={handleDelete}
-            className={clsx(buttonClass, "flex items-center gap-1")}
-          >
-            <Trash2 className="w-3 h-3" />
-            Delete
-          </button>
+            del={true}
+          />
         )}
       </div>
     </div>
