@@ -39,7 +39,7 @@ export function TutorModalContent({
         setReqModal={setReqModal}
         online={available_online}
       />
-      <div className="space-y-8 pt-8 pl-3 pr-8">
+      <div className="space-y-8 pt-8 pl-3">
         {/* TOP SECTION */}
         <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start">
           {/* ICON / AVATAR */}
@@ -113,7 +113,7 @@ export function TutorModalContent({
         </div>
 
         {/* CTA */}
-        <div className="pt-4 pb-2 flex justify-end">
+        <div className="pt-6 pb-2 flex justify-end">
           <button
             type="button"
             onClick={() => setReqModal(true)}
@@ -121,7 +121,7 @@ export function TutorModalContent({
           >
             <CardCTA
               cta="Book a Session"
-              textSize="text-sm sm:text-sm"
+              textSize="text-xs sm:text-sm"
               padding="py-1.5 sm:py-2 px-3 sm:px-4"
             />
           </button>

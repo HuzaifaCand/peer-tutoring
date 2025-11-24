@@ -100,7 +100,7 @@ export function OnlineFormUI({
 
                 return `Requesting a session for ${formattedDate}, around ${formattedTime}.`;
               })()
-            : "Choose a date to request this session."}
+            : ""}
         </p>
         <ConfirmButton handleSubmit={handleSubmit} disabled={submitting} />
       </div>
