@@ -24,6 +24,12 @@ export type ResourceRow = Database["public"]["Tables"]["resources"]["Row"];
 export type Notification = Database["public"]["Tables"]["notifications"]["Row"];
 
 export type EditRequest = Database["public"]["Tables"]["edit_requests"]["Row"];
+
+export type OnsiteSessionRequest =
+  Database["public"]["Tables"]["onsite_session_requests"]["Row"];
+export type OnlineSessionRequest =
+  Database["public"]["Tables"]["online_session_requests"]["Row"];
+
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 // yeah you should fs
 // yeah i am doing
