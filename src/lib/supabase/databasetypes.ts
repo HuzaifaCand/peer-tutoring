@@ -179,12 +179,12 @@ export type Database = {
         Row: {
           created_at: string;
           id: string;
+          message: string | null;
           session_id: string | null;
           status: string;
           student_id: string;
           subject_id: string;
           suggested_date: string;
-          suggested_duration_minutes: number;
           suggested_time: string | null;
           tutor_id: string;
           updated_at: string;
@@ -192,12 +192,12 @@ export type Database = {
         Insert: {
           created_at?: string;
           id?: string;
+          message?: string | null;
           session_id?: string | null;
           status?: string;
           student_id: string;
           subject_id: string;
           suggested_date: string;
-          suggested_duration_minutes?: number;
           suggested_time?: string | null;
           tutor_id: string;
           updated_at?: string;
@@ -205,12 +205,12 @@ export type Database = {
         Update: {
           created_at?: string;
           id?: string;
+          message?: string | null;
           session_id?: string | null;
           status?: string;
           student_id?: string;
           subject_id?: string;
           suggested_date?: string;
-          suggested_duration_minutes?: number;
           suggested_time?: string | null;
           tutor_id?: string;
           updated_at?: string;
@@ -264,9 +264,11 @@ export type Database = {
         Row: {
           created_at: string;
           id: string;
+          message: string | null;
           rejection_reason: string | null;
+          scheduled_for: string;
           session_id: string | null;
-          slot_id: string;
+          slot_id: string | null;
           status: string;
           student_id: string;
           subject_id: string;
@@ -276,9 +278,11 @@ export type Database = {
         Insert: {
           created_at?: string;
           id?: string;
+          message?: string | null;
           rejection_reason?: string | null;
+          scheduled_for: string;
           session_id?: string | null;
-          slot_id: string;
+          slot_id?: string | null;
           status?: string;
           student_id: string;
           subject_id: string;
@@ -288,9 +292,11 @@ export type Database = {
         Update: {
           created_at?: string;
           id?: string;
+          message?: string | null;
           rejection_reason?: string | null;
+          scheduled_for?: string;
           session_id?: string | null;
-          slot_id?: string;
+          slot_id?: string | null;
           status?: string;
           student_id?: string;
           subject_id?: string;
