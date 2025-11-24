@@ -12,6 +12,7 @@ import { getAddSubjectSchema } from "./OnboardingSchema";
 import { SubjectRow } from "@/lib/computedtypes";
 import { SubjectSelect } from "@/components/users/onboarding/OnboardingComponent";
 import { getButtonClass, getInputClass, getLabelClass } from "../classes";
+import { FormButton } from "../FormButton";
 
 interface AddSubjectFormProps {
   role: "student" | "tutor";
@@ -22,7 +23,6 @@ interface AddSubjectFormProps {
 
 const inputClass = getInputClass("sm");
 const labelClass = getLabelClass("sm");
-const buttonClass = getButtonClass("sm");
 
 export default function AddSubjectForm({
   role,
@@ -127,17 +127,7 @@ export default function AddSubjectForm({
 
       {/* Action Buttons */}
       <div className="flex justify-end mt-6">
-        <button
-          type="button"
-          onClick={handleAdd}
-          className={clsx(
-            buttonClass,
-            "flex items-center gap-1 bg-green-600 hover:bg-green-700"
-          )}
-        >
-          <CheckCircle className="w-3 h-3" />
-          Add
-        </button>
+        <FormButton text="Add" size="sm" handleClick={handleAdd} />
       </div>
     </div>
   );
