@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { Dispatch, SetStateAction, useCallback } from "react";
 
 export function useModalOpener<T>(
@@ -6,13 +6,18 @@ export function useModalOpener<T>(
   paramKey: string = "id"
 ) {
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleOpen = useCallback(
     (item: T & { id: string | number }) => {
       setSelected(item);
-      router.push(`?${paramKey}=${item.id}`);
+
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(paramKey, String(item.id));
+
+      router.push(`?${params.toString()}`);
     },
-    [router, setSelected, paramKey]
+    [router, searchParams, setSelected, paramKey]
   );
 
   return { handleOpen };
