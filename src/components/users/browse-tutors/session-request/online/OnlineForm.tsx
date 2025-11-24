@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { getInputClass, getLabelClass } from "@/components/forms/classes";
-import clsx from "clsx";
-import { MessageField } from "../MessageField";
-import { ConfirmButton } from "../ConfirmButton";
+import { toast } from "sonner";
+import { createOnlineRequest } from "./createOnlineRequest";
+import { OnlineFormUI } from "./OnlineFormUI";
+import { createNotification } from "@/components/notifications/createNotification";
 
 interface OnlineFormProps {
   currStudentId: string;
@@ -17,63 +17,98 @@ interface OnlineFormProps {
 }
 
 export function OnlineForm({
-  sharedLoad,
   currStudentId,
+  sharedLoad,
   closeModal,
 }: OnlineFormProps) {
-  const [message, setMessage] = useState("");
-  const [submitting, setSubmitting] = useState(false);
+  const { tutorId, subjectId, subjectLabel } = sharedLoad;
 
   const [suggestedDate, setSuggestedDate] = useState("");
   const [suggestedTime, setSuggestedTime] = useState("");
+  const [message, setMessage] = useState("");
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = () => {
-    // TODO submit
+  const handleSubmit = async () => {
+    if (!suggestedDate) {
+      return toast.error("Please select a date.");
+    }
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const selected = new Date(suggestedDate);
+    selected.setHours(0, 0, 0, 0);
+
+    // If selected date is BEFORE today → invalid
+    if (selected < today) {
+      return toast.error(
+        "Please select a valid date. You cannot select a past day."
+      );
+    }
+
+    // --- Validate time only if provided ---
+    if (suggestedTime) {
+      const [h, m] = suggestedTime.split(":").map(Number);
+
+      const now = new Date();
+
+      const isToday = selected.getTime() === today.getTime();
+
+      if (isToday) {
+        const selectedMinutes = h * 60 + m;
+        const nowMinutes = now.getHours() * 60 + now.getMinutes();
+
+        if (selectedMinutes < nowMinutes) {
+          return toast.error("The selected time has already passed.");
+        }
+      }
+    }
+
+    setSubmitting(true);
+
+    const payload = {
+      student_id: currStudentId,
+      tutor_id: tutorId,
+      subject_id: subjectId,
+      suggested_date: suggestedDate,
+      suggested_time: suggestedTime.trim() || null,
+      message: message.trim() || null,
+    };
+
+    const res = await createOnlineRequest(payload);
+
+    if (res.error) {
+      toast.error("Something went wrong. Please try again.");
+      setSubmitting(false);
+      return;
+    }
+
+    toast.success(`Request sent to tutor! They'll respond soon.`);
+
+    await createNotification({
+      userId: tutorId,
+      title: "New Online Session Request",
+      body: `A student has requested an online session for ${subjectLabel}`,
+      href: `/tutor/sessions?tab=requests`,
+      type: "session_request",
+    });
+
+    closeModal();
+    setSubmitting(false);
   };
 
   return (
-    <div className="space-y-4 text-textWhite pb-4 pt-2 w-full px-2">
-      <div className="space-y-2">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col">
-            <label className={getLabelClass("sm")}>Suggest a Date</label>
-            <input
-              type="date"
-              value={suggestedDate}
-              onChange={(e) => setSuggestedDate(e.target.value)}
-              className={clsx(
-                getInputClass("sm"),
-                "mt-2",
-                "[color-scheme:dark]"
-              )}
-            />
-          </div>
-
-          <div className="flex flex-col">
-            <label className={getLabelClass("sm")}>
-              Suggest a Time (Optional)
-            </label>
-            <input
-              type="time"
-              value={suggestedTime}
-              onChange={(e) => setSuggestedTime(e.target.value)}
-              className={clsx(
-                getInputClass("sm"),
-                "mt-2",
-                "[color-scheme:dark]"
-              )}
-            />
-          </div>
-        </div>
-        <p className="text-xs text-textMuted">
-          This is just a suggested time. Your tutor may accept it or propose a
-          different time, and you can decide the exact time together.
-        </p>
-      </div>
-
-      <MessageField msg={{ message, setMessage }} />
-
-      <ConfirmButton handleSubmit={handleSubmit} disabled={submitting} />
-    </div>
+    <OnlineFormUI
+      fields={{
+        suggestedDate,
+        setSuggestedDate,
+        suggestedTime,
+        setSuggestedTime,
+        message,
+        setMessage,
+      }}
+      handleSubmit={handleSubmit}
+      submitting={submitting}
+    />
   );
 }
