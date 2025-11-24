@@ -10,7 +10,7 @@ export function useModalOpener<T>(
   const handleOpen = useCallback(
     (item: T & { id: string | number }) => {
       setSelected(item);
-      router.replace(`?${paramKey}=${item.id}`);
+      router.push(`?${paramKey}=${item.id}`);
     },
     [router, setSelected, paramKey]
   );
