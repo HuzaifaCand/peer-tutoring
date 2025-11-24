@@ -39,7 +39,7 @@ export function TutorModalContent({
         setReqModal={setReqModal}
         online={available_online}
       />
-      <div className="space-y-8 pt-10 pl-3">
+      <div className="space-y-8 pt-10 px-0 sm:px-2">
         {/* TOP SECTION */}
         <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start pr-8 lg:pr-0">
           {/* ICON / AVATAR */}
