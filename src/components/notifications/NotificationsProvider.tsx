@@ -56,9 +56,8 @@ export function NotificationsProvider({
           filter: `user_id=eq.${user.id}`,
         },
         (payload) => {
-          const notif = payload.new as Notification;
-          addNotification(notif);
-          toast(notif.title);
+          addNotification(payload.new as Notification);
+          toast(payload.new.title);
         }
       )
       .subscribe();
@@ -66,7 +65,7 @@ export function NotificationsProvider({
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [user, addNotification]);
+  }, [user]);
 
   return (
     <NotificationsContext.Provider value={notifications}>
