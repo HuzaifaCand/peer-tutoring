@@ -13,9 +13,9 @@ const STUDENT_STATS = {
 } as const;
 
 const TUTOR_STATS = {
-  tutorPendingSessionVerifications: true,
   tutorScheduledSessions: true,
   tutorSessionRequests: true,
+  tutorPendingSessionVerifications: true,
 } as const;
 
 export default function UserOverview({ role }: { role: "student" | "tutor" }) {
@@ -41,11 +41,20 @@ export default function UserOverview({ role }: { role: "student" | "tutor" }) {
   return (
     <main>
       <SectionHeader title="Overview" rightSlot={rightSlot} />
+
+      {role === "tutor" && (
+        <>
+          <OperationalStats userId={user.id} config={TUTOR_STATS} />
+          <SectionDivider />
+        </>
+      )}
+
       <SubjectUserCards role={role} uid={user.id} />
       <SectionDivider />
-      <OperationalStats
-        config={role === "student" ? STUDENT_STATS : TUTOR_STATS}
-      />
+
+      {role === "student" && (
+        <OperationalStats userId={user.id} config={STUDENT_STATS} />
+      )}
     </main>
   );
 }
