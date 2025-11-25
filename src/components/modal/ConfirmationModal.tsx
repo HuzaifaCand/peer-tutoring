@@ -42,17 +42,22 @@ export function ConfirmationModal({
     try {
       setLoading(true);
       await onConfirm();
-      toast.success(successMessage);
+      if (successMessage) toast.success(successMessage);
     } catch (err) {
       console.error(err, "confirmation modal");
-      toast.error("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
   }
 
   return (
-    <ModalBase isOpen={isOpen} onClose={onCancel} autoFocus={true} noX={true}>
+    <ModalBase
+      isOpen={isOpen}
+      onClose={onCancel}
+      autoFocus={true}
+      noX={true}
+      width="tight"
+    >
       <div className="space-y-4 py-1">
         <div className="space-y-2">
           <h2 className="text-textWhite font-semibold text-lg sm:text-xl">
