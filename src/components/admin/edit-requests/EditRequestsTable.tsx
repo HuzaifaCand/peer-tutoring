@@ -69,7 +69,7 @@ export default function EditRequestsTable({
         type="editRequest"
         data={selectedRequest}
         onClose={closeModal}
-        refetchTable={() => setRefetchFlag(true)}
+        setRefetchFlag={setRefetchFlag}
       />
       <Table
         data={data}
