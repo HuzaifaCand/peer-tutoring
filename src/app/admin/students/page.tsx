@@ -1,10 +1,15 @@
 import StudentsOverview from "@/components/admin/students/StudentsOverview";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | Students",
 };
 
 export default function StudentsPage() {
-  return <StudentsOverview />;
+  return (
+    <Suspense fallback={null}>
+      <StudentsOverview />
+    </Suspense>
+  );
 }
