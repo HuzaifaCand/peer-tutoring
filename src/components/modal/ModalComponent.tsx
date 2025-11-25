@@ -1,6 +1,6 @@
 import { RequestModal } from "../admin/edit-requests/RequestModal";
 import { CardByType } from "../card/types";
-import { TableRowByType } from "../table/types";
+import { refetchFlagType, TableRowByType } from "../table/types";
 import ModalBase from "./ModalBase";
 import { ActiveSessionModal } from "./session/ActiveSessionModal";
 import { CancelledSessionModal } from "./session/CancelledSessionModal";
@@ -22,11 +22,12 @@ interface ModalProps {
   type: ModalType;
   data: unknown;
   onClose: () => void;
-  refetchTable?: () => void;
+  setRefetchFlag?: refetchFlagType;
 }
 
-export function Modal({ type, data, onClose, refetchTable }: ModalProps) {
+export function Modal({ type, data, onClose, setRefetchFlag }: ModalProps) {
   if (!type) return null;
+  const refetch = () => setRefetchFlag && setRefetchFlag((prev) => !prev);
 
   let content: React.ReactNode = null;
   switch (type) {
@@ -76,14 +77,13 @@ export function Modal({ type, data, onClose, refetchTable }: ModalProps) {
       );
       break;
     case "editRequest":
-      refetchTable &&
-        (content = (
-          <RequestModal
-            request={data as TableRowByType["editRequest"]}
-            onClose={onClose}
-            refetchTable={refetchTable}
-          />
-        ));
+      content = (
+        <RequestModal
+          request={data as TableRowByType["editRequest"]}
+          onClose={onClose}
+          refetchTable={refetch}
+        />
+      );
   }
 
   return (
