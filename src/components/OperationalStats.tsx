@@ -78,11 +78,15 @@ const STAT_INFO = {
     cta: "View Session Requests",
     href: "/student/sessions?tab=requests",
     icon: Send,
-    fetch: async () =>
-      supabase
-        .from("session_requests")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending"),
+    fetch: async (userId: string) => {
+      const { data, error } = await supabase
+        .from("session_pending_counts")
+        .select("pending_count")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      return { count: data?.pending_count ?? 0, error };
+    },
   },
 
   //tutor
@@ -102,12 +106,17 @@ const STAT_INFO = {
     cta: "View Session Requests",
     href: "/tutor/sessions?tab=requests",
     icon: Inbox,
-    fetch: async () =>
-      supabase
-        .from("session_requests")
-        .select("*", { count: "exact", head: true })
-        .eq("status", "pending"),
+    fetch: async (userId: string) => {
+      const { data, error } = await supabase
+        .from("session_pending_counts")
+        .select("pending_count")
+        .eq("user_id", userId)
+        .maybeSingle();
+
+      return { count: data?.pending_count ?? 0, error };
+    },
   },
+
   tutorPendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
@@ -127,9 +136,13 @@ type OperationalStatsConfig = Partial<Record<keyof typeof STAT_INFO, boolean>>;
 
 interface OperationalStatsProps {
   config: OperationalStatsConfig;
+  userId?: string;
 }
 
-export default function OperationalStats({ config }: OperationalStatsProps) {
+export default function OperationalStats({
+  config,
+  userId,
+}: OperationalStatsProps) {
   const [stats, setStats] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(true);
 
@@ -146,7 +159,7 @@ export default function OperationalStats({ config }: OperationalStatsProps) {
         // enabled queries
         const results = await Promise.all(
           enabledKeys.map(async (key) => {
-            const { count, error } = await STAT_INFO[key].fetch();
+            const { count, error } = await STAT_INFO[key].fetch(userId ?? "");
             if (error) throw error;
             return [key, count ?? 0] as const;
           })
@@ -163,7 +176,7 @@ export default function OperationalStats({ config }: OperationalStatsProps) {
     };
 
     fetchStats();
-  }, [config]);
+  }, [config, userId]);
 
   const enabledCount = Object.entries(config).filter(
     ([_, enabled]) => enabled
