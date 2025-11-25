@@ -1,3 +1,4 @@
+import SessionsMain from "@/components/users/sessions/SessionsMain";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -5,5 +6,5 @@ export const metadata: Metadata = {
 };
 
 export default function SessionsPage() {
-  return <></>;
+  return <SessionsMain role="tutor" />;
 }
