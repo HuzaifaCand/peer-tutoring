@@ -65,14 +65,12 @@ export function RequestCard({
                 ? "red"
                 : "green"
             }
-            textSize="text-[11px]"
-            className="shrink-0"
+            textSize="text-[10px] sm:text-[11px]"
           />
           <Tag
             value={isOnsite ? "onsite" : "online"}
             color={isOnsite ? "yellow" : "blue"}
-            textSize="text-[11px]"
-            className="shrink-0"
+            textSize="text-[10px] sm:text-[11px]"
           />
         </div>
       </div>
@@ -82,9 +80,13 @@ export function RequestCard({
       <div className="bg-textMuted/10 w-full h-[1px] my-4" />
 
       <div className="flex justify-between items-center gap-2">
-        <p className="text-textMuted text-xs">{subtitle}</p>
+        <p className="text-textMuted text-[10px] sm:text-xs">{subtitle}</p>
 
-        <CardCTA cta="View Details" textSize="text-xs" />
+        <CardCTA
+          cta="View Details"
+          textSize="text-[10px] sm:text-xs"
+          padding="px-2 sm:px-3 py-0.5 sm:py-1"
+        />
       </div>
     </CardShell>
   );
