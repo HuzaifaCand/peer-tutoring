@@ -12,7 +12,7 @@ export function MessageField({
       <textarea
         value={msg.message}
         onChange={(e) => msg.setMessage(e.target.value)}
-        placeholder="Optional: Tell the tutor what you need help with"
+        placeholder="Recommended: Tell the tutor what you need help with"
         className={clsx(getInputClass("sm"), "mt-2")}
         rows={4}
       />
