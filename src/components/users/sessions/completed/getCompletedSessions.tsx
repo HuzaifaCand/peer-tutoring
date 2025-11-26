@@ -19,7 +19,9 @@ export async function getCompletedSessions(
       start_time,
       verified,
       verified_by,
-      is_online
+      is_online,
+      scheduled_for,
+      subjects:subjects(label)
     `
     )
     .eq(idCol, uid)
@@ -63,6 +65,9 @@ export async function getCompletedSessions(
         ? "rejected"
         : "unverified",
       isOnline: s.is_online,
+      scheduledFor: s.scheduled_for,
+      startTime: s.start_time,
+      subjectLabel: s.subjects.label,
     };
   });
 
