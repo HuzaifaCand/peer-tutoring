@@ -10,6 +10,7 @@ import ModalBase from "@/components/modal/ModalBase";
 import { TutorModalContent } from "./TutorModalContent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
 import { useModalOpener } from "@/components/modal/useModalOpener";
+import { useSearchParams } from "next/navigation";
 
 export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
   const [selectedTutor, setSelectedTutor] = useState<SubjectTutorType | null>(
@@ -26,17 +27,20 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
     subject,
   } = tutor;
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-    if (id) {
-      const getTutor = async () => {
-        const data = await getSubjectTutor(id, subject.id);
-        setSelectedTutor(data);
-      };
-      getTutor();
-    }
-  }, []);
+    const id = searchParams.get("id");
+
+    if (!id) return;
+
+    const getTutor = async () => {
+      const data = await getSubjectTutor(id, subject.id);
+      setSelectedTutor(data);
+    };
+
+    getTutor();
+  }, [searchParams, subject.id]);
 
   const closeModal = useCloseModal(setSelectedTutor);
   const { handleOpen } = useModalOpener<SubjectTutorType>(
