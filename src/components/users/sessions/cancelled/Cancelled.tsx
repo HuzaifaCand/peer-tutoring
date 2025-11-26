@@ -35,9 +35,12 @@ export function CancelledSessions({
   return (
     <div className="space-y-3 mt-3">
       {data.map((cs, i) => (
-        <CardShell key={i}>
-          <CancelledSessionCard cs={cs} role={role} currentUserId={userId} />
-        </CardShell>
+        <CancelledSessionCard
+          key={i}
+          cs={cs}
+          role={role}
+          currentUserId={userId}
+        />
       ))}
     </div>
   );
