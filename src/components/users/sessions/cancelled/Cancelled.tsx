@@ -6,7 +6,6 @@ import { useDataFetch } from "@/hooks/useDataFetch";
 import { SharedPropsType } from "../SessionsMain";
 import { sortByTimestamp } from "@/utils/sortUtils";
 import { CardsLoading } from "@/components/card/CardsLoading";
-import { CardShell } from "@/components/card/CardShell";
 import { CancelledSessionCard } from "./CancelledSessionCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 
