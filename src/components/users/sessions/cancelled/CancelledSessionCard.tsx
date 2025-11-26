@@ -44,7 +44,7 @@ export function CancelledSessionCard({
           <div className="flex items-center gap-2">
             <Tag
               textSize="text-[10px] sm:text-[11px]"
-              value={cs.subject}
+              value={cs.subjectLabel}
               color="gray"
             />
             <Tag

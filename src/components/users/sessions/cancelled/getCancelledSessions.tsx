@@ -17,7 +17,8 @@ export async function getCancelledSessions(
        cancelled_by, 
        is_online, 
        cancelled_at,
-       scheduled_for`
+       scheduled_for,
+       subjects:subjects(label)`
     )
     .eq(idCol, uid)
     .eq("status", "cancelled")
@@ -38,6 +39,7 @@ export async function getCancelledSessions(
     isOnline: cs.is_online,
     source: cs.cancellation_source,
     scheduled_for: cs.scheduled_for,
+    subjectLabel: cs.subjects.label,
   }));
 
   return formatted ?? [];
