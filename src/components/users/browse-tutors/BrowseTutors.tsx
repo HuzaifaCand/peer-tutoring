@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import SubjectTabs from "./SubjectTabs";
 import { TutorCards } from "./TutorCards";
 import Loading from "@/components/Loading";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function BrowseTutors() {
   const [tutorCount, setTutorCount] = useState(0);
@@ -14,25 +14,39 @@ export default function BrowseTutors() {
   const [selectedSubject, setSelectedSubject] = useState<subject | null>(null);
 
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     if (subjects.length === 0) return;
 
-    const paramId = searchParams.get("sub");
+    const subParam = searchParams.get("sub");
 
-    if (paramId) {
-      const match = subjects.find((s) => s.id === paramId);
+    // 1) If we have ?sub=... → sync it
+    if (subParam) {
+      const match = subjects.find((s) => s.id === subParam);
       if (match) {
         setSelectedSubject(match);
-        return;
       }
+      return;
     }
 
-    // Fallback to first subject
+    // 2) If there is NO ?sub but user already has a selection → do nothing
+    if (selectedSubject) return;
+
+    // 3) FIRST LOAD: Default to first subject
     setSelectedSubject(subjects[0]);
-  }, [subjects, searchParams]);
+  }, [subjects, searchParams.get("sub")]);
 
   if (error) console.error(error);
+
+  function handleSetTab(s: subject) {
+    setSelectedSubject(s);
+
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("sub", s.id);
+
+    router.replace(`${window.location.pathname}?${params.toString()}`);
+  }
 
   return (
     <main>
@@ -45,7 +59,7 @@ export default function BrowseTutors() {
         <SubjectTabs
           subjectTab={selectedSubject}
           subjects={subjects}
-          setSubjectTab={setSelectedSubject}
+          setSubjectTab={handleSetTab}
         />
       )}
 
