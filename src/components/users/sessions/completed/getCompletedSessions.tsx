@@ -11,6 +11,7 @@ export async function getCompletedSessions(
     .from("sessions")
     .select(
       `
+      id,
       tutors:tutors(users(full_name)),
       students:students(users(full_name)),
       subject_id,
@@ -51,6 +52,7 @@ export async function getCompletedSessions(
     }
 
     return {
+      id: s.id,
       sName: studentName,
       tName: tutorName,
 
