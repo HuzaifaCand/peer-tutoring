@@ -32,16 +32,6 @@ export function CancelledSessionCard({
       hour12: true,
     });
 
-  const diffHours = (scheduled: string | null, cancelled: string | null) => {
-    if (!scheduled || !cancelled) return null;
-    const s = new Date(scheduled).getTime();
-    const c = new Date(cancelled).getTime();
-    const diff = (s - c) / (1000 * 60 * 60);
-    if (diff < 0) return null; // cancelled after scheduled start — no need to show
-    return Math.round(diff);
-  };
-
-  const hoursBefore = diffHours(cs.scheduled_for, cs.when);
   return (
     <CardShell>
       <div className="space-y-5">
@@ -86,26 +76,6 @@ export function CancelledSessionCard({
                 Reason: {cs.why}
               </p>
             )}
-            <div>
-              {hoursBefore !== null && (
-                <Tag
-                  value={
-                    hoursBefore === 1
-                      ? "Cancelled 1 hour before"
-                      : `Cancelled ${hoursBefore} hours before`
-                  }
-                  textSize="text-[10px] sm:text-[11px]"
-                  color={
-                    hoursBefore <= 1
-                      ? "red"
-                      : hoursBefore <= 4
-                      ? "yellow"
-                      : "muted"
-                  }
-                  className="px-0.5"
-                />
-              )}
-            </div>
           </div>
         </div>
 
