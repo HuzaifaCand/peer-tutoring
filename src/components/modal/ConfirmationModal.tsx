@@ -2,6 +2,7 @@ import clsx from "clsx";
 import ModalBase from "./ModalBase";
 import { useState } from "react";
 import { toast } from "sonner";
+import { getInputClass, getLabelClass } from "../forms/classes";
 
 interface ConfirmationModalProps {
   type: "positive" | "destructive";
@@ -19,6 +20,7 @@ interface ConfirmationModalProps {
     onInputChange: (v: string) => void;
     inputRequired: boolean;
     placeholder?: string;
+    maxLength?: number;
   };
 }
 
@@ -35,10 +37,18 @@ export function ConfirmationModal({
 }: ConfirmationModalProps) {
   const [loading, setLoading] = useState(false);
 
+  const maxLength = inputConfig?.maxLength ?? 125;
+  const valueLength = inputConfig?.inputValue.length ?? 0;
+  const exceedsLimit = valueLength > maxLength;
+
   async function handleConfirm() {
-    if (inputConfig?.inputRequired && !inputConfig.inputValue.trim()) {
+    if (
+      (inputConfig?.inputRequired && !inputConfig.inputValue.trim()) ||
+      exceedsLimit
+    ) {
       return;
     }
+
     try {
       setLoading(true);
       await onConfirm();
@@ -58,11 +68,13 @@ export function ConfirmationModal({
       noX={true}
       width="tight"
     >
-      <div className="space-y-4 py-1">
-        <div className="space-y-2">
+      <div className="space-y-4 py-2 px-0 sm:px-2 py-1">
+        {/* Title + Description */}
+        <div className="space-y-1">
           <h2 className="text-textWhite font-semibold text-lg sm:text-xl">
             {title}
           </h2>
+
           {description && (
             <p className="text-textMuted/80 font-medium text-xs sm:text-sm">
               {description}
@@ -70,46 +82,73 @@ export function ConfirmationModal({
           )}
         </div>
 
+        {/* Input Area */}
         {inputConfig && (
           <div className="space-y-1">
-            <label className="text-textWhite/90 text-sm font-medium">
-              {inputConfig.inputLabel}
-            </label>
+            <div className="flex items-center gap-1">
+              <label className={getLabelClass("sm")}>
+                {inputConfig.inputLabel}
+              </label>
 
-            <textarea
-              value={inputConfig.inputValue}
-              onChange={(e) => inputConfig.onInputChange(e.target.value)}
-              placeholder={inputConfig.placeholder}
-              className="w-full bg-elevatedBg border placeholder-textMuted/80 mt-2 border-white/10 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-white/20 text-xs text-textWhite resize-none"
-              rows={1}
-            />
+              {inputConfig.inputRequired && !inputConfig.inputValue && (
+                <p className="text-[10px] text-red-400">
+                  This field is required.
+                </p>
+              )}
+            </div>
 
-            {inputConfig.inputRequired && !inputConfig.inputValue && (
-              <p className="text-xs text-red-300 mt-1">
-                This field is required.
+            <div className="relative">
+              <textarea
+                value={inputConfig.inputValue}
+                onChange={(e) => inputConfig.onInputChange(e.target.value)}
+                placeholder={inputConfig.placeholder}
+                className={clsx(getInputClass("sm"), "pr-10")}
+                rows={2}
+                maxLength={undefined} // We enforce logic ourselves
+              />
+
+              {/* CHARACTER COUNTER */}
+              <div
+                className={clsx(
+                  "absolute bottom-1 right-2 text-[10px] font-medium",
+                  exceedsLimit ? "text-red-400" : "text-textMuted/70"
+                )}
+              >
+                {valueLength} / {maxLength}
+              </div>
+            </div>
+
+            {exceedsLimit && (
+              <p className="text-[11px] text-red-400">
+                Maximum {maxLength} characters allowed.
               </p>
             )}
           </div>
         )}
 
-        <div className="flex justify-end text-sm items-center gap-2">
+        {/* Buttons */}
+        <div className="flex justify-end text-sm pt-2 items-center gap-2">
           <button
             disabled={loading}
             onClick={onCancel}
-            className="px-4 py-1.5 bg-elevatedBg text-textWhite/90 hover:bg-hoverBg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer border border-white/5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/10"
+            className="w-full px-4 py-2 bg-elevatedBg text-textWhite/90 hover:bg-hoverBg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer border border-white/5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/10"
           >
             Cancel
           </button>
 
           <button
-            disabled={loading}
+            disabled={
+              loading ||
+              (inputConfig?.inputRequired && !inputConfig.inputValue.trim()) ||
+              exceedsLimit
+            }
             onClick={handleConfirm}
             className={clsx(
-              "px-4 py-1.5 rounded-lg cursor-pointer font-medium flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2",
+              "w-full px-4 py-2 rounded-lg cursor-pointer font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2",
 
               type === "positive"
-                ? "bg-green-500/10 text-green-300 hover:bg-green-500/20 focus:ring-green-400/20"
-                : "bg-red-500/10 text-red-300 hover:bg-red-500/20 focus:ring-red-400/20"
+                ? "bg-green-500/10 text-textWhite hover:bg-green-500/20 focus:ring-green-400/20 border border-green-800/30"
+                : "bg-red-700/20 text-textWhite hover:bg-red-900/40 focus:ring-red-400/20 border border-red-800/30"
             )}
           >
             {loading && (
