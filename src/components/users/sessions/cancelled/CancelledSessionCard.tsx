@@ -36,7 +36,7 @@ export function CancelledSessionCard({
 
   const hoursBefore = diffHours(cs.scheduled_for, cs.when);
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Tags */}
       <div className="flex justify-between items-center gap-2">
         <div className="flex items-center gap-2">
@@ -74,7 +74,7 @@ export function CancelledSessionCard({
         </p>
         <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-6 gap-2 sm:items-center">
           {cs.why && (
-            <p className="text-xs text-textMuted leading-relaxed mt-1">
+            <p className="text-xs text-textMuted leading-relaxed">
               Reason: {cs.why}
             </p>
           )}
