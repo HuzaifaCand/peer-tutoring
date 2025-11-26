@@ -17,12 +17,8 @@ export function ToggleModeBar({
     <div className="relative max-w-xs sm:max-w-sm mx-auto w-full rounded-xl bg-elevatedBg p-1 flex">
       {/* Highlight pill */}
       <motion.div
-        layout="position"
-        layoutId="toggle-pill"
-        className={clsx(
-          "absolute top-1 bottom-1 rounded-lg bg-mainBg shadow-md transition-colors",
-          mode === "onsite" ? "left-1 right-1/2" : "left-1/2 right-1"
-        )}
+        className="absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-lg bg-mainBg shadow-md"
+        animate={{ x: mode === "onsite" ? 0 : "100%" }}
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       />
 
