@@ -2,19 +2,25 @@ import { CardShell } from "@/components/card/CardShell";
 import { CancSessions } from "./getCancelledSessions";
 import { Tag } from "@/components/ui/Tag";
 
+function getCancelledByLabel(cs: CancSessions, currentUserId: string) {
+  if (cs.source === "system") return "System";
+
+  if (cs.who === currentUserId) return "You";
+
+  if (cs.who === cs.studentId) return `Student -- ${cs.sName}`;
+  if (cs.who === cs.tutorId) return `Tutor -- ${cs.tName}`;
+
+  return "Admin";
+}
+
 export function CancelledSessionCard({
   cs,
-  role,
   currentUserId,
 }: {
   cs: CancSessions;
   role: "tutor" | "student";
   currentUserId: string;
 }) {
-  const name = role === "tutor" ? cs.sName : cs.tName;
-
-  const cancelledByYou = cs.who === currentUserId;
-
   const formattedDate = (timestamp: string | null) =>
     timestamp &&
     new Date(timestamp).toLocaleString("en-GB", {
@@ -72,7 +78,7 @@ export function CancelledSessionCard({
         {/* Who & What */}
         <div className="space-y-1">
           <p className="text-textWhite text-sm font-medium">
-            Cancelled by {cancelledByYou ? "You" : name}
+            Cancelled by {getCancelledByLabel(cs, currentUserId)}
           </p>
           <div className="flex flex-col sm:flex-row sm:justify-between sm:gap-6 gap-2 sm:items-center">
             {cs.why && (

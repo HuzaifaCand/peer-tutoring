@@ -12,6 +12,8 @@ export async function getCancelledSessions(
       `tutors:tutors(users(full_name)),
        students:students(users(full_name)), 
        subject_id, 
+       student_id,
+       tutor_id,
        cancel_reason, 
        cancellation_source, 
        cancelled_by, 
@@ -30,6 +32,8 @@ export async function getCancelledSessions(
   }
 
   const formatted = data?.map((cs) => ({
+    studentId: cs.student_id,
+    tutorId: cs.tutor_id,
     sName: cs.students.users.full_name.split(" ").slice(0, -1).join(" "),
     tName: cs.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
     subject: cs.subject_id,
