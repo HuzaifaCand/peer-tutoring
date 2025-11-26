@@ -49,8 +49,8 @@ export function CancelledSessionCard({
             />
             <Tag
               textSize="text-[10px] sm:text-[11px]"
-              value={cs.type}
-              color={cs.type === "online" ? "blue" : "yellow"}
+              value={cs.isOnline ? "online" : "onsite"}
+              color={cs.isOnline ? "blue" : "yellow"}
             />
           </div>
 

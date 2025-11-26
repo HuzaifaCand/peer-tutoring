@@ -35,7 +35,7 @@ export async function getCancelledSessions(
     why: cs.cancel_reason,
     who: cs.cancelled_by,
     when: cs.cancelled_at,
-    type: cs.is_online ? "online" : "onsite",
+    isOnline: cs.is_online,
     source: cs.cancellation_source,
     scheduled_for: cs.scheduled_for,
   }));
