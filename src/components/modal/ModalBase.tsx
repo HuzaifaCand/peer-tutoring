@@ -75,10 +75,10 @@ export default function ModalBase({
                 width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
               )}
               onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.18, ease: "easeOut" }}
             >
               {!noX && (
                 <div className="absolute top-8 right-8" onClick={onClose}>
