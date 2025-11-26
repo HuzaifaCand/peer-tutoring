@@ -40,8 +40,13 @@ export function CancelledSessionCard({
       {/* Tags */}
       <div className="flex justify-between items-center gap-2">
         <div className="flex items-center gap-2">
-          <Tag value={cs.subject} color="gray" />
           <Tag
+            textSize="text-[10px] sm:text-[11px]"
+            value={cs.subject}
+            color="gray"
+          />
+          <Tag
+            textSize="text-[10px] sm:text-[11px]"
             value={cs.type}
             color={cs.type === "online" ? "blue" : "yellow"}
           />
@@ -49,6 +54,7 @@ export function CancelledSessionCard({
 
         {cs.source && (
           <Tag
+            textSize="text-[10px] sm:text-[11px]"
             value={cs.source}
             color={
               cs.source === "manual"
@@ -72,7 +78,7 @@ export function CancelledSessionCard({
               Reason: {cs.why}
             </p>
           )}
-          <div className="flex justify-end">
+          <div>
             {hoursBefore !== null && (
               <Tag
                 value={
