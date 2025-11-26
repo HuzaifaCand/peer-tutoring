@@ -54,7 +54,7 @@ export default function ModalBase({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 bg-black/30 backdrop-brightness-70 flex items-center justify-center"
+          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center will-change-opacity"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -70,15 +70,14 @@ export default function ModalBase({
           >
             <motion.div
               className={clsx(
-                "modal-content bg-mainBg relative focus:outline-none rounded-2xl shadow-2xl",
-                "overflow-y-auto w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
-                width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl",
-                "modal-scroll"
+                "modal-content will-change-opacity bg-mainBg relative focus:outline-none rounded-2xl shadow-2xl",
+                "w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
+                width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
               )}
               onClick={(e) => e.stopPropagation()}
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.95, opacity: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
             >
               {!noX && (
@@ -89,7 +88,9 @@ export default function ModalBase({
                   />
                 </div>
               )}
-              <div className="p-6">{children}</div>
+              <div className="p-6 overflow-y-auto modal-scroll max-h-[90vh]">
+                {children}
+              </div>
             </motion.div>
           </FocusTrap>
         </motion.div>
