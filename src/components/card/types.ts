@@ -20,5 +20,6 @@ export interface CardGridProps<K extends keyof CardByType> {
   emptyMessage?: string;
   handleCardClick?: (item: CardByType[K]) => void;
   getKey?: (item: CardByType[K], index: number) => string | number;
-  setRefetchFlag: refetchFlagType;
+  setRefetchFlag?: refetchFlagType;
+  role?: "tutor" | "student";
 }

@@ -12,11 +12,13 @@ import { ResourceCard } from "../users/resources/ResourceCard";
 import { SubjectFilter } from "../users/SubjectFilter";
 import { useUserSubjects } from "@/hooks/useUserSubjects";
 import { CompletedSessionCard } from "../users/sessions/completed/CompletedSessionCard";
+import { VerificationStatus } from "@/utils/sortUtils";
+import { VerificationFilter } from "../users/sessions/completed/VerificationFilter";
 
 const typeEmptyGridMap: Record<cardTypes, string> = {
   activeSession: "No sessions are active right now",
-  resource: "No resources exist for this subject yet",
-  compSessions: "You have no completed sessions yet",
+  resource: "No resources found",
+  compSessions: "No sessions found",
 };
 
 export function CardGrid<K extends keyof CardByType>({
@@ -28,9 +30,13 @@ export function CardGrid<K extends keyof CardByType>({
   setRefetchFlag,
   getKey = (_, i) => i,
   handleCardClick,
+  role,
 }: CardGridProps<K>) {
   const [search, setSearch] = useState("");
   const [subjectFilter, setSubjectFilter] = useState<"all" | string>("all");
+  const [verificationFilter, setVerificationFilter] = useState<
+    "all" | VerificationStatus
+  >("all");
 
   const { subjects, error: subjectError } = useUserSubjects();
 
@@ -56,9 +62,16 @@ export function CardGrid<K extends keyof CardByType>({
         (r) => (r as CardByType["resource"]).subject_id === subjectFilter
       );
     }
+    if (verificationFilter != "all" && type === "compSessions") {
+      result = result.filter(
+        (r) =>
+          (r as CardByType["compSessions"]).verificationStatus ===
+          verificationFilter
+      );
+    }
 
     return result;
-  }, [search, data, subjectFilter]);
+  }, [search, data, subjectFilter, verificationFilter]);
 
   const [, setNow] = useState(Date.now());
   useEffect(() => {
@@ -89,11 +102,21 @@ export function CardGrid<K extends keyof CardByType>({
               subjectOptions={subjects}
             />
           )}
+          {role === "tutor" && type === "compSessions" && (
+            <VerificationFilter
+              verificationFilter={{
+                value: verificationFilter,
+                setValue: setVerificationFilter,
+              }}
+            />
+          )}
         </div>
 
         <div className="flex items-center gap-1">
           <DataSearch value={search} onChange={setSearch} />
-          <DataRefresh refetch={setRefetchFlag} loading={loading} />
+          {setRefetchFlag && (
+            <DataRefresh refetch={setRefetchFlag} loading={loading} />
+          )}
         </div>
       </div>
 
@@ -132,10 +155,13 @@ export function CardGrid<K extends keyof CardByType>({
 
               case "compSessions":
                 return (
-                  <CompletedSessionCard
-                    key={key}
-                    cs={item as CardByType["compSessions"]}
-                  />
+                  role && (
+                    <CompletedSessionCard
+                      key={key}
+                      role={role}
+                      cs={item as CardByType["compSessions"]}
+                    />
+                  )
                 );
 
               default:
