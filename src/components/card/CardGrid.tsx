@@ -11,10 +11,12 @@ import { ActiveSessionCard } from "../admin/sessions/active/ActiveSessionCard";
 import { ResourceCard } from "../users/resources/ResourceCard";
 import { SubjectFilter } from "../users/SubjectFilter";
 import { useUserSubjects } from "@/hooks/useUserSubjects";
+import { CompletedSessionCard } from "../users/sessions/completed/CompletedSessionCard";
 
 const typeEmptyGridMap: Record<cardTypes, string> = {
   activeSession: "No sessions are active right now",
   resource: "No resources exist for this subject yet",
+  compSessions: "You have no completed sessions yet",
 };
 
 export function CardGrid<K extends keyof CardByType>({
@@ -125,6 +127,14 @@ export function CardGrid<K extends keyof CardByType>({
                   <ResourceCard
                     key={key}
                     resource={item as CardByType["resource"]}
+                  />
+                );
+
+              case "compSessions":
+                return (
+                  <CompletedSessionCard
+                    key={key}
+                    cs={item as CardByType["compSessions"]}
                   />
                 );
 
