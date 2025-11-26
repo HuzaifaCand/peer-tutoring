@@ -449,6 +449,7 @@ export type Database = {
           id: string;
           is_online: boolean;
           meeting_link: string | null;
+          message: string | null;
           rejection_reason: string | null;
           scheduled_for: string;
           slot_id: string | null;
@@ -473,6 +474,7 @@ export type Database = {
           id?: string;
           is_online?: boolean;
           meeting_link?: string | null;
+          message?: string | null;
           rejection_reason?: string | null;
           scheduled_for: string;
           slot_id?: string | null;
@@ -497,6 +499,7 @@ export type Database = {
           id?: string;
           is_online?: boolean;
           meeting_link?: string | null;
+          message?: string | null;
           rejection_reason?: string | null;
           scheduled_for?: string;
           slot_id?: string | null;
@@ -564,6 +567,45 @@ export type Database = {
             columns: ["verified_by"];
             isOneToOne: false;
             referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      student_session_feedback: {
+        Row: {
+          created_at: string;
+          id: string;
+          message: string;
+          session_id: string;
+          student_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          message: string;
+          session_id: string;
+          student_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          message?: string;
+          session_id?: string;
+          student_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "student_session_feedback_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "student_session_feedback_student_id_fkey";
+            columns: ["student_id"];
+            isOneToOne: false;
+            referencedRelation: "students";
             referencedColumns: ["id"];
           }
         ];
@@ -682,6 +724,48 @@ export type Database = {
           slug?: string;
         };
         Relationships: [];
+      };
+      tutor_session_feedback: {
+        Row: {
+          created_at: string;
+          id: string;
+          message: string | null;
+          session_id: string;
+          student_attendance: string;
+          tutor_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          message?: string | null;
+          session_id: string;
+          student_attendance: string;
+          tutor_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          message?: string | null;
+          session_id?: string;
+          student_attendance?: string;
+          tutor_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "tutor_session_feedback_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "tutor_session_feedback_tutor_id_fkey";
+            columns: ["tutor_id"];
+            isOneToOne: false;
+            referencedRelation: "tutors";
+            referencedColumns: ["id"];
+          }
+        ];
       };
       tutor_subjects: {
         Row: {
@@ -803,6 +887,13 @@ export type Database = {
       };
     };
     Views: {
+      session_pending_counts: {
+        Row: {
+          pending_count: number | null;
+          user_id: string | null;
+        };
+        Relationships: [];
+      };
       subject_health: {
         Row: {
           code: string | null;
