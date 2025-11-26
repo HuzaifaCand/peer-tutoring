@@ -14,13 +14,13 @@ import {
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
-const STAT_INFO = {
+const ADMIN_STATS = {
   activeSessions: {
     label: "Active Sessions",
     cta: "Manage Active Sessions",
     href: "/admin/sessions/active",
     icon: Activity,
-    fetch: async () =>
+    fetch: async (_userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -31,7 +31,7 @@ const STAT_INFO = {
     cta: "Review Completed Sessions",
     href: "/admin/sessions/completed",
     icon: ClipboardList,
-    fetch: async () =>
+    fetch: async (_userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -43,7 +43,7 @@ const STAT_INFO = {
     cta: "View Booked Sessions",
     href: "/admin/sessions/scheduled",
     icon: CalendarClock,
-    fetch: async () =>
+    fetch: async (_userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
@@ -54,23 +54,26 @@ const STAT_INFO = {
     cta: "Verify New Tutors",
     href: "/admin/tutors",
     icon: UserCheck2,
-    fetch: async () =>
+    fetch: async (_userId: string) =>
       supabase
         .from("tutors")
         .select("*", { count: "exact", head: true })
         .is("approved", null),
   },
+};
 
-  // student
+const STUDENT_STATS = {
   studentScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
     href: "/student/sessions?tab=scheduled",
     icon: CalendarDays,
-    fetch: async () =>
+    fetch: async (userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
+        .eq("student_id", userId)
+
         .eq("status", "scheduled"),
   },
   studentSessionRequests: {
@@ -88,17 +91,19 @@ const STAT_INFO = {
       return { count: data?.pending_count ?? 0, error };
     },
   },
+};
 
-  //tutor
+const TUTOR_STATS = {
   tutorScheduledSessions: {
     label: "Upcoming Sessions",
     cta: "View Scheduled Sessions",
     href: "/tutor/sessions?tab=scheduled",
     icon: CalendarDays,
-    fetch: async () =>
+    fetch: async (userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
+        .eq("tutor_id", userId)
         .eq("status", "scheduled"),
   },
   tutorSessionRequests: {
@@ -122,14 +127,21 @@ const STAT_INFO = {
     cta: "Review Completed Sessions",
     href: "/admin/sessions?tab=completed",
     icon: ClipboardCheck,
-    fetch: async () =>
+    fetch: async (userId: string) =>
       supabase
         .from("sessions")
         .select("*", { count: "exact", head: true })
+        .eq("tutor_id", userId)
         .eq("status", "completed")
         .is("verified", null),
   },
 };
+
+const STAT_INFO = {
+  ...ADMIN_STATS,
+  ...STUDENT_STATS,
+  ...TUTOR_STATS,
+} as const;
 
 // config that  toggles which stats to show
 type OperationalStatsConfig = Partial<Record<keyof typeof STAT_INFO, boolean>>;
