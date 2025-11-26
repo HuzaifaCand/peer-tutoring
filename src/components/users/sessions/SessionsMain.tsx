@@ -8,7 +8,7 @@ import { SessionsOverview } from "./SessionsOverview";
 import { SessionRequests } from "./requests/SessionRequests";
 import { ScheduledSessions } from "./Scheduled";
 import { ActiveSessions } from "./Active";
-import { CompletedSessions } from "./Completed";
+import { CompletedSessions } from "./completed/Completed";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { CancelledSessions } from "./cancelled/Cancelled";
 
@@ -64,7 +64,7 @@ export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
       {tab === "requests" && <SessionRequests sharedProps={sharedProps} />}
       {tab === "scheduled" && <ScheduledSessions />}
       {tab === "active" && <ActiveSessions />}
-      {tab === "completed" && <CompletedSessions />}
+      {tab === "completed" && <CompletedSessions sharedProps={sharedProps} />}
       {tab === "cancelled" && <CancelledSessions sharedProps={sharedProps} />}
     </main>
   );
