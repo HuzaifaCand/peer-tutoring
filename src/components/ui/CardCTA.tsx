@@ -14,7 +14,7 @@ export function CardCTA({
   return (
     <span
       className={clsx(
-        "flex items-center gap-1 text-textButton border border-white/10 rounded-md hover:bg-hoverBg group-hover:bg-hoverBg transition-all",
+        "flex items-center gap-1 text-textButton cursor-pointer border border-white/10 rounded-md hover:bg-hoverBg group-hover:bg-hoverBg transition-all",
         padding,
         textSize
       )}
