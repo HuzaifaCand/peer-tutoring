@@ -53,6 +53,7 @@ export function RejectRequestModal({ modalConfig }: Props) {
         onInputChange: setRejectReason,
         inputRequired: true, // Required for rejects
         placeholder: "Please provide a reason for rejecting this request.",
+        maxLength: 200,
       }}
       successMessage="Request rejected successfully!"
     />
