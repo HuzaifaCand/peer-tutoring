@@ -439,6 +439,7 @@ export type Database = {
       sessions: {
         Row: {
           academic_year: string;
+          actual_duration: number | null;
           booked_at: string;
           cancel_reason: string | null;
           cancellation_source: string | null;
@@ -464,6 +465,7 @@ export type Database = {
         };
         Insert: {
           academic_year?: string;
+          actual_duration?: number | null;
           booked_at?: string;
           cancel_reason?: string | null;
           cancellation_source?: string | null;
@@ -489,6 +491,7 @@ export type Database = {
         };
         Update: {
           academic_year?: string;
+          actual_duration?: number | null;
           booked_at?: string;
           cancel_reason?: string | null;
           cancellation_source?: string | null;
