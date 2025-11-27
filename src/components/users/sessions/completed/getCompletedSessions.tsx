@@ -22,7 +22,8 @@ export async function getCompletedSessions(
       verified_by,
       is_online,
       scheduled_for,
-      subjects:subjects(label)
+      subjects:subjects(label),
+      actual_duration
     `
     )
     .eq(idCol, uid)
@@ -43,14 +44,6 @@ export async function getCompletedSessions(
       s.tutors.users.full_name.split(" ").slice(0, -1).join(" ") ||
       s.tutors.users.full_name;
 
-    // compute REAL duration
-    let actualDuration = null;
-    if (s.start_time && s.completed_at) {
-      const start = new Date(s.start_time).getTime();
-      const end = new Date(s.completed_at).getTime();
-      actualDuration = Math.round((end - start) / (1000 * 60)); // ms → minutes
-    }
-
     return {
       id: s.id,
       sName: studentName,
@@ -58,7 +51,7 @@ export async function getCompletedSessions(
 
       subject: s.subject_id,
       expectedDuration: s.duration_minutes,
-      actualDuration,
+      actualDuration: s.actual_duration,
 
       completedAt: s.completed_at,
       verificationStatus: s.verified
