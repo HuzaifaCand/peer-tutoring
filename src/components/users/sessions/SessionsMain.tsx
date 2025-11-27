@@ -1,13 +1,13 @@
 "use client";
 
 import SectionHeader from "@/components/ui/SectionHeader";
-import { SessionsTabs, Tab } from "./SessionsTabs";
+import { SessionsTabs, Tab } from "./SessionTabs";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { SessionsOverview } from "./SessionsOverview";
+import { SessionsOverview } from "./overview/Overview";
 import { SessionRequests } from "./requests/SessionRequests";
-import { ScheduledSessions } from "./Scheduled";
-import { ActiveSessions } from "./Active";
+import { ScheduledSessions } from "./scheduled/Scheduled";
+import { ActiveSessions } from "./active/Active";
 import { CompletedSessions } from "./completed/Completed";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { CancelledSessions } from "./cancelled/Cancelled";
@@ -62,7 +62,7 @@ export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
 
       {tab === "overview" && <SessionsOverview role={role} />}
       {tab === "requests" && <SessionRequests sharedProps={sharedProps} />}
-      {tab === "scheduled" && <ScheduledSessions />}
+      {tab === "scheduled" && <ScheduledSessions sharedProps={sharedProps} />}
       {tab === "active" && <ActiveSessions />}
       {tab === "completed" && <CompletedSessions sharedProps={sharedProps} />}
       {tab === "cancelled" && <CancelledSessions sharedProps={sharedProps} />}
