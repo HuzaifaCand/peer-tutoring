@@ -20,7 +20,7 @@ interface ConfirmationModalProps {
     onInputChange: (v: string) => void;
     inputRequired: boolean;
     placeholder?: string;
-    maxLength?: number;
+    maxLength?: number; // Optional — only use if explicitly provided
   };
 }
 
@@ -37,9 +37,10 @@ export function ConfirmationModal({
 }: ConfirmationModalProps) {
   const [loading, setLoading] = useState(false);
 
-  const maxLength = inputConfig?.maxLength ?? 125;
+  const maxLength = inputConfig?.maxLength; // no default
   const valueLength = inputConfig?.inputValue.length ?? 0;
-  const exceedsLimit = valueLength > maxLength;
+
+  const exceedsLimit = maxLength !== undefined && valueLength > maxLength;
 
   async function handleConfirm() {
     if (
@@ -85,13 +86,13 @@ export function ConfirmationModal({
         {/* Input Area */}
         {inputConfig && (
           <div className="space-y-1">
-            <div className="flex items-center gap-1">
+            <div className="flex items-center gap-2">
               <label className={getLabelClass("sm")}>
                 {inputConfig.inputLabel}
               </label>
 
               {inputConfig.inputRequired && !inputConfig.inputValue && (
-                <p className="text-[10px] text-red-400">
+                <p className="text-[10px] text-red-400 sm:mt-1">
                   This field is required.
                 </p>
               )}
@@ -102,22 +103,24 @@ export function ConfirmationModal({
                 value={inputConfig.inputValue}
                 onChange={(e) => inputConfig.onInputChange(e.target.value)}
                 placeholder={inputConfig.placeholder}
-                className={clsx(getInputClass("sm"), "pr-10")}
-                rows={2}
-                maxLength={undefined} // We enforce logic ourselves
+                className={clsx(getInputClass("sm"), maxLength && "pr-10")}
+                rows={1}
               />
 
-              {/* CHARACTER COUNTER */}
-              <div
-                className={clsx(
-                  "absolute bottom-1 right-2 text-[10px] font-medium",
-                  exceedsLimit ? "text-red-400" : "text-textMuted/70"
-                )}
-              >
-                {valueLength} / {maxLength}
-              </div>
+              {/* Character Counter — show only if maxLength is set */}
+              {maxLength !== undefined && (
+                <div
+                  className={clsx(
+                    "absolute bottom-1 right-2 text-[10px] font-medium",
+                    exceedsLimit ? "text-red-400" : "text-textMuted/70"
+                  )}
+                >
+                  {valueLength} / {maxLength}
+                </div>
+              )}
             </div>
 
+            {/* Exceeded Message */}
             {exceedsLimit && (
               <p className="text-[11px] text-red-400">
                 Maximum {maxLength} characters allowed.
