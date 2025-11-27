@@ -30,7 +30,8 @@ export const sessionExtendSelects: Record<SessionStatus, string> = {
       rejection_reason,
       start_time,
       completed_at,
-      duration_minutes
+      duration_minutes,
+      actual_duration
     `,
 };
 

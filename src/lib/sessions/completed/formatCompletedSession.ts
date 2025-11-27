@@ -3,10 +3,6 @@ import { extractTutorStudentInfo, computeMode } from "../sessionFormatters";
 import { SessionWithUsers } from "../types";
 
 export function formatCompletedSession(s: SessionWithUsers) {
-  const start = s.start_time ? parseISO(s.start_time) : null;
-  const end = s.completed_at ? parseISO(s.completed_at) : null;
-  const actualDuration = start && end ? differenceInMinutes(end, start) : null;
-
   const info = extractTutorStudentInfo(s);
 
   const mode = computeMode(s.is_online);
@@ -26,6 +22,6 @@ export function formatCompletedSession(s: SessionWithUsers) {
     rejection_reason: s.rejection_reason ?? "",
 
     expected_duration: s.duration_minutes,
-    actual_duration: actualDuration,
+    actual_duration: s.actual_duration,
   };
 }
