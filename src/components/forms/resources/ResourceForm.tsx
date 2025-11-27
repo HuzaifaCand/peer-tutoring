@@ -1,12 +1,11 @@
 import { useForm } from "react-hook-form";
-import { getButtonClass, getInputClass, getLabelClass } from "../classes";
+import { getInputClass, getLabelClass } from "../classes";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddResourceData, addResourceSchema } from "./AddResourceSchema";
 import SubjectInput from "../fields/SubjectInput";
 import { subjectOptions } from "@/lib/constants/subjects";
 import clsx from "clsx";
 import { User } from "@supabase/supabase-js";
-import { CheckCircle } from "lucide-react";
 import { FormButton } from "../FormButton";
 
 interface ResourceFormProps {
@@ -17,7 +16,7 @@ interface ResourceFormProps {
 
 const inputClass = getInputClass("xs");
 const labelClass = getLabelClass("xs");
-const buttonClass = getButtonClass("xs");
+
 export function ResourceForm({
   onSubmit,
   user,
