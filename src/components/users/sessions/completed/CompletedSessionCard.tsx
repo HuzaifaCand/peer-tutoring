@@ -2,6 +2,7 @@ import { CardShell } from "@/components/card/CardShell";
 import { CompletedSessionsType } from "./getCompletedSessions";
 import { Tag } from "@/components/ui/Tag";
 import { StudentFeedbackButton } from "./StudentFeedbackButton";
+import { HeaderLeft, tagTextSize } from "../sharedUI";
 
 export function CompletedSessionCard({
   cs,
@@ -38,25 +39,14 @@ export function CompletedSessionCard({
     <CardShell>
       <div className="space-y-5">
         {/* Tags */}
-        <div className="flex justify-between items-center gap-2">
-          <div className="flex items-center gap-2">
-            <Tag
-              textSize="text-[10px] sm:text-[11px]"
-              value={cs.subjectLabel}
-              color="gray"
-            />
-            <Tag
-              textSize="text-[10px] sm:text-[11px]"
-              value={cs.isOnline ? "online" : "onsite"}
-              color={cs.isOnline ? "blue" : "yellow"}
-            />
-          </div>
+        <div className="flex flex-col [@media(min-width:375px)]:items-center items-start [@media(min-width:375px)]:justify-between [@media(min-width:375px)]:flex-row gap-2">
+          <HeaderLeft sub={cs.subjectLabel} isOnline={cs.isOnline} />
 
           {role === "tutor" && (
             <Tag
               value={cs.verificationStatus}
               color={verificationColor}
-              textSize="text-[10px] sm:text-[11px]"
+              textSize={tagTextSize}
             />
           )}
           {role === "student" && <StudentFeedbackButton sessionId={cs.id} />}

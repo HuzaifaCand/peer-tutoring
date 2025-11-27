@@ -1,6 +1,7 @@
 import { CardShell } from "@/components/card/CardShell";
 import { CancSessions } from "./getCancelledSessions";
 import { Tag } from "@/components/ui/Tag";
+import { HeaderLeft, tagTextSize } from "../sharedUI";
 
 function getCancelledByLabel(cs: CancSessions, currentUserId: string) {
   if (cs.source === "system") return "System";
@@ -37,22 +38,11 @@ export function CancelledSessionCard({
       <div className="space-y-5">
         {/* Tags */}
         <div className="flex justify-between items-center gap-2">
-          <div className="flex items-center gap-2">
-            <Tag
-              textSize="text-[10px] sm:text-[11px]"
-              value={cs.subjectLabel}
-              color="gray"
-            />
-            <Tag
-              textSize="text-[10px] sm:text-[11px]"
-              value={cs.isOnline ? "online" : "onsite"}
-              color={cs.isOnline ? "blue" : "yellow"}
-            />
-          </div>
+          <HeaderLeft sub={cs.subjectLabel} isOnline={cs.isOnline} />
 
           {cs.source && (
             <Tag
-              textSize="text-[10px] sm:text-[11px]"
+              textSize={tagTextSize}
               value={cs.source}
               color={
                 cs.source === "manual"
