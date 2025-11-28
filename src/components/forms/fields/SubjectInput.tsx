@@ -5,6 +5,7 @@ import { useEffect, useState, ChangeEvent, KeyboardEvent } from "react";
 export interface SubjectOption {
   id: string;
   labelDisplay: string;
+  searchKey: string;
 }
 
 interface Props {
@@ -25,7 +26,7 @@ export default function SubjectInput({
   const [highlightedIndex, setHighlightedIndex] = useState(0);
 
   const filtered = options.filter((opt) =>
-    opt.labelDisplay.toLowerCase().includes(inputValue.toLowerCase())
+    opt.searchKey.includes(inputValue.toLowerCase())
   );
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -73,7 +74,7 @@ export default function SubjectInput({
         }}
         onKeyDown={handleKeyDown}
         value={inputValue}
-        placeholder="Search subject..."
+        placeholder="Search subject by name or code..."
         className={inputClass}
       />
 
