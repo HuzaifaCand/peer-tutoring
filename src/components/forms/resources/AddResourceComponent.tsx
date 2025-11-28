@@ -34,6 +34,11 @@ export function AddResourceForm({
       link: data.link,
     });
 
+    if (error?.code === "23505") {
+      toast.error("Resource already exists. No need to add it again!");
+      return;
+    }
+
     if (error) {
       console.error(error);
       toast.error("Submission failed.");

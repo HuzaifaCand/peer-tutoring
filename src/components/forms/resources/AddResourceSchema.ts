@@ -3,7 +3,7 @@ import z from "zod";
 
 export const addResourceSchema = z.object({
   subject: z
-    .string()
+    .string("Subject cannot be empty.")
     .refine(
       (val) => subjectOptions.some((s) => s.id === val),
       "Please select a valid subject."
@@ -12,7 +12,7 @@ export const addResourceSchema = z.object({
   description: z.string().max(300).optional().or(z.literal("")),
   link: z
     .string()
-    .min(1)
+    .min(1, "Link cannot be empty.")
     .refine(
       (val) => /^(https?:\/\/)?([\w-]+(\.[\w-]+)+)([/?#].*)?$/i.test(val),
       { message: "Please enter a valid URL." }
