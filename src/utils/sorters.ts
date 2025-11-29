@@ -1,7 +1,7 @@
 import { ComputedTutorRow } from "@/lib/users/getTutors";
 import {
   chainSorters,
-  sortByRequestStats,
+  sortByRequestStatus,
   sortByTimestamp,
   sortByVerification,
 } from "./sortUtils";
@@ -42,7 +42,7 @@ export const defaultSorters = {
   >("scheduled_for_iso", "asc"),
 
   sessionRequests: chainSorters(
-    sortByRequestStats,
+    sortByRequestStatus,
     sortByTimestamp<UnifiedRequest, "created_at">("created_at", "desc")
   ),
 };

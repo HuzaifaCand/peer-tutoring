@@ -77,14 +77,15 @@ export function chainSorters<T>(...sortFns: ((a: T, b: T) => number)[]) {
   };
 }
 
-export function sortByRequestStats<T extends { status: RequestStatus }>(
+export function sortByRequestStatus<T extends { status: RequestStatus }>(
   a: T,
   b: T
 ) {
   const order: Record<RequestStatus, number> = {
     pending: 0,
     accepted: 1,
-    rejected: 2,
+    timed_out: 2,
+    rejected: 3,
   };
   return order[a.status] - order[b.status];
 }
