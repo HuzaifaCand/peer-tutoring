@@ -10,6 +10,7 @@ import { useState } from "react";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuthUser } from "@/hooks/useAuthUser";
+import { getActionButtonClass } from "../sessions/sharedUI";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -147,9 +148,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
           {isTutorUser && !resource.verified && setResourceData && (
             <button
               onClick={() => setResourceData(resource)}
-              className="flex items-center gap-1 px-3 py-1 text-xs font-medium
-               text-green-400 bg-green-500/10 focus:outline-none focus:bg-green-400/20 border border-white/10 rounded-md
-               hover:bg-green-700/60 transition-all duration-200 hover:cursor-pointer"
+              className={getActionButtonClass("positive")}
             >
               Verify
             </button>
@@ -162,16 +161,16 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
             onClick={() =>
               incrementResourceView(resource.id).catch(console.error)
             }
-            className="flex items-center gap-1 px-3 py-1 text-xs sm:text-sm font-medium
+            className="flex items-center gap-1 px-3 py-1 text-[11px] sm:text-xs font-medium
                text-textButton/90 bg-elevatedBg border border-white/10 rounded-md
                hover:bg-hoverBg transition-all duration-200 focus:outline-none focus:bg-hoverBg focus:ring-2 focus:ring-white/10"
           >
-            <ExternalLink size={14} />
+            <ExternalLink size={13} />
             View
           </a>
           <div title="Copy Link" onClick={handleCopy}>
             <Copy
-              size={14}
+              size={13}
               className="text-textWhite hover:cursor-pointer hover:text-textButton"
             />
           </div>
