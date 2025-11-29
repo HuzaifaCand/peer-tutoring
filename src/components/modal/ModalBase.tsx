@@ -70,7 +70,7 @@ export default function ModalBase({
           >
             <motion.div
               className={clsx(
-                "modal-content will-change-opacity bg-mainBg relative focus:outline-none rounded-2xl shadow-2xl",
+                "modal-content will-change-opacity bg-mainBg focus:outline-none rounded-2xl shadow-2xl",
                 "w-[90vw] md:w-[80vw] xl:w-[70vw] max-h-[90vh] mx-auto",
                 width === "tight" ? "max-w-3xl xl:max-w-4xl" : "max-w-6xl"
               )}
@@ -80,16 +80,21 @@ export default function ModalBase({
               exit={{ opacity: 0, y: 8 }}
               transition={{ duration: 0.18, ease: "easeOut" }}
             >
-              {!noX && (
-                <div className="absolute top-8 right-8" onClick={onClose}>
-                  <X
-                    className="text-textWhite/80 transition hover:cursor-pointer hover:text-textButton"
-                    size={16}
-                  />
-                </div>
-              )}
               <div className="p-6 overflow-y-auto modal-scroll max-h-[90vh]">
-                {children}
+                <div className="relative">
+                  {children}
+                  {!noX && (
+                    <button
+                      className="absolute top-4 right-2"
+                      onClick={onClose}
+                    >
+                      <X
+                        className="text-textWhite/80 transition hover:cursor-pointer hover:text-textButton"
+                        size={16}
+                      />
+                    </button>
+                  )}
+                </div>
               </div>
             </motion.div>
           </FocusTrap>
