@@ -7,7 +7,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { RejectRequest } from "./RejectRequest";
-import { AcceptRequest } from "./AcceptRequest";
+import { AcceptOnlineRequest } from "./AcceptOnlineRequest";
+import { AcceptOnsiteRequest } from "./AcceptOnsiteRequest";
 
 export function RequestActions({
   req,
@@ -67,19 +68,28 @@ export function RequestActions({
 
   if (role === "tutor") {
     return (
-      <div className="flex justify-end gap-3 pt-4">
+      <div className="flex justify-end gap-2 pt-4">
         <RejectRequest
           type={type}
           refetch={refetch}
           requestId={req.id}
           closeModal={closeModal}
         />
-        <AcceptRequest
-          type={type}
-          refetch={refetch}
-          req={req}
-          closeModal={closeModal}
-        />
+        {req.type === "onsite" && (
+          <AcceptOnsiteRequest
+            req={req}
+            closeModal={closeModal}
+            refetch={refetch}
+          />
+        )}
+
+        {req.type === "online" && (
+          <AcceptOnlineRequest
+            req={req}
+            closeModal={closeModal}
+            refetch={refetch}
+          />
+        )}
       </div>
     );
   }

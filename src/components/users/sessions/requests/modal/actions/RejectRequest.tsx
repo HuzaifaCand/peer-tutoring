@@ -67,9 +67,9 @@ export function RejectRequest({
       />
       <button
         onClick={() => setRejectModal(true)}
-        className={getActionButtonClass("positive")}
+        className={getActionButtonClass("destructive")}
       >
-        Accept
+        Reject
       </button>
     </>
   );
