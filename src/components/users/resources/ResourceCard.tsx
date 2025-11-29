@@ -61,6 +61,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
       toast.error(
         "You cannot verify this resource. The subject is not assigned to you."
       );
+      setResourceData(null);
       return;
     }
 
