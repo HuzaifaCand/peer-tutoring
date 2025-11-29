@@ -30,7 +30,7 @@ export function TutorCards({ sid, setTutorCount }: TutorCardProps) {
   return (
     <div className="grid grid-cols-1 gap-3">
       {data.map(
-        (t) => (t.verified! = false && <TutorCard key={t.id} tutor={t} />)
+        (t) => t.verified !== false && <TutorCard key={t.id} tutor={t} />
       )}
     </div>
   );
