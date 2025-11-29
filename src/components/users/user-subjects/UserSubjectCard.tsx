@@ -33,7 +33,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
           <div className="flex flex-col items-start  sm:flex-row sm:items-center gap-2">
             <Tag
               value={bottomText}
-              color={count === 0 ? "red" : "gray"}
+              color={count === 0 ? "red" : "green"}
               textSize="text-[10px] sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
@@ -43,7 +43,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
                   ? resource_count + " Resources"
                   : "1 Resource"
               }
-              color={resource_count === 0 ? "orange" : "muted"}
+              color={resource_count === 0 ? "gray" : "green"}
               textSize="text-[10px] sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
