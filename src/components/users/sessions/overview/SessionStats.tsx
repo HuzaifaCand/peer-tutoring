@@ -1,6 +1,14 @@
+"use client";
+
 import CountCard from "@/components/CountCard";
 
-export function SessionStats({ role }: { role: "tutor" | "student" }) {
+export function SessionStats({
+  role,
+  userId,
+}: {
+  role: "tutor" | "student";
+  userId: string;
+}) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       <CountCard
