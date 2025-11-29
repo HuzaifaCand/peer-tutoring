@@ -4,8 +4,8 @@ import { supabase } from "@/lib/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { UnifiedRequest } from "../../getSessionRequests";
-import { FormButton } from "@/components/forms/FormButton";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
+import { getActionButtonClass } from "../../../sharedUI";
 
 const cutoff = new Date(Date.now() + 30 * 60 * 1000).toISOString();
 
@@ -83,11 +83,12 @@ export function AcceptOnsiteRequest({
         onConfirm={handleAcceptOnsite}
         confirmText="Schedule"
       />
-      <FormButton
-        text="Accept"
-        size="sm"
-        handleClick={() => setOnsiteModal(true)}
-      />
+      <button
+        onClick={() => setOnsiteModal(true)}
+        className={getActionButtonClass("positive")}
+      >
+        Accept
+      </button>
     </>
   );
 }

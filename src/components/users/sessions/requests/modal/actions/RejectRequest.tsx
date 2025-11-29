@@ -1,10 +1,10 @@
 "use client";
 
-import { FormButton } from "@/components/forms/FormButton";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { supabase } from "@/lib/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
+import { getActionButtonClass } from "../../../sharedUI";
 
 export function RejectRequest({
   type,
@@ -65,12 +65,12 @@ export function RejectRequest({
         }}
         successMessage="Request rejected successfully!"
       />
-      <FormButton
-        text="Reject"
-        size="sm"
-        style="reject"
-        handleClick={() => setRejectModal(true)}
-      />
+      <button
+        onClick={() => setRejectModal(true)}
+        className={getActionButtonClass("positive")}
+      >
+        Accept
+      </button>
     </>
   );
 }
