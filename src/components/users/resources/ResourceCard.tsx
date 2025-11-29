@@ -56,17 +56,16 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
       .select("id")
       .maybeSingle();
 
+    if (error) {
+      console.error(error);
+      toast.error("Failed to verify resource, try again.");
+      return;
+    }
     if (!data) {
       toast.error(
         "You cannot verify this resource. The subject is not assigned to you."
       );
       setResourceData(null);
-      return;
-    }
-
-    if (error) {
-      console.error(error);
-      toast.error("Failed to verify resource, try again.");
       return;
     }
 
