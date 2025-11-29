@@ -5,7 +5,7 @@ import { UnifiedRequest } from "../getSessionRequests";
 import { RequestHeader } from "./RequestHeader";
 import { RequestMeta } from "./RequestMeta";
 import { refetchFlagType } from "@/components/table/types";
-import { RequestActions } from "./RequestActions";
+import { RequestActions } from "./actions/RequestActions";
 
 // needs to handle the option for deletion by students if req.status === "pending"
 // needs to show more detailed info
@@ -15,12 +15,12 @@ export function ViewRequestModal({
   req,
   closeModal,
   role,
-  onRefetch,
+  refetch,
 }: {
   req: UnifiedRequest | null;
   closeModal: () => void;
   role: "tutor" | "student";
-  onRefetch: () => void;
+  refetch: () => void;
 }) {
   return (
     <ModalBase isOpen={!!req} onClose={closeModal}>
@@ -33,7 +33,7 @@ export function ViewRequestModal({
               req={req}
               role={role}
               closeModal={closeModal}
-              onRefetch={onRefetch}
+              refetch={refetch}
             />
           )}
         </div>
