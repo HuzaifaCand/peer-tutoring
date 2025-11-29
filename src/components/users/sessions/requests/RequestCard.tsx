@@ -2,6 +2,9 @@ import { CardShell } from "@/components/card/CardShell";
 import { UnifiedRequest } from "./getSessionRequests";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
+import { HeaderTags } from "@/components/modal/session/SessionHeaderTags";
+import { HeaderLeft, tagTextSize } from "../sharedUI";
+import { formatUnderscored } from "@/components/admin/edit-requests/getEditRequests";
 
 function formatDate(dateStr: string) {
   const d = new Date(dateStr);
@@ -30,8 +33,8 @@ export function RequestCard({
 
   const name =
     role === "tutor"
-      ? `Requested by ${req.studentName.split(" ").slice(0, -1).join(" ")}`
-      : `Tutor -- ${req.tutorName.split(" ").slice(0, -1).join(" ")}`;
+      ? `Student: ${req.studentName.split(" ").slice(0, -1).join(" ")}`
+      : `Tutor: ${req.tutorName.split(" ").slice(0, -1).join(" ")}`;
 
   let subtitle = "";
   if (isOnsite) {
@@ -47,40 +50,32 @@ export function RequestCard({
   }
 
   return (
-    <CardShell onClick={() => handleOpen(req)} className="space-y-2 mb-3">
+    <CardShell onClick={() => handleOpen(req)} className="space-y-5 mb-3">
       <div className="flex justify-between items-center">
-        {/* Subject */}
-        <h3 className="text-textWhite font-semibold text-sm sm:text-base">
-          {req.subjects.label}
-        </h3>
+        <HeaderLeft sub={req.subjects.label} isOnline={!isOnsite} />
 
         {/* Tag */}
-        <div className="flex items-center gap-1">
-          <Tag
-            value={req.status}
-            color={
-              req.status === "pending"
-                ? "gray"
-                : req.status === "rejected"
-                ? "red"
-                : "green"
-            }
-            textSize="text-[10px] sm:text-[11px]"
-          />
-          <Tag
-            value={isOnsite ? "onsite" : "online"}
-            color={isOnsite ? "yellow" : "blue"}
-            textSize="text-[10px] sm:text-[11px]"
-          />
-        </div>
+        <Tag
+          value={formatUnderscored(req.status)}
+          color={
+            req.status === "pending"
+              ? "gray"
+              : req.status === "accepted"
+              ? "green"
+              : "red"
+          }
+          textSize={tagTextSize}
+        />
       </div>
 
-      <p className="text-textMuted text-xs">{name}</p>
+      <h3 className="text-textWhite font-semibold text-sm sm:text-base">
+        {name}
+      </h3>
 
       <div className="bg-textMuted/10 w-full h-[1px] my-4" />
 
       <div className="flex justify-between items-center gap-2">
-        <p className="text-textMuted text-[10px] sm:text-xs">{subtitle}</p>
+        <p className="text-textMuted text-[10px] sm:text-[11px]">{subtitle}</p>
 
         <CardCTA
           cta="View Details"
