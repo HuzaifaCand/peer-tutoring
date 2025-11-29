@@ -12,7 +12,7 @@ type EditRequestWithUserWithAdmin = EditRequest & {
   admin: UserRow | null;
 };
 
-export const formatEditType = (type: string) => {
+export const formatUnderscored = (type: string) => {
   return type
     .split("_")
     .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
@@ -29,7 +29,7 @@ const formatEditRequest = (e: EditRequestWithUserWithAdmin) => {
     resolved_by: e.admin?.full_name,
     request: (e.payload as payload)?.what,
     reason: (e.payload as payload)?.why,
-    type: formatEditType(e.type),
+    type: formatUnderscored(e.type),
     username: e.users.full_name.split(" ").slice(0, -1).join(" "),
     student_id: e.users.email.split("@")[0],
     role: e.users.role,

@@ -3,7 +3,7 @@
 import { Notification } from "@/lib/computedtypes";
 import { CardShell } from "../card/CardShell";
 import { Tag } from "../ui/Tag";
-import { formatEditType } from "../admin/edit-requests/getEditRequests";
+import { formatUnderscored } from "../admin/edit-requests/getEditRequests";
 import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
@@ -29,7 +29,7 @@ export function NotificationCard({ n }: { n: Notification }) {
           </div>
 
           <Tag
-            value={formatEditType(n.type ?? "")}
+            value={formatUnderscored(n.type ?? "")}
             color="gray"
             textSize="text-[10px] sm:text-[12px]"
             className="px-1 sm:px-3 py-1"

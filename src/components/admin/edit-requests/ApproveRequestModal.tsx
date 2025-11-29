@@ -25,8 +25,6 @@ export function ApproveRequestModal({ modalConfig }: Props) {
       return;
     }
 
-    await new Promise((r) => setTimeout(r, 75)); // delay to make sure database fully updated
-
     refetchTable();
     setIsOpen(false);
     onClose();
@@ -41,7 +39,7 @@ export function ApproveRequestModal({ modalConfig }: Props) {
       onConfirm={approveRequest}
       isOpen={isOpen}
       onCancel={() => setIsOpen(false)}
-      successMessage="Success! Please send a message to resolve if necessary"
+      successMessage="Edit Request Approved! It will be resolved shortly."
     />
   );
 }

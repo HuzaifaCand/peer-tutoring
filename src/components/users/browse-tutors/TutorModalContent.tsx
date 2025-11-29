@@ -82,9 +82,9 @@ export function TutorModalContent({
             </div>
 
             {/* CREDENTIALS */}
-            <div className="space-y-2">
+            <div className="space-y-1">
               <h3 className="text-textWhite font-semibold text-md sm:text-lg">
-                {subject.name} Credentials
+                Subject Credentials
               </h3>
               <p className="text-textMuted/80 text-xs sm:text-sm leading-relaxed max-w-prose">
                 {subject_credentials || "Not added yet."}

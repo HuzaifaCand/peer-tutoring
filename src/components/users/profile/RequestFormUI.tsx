@@ -1,17 +1,11 @@
-import { formatEditType } from "@/components/admin/edit-requests/getEditRequests";
-import {
-  getButtonClass,
-  getInputClass,
-  getLabelClass,
-} from "@/components/forms/classes";
-import { CheckCircle, Trash2 } from "lucide-react";
+import { formatUnderscored } from "@/components/admin/edit-requests/getEditRequests";
+import { getInputClass, getLabelClass } from "@/components/forms/classes";
 import { editReqType } from "./EditRequestForm";
 import clsx from "clsx";
 import { FormButton } from "@/components/forms/FormButton";
 
 const inputClass = getInputClass("xs");
 const labelClass = getLabelClass("xs");
-const buttonClass = getButtonClass("xs");
 
 interface FormProps {
   type: "subject_change" | "availability_change";
@@ -52,7 +46,11 @@ export function RequestFormUI({
 
       <div className="space-y-2 ">
         <label className={labelClass}>Request Type</label>
-        <input disabled value={formatEditType(type)} className={inputClass} />
+        <input
+          disabled
+          value={formatUnderscored(type)}
+          className={inputClass}
+        />
       </div>
 
       {/* Detailed Changes */}

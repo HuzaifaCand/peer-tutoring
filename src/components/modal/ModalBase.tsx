@@ -54,7 +54,7 @@ export default function ModalBase({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center will-change-opacity"
+          className="fixed inset-0 z-50 bg-black/60 flex items-center justify-center will-change-opacity"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
