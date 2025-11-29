@@ -5,22 +5,33 @@ import { supabase } from "@/lib/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { getActionButtonClass } from "../../sharedUI";
+import { TimeToSessionType } from "../formatSessionCountdown";
 
 interface CancelSessionProps {
   userId: string;
   refetch: () => void;
   sessionId: string;
-  disableCancel: boolean;
+  timeToSession: TimeToSessionType;
 }
 
 export function CancelSession({
   userId,
   sessionId,
   refetch,
-  disableCancel,
+  timeToSession,
 }: CancelSessionProps) {
   const [cancelModal, setCancelModal] = useState(false);
   const [cancelReason, setCancelReason] = useState("");
+
+  const { mode, hours, minutes } = timeToSession;
+
+  const disableCancel =
+    mode === "expired" ||
+    mode === "grace" ||
+    (mode === "before" &&
+      hours !== null &&
+      minutes !== null &&
+      hours * 60 + minutes <= 30);
 
   async function handleCancel(cancelReason: string) {
     const { error } = await supabase

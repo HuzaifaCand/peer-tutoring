@@ -3,7 +3,6 @@
 import { CardShell } from "@/components/card/CardShell";
 import { Tag } from "@/components/ui/Tag";
 import { ScheduledSessionsType } from "./getScheduledSessions";
-import { useEffect, useState } from "react";
 import { ScheduledActions } from "./actions/ScheduledActions";
 import { SharedPropsType } from "../SessionsMain";
 import { useSessionCountdown } from "./useSessionCountdown";

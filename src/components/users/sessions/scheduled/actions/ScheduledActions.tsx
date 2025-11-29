@@ -1,19 +1,16 @@
+import { supabase } from "@/lib/supabase/client";
 import { SharedPropsType } from "../../SessionsMain";
 import { CancelSession } from "./CancelSession";
 import { StartSession } from "./StartSession";
+import { useEffect, useRef } from "react";
+import { TimeToSessionType } from "../formatSessionCountdown";
 
 interface ActionProps {
   isOnline: boolean;
   sessionId: string;
   sharedProps: SharedPropsType;
   refetch: () => void;
-  timeToSession: {
-    mode: "grace" | "expired" | "before";
-    hours: number | null;
-    minutes: number | null;
-    seconds: number | null;
-    graceMinutesLeft: number | null;
-  };
+  timeToSession: TimeToSessionType;
 }
 export function ScheduledActions({
   isOnline,
@@ -22,33 +19,35 @@ export function ScheduledActions({
   refetch,
   timeToSession,
 }: ActionProps) {
-  const { hours, minutes, mode, graceMinutesLeft } = timeToSession;
   const { userId, role } = sharedProps;
 
-  const disableCancel =
-    mode === "expired" ||
-    (mode === "grace" && graceMinutesLeft !== null && graceMinutesLeft <= 0);
+  // Prevent double auto-cancel calls
+  const autoCancelled = useRef(false);
 
-  // ----------------------------
-  // START BUTTON LOGIC (tutor only)
-  // ----------------------------
-  let disableStart = true;
+  useEffect(() => {
+    if (timeToSession.mode !== "expired") return;
+    if (autoCancelled.current) return;
 
-  if (mode === "before") {
-    // Start allowed only when <= 10 minutes before scheduled time
-    if (hours !== null && hours === 0 && minutes !== null && minutes <= 10) {
-      disableStart = false;
-    }
-  }
+    autoCancelled.current = true;
 
-  if (mode === "grace") {
-    // Session time has passed — tutor should still be able to start
-    disableStart = false;
-  }
+    const cancel = async () => {
+      const { error } = await supabase
+        .from("sessions")
+        .update({
+          cancelled_at: new Date().toISOString(),
+          cancelled_by: userId,
+          cancellation_source: "timeout",
+          cancel_reason: "Session timed out as tutor did not start.",
+        })
+        .eq("id", sessionId);
 
-  if (mode === "expired") {
-    disableStart = true;
-  }
+      if (!error) {
+        refetch();
+      }
+    };
+
+    cancel();
+  }, [timeToSession.mode, sessionId, userId, refetch]);
 
   return (
     <div className="flex items-center gap-2">
@@ -56,14 +55,14 @@ export function ScheduledActions({
         sessionId={sessionId}
         userId={userId}
         refetch={refetch}
-        disableCancel={disableCancel}
+        timeToSession={timeToSession}
       />
       {role === "tutor" && (
         <StartSession
           isOnline={isOnline}
           sessionId={sessionId}
           refetch={refetch}
-          disabled={disableStart}
+          timeToSession={timeToSession}
         />
       )}
     </div>

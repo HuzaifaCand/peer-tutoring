@@ -5,21 +5,42 @@ import { supabase } from "@/lib/supabase/client";
 import { useState } from "react";
 import { toast } from "sonner";
 import { getActionButtonClass } from "../../sharedUI";
+import { TimeToSessionType } from "../formatSessionCountdown";
 
 interface StartSessionProps {
   isOnline: boolean;
   refetch: () => void;
   sessionId: string;
-  disabled: boolean;
+  timeToSession: TimeToSessionType;
 }
 export function StartSession({
   isOnline,
   sessionId,
   refetch,
-  disabled,
+  timeToSession,
 }: StartSessionProps) {
   const [startModal, setStartModal] = useState(false);
   const [meetingLink, setMeetingLink] = useState("");
+
+  let disableStart = true;
+
+  const { mode, hours, minutes } = timeToSession;
+
+  if (mode === "before") {
+    // Start allowed only when <= 10 minutes before scheduled time
+    if (hours !== null && hours === 0 && minutes !== null && minutes <= 10) {
+      disableStart = false;
+    }
+  }
+
+  if (mode === "grace") {
+    // Session time has passed — tutor should still be able to start
+    disableStart = false;
+  }
+
+  if (mode === "expired") {
+    disableStart = true;
+  }
 
   async function handleStartSession(link: string | undefined) {
     if (isOnline && !link?.trim()) return;
@@ -70,7 +91,7 @@ export function StartSession({
       )}
       <button
         onClick={() => setStartModal(true)}
-        disabled={disabled}
+        disabled={disableStart}
         className={getActionButtonClass("positive")}
       >
         Start Session
