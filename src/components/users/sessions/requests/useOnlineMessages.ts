@@ -3,10 +3,16 @@
 import { useEffect, useState, useRef } from "react";
 import { supabase } from "@/lib/supabase/client";
 
+type OnlineMessage = {
+  id: string;
+  request_id: string;
+  sender_id: string;
+  message: string;
+  created_at: string;
+};
+
 export function useOnlineMessages(requestId: string) {
-  const [messages, setMessages] = useState<
-    { id: string; message: string; sender_id: string; created_at: string }[]
-  >([]);
+  const [messages, setMessages] = useState<OnlineMessage[]>([]);
   const [loading, setLoading] = useState(true);
 
   const bottomRef = useRef<HTMLDivElement | null>(null);
@@ -19,7 +25,7 @@ export function useOnlineMessages(requestId: string) {
       .order("created_at", { ascending: true });
 
     if (!error && data) {
-      setMessages(data);
+      setMessages(data as OnlineMessage[]);
     }
     setLoading(false);
   }
@@ -38,7 +44,8 @@ export function useOnlineMessages(requestId: string) {
           filter: `request_id=eq.${requestId}`,
         },
         (payload) => {
-          setMessages((prev) => [...prev, payload.new as any]);
+          const newMessage = payload.new as OnlineMessage;
+          setMessages((prev) => [...prev, newMessage]);
         }
       )
       .subscribe();
@@ -48,7 +55,6 @@ export function useOnlineMessages(requestId: string) {
     };
   }, [requestId]);
 
-  // Scroll to bottom
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
