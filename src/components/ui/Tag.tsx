@@ -35,7 +35,6 @@ const colorStyles: Record<colors, string> = {
   maroon: "bg-[#b91c1c]/20 text-[#fecaca]",
 
   green: "bg-green-500/20 text-green-300",
-  emerald: "bg-emarald-500/20 text-emerald-300",
   lime: "bg-lime-500/20 text-lime-300",
   forest: "bg-[#15803d]/20 text-[#bbf7d0]",
 

@@ -23,7 +23,6 @@ export type subjectColors =
   | "fuchsia"
   | "rose"
   | "maroon"
-  | "emerald"
   | "lime"
   | "forest"
   | "cyan"
@@ -53,7 +52,6 @@ export const subjectColorMap: Record<subjectColors, string> = {
   maroon: "bg-[#b91c1c]/20 border border-[#b91c1c]/20 text-[#fecaca]",
 
   green: "bg-green-500/20 border border-green-500/20 text-green-300",
-  emerald: "bg-emerald-500/20 border border-emerald-500/20 text-emerald-300",
   lime: "bg-lime-500/20 border border-lime-500/20 text-lime-300",
   forest: "bg-[#15803d]/20 border border-[#15803d]/20 text-[#bbf7d0]",
 
