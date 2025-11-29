@@ -48,7 +48,7 @@ export async function getSubjectTutors(subject_id: string) {
     .from("tutor_subjects")
     .select(select)
     .eq("subject_id", subject_id)
-    .or("tutors.approved.eq.true,tutors.approved.is.null")
+    .or("(tutors.approved.eq.true,tutors.approved.is.null)")
     .overrideTypes<SubjectTutor[]>();
 
   if (error) console.error("Subject Tutors error", error);
@@ -68,7 +68,7 @@ export async function getSubjectTutor(tutor_id: string, subject_id: string) {
     .select(select)
     .eq("subject_id", subject_id)
     .eq("tutor_id", tutor_id)
-    .or("tutors.approved.eq.true,tutors.approved.is.null")
+    .or("(tutors.approved.eq.true,tutors.approved.is.null)")
     .single()
     .overrideTypes<SubjectTutor>();
 
