@@ -6,8 +6,17 @@ import { toast } from "sonner";
 import { UnifiedRequest } from "../../getSessionRequests";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { getActionButtonClass } from "../../../sharedUI";
+import { format, parseISO } from "date-fns";
 
-const cutoff = new Date(Date.now() + 30 * 60 * 1000).toISOString();
+const cutoff = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // 30 minute buffer
+
+function formatDateTime(dateStr: string | null | undefined) {
+  if (!dateStr) return "";
+  const d = parseISO(dateStr);
+  const date = format(d, "EEEEEEEEEEEEEEEE, d MMM");
+  const time = format(d, "h:mm a");
+  return `${date} at ${time}`;
+}
 
 export function AcceptOnsiteRequest({
   req,
@@ -19,17 +28,6 @@ export function AcceptOnsiteRequest({
   closeModal: () => void;
 }) {
   const [onsiteModal, setOnsiteModal] = useState(false);
-
-  const formatted = (ts: string | null) =>
-    ts &&
-    new Date(ts).toLocaleString("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
 
   const handleAcceptOnsite = async () => {
     const { error: reqError, data: updateReq } = await supabase
@@ -76,7 +74,7 @@ export function AcceptOnsiteRequest({
   return (
     <>
       <ConfirmationModal
-        title={`Schedule session for ${formatted(req.scheduled_for!)}?`}
+        title={`Schedule session for ${formatDateTime(req.scheduled_for!)}?`}
         type="positive"
         isOpen={onsiteModal}
         onCancel={() => setOnsiteModal(false)}
