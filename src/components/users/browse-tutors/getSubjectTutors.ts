@@ -32,25 +32,22 @@ const formatSubjectTutor = (t: SubjectTutor) => {
   };
 };
 
-const select = `
-  subjects(*),
-  tutor_id,
-  credentials,
-  tutors(
-    grade,
-    about,
-    users(full_name),
-    approved,
-    available_online,
-    available_slots(*)
-  )
-`;
+const select = `subjects(*),
+      tutor_id,
+      credentials,
+      tutors!inner(
+      grade,
+      about,
+      users(full_name),
+      approved,
+      available_online,
+      available_slots(*))`;
+
 export async function getSubjectTutors(subject_id: string) {
   const { data, error } = await supabase
     .from("tutor_subjects")
     .select(select)
     .eq("subject_id", subject_id)
-    .filter("tutors.approved", "in", "(true,null)")
     .overrideTypes<SubjectTutor[]>();
 
   if (error) console.error("Subject Tutors error", error);
@@ -70,7 +67,6 @@ export async function getSubjectTutor(tutor_id: string, subject_id: string) {
     .select(select)
     .eq("subject_id", subject_id)
     .eq("tutor_id", tutor_id)
-    .filter("tutors.approved", "in", "(true,null)")
     .maybeSingle()
     .overrideTypes<SubjectTutor>();
 

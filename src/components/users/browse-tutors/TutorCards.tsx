@@ -4,8 +4,8 @@ import { useCallback, useEffect } from "react";
 import { getSubjectTutors } from "./getSubjectTutors";
 import { useDataFetch } from "@/hooks/useDataFetch";
 import { CardsLoading } from "@/components/card/CardsLoading";
-import { TutorCard } from "./TutorCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
+import { TutorCard } from "./TutorCard";
 
 interface TutorCardProps {
   sid: string;
@@ -29,9 +29,9 @@ export function TutorCards({ sid, setTutorCount }: TutorCardProps) {
 
   return (
     <div className="grid grid-cols-1 gap-3">
-      {data.map((t) => (
-        <TutorCard key={t.id} tutor={t} />
-      ))}
+      {data.map(
+        (t) => (t.verified! = false && <TutorCard key={t.id} tutor={t} />)
+      )}
     </div>
   );
 }
