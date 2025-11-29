@@ -56,8 +56,9 @@ export async function getUserSubjects(role: "tutor" | "student", uid: string) {
 
   const { data: rows, error } = await supabase
     .from(table)
-    .select("subject_id")
-    .eq(idColumn, uid);
+    .select(`subject_id, tutors!inner(approved)`)
+    .eq(idColumn, uid)
+    .eq("tutors.approved", true);
 
   if (error) {
     console.error("subject ID fetch error:", error);
