@@ -23,7 +23,7 @@ export function AcceptOnsiteRequest({
   const formatted = (ts: string | null) =>
     ts &&
     new Date(ts).toLocaleString("en-GB", {
-      day: "2-digit",
+      day: "numeric",
       month: "long",
       year: "numeric",
       hour: "numeric",
