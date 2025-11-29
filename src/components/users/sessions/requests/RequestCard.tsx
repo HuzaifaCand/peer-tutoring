@@ -4,20 +4,32 @@ import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
 import { formatUnderscored } from "@/components/admin/edit-requests/getEditRequests";
+import { parseISO } from "date-fns";
+import { format } from "date-fns";
 
-function formatDate(dateStr: string | null | undefined) {
-  if (!dateStr) return;
-  const d = new Date(dateStr);
-  return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
+// For onsite request
+function formatDateTime(dateStr: string | null | undefined) {
+  if (!dateStr) return "";
+  const d = parseISO(dateStr);
+  const date = format(d, "EEE, d MMM");
+  const time = format(d, "h:mm a");
+  return `${date} at ${time}`;
 }
 
-function formatTime(time: string | null | undefined) {
-  if (!time) return null;
-  const [h, m] = time.split(":");
-  const hour = Number(h);
-  const ampm = hour >= 12 ? "PM" : "AM";
-  const display = hour % 12 === 0 ? 12 : hour % 12;
-  return `${display}:${m} ${ampm}`;
+// For suggested online time (HH:mm)
+function formatPlainTime(time: string | null | undefined) {
+  if (!time) return "";
+  const [h, m] = time.split(":").map(Number);
+  const hours12 = h % 12 === 0 ? 12 : h % 12;
+  const ampm = h >= 12 ? "PM" : "AM";
+  return `${hours12}:${m.toString().padStart(2, "0")} ${ampm}`;
+}
+
+// For suggested date (online)
+function formatSimpleDate(dateStr: string | null | undefined) {
+  if (!dateStr) return "";
+  const d = parseISO(dateStr);
+  return format(d, "EEE, d MMM");
 }
 
 export function RequestCard({
@@ -38,14 +50,11 @@ export function RequestCard({
 
   let requestTime = "";
   if (isOnsite) {
-    const date = formatDate(req.scheduled_for);
-    const time = formatTime(
-      new Date(req.scheduled_for ?? "").toISOString().split("T")[1]?.slice(0, 5)
-    );
-    requestTime = `Requested for ${date}${time ? " at " + time : ""}`;
+    const dateTime = formatDateTime(req.scheduled_for);
+    requestTime = `Requested for ${dateTime}`;
   } else {
-    const date = formatDate(req.suggested_date);
-    const time = formatTime(req.suggested_time);
+    const date = formatSimpleDate(req.suggested_date);
+    const time = formatPlainTime(req.suggested_time);
     requestTime = `Requested for ${date}${time ? ", around " + time : ""}`;
   }
 
@@ -77,10 +86,10 @@ export function RequestCard({
             Rejection reason: {req.rejectionReason}
           </p>
         )}
-        {req.message && (
+        {req.rejectionReason === null && (
           <p className="text-textMuted text-[10px] sm:text-[11px]">
             {role === "tutor" ? "Student message" : "Your message"}:{" "}
-            {req.message}
+            {req.message ?? "No message"}
           </p>
         )}
       </div>
