@@ -87,7 +87,7 @@ export function ConfirmationModal({
         {inputConfig && (
           <div className="space-y-1">
             <div className="flex items-center gap-2">
-              <label className={getLabelClass("sm")}>
+              <label className={getLabelClass("xs")}>
                 {inputConfig.inputLabel}
               </label>
 
@@ -103,7 +103,7 @@ export function ConfirmationModal({
                 value={inputConfig.inputValue}
                 onChange={(e) => inputConfig.onInputChange(e.target.value)}
                 placeholder={inputConfig.placeholder}
-                className={clsx(getInputClass("sm"), maxLength && "pr-10")}
+                className={clsx(getInputClass("xs"), maxLength && "pr-10")}
                 rows={1}
               />
 
