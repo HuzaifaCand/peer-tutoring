@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { RejectRequest } from "./RejectRequest";
+import { AcceptRequest } from "./AcceptRequest";
 
 export function RequestActions({
   req,
@@ -19,13 +20,11 @@ export function RequestActions({
   closeModal: () => void;
   refetch: () => void;
 }) {
-  const [loading, setLoading] = useState(false);
+  const type = req.type;
 
   const handleCancel = async () => {
     const table =
-      req.type === "onsite"
-        ? "onsite_session_requests"
-        : "online_session_requests";
+      type === "onsite" ? "onsite_session_requests" : "online_session_requests";
 
     const { error } = await supabase
       .from(table)
@@ -60,7 +59,6 @@ export function RequestActions({
             size="xs"
             del
             handleClick={() => setCancelModal(true)}
-            disabled={loading}
           />
         </div>
       </>
@@ -71,9 +69,15 @@ export function RequestActions({
     return (
       <div className="flex justify-end gap-3 pt-4">
         <RejectRequest
-          type={req.type}
+          type={type}
           refetch={refetch}
           requestId={req.id}
+          closeModal={closeModal}
+        />
+        <AcceptRequest
+          type={type}
+          refetch={refetch}
+          req={req}
           closeModal={closeModal}
         />
       </div>
