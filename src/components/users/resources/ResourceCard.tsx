@@ -13,9 +13,8 @@ import { useAuthUser } from "@/hooks/useAuthUser";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
+  refetch: () => void;
 }
-
-// add the verifying ability after adding the auths or at some point later down the line, actually might as well seed it right now
 
 async function incrementResourceView(resourceId: string) {
   const { data, error } = await supabase.rpc("increment_resource_view_count", {
@@ -29,7 +28,7 @@ async function incrementResourceView(resourceId: string) {
   }
 }
 
-export function ResourceCard({ resource }: ResourceCardProps) {
+export function ResourceCard({ resource, refetch }: ResourceCardProps) {
   const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
     null
   );
@@ -60,6 +59,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     } else {
       toast.success("Resource verified successfully");
     }
+
+    setResourceData(null);
+    refetch();
   }
 
   const addedByTutor = resource.added_by_role === "tutor";

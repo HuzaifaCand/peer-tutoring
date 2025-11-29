@@ -43,6 +43,7 @@ export function EditRequestForm({
         .limit(1);
 
       if (error) {
+        toast.error("Failed to fetch edit request");
         console.error("edit request fetch error:", error);
         return;
       }

@@ -150,6 +150,9 @@ export function CardGrid<K extends keyof CardByType>({
                   <ResourceCard
                     key={key}
                     resource={item as CardByType["resource"]}
+                    refetch={() =>
+                      setRefetchFlag && setRefetchFlag((prev) => !prev)
+                    }
                   />
                 );
 
