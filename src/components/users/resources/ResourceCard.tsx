@@ -49,17 +49,22 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
 
   async function handleVerify(resourceId: string) {
     if (!user) return;
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("resources")
       .update({ verified: true, verified_by: user.id })
-      .eq("id", resourceId);
+      .eq("id", resourceId)
+      .select("id")
+      .maybeSingle();
 
-    if (error) {
-      console.error(error, "updating resources");
-      toast.error("Failed to verify resource");
-    } else {
-      toast.success("Resource verified successfully");
+    if (error || !data) {
+      console.error(error);
+      toast.error(
+        "You cannot verify this resource. The subject is not assigned to you."
+      );
+      return;
     }
+
+    toast.success("Resource verified successfully");
 
     setResourceData(null);
     refetch();
@@ -145,7 +150,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
         />
 
         <div className="flex items-center gap-2">
-          {isTutorUser && !resource.verified && setResourceData && (
+          {isTutorUser && !resource.verified && (
             <button
               onClick={() => setResourceData(resource)}
               className={getActionButtonClass("positive")}
