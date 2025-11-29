@@ -8,14 +8,15 @@ import { useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
 
-// helper → local date+time → UTC ISO
-function toUTC(date: string, time: string) {
-  const dateTime = new Date(`${date}T${time}:00`);
-  return new Date(
-    dateTime.getTime() - dateTime.getTimezoneOffset() * 60000
-  ).toISOString();
-}
+export function localDateTimeToUTC(date: string, time: string): string {
+  const dt = new Date(`${date}T${time}:00`);
 
+  if (isNaN(dt.getTime())) {
+    throw new Error("Invalid date or time.");
+  }
+
+  return dt.toISOString();
+}
 export function AcceptOnlineModal({
   isOpen,
   onClose,
@@ -76,7 +77,7 @@ export function AcceptOnlineModal({
       }
     }
 
-    const scheduledForUTC = toUTC(date, time);
+    const scheduledForUTC = localDateTimeToUTC(date, time);
 
     setLoading(true);
 
