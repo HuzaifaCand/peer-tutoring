@@ -85,7 +85,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             color={resource.subject_color as colors}
             font="font-medium"
           />
-          <Tag value={resource.subject_code} color="muted" font="font-mono" />
+          <Tag value={resource.subject_code} color="muted" />
         </div>
         <div className="flex items-center gap-3">
           {isVerified ? (
