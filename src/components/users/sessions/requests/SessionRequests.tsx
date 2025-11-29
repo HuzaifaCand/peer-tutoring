@@ -43,7 +43,7 @@ export function SessionRequests({
         role={role}
         req={selectedReq}
         closeModal={closeModal}
-        onRefetch={() => setRefetchFlag((prev) => !prev)}
+        refetch={() => setRefetchFlag((prev) => !prev)}
       />
       <div className="space-y-3 mt-3">
         {data.map((req) => (
