@@ -2,11 +2,11 @@ import { CardShell } from "@/components/card/CardShell";
 import { UnifiedRequest } from "./getSessionRequests";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
-import { HeaderTags } from "@/components/modal/session/SessionHeaderTags";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
 import { formatUnderscored } from "@/components/admin/edit-requests/getEditRequests";
 
-function formatDate(dateStr: string) {
+function formatDate(dateStr: string | null | undefined) {
+  if (!dateStr) return;
   const d = new Date(dateStr);
   return d.toLocaleDateString("en-GB", { day: "numeric", month: "short" });
 }
@@ -38,13 +38,13 @@ export function RequestCard({
 
   let requestTime = "";
   if (isOnsite) {
-    const date = formatDate(req.scheduled_for!);
+    const date = formatDate(req.scheduled_for);
     const time = formatTime(
-      new Date(req.scheduled_for!).toISOString().split("T")[1]?.slice(0, 5)
+      new Date(req.scheduled_for ?? "").toISOString().split("T")[1]?.slice(0, 5)
     );
     requestTime = `Requested for ${date}${time ? " at " + time : ""}`;
   } else {
-    const date = formatDate(req.suggested_date!);
+    const date = formatDate(req.suggested_date);
     const time = formatTime(req.suggested_time);
     requestTime = `Requested for ${date}${time ? ", around " + time : ""}`;
   }
