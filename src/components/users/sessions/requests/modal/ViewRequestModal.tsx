@@ -4,7 +4,6 @@ import ModalBase from "@/components/modal/ModalBase";
 import { UnifiedRequest } from "../getSessionRequests";
 import { RequestHeader } from "./RequestHeader";
 import { RequestMeta } from "./RequestMeta";
-import { refetchFlagType } from "@/components/table/types";
 import { RequestActions } from "./actions/RequestActions";
 
 // needs to handle the option for deletion by students if req.status === "pending"
