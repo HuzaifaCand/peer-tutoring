@@ -1,3 +1,13 @@
+type modes = "grace" | "expired" | "before";
+
+export type TimeToSessionType = {
+  mode: modes;
+  hours: number | null;
+  minutes: number | null;
+  seconds: number | null;
+  graceMinutesLeft: number | null;
+};
+
 export function formatSessionCountdown(
   countdown: ReturnType<
     typeof import("./useSessionCountdown").useSessionCountdown
@@ -6,7 +16,7 @@ export function formatSessionCountdown(
   let color: "gray" | "yellow" | "green" | "red" = "gray";
   let label: string | null = null;
 
-  let timeToSession = {
+  let timeToSession: TimeToSessionType = {
     mode: countdown.mode,
     hours: null as number | null,
     minutes: null as number | null,
