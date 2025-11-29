@@ -68,6 +68,7 @@ export function RejectRequest({
       <FormButton
         text="Reject"
         size="sm"
+        style="reject"
         handleClick={() => setRejectModal(true)}
       />
     </>

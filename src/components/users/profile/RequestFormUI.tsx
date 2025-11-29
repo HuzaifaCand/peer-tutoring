@@ -93,7 +93,7 @@ export function RequestFormUI({
             size="xs"
             text="Delete"
             disabled={loading}
-            del={true}
+            style="delete"
           />
         )}
       </div>

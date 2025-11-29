@@ -57,7 +57,7 @@ export function RequestActions({
           <FormButton
             text="Cancel Request"
             size="xs"
-            del
+            style="reject"
             handleClick={() => setCancelModal(true)}
           />
         </div>
