@@ -180,6 +180,7 @@ export type Database = {
           created_at: string;
           id: string;
           message: string | null;
+          rejection_reason: string | null;
           session_id: string | null;
           status: string;
           student_id: string;
@@ -193,6 +194,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           message?: string | null;
+          rejection_reason?: string | null;
           session_id?: string | null;
           status?: string;
           student_id: string;
@@ -206,6 +208,7 @@ export type Database = {
           created_at?: string;
           id?: string;
           message?: string | null;
+          rejection_reason?: string | null;
           session_id?: string | null;
           status?: string;
           student_id?: string;
@@ -890,10 +893,28 @@ export type Database = {
       };
     };
     Views: {
+      session_minutes: {
+        Row: {
+          minutes: number | null;
+          role: string | null;
+          session_id: string | null;
+          user_id: string | null;
+        };
+        Relationships: [];
+      };
       session_pending_counts: {
         Row: {
           pending_count: number | null;
           user_id: string | null;
+        };
+        Relationships: [];
+      };
+      sessions_per_week: {
+        Row: {
+          cancelled_sessions: number | null;
+          completed_sessions: number | null;
+          total_sessions: number | null;
+          week_start: string | null;
         };
         Relationships: [];
       };
@@ -941,6 +962,7 @@ export type Database = {
         };
         Returns: Json;
       };
+      timeout_onsite_requests: { Args: never; Returns: undefined };
     };
     Enums: {
       [_ in never]: never;
