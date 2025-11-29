@@ -60,10 +60,10 @@ export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
       <SectionHeader title="My Sessions" />
       <SessionsTabs activeTab={tab} setActiveTab={handleSetTab} />
 
-      {tab === "overview" && <SessionsOverview role={role} />}
+      {tab === "overview" && <SessionsOverview sharedProps={sharedProps} />}
       {tab === "requests" && <SessionRequests sharedProps={sharedProps} />}
       {tab === "scheduled" && <ScheduledSessions sharedProps={sharedProps} />}
-      {tab === "active" && <ActiveSessions />}
+      {tab === "active" && <ActiveSessions sharedProps={sharedProps} />}
       {tab === "completed" && <CompletedSessions sharedProps={sharedProps} />}
       {tab === "cancelled" && <CancelledSessions sharedProps={sharedProps} />}
     </main>
