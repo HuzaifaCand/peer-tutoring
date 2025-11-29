@@ -21,7 +21,7 @@ type OnlineReq = OnlineSessionRequest & {
   student: StudentUser;
 };
 
-export type RequestStatus = "pending" | "accepted" | "rejected";
+export type RequestStatus = "pending" | "accepted" | "rejected" | "timed_out";
 
 export type UnifiedRequest = {
   id: string;
