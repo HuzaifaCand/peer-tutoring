@@ -44,7 +44,7 @@ export function MeetingLinkEditable({
   }
 
   return (
-    <div className="flex items-center gap-2 w-2/3 sm:w-1/2">
+    <div className="flex items-center gap-2 [@media(min-width:420px)]:w-2/3 w-full sm:w-1/2">
       <p className="text-[10px] sm:text-[11px] whitespace-nowrap mt-1.5 text-textWhite/70">
         Meeting Link
       </p>

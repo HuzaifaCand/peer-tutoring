@@ -24,7 +24,7 @@ export function HeaderLeft({
 
 export const getActionButtonClass = (type: "positive" | "destructive") => {
   const sharedClass =
-    "px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs transition-colors duration-200 rounded-md sm:rounded-lg cursor-pointer";
+    "px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs transition-colors duration-200 rounded-md sm:rounded-lg cursor-pointer whitespace-nowrap";
   const negativeColors = "bg-red-800/20 text-red-300 hover:bg-red-900/40";
   const positiveColors = "bg-green-800/20 text-green-300 hover:bg-green-900/40";
 

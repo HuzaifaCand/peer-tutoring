@@ -74,11 +74,11 @@ export function CancelledSessionCard({
         {/* Timestamp */}
 
         <div className="flex justify-between items-center gap-2">
-          <p className="ml-0.5 text-[10px] sm:text-[11px] text-textMuted">
-            Cancelled on{" "}
+          <p className="ml-0.5 text-[10px] sm:text-[11px] text-textMuted flex flex-col [@media(min-width:400px)]:gap-1 [@media(min-width:400px)]:flex-row">
+            Cancelled on
             <span className="text-textWhite/80">{formattedDate(cs.when)}</span>
           </p>
-          <p className="text-[10px] sm:text-[11px] text-textMuted text-right">
+          <p className="text-[10px] sm:text-[11px] flex flex-col [@media(min-width:400px)]:gap-1 [@media(min-width:400px)]:flex-row text-textMuted text-right">
             Scheduled For{" "}
             <span className="text-textWhite/80">
               {formattedDate(cs.scheduled_for)}

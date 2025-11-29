@@ -36,7 +36,7 @@ export function MessagingPanel({
   }
 
   return (
-    <div className="flex flex-col h-[70vh] bg-mainBg rounded-xl border border-textMuted/10 overflow-hidden shadow-lg">
+    <div className="flex flex-col max-h-[70vh] bg-mainBg rounded-xl border border-textMuted/10 overflow-hidden shadow-lg">
       {/* Header */}
       <div className="p-4 border-b border-textMuted/10">
         <h2 className="text-textWhite font-semibold text-sm">Messages</h2>
@@ -45,7 +45,9 @@ export function MessagingPanel({
       {/* Message list */}
       <div className="flex-1 overflow-y-auto p-4 flex flex-col">
         {loading ? (
-          <Loader2 className="text-textWhite w-3 h-3 animate-spin" />
+          <div className="flex items-center justify-center h-40">
+            <Loader2 className="text-textWhite w-3 h-3 animate-spin" />
+          </div>
         ) : messages.length === 0 ? (
           <p className="text-textMuted text-sm">No messages yet</p>
         ) : (
@@ -66,7 +68,7 @@ export function MessagingPanel({
       <div className="p-4 border-t border-textMuted/10 flex items-center gap-2">
         <input
           type="text"
-          className="flex-1 bg-elevatedBg text-textWhite p-2 rounded-lg text-sm outline-none"
+          className="flex-1 bg-elevatedBg text-textWhite p-2 rounded-lg text-[11px] sm:text-xs outline-none"
           placeholder="Write a message…"
           value={input}
           onChange={(e) => setInput(e.target.value)}

@@ -54,7 +54,7 @@ export function ActiveSessionCard({
             {role === "tutor" ? "Student: " : "Tutor: "} {name}
           </p>
 
-          <div className="flex justify-between items-center gap-3">
+          <div className="flex [@media(min-width:420px)]:justify-between [@media(min-width:420px)]:items-center flex-col gap-1 [@media(min-width:420px)]:flex-row">
             {/* Start Time */}
             <p className="text-[10px] sm:text-[11px] mt-1.5 text-textMuted">
               Started at:{" "}
@@ -98,7 +98,7 @@ export function ActiveSessionCard({
                 rel="noopener noreferrer"
                 href={as.meetingLink ?? "#"}
               >
-                <CardCTA cta="Join Meeting" />
+                <CardCTA cta="Join Meeting" textSize="text-[11px] sm:text-xs" />
               </a>
             </div>
           )}

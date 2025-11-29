@@ -51,11 +51,11 @@ export function RequestCard({
   let requestTime = "";
   if (isOnsite) {
     const dateTime = formatDateTime(req.scheduled_for);
-    requestTime = `Requested for ${dateTime}`;
+    requestTime = dateTime;
   } else {
     const date = formatSimpleDate(req.suggested_date);
     const time = formatPlainTime(req.suggested_time);
-    requestTime = `Requested for ${date}${time ? ", around " + time : ""}`;
+    requestTime = `${date}${time ? ", around " + time : ""}`;
   }
 
   return (
@@ -96,9 +96,9 @@ export function RequestCard({
       <div className="bg-textMuted/10 w-full h-[1px] my-4" />
 
       <div className="flex justify-between items-center gap-2">
-        <p className="text-textMuted text-[10px] sm:text-[11px]">
-          {requestTime}
-        </p>
+        <span className="flex flex-col [@media(min-width:400px)]:flex-row [@media(min-width:400px)]:gap-1 text-textMuted text-[10px] sm:text-[11px]">
+          Requested for <span className="text-textWhite/80">{requestTime}</span>
+        </span>
 
         <CardCTA
           cta="View Details"

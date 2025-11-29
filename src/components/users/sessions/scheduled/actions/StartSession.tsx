@@ -89,13 +89,19 @@ export function StartSession({
       ) : (
         <ConfirmationModal {...sharedProps} />
       )}
-      <button
-        onClick={() => setStartModal(true)}
-        disabled={disableStart}
-        className={getActionButtonClass("positive")}
+      <div
+        onClick={() =>
+          disableStart && toast.error("Cannot start the session right now.")
+        }
       >
-        Start Session
-      </button>
+        <button
+          onClick={() => setStartModal(true)}
+          disabled={disableStart}
+          className={getActionButtonClass("positive")}
+        >
+          Start Session
+        </button>
+      </div>
     </>
   );
 }
