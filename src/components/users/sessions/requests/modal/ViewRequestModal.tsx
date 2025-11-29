@@ -5,6 +5,7 @@ import { UnifiedRequest } from "../getSessionRequests";
 import { RequestHeader } from "./RequestHeader";
 import { RequestMeta } from "./RequestMeta";
 import { RequestActions } from "./actions/RequestActions";
+import { MessagingPanel } from "../MessagingPanel";
 
 // needs to handle the option for deletion by students if req.status === "pending"
 // needs to show more detailed info
@@ -24,9 +25,21 @@ export function ViewRequestModal({
   return (
     <ModalBase isOpen={!!req} onClose={closeModal}>
       {req && (
-        <div className="space-y-4">
+        <div className="space-y-6 pt-4">
           <RequestHeader role={role} req={req} />
-          <RequestMeta req={req} />
+          <hr className="my-6 text-textMuted/10 h-[1px]" />
+          <RequestMeta role={role} req={req} />
+          {req.type === "online" && (
+            <MessagingPanel
+              requestId={req.id}
+              userId={role === "tutor" ? req.tutor_id : req.student_id}
+            />
+          )}
+
+          {req.type === "onsite" && (
+            <hr className="my-2 text-textMuted/10 h-[1px]" />
+          )}
+
           {req.status === "pending" && (
             <RequestActions
               req={req}
