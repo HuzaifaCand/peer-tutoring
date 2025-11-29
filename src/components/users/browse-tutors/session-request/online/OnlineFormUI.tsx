@@ -39,7 +39,7 @@ export function OnlineFormUI({
       <div className="space-y-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className={getLabelClass("sm")}>Suggest a Date</label>
+            <label className={getLabelClass("sm")}>Choose a Date</label>
             <input
               type="date"
               value={suggestedDate}
