@@ -32,6 +32,7 @@ export type UnifiedRequest = {
   created_at: string;
   status: RequestStatus;
   message?: string | null;
+  rejectionReason: string | null;
 
   // onsite
   scheduled_for?: string | null;
@@ -64,6 +65,7 @@ function baseMapper(req: OnsiteReq | OnlineReq) {
     studentAbout: req.student.about,
     tutorName: req.tutor.users.full_name,
     tutorAbout: req.tutor.about,
+    rejectionReason: req.rejection_reason,
   };
 }
 
