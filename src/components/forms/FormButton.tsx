@@ -1,4 +1,10 @@
-import { CheckCircle, Trash2 } from "lucide-react";
+import {
+  Check,
+  CheckCircle,
+  CheckCircle2,
+  Trash2,
+  XCircle,
+} from "lucide-react";
 import { getButtonClass } from "./classes";
 import clsx from "clsx";
 
@@ -7,16 +13,28 @@ export function FormButton({
   handleClick,
   disabled,
   text,
-  del = false,
   type = "button",
+  style = "accept",
 }: {
   size: "sm" | "xs";
   handleClick?: () => void;
   disabled?: boolean;
   text: string;
   type?: "button" | "submit";
-  del?: boolean;
+  style?: "accept" | "reject" | "delete";
 }) {
+  let icon: React.ReactNode = null;
+  switch (style) {
+    case "accept":
+      icon = <CheckCircle2 className="w-3 h-3" />;
+      break;
+    case "reject":
+      icon = <XCircle className="w-3 h-3" />;
+      break;
+    case "delete":
+      icon = <Trash2 className="w-3 h-3" />;
+      break;
+  }
   return (
     <button
       type={type}
@@ -28,11 +46,7 @@ export function FormButton({
         disabled && "disabled:opacity-50"
       )}
     >
-      {del ? (
-        <Trash2 className="w-3 h-3" />
-      ) : (
-        <CheckCircle className="w-3 h-3" />
-      )}
+      {icon}
       {text}
     </button>
   );

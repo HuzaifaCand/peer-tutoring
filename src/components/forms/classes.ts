@@ -2,7 +2,7 @@ type sizes = "sm" | "xs";
 
 export const getInputClass = (size: sizes) => {
   const baseClass =
-    "w-full rounded-md bg-elevatedBg px-2.5 py-1.5 text-textWhite/90 focus:outline-none focus:ring-1 focus:ring-white/10";
+    "w-full rounded-md bg-elevatedBg px-2.5 py-1.5 text-textWhite/90 focus:outline-none focus:ring-1 focus:ring-white/10 placeholder-textMuted/60";
 
   return baseClass + " " + (size === "sm" ? "text-xs sm:text-sm" : "text-xs");
 };
