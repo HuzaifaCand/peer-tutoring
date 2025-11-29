@@ -1,17 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Check, CheckCircle } from "lucide-react";
 import SubjectInput, {
   SubjectOption,
 } from "@/components/forms/fields/SubjectInput";
 import { SUBJECTS } from "@/lib/constants/subjects"; // adjust import path
 import clsx from "clsx";
-import { toast } from "sonner";
 import { getAddSubjectSchema } from "./OnboardingSchema";
 import { SubjectRow } from "@/lib/computedtypes";
 import { SubjectSelect } from "@/components/users/onboarding/OnboardingComponent";
-import { getButtonClass, getInputClass, getLabelClass } from "../classes";
+import { getInputClass, getLabelClass } from "../classes";
 import { FormButton } from "../FormButton";
 
 interface AddSubjectFormProps {
