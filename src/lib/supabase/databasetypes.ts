@@ -14,6 +14,52 @@ export type Database = {
   };
   public: {
     Tables: {
+      active_session_messages: {
+        Row: {
+          created_at: string;
+          id: string;
+          message: string;
+          sender_id: string;
+          session_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          message: string;
+          sender_id: string;
+          session_id: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          message?: string;
+          sender_id?: string;
+          session_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "active_session_messages_sender_id_fkey";
+            columns: ["sender_id"];
+            isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
+          {
+            foreignKeyName: "active_session_messages_sender_id_fkey";
+            columns: ["sender_id"];
+            isOneToOne: false;
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "active_session_messages_session_id_fkey";
+            columns: ["session_id"];
+            isOneToOne: false;
+            referencedRelation: "sessions";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       available_slots: {
         Row: {
           available: boolean;
@@ -91,8 +137,22 @@ export type Database = {
             foreignKeyName: "edit_requests_admin_id_fkey";
             columns: ["admin_id"];
             isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
+          {
+            foreignKeyName: "edit_requests_admin_id_fkey";
+            columns: ["admin_id"];
+            isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "edit_requests_user_id_fkey";
+            columns: ["user_id"];
+            isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
           },
           {
             foreignKeyName: "edit_requests_user_id_fkey";
@@ -165,6 +225,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "online_session_requests";
             referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "online_session_messages_sender_id_fkey";
+            columns: ["sender_id"];
+            isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
           },
           {
             foreignKeyName: "online_session_messages_sender_id_fkey";
@@ -406,6 +473,13 @@ export type Database = {
             foreignKeyName: "resources_added_by_fkey";
             columns: ["added_by"];
             isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
+          {
+            foreignKeyName: "resources_added_by_fkey";
+            columns: ["added_by"];
+            isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
@@ -523,6 +597,13 @@ export type Database = {
             foreignKeyName: "sessions_cancelled_by_fkey";
             columns: ["cancelled_by"];
             isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
+          {
+            foreignKeyName: "sessions_cancelled_by_fkey";
+            columns: ["cancelled_by"];
+            isOneToOne: false;
             referencedRelation: "users";
             referencedColumns: ["id"];
           },
@@ -567,6 +648,13 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "tutors";
             referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "sessions_verified_by_fkey";
+            columns: ["verified_by"];
+            isOneToOne: false;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
           },
           {
             foreignKeyName: "sessions_verified_by_fkey";
@@ -689,6 +777,13 @@ export type Database = {
           updated_at?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: "students_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
           {
             foreignKeyName: "students_id_fkey";
             columns: ["id"];
@@ -859,6 +954,13 @@ export type Database = {
             foreignKeyName: "tutors_id_fkey";
             columns: ["id"];
             isOneToOne: true;
+            referencedRelation: "user_session_stats";
+            referencedColumns: ["user_id"];
+          },
+          {
+            foreignKeyName: "tutors_id_fkey";
+            columns: ["id"];
+            isOneToOne: true;
             referencedRelation: "users";
             referencedColumns: ["id"];
           }
@@ -893,15 +995,6 @@ export type Database = {
       };
     };
     Views: {
-      session_minutes: {
-        Row: {
-          minutes: number | null;
-          role: string | null;
-          session_id: string | null;
-          user_id: string | null;
-        };
-        Relationships: [];
-      };
       session_pending_counts: {
         Row: {
           pending_count: number | null;
@@ -926,6 +1019,20 @@ export type Database = {
           subject_label: string | null;
           tutor_count: number | null;
         };
+        Insert: {
+          code?: string | null;
+          id?: string | null;
+          student_count?: never;
+          subject_label?: string | null;
+          tutor_count?: never;
+        };
+        Update: {
+          code?: string | null;
+          id?: string | null;
+          student_count?: never;
+          subject_label?: string | null;
+          tutor_count?: never;
+        };
         Relationships: [];
       };
       subject_popularity: {
@@ -933,6 +1040,18 @@ export type Database = {
           session_count: number | null;
           subject: string | null;
           subject_id: string | null;
+        };
+        Relationships: [];
+      };
+      user_session_stats: {
+        Row: {
+          completed_online_sessions: number | null;
+          completed_onsite_sessions: number | null;
+          completed_sessions: number | null;
+          online_minutes: number | null;
+          onsite_minutes: number | null;
+          total_minutes: number | null;
+          user_id: string | null;
         };
         Relationships: [];
       };
