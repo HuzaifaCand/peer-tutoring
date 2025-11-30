@@ -25,7 +25,7 @@ export function RequestHeader({
           Requested by: {name.split(" ").slice(0, -1).join(" ")}
         </p>
 
-        <p className="text-xs sm:text-sm font-light text-textMuted line-clamp-3">
+        <p className="text-[11px] sm:text-xs font-light text-textMuted line-clamp-3">
           <span className="text-textWhite">About:</span> {about ?? "Not added"}
         </p>
       </div>

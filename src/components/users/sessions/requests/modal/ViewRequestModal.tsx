@@ -31,6 +31,7 @@ export function ViewRequestModal({
           <RequestMeta role={role} req={req} />
           {req.type === "online" && (
             <MessagingPanel
+              disable={req.status !== "pending"}
               requestId={req.id}
               userId={role === "tutor" ? req.tutor_id : req.student_id}
             />

@@ -85,7 +85,9 @@ export function RequestMeta({
 
       {/* CREATED AT */}
       <div className="flex justify-end">
-        <p className="text-xs text-textMuted ">Requested on {createdAt}</p>
+        <p className="text-xs text-textMuted ">
+          Requested on <span className="text-textWhite">{createdAt}</span>
+        </p>
       </div>
     </div>
   );
