@@ -107,7 +107,7 @@ const TUTOR_STATS = {
         .eq("status", "scheduled"),
   },
   tutorSessionRequests: {
-    label: "New Session Requests",
+    label: "Pending Session Requests",
     cta: "View Session Requests",
     href: "/tutor/sessions?tab=requests",
     icon: Inbox,
