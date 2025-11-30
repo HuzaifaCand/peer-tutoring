@@ -6,6 +6,7 @@ import { useNotificationsStore } from "./notificationsStore";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { toast } from "sonner";
 import { Notification } from "@/lib/computedtypes";
+import { BellRingIcon } from "lucide-react";
 
 interface NotificationsProviderProps {
   children: React.ReactNode;
@@ -57,7 +58,12 @@ export function NotificationsProvider({
         },
         (payload) => {
           addNotification(payload.new as Notification);
-          toast(payload.new.title);
+          toast(
+            <div className="flex items-center gap-2">
+              <BellRingIcon className="w-4 h-4 text-textWhite" />
+              <p>{payload.new.title}</p>
+            </div>
+          );
         }
       )
       .subscribe();

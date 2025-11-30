@@ -73,7 +73,7 @@ export function AcceptOnsiteRequest({
       body: `Your session request for ${formatDateTime(
         req.scheduled_for
       )} has been accepted. The session has been scheduled.`,
-      href: "/student/session?tab=scheduled",
+      href: "/student/sessions?tab=scheduled",
     });
 
     toast.success("Session scheduled!");

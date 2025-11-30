@@ -5,7 +5,6 @@ import { formatUnderscored } from "../admin/edit-requests/getEditRequests";
 import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
-import { CheckCheck } from "lucide-react";
 
 export function NotificationCard({ n }: { n: Notification }) {
   const content = (
@@ -20,7 +19,11 @@ export function NotificationCard({ n }: { n: Notification }) {
         {/* Header */}
         <div className="flex justify-between items-center gap-3">
           <div className="flex items-center gap-2">
-            <h2 className={clsx("text-textWhite text-sm sm:text-lg")}>
+            <h2
+              className={clsx(
+                "text-textWhite text-sm sm:text-lg font-semibold"
+              )}
+            >
               {n.title}
             </h2>
           </div>
