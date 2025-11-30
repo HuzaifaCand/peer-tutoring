@@ -22,7 +22,7 @@ export function VerificationFilter({
     {
       key: "rejected",
       label: "Rejected",
-      color: "bg-rejected-500/20 text-rejected-300 border-rejected-400/20",
+      color: "bg-red-500/20 text-red-300 border-red-400/20",
     },
   ] as const;
 
