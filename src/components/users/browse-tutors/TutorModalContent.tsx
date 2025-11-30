@@ -122,7 +122,7 @@ export function TutorModalContent({
             <CardCTA
               cta="Book a Session"
               textSize="text-xs sm:text-sm"
-              padding="py-1.5 sm:py-2 px-3 sm:px-4"
+              padding="py-1.5 px-3"
             />
           </button>
         </div>

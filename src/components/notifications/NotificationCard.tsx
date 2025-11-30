@@ -12,14 +12,15 @@ export function NotificationCard({ n }: { n: Notification }) {
     <CardShell
       className={clsx(
         "relative mb-4",
-        n.href && "cursor-pointer hover:bg-hoverBg transition duration-200"
+        n.read && "bg-elevatedBg/40 hover:bg-hoverBg",
+        n.href && "cursor-pointer hover:bg-hoverBg/60 transition duration-200"
       )}
     >
       <div className="flex flex-col gap-3 p-0 sm:p-1">
         {/* Header */}
         <div className="flex justify-between items-center gap-3">
           <div className="flex items-center gap-2">
-            <h2 className="text-textWhite font-semibold text-sm sm:text-lg">
+            <h2 className={clsx("text-textWhite text-sm sm:text-lg")}>
               {n.title}
             </h2>
           </div>
@@ -30,18 +31,10 @@ export function NotificationCard({ n }: { n: Notification }) {
               textSize="text-[10px] sm:text-[12px]"
               className="px-0.5 sm:px-3 py-1 whitespace-nowrap"
             />
-            <div title={!n.read ? "Unread" : "Read"}>
-              <CheckCheck
-                className={clsx(
-                  "w-3 h-3 text-blue",
-                  !n.read ? "opacity-50" : "opacity-100"
-                )}
-              />
-            </div>
           </div>
         </div>
 
-        <div className="bg-hoverBg my-1 w-full h-[1px]" />
+        <div className="bg-white/5 my-1 w-full h-[1px]" />
 
         <div className="flex justify-between items-end gap-8">
           <p className="text-textMuted text-[10px] sm:text-xs max-w-xl">
