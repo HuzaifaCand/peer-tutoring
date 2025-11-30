@@ -23,7 +23,7 @@ export default function UserSubjectCards({
       </div>
 
       {loading ? (
-        <CardsLoading layoutClassName="grid grid-cols-1 gap-4" count={2} />
+        <CardsLoading layoutClassName="grid grid-cols-1 gap-4" count={1} />
       ) : (
         <div className="grid grid-cols-1 gap-4">
           {data.map((subject) => (
