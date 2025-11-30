@@ -39,7 +39,7 @@ export function CompletedSessionCard({
     <CardShell>
       <div className="space-y-5">
         {/* Tags */}
-        <div className="flex flex-col [@media(min-width:360px)]:items-center items-start [@media(min-width:360px)]:justify-between [@media(min-width:360px)]:flex-row gap-2">
+        <div className="flex items-center justify-between gap-2">
           <HeaderLeft sub={cs.subjectLabel} isOnline={cs.isOnline} />
 
           {role === "tutor" && (
@@ -57,7 +57,7 @@ export function CompletedSessionCard({
             {role === "tutor" ? "Student: " : "Tutor: "} {name}{" "}
           </p>
           <div className="flex justify-between items-center gap-4 border-b border-textMuted/10 pb-3">
-            <p className="text-[10px] sm:text-[11px] text-textMuted">
+            <p className="flex flex-col [@media(min-width:400px)]:flex-row [@media(min-width:400px)]:gap-1 text-textMuted text-[10px] sm:text-[11px]">
               Scheduled:{" "}
               <span className="text-textWhite/80">
                 {formatted(cs.scheduledFor)}
@@ -65,7 +65,7 @@ export function CompletedSessionCard({
             </p>
 
             {cs.startTime && (
-              <p className="text-[10px] sm:text-[11px] text-textMuted text-right">
+              <p className="flex flex-col [@media(min-width:400px)]:flex-row [@media(min-width:400px)]:gap-1 text-textMuted text-[10px] sm:text-[11px] text-right">
                 Started:{" "}
                 <span className="text-textWhite/80">
                   {formatted(cs.startTime)}
