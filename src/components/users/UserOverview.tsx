@@ -6,6 +6,7 @@ import SectionHeader from "../ui/SectionHeader";
 import SubjectUserCards from "./user-subjects/UserSubjectCards";
 import SectionDivider from "../ui/SectionDivider";
 import OperationalStats from "../OperationalStats";
+import { Library } from "lucide-react";
 
 const STUDENT_STATS = {
   studentScheduledSessions: true,
@@ -53,8 +54,18 @@ export default function UserOverview({ role }: { role: "student" | "tutor" }) {
       <SectionDivider />
 
       {role === "student" && (
-        <OperationalStats userId={user.id} config={STUDENT_STATS} />
+        <>
+          <OperationalStats userId={user.id} config={STUDENT_STATS} />
+          <SectionDivider />
+        </>
       )}
+
+      <div className="border-1 border-white/10 bg-mainBg text-textMuted flex items-center  justify-center ">
+        <div className="py-12 px-4 flex flex-col gap-4 items-center">
+          <Library className="w-8 h-8 text-textMuted" />
+          <p className="text-xs sm:text-sm">Resource Management Coming Soon</p>
+        </div>
+      </div>
     </main>
   );
 }
