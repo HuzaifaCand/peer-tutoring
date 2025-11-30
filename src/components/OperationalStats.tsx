@@ -125,7 +125,7 @@ const TUTOR_STATS = {
   tutorPendingSessionVerifications: {
     label: "Pending Session Verifications",
     cta: "Review Completed Sessions",
-    href: "/admin/sessions?tab=completed",
+    href: "/tutor/sessions?tab=completed",
     icon: ClipboardCheck,
     fetch: async (userId: string) =>
       supabase
