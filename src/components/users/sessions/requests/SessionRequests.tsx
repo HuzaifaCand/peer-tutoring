@@ -3,8 +3,6 @@
 import { useCallback, useState } from "react";
 import { getSessionRequests, UnifiedRequest } from "./getSessionRequests";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { useModalOpener } from "@/components/modal/useModalOpener";
-import { useCloseModal } from "@/components/modal/useCloseModal";
 import { RequestCard } from "./RequestCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 import { defaultSorters } from "@/utils/sorters";
@@ -28,8 +26,6 @@ export function SessionRequests({
   const { data, loading, setRefetchFlag } = useDataFetch(getSessionReqs, {
     sortFn: defaultSorters.sessionRequests,
   });
-  const { handleOpen } = useModalOpener(setSelectedReq, "id");
-  const closeModal = useCloseModal(setSelectedReq);
 
   if (loading)
     return <CardsLoading count={4} layoutClassName="grid grid-cols-1 gap-3" />;
@@ -42,7 +38,7 @@ export function SessionRequests({
       <ViewRequestModal
         role={role}
         req={selectedReq}
-        closeModal={closeModal}
+        closeModal={() => setSelectedReq(null)}
         refetch={() => setRefetchFlag((prev) => !prev)}
       />
       <div className="space-y-3 mt-3">
@@ -51,7 +47,7 @@ export function SessionRequests({
             role={role}
             key={req.id}
             req={req}
-            handleOpen={handleOpen}
+            handleOpen={() => setSelectedReq(req)}
           />
         ))}
       </div>
