@@ -114,7 +114,7 @@ export function AcceptOnlineModal({
     await supabase.from("notifications").insert({
       user_id: req.student_id,
       title: "Session Accepted",
-      body: "Your online session req has been accepted and scheduled.",
+      body: "Your online session request has been accepted and scheduled.",
       type: "session",
       href: "/student/sessions?tab=requests",
     });

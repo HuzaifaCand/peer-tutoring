@@ -7,6 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { toast } from "sonner";
 import { formatUnderscored } from "@/components/admin/edit-requests/getEditRequests";
 import { FormButton } from "@/components/forms/FormButton";
+import { createNotification } from "@/components/notifications/createNotification";
 
 export function CompleteSessionModal({
   completeModal,
@@ -68,13 +69,15 @@ export function CompleteSessionModal({
     }
 
     // Update session → completed
-    const { error: completeErr } = await supabase
+    const { error: completeErr, data } = await supabase
       .from("sessions")
       .update({
         status: "completed",
         completed_at: new Date().toISOString(),
       })
-      .eq("id", sessionId);
+      .eq("id", sessionId)
+      .select("student_id")
+      .maybeSingle();
 
     if (completeErr) {
       console.error(completeErr);
@@ -82,6 +85,13 @@ export function CompleteSessionModal({
       setSubmitting(false);
       return;
     }
+
+    await createNotification({
+      userId: data?.student_id,
+      title: "Session Completed",
+      type: "system",
+      body: "Tutor has ended the current session.",
+    });
 
     toast.success("Session completed successfully.");
     setSubmitting(false);

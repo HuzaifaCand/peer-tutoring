@@ -6,6 +6,9 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { getActionButtonClass } from "../../sharedUI";
 import { TimeToSessionType } from "../formatSessionCountdown";
+import { createNotification } from "@/components/notifications/createNotification";
+import { formatted } from "../ScheduledSessionCard";
+import clsx from "clsx";
 
 interface CancelSessionProps {
   userId: string;
@@ -34,7 +37,7 @@ export function CancelSession({
       hours * 60 + minutes <= 30);
 
   async function handleCancel(cancelReason: string) {
-    const { error } = await supabase
+    const { error, data } = await supabase
       .from("sessions")
       .update({
         status: "cancelled",
@@ -43,12 +46,37 @@ export function CancelSession({
         cancelled_by: userId,
         cancellation_source: "manual",
       })
-      .eq("id", sessionId);
+      .eq("id", sessionId)
+      .select("student_id, tutor_id, scheduled_for")
+      .maybeSingle();
 
     if (error) {
       console.error("cancellation error", error);
       toast.error("Cancelling failed. Try again");
     }
+
+    if (!data) {
+      console.error("Something went wrong.");
+      return;
+    }
+
+    const studentId = data.student_id;
+    const tutorId = data.tutor_id;
+
+    const notifyId = userId === studentId ? tutorId : studentId;
+    const canceller = notifyId === studentId ? "tutor" : "student";
+
+    await createNotification({
+      userId: notifyId,
+      title: `Session was cancelled by ${canceller}`,
+      body: `Your session scheduled for ${formatted(
+        data.scheduled_for
+      )} was cancelled`,
+      type: "session_cancellation",
+      href: `/${
+        canceller === "tutor" ? "student" : "tutor"
+      }/sessions?tab=cancelled`,
+    });
 
     refetch();
     setCancelReason("");
@@ -76,16 +104,26 @@ export function CancelSession({
         successMessage="Session has been cancelled."
       />
       <div className="flex justify-end">
-        <button
-          disabled={disableCancel}
-          title={
-            disableCancel ? "Can't cancel the session now" : "Cancel Session"
-          }
-          className={getActionButtonClass("destructive")}
-          onClick={() => setCancelModal(true)}
+        <div
+          onClick={() => {
+            if (disableCancel) {
+              toast.error("Cannot cancel the session anymore.");
+              return;
+            }
+
+            setCancelModal(true);
+          }}
         >
-          Cancel Booking
-        </button>
+          <button
+            disabled={disableCancel}
+            className={clsx(
+              getActionButtonClass("destructive"),
+              "disabled:pointer-events-none"
+            )}
+          >
+            Cancel Session
+          </button>
+        </div>
       </div>
     </>
   );

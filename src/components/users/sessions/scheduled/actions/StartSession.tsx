@@ -6,6 +6,8 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { getActionButtonClass } from "../../sharedUI";
 import { TimeToSessionType } from "../formatSessionCountdown";
+import { createNotification } from "@/components/notifications/createNotification";
+import clsx from "clsx";
 
 interface StartSessionProps {
   isOnline: boolean;
@@ -45,20 +47,34 @@ export function StartSession({
   async function handleStartSession(link: string | undefined) {
     if (isOnline && !link?.trim()) return;
 
-    const { error } = await supabase
+    const { data, error } = await supabase
       .from("sessions")
       .update({
         status: "in_progress",
         start_time: new Date().toISOString(),
         meeting_link: link?.trim() ?? null,
       })
-      .eq("id", sessionId);
+      .eq("id", sessionId)
+      .select("student_id")
+      .maybeSingle();
 
     if (error) {
       console.error("cancellation error", error);
       toast.error("Failed to start sessions. Try again");
       return;
     }
+
+    if (!data) {
+      return;
+    }
+
+    await createNotification({
+      userId: data.student_id,
+      title: "Session started",
+      body: "Tutor has started the session. Please join them if you have not.",
+      href: "/student/sessions?tab=active",
+      type: "session_started",
+    });
 
     refetch();
     setStartModal(false);
@@ -90,14 +106,21 @@ export function StartSession({
         <ConfirmationModal {...sharedProps} />
       )}
       <div
-        onClick={() =>
-          disableStart && toast.error("Cannot start the session right now.")
-        }
+        onClick={() => {
+          if (disableStart) {
+            toast.error("Cannot start the session right now.");
+            return;
+          }
+
+          setStartModal(true);
+        }}
       >
         <button
-          onClick={() => setStartModal(true)}
           disabled={disableStart}
-          className={getActionButtonClass("positive")}
+          className={clsx(
+            getActionButtonClass("positive"),
+            "disabled:pointer-events-none"
+          )}
         >
           Start Session
         </button>

@@ -6,6 +6,9 @@ export type NotificationType =
   | "session_rejected"
   | "general"
   | "edit_request"
+  | "session_cancellation"
+  | "session_started"
+  | "resources"
   | "system";
 
 interface CreateNotificationInput {

@@ -9,6 +9,17 @@ import { useSessionCountdown } from "./useSessionCountdown";
 import { formatSessionCountdown } from "./formatSessionCountdown";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
 
+export const formatted = (ts: string | null) =>
+  ts &&
+  new Date(ts).toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
 export function ScheduledSessionCard({
   index,
   ss,
@@ -22,17 +33,6 @@ export function ScheduledSessionCard({
 }) {
   const { role } = sharedProps;
   const name = role === "tutor" ? ss.sName : ss.tName;
-
-  const formatted = (ts: string | null) =>
-    ts &&
-    new Date(ts).toLocaleString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
 
   const countdown = useSessionCountdown(ss.scheduledFor);
   const {

@@ -11,6 +11,7 @@ import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { useUserRole } from "@/hooks/useUserRole";
 import { useAuthUser } from "@/hooks/useAuthUser";
 import { getActionButtonClass } from "../sessions/sharedUI";
+import { createNotification } from "@/components/notifications/createNotification";
 
 interface ResourceCardProps {
   resource: ComputedResourceType;
@@ -53,7 +54,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
       .from("resources")
       .update({ verified: true, verified_by: user.id })
       .eq("id", resourceId)
-      .select("id")
+      .select("id, added_by")
       .maybeSingle();
 
     if (error) {
@@ -70,6 +71,13 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
     }
 
     toast.success("Resource verified successfully");
+
+    await createNotification({
+      userId: data?.added_by,
+      type: "resources",
+      title: "Resource has been verified",
+      body: "Your resource has been verified by a tutor. Thank you for contributing!",
+    });
 
     setResourceData(null);
     refetch();

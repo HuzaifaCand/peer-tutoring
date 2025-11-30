@@ -7,6 +7,7 @@ import { UnifiedRequest } from "../../getSessionRequests";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { getActionButtonClass } from "../../../sharedUI";
 import { format, parseISO } from "date-fns";
+import { createNotification } from "@/components/notifications/createNotification";
 
 const cutoff = new Date(Date.now() + 30 * 60 * 1000).toISOString(); // 30 minute buffer
 
@@ -45,11 +46,10 @@ export function AcceptOnsiteRequest({
       return;
     }
 
-    if (!updateReq || updateReq.length === 0) {
+    if (!updateReq) {
       toast.error("This request has expired or is no longer pending.");
       return;
     }
-
     const { error: sessionError } = await supabase.from("sessions").insert({
       tutor_id: req.tutor_id,
       student_id: req.student_id,
@@ -65,6 +65,16 @@ export function AcceptOnsiteRequest({
       toast.error("Could not schedule the session.");
       return;
     }
+
+    await createNotification({
+      userId: req.student_id,
+      title: "Session Request Accepted",
+      type: "session_accepted",
+      body: `Your session request for ${formatDateTime(
+        req.scheduled_for
+      )} has been accepted. The session has been scheduled.`,
+      href: "/student/session?tab=scheduled",
+    });
 
     toast.success("Session scheduled!");
     closeModal();

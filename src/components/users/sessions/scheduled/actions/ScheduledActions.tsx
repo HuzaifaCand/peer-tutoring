@@ -1,9 +1,12 @@
+"use client";
+
 import { supabase } from "@/lib/supabase/client";
 import { SharedPropsType } from "../../SessionsMain";
 import { CancelSession } from "./CancelSession";
 import { StartSession } from "./StartSession";
 import { useEffect, useRef } from "react";
 import { TimeToSessionType } from "../formatSessionCountdown";
+import { createNotification } from "@/components/notifications/createNotification";
 
 interface ActionProps {
   isOnline: boolean;
@@ -31,7 +34,7 @@ export function ScheduledActions({
     autoCancelled.current = true;
 
     const cancel = async () => {
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from("sessions")
         .update({
           cancelled_at: new Date().toISOString(),
@@ -39,11 +42,28 @@ export function ScheduledActions({
           cancellation_source: "timeout",
           cancel_reason: "Session timed out as tutor did not start.",
         })
-        .eq("id", sessionId);
+        .eq("id", sessionId)
+        .select("student_id, tutor_id")
+        .maybeSingle();
 
       if (!error) {
         refetch();
       }
+
+      await createNotification({
+        userId: data?.student_id,
+        type: "session_cancellation",
+        title: "Session Timeout",
+        body: "Session has timed out. Tutor did not start the session in time.",
+        href: "/student/sessions?tab=cancelled",
+      });
+      await createNotification({
+        userId: data?.tutor_id,
+        type: "session_cancellation",
+        title: "Session Timeout",
+        body: "Session has timed out. You did not start the session in time.",
+        href: "/tutor/sessions?tab=cancelled",
+      });
     };
 
     cancel();
