@@ -4,6 +4,17 @@ import { Tag } from "@/components/ui/Tag";
 import { StudentFeedbackButton } from "./StudentFeedbackButton";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
 
+export const formatted = (ts: string | null) =>
+  ts &&
+  new Date(ts).toLocaleString("en-GB", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "2-digit",
+    hour: "numeric",
+    minute: "2-digit",
+    hour12: true,
+  });
+
 export function CompletedSessionCard({
   cs,
   role,
@@ -12,17 +23,6 @@ export function CompletedSessionCard({
   role: "tutor" | "student";
 }) {
   const name = role === "tutor" ? cs.sName : cs.tName;
-
-  const formatted = (ts: string | null) =>
-    ts &&
-    new Date(ts).toLocaleString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
 
   const durationText = cs.actualDuration
     ? `${cs.actualDuration} mins`
