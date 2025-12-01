@@ -47,12 +47,12 @@ function ActiveSessionSkeleton() {
 }
 
 export function ActiveSessions({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
-  const { role, userId } = sharedProps;
-
   const fetchFn = useCallback(
     () => getActiveSessions(userId, role),
     [userId, role]

@@ -11,12 +11,13 @@ import { SharedPropsType } from "../SessionsMain";
 import { ViewRequestModal } from "./modal/ViewRequestModal";
 
 export function SessionRequests({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
   const [selectedReq, setSelectedReq] = useState<UnifiedRequest | null>(null);
-  const { userId, role } = sharedProps;
 
   const getSessionReqs = useCallback(
     () => getSessionRequests(userId, role),

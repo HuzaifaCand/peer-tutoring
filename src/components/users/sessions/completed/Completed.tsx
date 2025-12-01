@@ -6,17 +6,16 @@ import {
   getCompletedSessions,
 } from "./getCompletedSessions";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SharedPropsType } from "../SessionsMain";
 import { sortByTimestamp } from "@/utils/sortUtils";
 import { CardGrid } from "@/components/card/CardGrid";
 
 export function CompletedSessions({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
-  const { role, userId } = sharedProps;
-
   const fetchFn = useCallback(
     () => getCompletedSessions(userId, role),
     [userId, role]

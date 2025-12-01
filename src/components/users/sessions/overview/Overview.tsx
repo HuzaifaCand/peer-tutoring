@@ -1,5 +1,4 @@
 import SectionDivider from "@/components/ui/SectionDivider";
-import { SharedPropsType } from "../SessionsMain";
 import { SessionStats } from "./SessionStats";
 import OperationalStats from "@/components/OperationalStats";
 import { BarChart2 } from "lucide-react";
@@ -14,11 +13,12 @@ const STUDENT_CONFIG = {
   studentSessionRequests: true,
 };
 export function SessionsOverview({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
-  const { userId, role } = sharedProps;
   return (
     <section className="space-y-4">
       <OperationalStats

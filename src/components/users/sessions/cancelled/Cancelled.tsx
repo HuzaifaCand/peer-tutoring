@@ -10,12 +10,12 @@ import { CancelledSessionCard } from "./CancelledSessionCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 
 export function CancelledSessions({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
-  const { role, userId } = sharedProps;
-
   const fetchFn = useCallback(
     () => getCancelledSessions(userId, role),
     [userId, role]

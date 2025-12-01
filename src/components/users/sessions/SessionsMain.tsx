@@ -21,7 +21,10 @@ export const TABS: Tab[] = [
   "cancelled",
 ];
 
-export type SharedPropsType = { userId: string; role: "tutor" | "student" };
+export type SharedPropsType = {
+  userId: string;
+  role: "tutor" | "student";
+};
 
 export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
   const searchParams = useSearchParams();
@@ -43,12 +46,7 @@ export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
     }
   }, [tabParam]);
 
-  if (!user) return;
-  const userId = user.id;
-  const sharedProps: SharedPropsType = {
-    userId,
-    role,
-  };
+  const userId = user?.id;
 
   const handleSetTab = (t: Tab) => {
     setTab(t);
@@ -60,12 +58,24 @@ export default function SessionsMain({ role }: { role: "tutor" | "student" }) {
       <SectionHeader title="My Sessions" />
       <SessionsTabs activeTab={tab} setActiveTab={handleSetTab} />
 
-      {tab === "overview" && <SessionsOverview sharedProps={sharedProps} />}
-      {tab === "requests" && <SessionRequests sharedProps={sharedProps} />}
-      {tab === "scheduled" && <ScheduledSessions sharedProps={sharedProps} />}
-      {tab === "active" && <ActiveSessions sharedProps={sharedProps} />}
-      {tab === "completed" && <CompletedSessions sharedProps={sharedProps} />}
-      {tab === "cancelled" && <CancelledSessions sharedProps={sharedProps} />}
+      {userId && tab === "overview" && (
+        <SessionsOverview role={role} userId={userId} />
+      )}
+      {userId && tab === "requests" && (
+        <SessionRequests role={role} userId={userId} />
+      )}
+      {userId && tab === "scheduled" && (
+        <ScheduledSessions role={role} userId={userId} />
+      )}
+      {userId && tab === "active" && (
+        <ActiveSessions role={role} userId={userId} />
+      )}
+      {userId && tab === "completed" && (
+        <CompletedSessions role={role} userId={userId} />
+      )}
+      {userId && tab === "cancelled" && (
+        <CancelledSessions role={role} userId={userId} />
+      )}
     </main>
   );
 }

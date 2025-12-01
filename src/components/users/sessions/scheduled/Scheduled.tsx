@@ -6,18 +6,22 @@ import {
   ScheduledSessionsType,
 } from "./getScheduledSessions";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { SharedPropsType } from "../SessionsMain";
 import { CardsLoading } from "@/components/card/CardsLoading";
 import { ScheduledSessionCard } from "./ScheduledSessionCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 import { sortByTimestamp } from "@/utils/sortUtils";
 
 export function ScheduledSessions({
-  sharedProps,
+  userId,
+  role,
 }: {
-  sharedProps: SharedPropsType;
+  userId: string;
+  role: "student" | "tutor";
 }) {
-  const { role, userId } = sharedProps;
+  const sharedProps = {
+    userId,
+    role,
+  };
 
   const fetchFn = useCallback(
     () => getScheduledSessions(userId, role),
