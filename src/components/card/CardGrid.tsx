@@ -71,7 +71,7 @@ export function CardGrid<K extends keyof CardByType>({
     }
 
     return result;
-  }, [search, data, subjectFilter, verificationFilter]);
+  }, [search, data, subjectFilter, verificationFilter, type]);
 
   const [, setNow] = useState(Date.now());
   useEffect(() => {
