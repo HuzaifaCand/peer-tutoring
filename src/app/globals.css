@@ -113,11 +113,6 @@ input[type="time"] {
   -moz-appearance: none;
 
   color-scheme: dark; /* helps force your dark theme */
-
-  padding: 0.6rem 0.8rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  font-size: 14px;
 }
 
 /* Hide calendar/time icons if needed */

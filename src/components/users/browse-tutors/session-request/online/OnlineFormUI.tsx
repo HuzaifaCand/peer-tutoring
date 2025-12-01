@@ -39,9 +39,10 @@ export function OnlineFormUI({
       <div className="space-y-2">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
-            <label className={getLabelClass("sm")}>Choose a Date</label>
+            <label className={getLabelClass("sm")}>Select a Date</label>
             <input
               type="date"
+              placeholder="Select a date..."
               value={suggestedDate}
               onChange={(e) => setSuggestedDate(e.target.value)}
               className={clsx(
@@ -58,6 +59,7 @@ export function OnlineFormUI({
             </label>
             <input
               type="time"
+              placeholder="Enter a time..."
               value={suggestedTime}
               onChange={(e) => setSuggestedTime(e.target.value)}
               className={clsx(
