@@ -1,7 +1,7 @@
 import { format, parseISO } from "date-fns";
 import { extractTutorStudentInfo, computeMode } from "../sessionFormatters";
 import { SessionWithUsers } from "../types";
-import { formatted } from "@/components/users/sessions/completed/CompletedSessionCard";
+import { formatted } from "@/components/users/sessions/scheduled/ScheduledSessionCard";
 
 export function formatCompletedSession(s: SessionWithUsers) {
   const info = extractTutorStudentInfo(s);
