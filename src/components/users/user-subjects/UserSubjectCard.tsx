@@ -29,7 +29,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
         <SubjectHeader name={name} code={code} grade={grade} color={color} />
         <div className="bg-hoverBg w-full h-[1px]" />
         {/* Footer */}
-        <div className="flex items-center justify-between pt-1 gap-2">
+        <div className="flex items-end justify-between pt-1 gap-2">
           <div className="flex flex-col items-start  sm:flex-row sm:items-center gap-2">
             <Tag
               value={bottomText}
