@@ -46,7 +46,12 @@ export default function TutorsTable({ setRowCount }: TutorsTableProps) {
 
   return (
     <>
-      <Modal type="tutor" onClose={closeModal} data={selectedTutor} />
+      <Modal
+        type="tutor"
+        onClose={closeModal}
+        data={selectedTutor}
+        setRefetchFlag={setRefetchFlag}
+      />
 
       <Table
         type="tutor"

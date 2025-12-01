@@ -4,11 +4,11 @@ import { Tag } from "@/components/ui/Tag";
 
 export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
   {
-    key: "s_id",
+    key: "studentId",
     label: "ID",
     render: (row) => (
       <div className="flex items-center gap-2">
-        <span className="ml-3">{row.s_id}</span>
+        <span className="ml-3">{row.studentId}</span>
         <div className="space-x-1">
           <Tag
             textSize="text-[10px]"
@@ -38,10 +38,10 @@ export const tutorColumns: TableColumn<ComputedTutorRow>[] = [
     ),
   },
   {
-    key: "full_name",
+    key: "name",
     label: "Name ",
   },
-  { key: "subjects", label: "Subjects" },
+  { key: "subjectsList", label: "Subjects" },
 
   {
     key: "available_slots",
