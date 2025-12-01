@@ -22,9 +22,12 @@ export function HeaderLeft({
   );
 }
 
-export const getActionButtonClass = (type: "positive" | "destructive") => {
+export const getActionButtonClass = (
+  type: "positive" | "destructive",
+  size?: "sm" | "xs"
+) => {
   const sharedClass =
-    "px-2 sm:px-3 py-1 sm:py-1.5 text-[11px] sm:text-xs transition-colors duration-200 rounded-md sm:rounded-lg cursor-pointer whitespace-nowrap";
+    "py-2 px-3 transition-colors duration-200 rounded-md sm:rounded-lg cursor-pointer whitespace-nowrap";
   const negativeColors = "bg-red-800/20 text-red-300 hover:bg-red-900/40";
   const positiveColors = "bg-green-800/20 text-green-300 hover:bg-green-900/40";
 
@@ -32,6 +35,7 @@ export const getActionButtonClass = (type: "positive" | "destructive") => {
     "disabled:bg-gray-800/40 disabled:hover:bg-gray-800/40 disabled:text-textMuted disabled:cursor-not-allowed";
   return clsx(
     sharedClass,
+    size === "sm" ? "text-xs sm:text-sm" : "text-[11px] sm:text-xs",
     disabledClasses,
     type === "positive" ? positiveColors : negativeColors
   );
