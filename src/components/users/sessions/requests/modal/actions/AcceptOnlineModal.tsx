@@ -148,7 +148,7 @@ export function AcceptOnlineModal({
                   onChange={(e) => setDate(e.target.value)}
                   className={clsx(
                     getInputClass("sm"),
-                    "appearance-none pr-10 [color-scheme:dark]"
+                    "appearance-none [color-scheme:dark]"
                   )}
                 />
 
@@ -168,7 +168,7 @@ export function AcceptOnlineModal({
                   onChange={(e) => setTime(e.target.value)}
                   className={clsx(
                     getInputClass("sm"),
-                    "appearance-none pr-10 [color-scheme:dark]"
+                    "appearance-none [color-scheme:dark]"
                   )}
                 />
 
