@@ -18,7 +18,7 @@ export function CardShell({
       whileHover={clickable ? { backgroundColor: "var(--color-hoverBg)" } : {}}
       whileTap={
         clickable
-          ? { scale: 0.99, backgroundColor: "var(--color-hoverBg)" }
+          ? { scale: 0.98, backgroundColor: "var(--color-hoverBg)" }
           : {}
       }
       transition={{ duration: 0.12, ease: "easeOut" }}
