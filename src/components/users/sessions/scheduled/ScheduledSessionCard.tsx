@@ -8,11 +8,12 @@ import { SharedPropsType } from "../SessionsMain";
 import { useSessionCountdown } from "./useSessionCountdown";
 import { formatSessionCountdown } from "./formatSessionCountdown";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
+import clsx from "clsx";
 
 export const formatted = (ts: string | null) =>
   ts &&
   new Date(ts).toLocaleString("en-GB", {
-    day: "2-digit",
+    day: "numeric",
     month: "2-digit",
     year: "2-digit",
     hour: "numeric",
@@ -45,16 +46,27 @@ export function ScheduledSessionCard({
     <CardShell>
       <div className="space-y-5">
         {/* TAGS */}
-        <div className="flex items-start flex-col [@media(min-width:360px)]:flex-row [@media(min-width:360px)]:justify-between [@media(min-width:360px)]:items-center gap-2">
-          <HeaderLeft sub={ss.subjectLabel} isOnline={ss.isOnline} />
-
-          {countdownLabel && (
-            <Tag
-              textSize={tagTextSize}
-              color={index === 0 ? countdownColor : "gray"}
-              value={countdownLabel}
-            />
+        <div
+          className={clsx(
+            "flex items-start flex-col gap-2",
+            timeToSession.mode !== "before"
+              ? "[@media(min-width:430px)]:flex-row [@media(min-width:430px)]:justify-between [@media(min-width:430px)]:items-center"
+              : "[@media(min-width:370px)]:flex-row [@media(min-width:370px)]:justify-between [@media(min-width:370px)]:items-center"
           )}
+        >
+          <HeaderLeft sub={ss.subjectLabel} isOnline={ss.isOnline} />
+          <div className="flex items-center gap-2">
+            {countdownLabel && (
+              <Tag
+                textSize={tagTextSize}
+                color={index === 0 ? countdownColor : "gray"}
+                value={countdownLabel}
+              />
+            )}
+            <p className="text-[10px] sm:text-[11px] text-left text-textWhite/80">
+              {formatted(ss.scheduledFor)}
+            </p>
+          </div>
         </div>
 
         {/* WHO + MESSAGE */}
@@ -72,10 +84,7 @@ export function ScheduledSessionCard({
 
           <hr className="h-[1px] text-textMuted/10 w-full my-4" />
 
-          <div className="flex justify-between items-center gap-3">
-            <p className="text-[10px] sm:text-[11px] text-left text-textWhite/80">
-              {formatted(ss.scheduledFor)}
-            </p>
+          <div className="flex justify-end">
             <ScheduledActions
               isOnline={ss.isOnline}
               sessionId={ss.id}

@@ -85,7 +85,7 @@ export function StartSession({
     onCancel: () => setStartModal(false),
     isOpen: startModal,
     confirmText: "Start Session",
-    title: "Are you sure you want to start this session",
+    title: "Are you sure you want to start this session?",
     successMessage: "Session has started, student has been notified!",
     onConfirm: () => handleStartSession(meetingLink),
   } as const;
@@ -108,7 +108,11 @@ export function StartSession({
       <div
         onClick={() => {
           if (disableStart) {
-            toast.error("Cannot start the session right now.");
+            toast.error(
+              `Cannot start the session ${
+                timeToSession.mode === "expired" ? "anymore" : "right now"
+              }.`
+            );
             return;
           }
 
