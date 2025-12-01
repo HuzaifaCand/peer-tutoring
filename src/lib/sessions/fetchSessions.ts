@@ -31,16 +31,20 @@ export const sessionExtendSelects: Record<SessionStatus, string> = {
       start_time,
       completed_at,
       duration_minutes,
-      actual_duration
+      actual_duration,
+      student_session_feedback(*),
+      tutor_session_feedback(*)
     `,
 };
 
 export const baseSelect = `
   id,
+  tutor_id,
+  student_id,
   subjects(id, label, code),
   is_online,
-  tutors(grade, users(full_name, email)),
-  students(grade, users(full_name, email))
+  tutors(id, grade, users(full_name, email)),
+  students(id, grade, users(full_name, email))
 `;
 
 export async function fetchSessions(

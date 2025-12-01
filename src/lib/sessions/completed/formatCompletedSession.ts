@@ -1,6 +1,7 @@
-import { differenceInMinutes, format, parseISO } from "date-fns";
+import { format, parseISO } from "date-fns";
 import { extractTutorStudentInfo, computeMode } from "../sessionFormatters";
 import { SessionWithUsers } from "../types";
+import { formatted } from "@/components/users/sessions/completed/CompletedSessionCard";
 
 export function formatCompletedSession(s: SessionWithUsers) {
   const info = extractTutorStudentInfo(s);
@@ -12,7 +13,8 @@ export function formatCompletedSession(s: SessionWithUsers) {
     ...info,
     ...mode,
 
-    date: format(parseISO(s.completed_at ?? ""), "EEE, MMM d"),
+    scheduledFor: formatted(s.scheduled_for),
+
     start_time: format(parseISO(s.start_time ?? ""), "p"),
     completed_at: s.completed_at,
     completed_at_time: format(parseISO(s.completed_at ?? ""), "p"),
@@ -23,5 +25,8 @@ export function formatCompletedSession(s: SessionWithUsers) {
 
     expected_duration: s.duration_minutes,
     actual_duration: s.actual_duration,
+    studentFeedback: s.student_session_feedback.message,
+    tutorFeedback: s.tutor_session_feedback.message,
+    studentAttendance: s.tutor_session_feedback.student_attendance,
   };
 }
