@@ -11,44 +11,14 @@ import { formatCompletedSession } from "@/lib/sessions/completed/formatCompleted
 
 export default function CompletedSessions() {
   const [rowCount, setRowCount] = useState(0);
-  const [selectedSession, setSelectedSession] =
-    useState<ComputedCompletedSessionRow | null>(null);
 
-  useEffect(() => {
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-
-    if (id) {
-      const getSession = async () => {
-        const data = await getSessionById({
-          id,
-          status: "completed",
-        });
-
-        const formatted = formatCompletedSession(data);
-        setSelectedSession(formatted);
-      };
-      getSession();
-    }
-  }, []);
-
-  const closeModal = useCloseModal(setSelectedSession);
   return (
     <main>
-      <Modal
-        data={selectedSession}
-        type="completedSession"
-        onClose={closeModal}
-      />
-
       <SectionHeader
         title="Completed Sessions"
         rightSlot={`${rowCount} rows shown`}
       />
-      <CompletedSessionsTable
-        setCount={setRowCount}
-        setSelectedSession={setSelectedSession}
-      />
+      <CompletedSessionsTable setCount={setRowCount} />
     </main>
   );
 }
