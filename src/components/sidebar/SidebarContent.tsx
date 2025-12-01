@@ -105,7 +105,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
         successMessage="Signed out successfully"
       />
 
-      <section className="flex flex-col min-h-full">
+      <section className="flex flex-col min-h-14/15 lg:min-h-full">
         <div className="px-4 lg:pt-13 pb-3 text-xl font-bold border-b border-white/5">
           Dashboard
         </div>
@@ -157,7 +157,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
           })}
         </nav>
 
-        <div className="mt-auto pl-2 pr-3 py-4 border-t border-white/5">
+        <div className="mt-auto pl-2 pr-3 pt-4 lg:py-4 border-t border-white/5">
           <button
             type="button"
             onClick={() => {
