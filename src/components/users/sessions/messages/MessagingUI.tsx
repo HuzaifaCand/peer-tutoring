@@ -63,7 +63,7 @@ export function MessagingUI({
             <Loader2 className="text-textWhite w-3 h-3 animate-spin" />
           </div>
         ) : messages.length === 0 ? (
-          <p className="text-textMuted text-sm">No messages yet</p>
+          <p className="text-textMuted text-xs">No messages yet</p>
         ) : (
           messages.map((msg) => (
             <MessageBubble
