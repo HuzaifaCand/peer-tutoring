@@ -49,7 +49,7 @@ export function OnlineFormUI({
                 onChange={(e) => setSuggestedDate(e.target.value)}
                 className={clsx(
                   getInputClass("sm"),
-                  "appearance-none pr-10 [color-scheme:dark]"
+                  "appearance-none [color-scheme:dark]"
                 )}
               />
 
@@ -70,7 +70,7 @@ export function OnlineFormUI({
                 onChange={(e) => setSuggestedTime(e.target.value)}
                 className={clsx(
                   getInputClass("sm"),
-                  "appearance-none pr-10 [color-scheme:dark]"
+                  "appearance-none [color-scheme:dark]"
                 )}
               />
 

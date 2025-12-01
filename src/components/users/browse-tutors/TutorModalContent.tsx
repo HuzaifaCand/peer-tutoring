@@ -7,6 +7,23 @@ import { CardCTA } from "@/components/ui/CardCTA";
 import { OnsiteAvailablity } from "./OnsiteAvailability";
 import { useState } from "react";
 import { SessionRequestModal } from "./session-request/SessionRequestModal";
+import { useUserStats } from "../useUserStats";
+
+function StatsPill({ count, loading }: { count: number; loading: boolean }) {
+  return (
+    <div className="inline-flex items-center gap-1.5 bg-elevatedBg/60 border border-white/10 px-2.5 py-1 rounded-full">
+      {loading ? (
+        <div className="w-8 h-3 bg-white/10 animate-pulse rounded" />
+      ) : (
+        <>
+          <span className="text-xs text-white/80 font-medium">
+            {count} sessions completed
+          </span>
+        </>
+      )}
+    </div>
+  );
+}
 
 export function TutorModalContent({
   tutor,
@@ -27,6 +44,8 @@ export function TutorModalContent({
     slots,
     subject,
   } = tutor;
+
+  const { stats, loading } = useUserStats(tutorId);
 
   return (
     <>
@@ -79,6 +98,14 @@ export function TutorModalContent({
                   />
                 )}
               </div>
+
+              {/* STATS PILL */}
+              {verified && (
+                <StatsPill
+                  count={stats?.completed_sessions ?? 0}
+                  loading={loading}
+                />
+              )}
             </div>
 
             {/* CREDENTIALS */}
