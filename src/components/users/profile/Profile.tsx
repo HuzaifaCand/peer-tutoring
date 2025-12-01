@@ -12,7 +12,7 @@ import { AboutSection } from "./AboutSection";
 export default function Profile({ role }: { role: "student" | "tutor" }) {
   const { user } = useAuthUser();
 
-  if (!user) return null;
+  if (!user) return <SectionHeader title="Profile" />;
 
   const { displayName, email, studentId } = getUserMetadata(user);
 
