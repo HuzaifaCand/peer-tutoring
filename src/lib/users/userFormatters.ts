@@ -2,8 +2,8 @@ import { StudentUser, TutorUser } from "./types";
 
 export function extractUserInfo(user: { full_name: string; email: string }) {
   return {
-    s_id: user.email.split("@")[0],
-    full_name: user.full_name.split(" ").slice(0, -1).join(" "),
+    studentId: user.email.split("@")[0],
+    name: user.full_name.split(" ").slice(0, -1).join(" "),
     email: user.email,
   };
 }
@@ -18,12 +18,16 @@ export function formatTutor(t: TutorUser) {
     ...userInfo,
     id: t.id,
     grade: t.grade,
-    subjects: subjects.join(" | "),
+    subjectsList: subjects.join(" | "),
+    subjects: t.tutor_subjects,
     verified: t.approved,
+    slots: t.available_slots,
     available_slots: t.available_slots?.filter((s) => s.available).length ?? 0,
     unavailable_slots:
       t.available_slots?.filter((s) => !s.available).length ?? 0,
     created_at: t.created_at,
+    availableOnline: t.available_online,
+    about: t.about,
   };
 }
 
@@ -37,7 +41,9 @@ export function formatStudent(s: StudentUser) {
     ...userInfo,
     id: s.id,
     grade: s.grade,
-    subjects: subjects.join(" | "),
+    subjects: s.student_subjects,
+    subjectsList: subjects.join(" | "),
     created_at: s.created_at,
+    about: s.about,
   };
 }
