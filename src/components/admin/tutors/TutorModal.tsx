@@ -1,8 +1,11 @@
-import { BadgeCheck, GraduationCap } from "lucide-react";
+"use client";
+
+import { BadgeCheck, BarChart, GraduationCap } from "lucide-react";
 import { ComputedTutorRow } from "../../../lib/users/getTutors";
 import { colors, Tag } from "../../ui/Tag";
 import { OnsiteAvailablity } from "@/components/users/browse-tutors/OnsiteAvailability";
 import { VerifyTutor } from "./VerifyTutor";
+import { UserStats } from "../UserStats";
 
 export function TutorModal({
   tutor,
@@ -23,8 +26,9 @@ export function TutorModal({
     slots,
     about,
   } = tutor;
+
   return (
-    <div className="space-y-6 py-4">
+    <div className="space-y-6 py-4 sm:px-2">
       <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start pr-8 lg:pr-0">
         {/* ICON / AVATAR */}
         <div className="flex items-center justify-center bg-mainBg border border-4 border-hoverBg rounded-sm w-full h-32 lg:w-50 lg:h-50 shrink-0">
@@ -80,14 +84,14 @@ export function TutorModal({
           </div>
         </div>
       </div>
-      <div className="h-px bg-white/5" />
+      <div className="h-px my-8 bg-white/5" />
       {/* SUBJECTS */}
       <div className="space-y-3">
         <h3 className="text-textWhite font-semibold text-md sm:text-lg">
           Subjects
         </h3>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-2">
           {subjects.map((s) => (
             <div
               key={s.subject_id}
@@ -115,7 +119,7 @@ export function TutorModal({
           ))}
         </div>
       </div>
-      <div className="h-px bg-white/5" />
+      <div className="h-px my-8 bg-white/5" />
 
       {/* AVAILABILITY */}
       <div className="space-y-3">
@@ -124,7 +128,18 @@ export function TutorModal({
         </h3>
         <OnsiteAvailablity slots={slots} />
       </div>
-      <div className="h-px bg-white/5" />
+      <div className="h-px my-8 bg-white/5" />
+
+      {!verified && (
+        <div className="border-1 text-center border-white/10 bg-mainBg text-textMuted flex items-center  justify-center ">
+          <div className="py-12 px-4 flex flex-col gap-4 items-center">
+            <BarChart className="w-8 h-8 text-textMuted" />
+            <p className="text-xs sm:text-sm">
+              Analytics will be visible after tutor approval
+            </p>
+          </div>
+        </div>
+      )}
 
       {!verified && (
         <div className="flex justify-end gap-2 pt-4">
@@ -135,6 +150,7 @@ export function TutorModal({
           />
         </div>
       )}
+      {verified && <UserStats role="tutor" userId={tutorId} />}
     </div>
   );
 }
