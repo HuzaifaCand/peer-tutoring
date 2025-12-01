@@ -1,4 +1,5 @@
 import CancelledSessions from "@/components/admin/sessions/cancelled/CancelledSessions";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function CancelledSessionsPage() {
-  return <CancelledSessions />;
+  return (
+    <PageTransitionWrapper>
+      <CancelledSessions />
+    </PageTransitionWrapper>
+  );
 }

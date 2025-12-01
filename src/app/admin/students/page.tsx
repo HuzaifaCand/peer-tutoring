@@ -1,4 +1,5 @@
 import StudentsOverview from "@/components/admin/students/StudentsOverview";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 import { Suspense } from "react";
 
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function StudentsPage() {
   return (
     <Suspense fallback={null}>
-      <StudentsOverview />
+      <PageTransitionWrapper>
+        <StudentsOverview />
+      </PageTransitionWrapper>
     </Suspense>
   );
 }

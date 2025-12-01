@@ -1,4 +1,5 @@
 import ActiveSessions from "@/components/admin/sessions/active/ActiveSessions";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function ActiveSessionsPage() {
-  return <ActiveSessions />;
+  return (
+    <PageTransitionWrapper>
+      <ActiveSessions />
+    </PageTransitionWrapper>
+  );
 }

@@ -1,4 +1,5 @@
 import ScheduledSessions from "@/components/admin/sessions/scheduled/ScheduledSessions";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function ScheduledSessionsPage() {
-  return <ScheduledSessions />;
+  return (
+    <PageTransitionWrapper>
+      <ScheduledSessions />
+    </PageTransitionWrapper>
+  );
 }

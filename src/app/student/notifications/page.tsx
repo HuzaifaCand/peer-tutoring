@@ -1,4 +1,5 @@
 import NotificationsPage from "@/components/notifications/NotificationsPage";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function StudentNotificationPage() {
-  return <NotificationsPage />;
+  return (
+    <PageTransitionWrapper>
+      <NotificationsPage />
+    </PageTransitionWrapper>
+  );
 }

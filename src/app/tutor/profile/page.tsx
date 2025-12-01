@@ -1,3 +1,4 @@
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import Profile from "@/components/users/profile/Profile";
 import { Metadata } from "next";
 
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function TutorProfilePage() {
-  return <Profile role="tutor" />;
+  return (
+    <PageTransitionWrapper>
+      <Profile role="tutor" />
+    </PageTransitionWrapper>
+  );
 }

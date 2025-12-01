@@ -1,4 +1,5 @@
 import CompletedSessions from "@/components/admin/sessions/completed/CompletedSessions";
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -6,5 +7,9 @@ export const metadata: Metadata = {
 };
 
 export default function CompletedSessionsPage() {
-  return <CompletedSessions />;
+  return (
+    <PageTransitionWrapper>
+      <CompletedSessions />
+    </PageTransitionWrapper>
+  );
 }

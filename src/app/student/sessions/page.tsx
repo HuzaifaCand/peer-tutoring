@@ -1,3 +1,4 @@
+import PageTransitionWrapper from "@/components/TransitionWrapper";
 import SessionsMain from "@/components/users/sessions/SessionsMain";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -9,7 +10,9 @@ export const metadata: Metadata = {
 export default function SessionsPage() {
   return (
     <Suspense fallback={null}>
-      <SessionsMain role="student" />
+      <PageTransitionWrapper>
+        <SessionsMain role="student" />
+      </PageTransitionWrapper>
     </Suspense>
   );
 }
