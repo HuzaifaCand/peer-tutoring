@@ -113,8 +113,6 @@ input[type="time"] {
   -moz-appearance: none;
 
   color-scheme: dark; /* helps force your dark theme */
-  background-color: var(--your-bg-color);
-  color: var(--your-text-color);
 
   padding: 0.6rem 0.8rem;
   border-radius: 6px;

@@ -29,12 +29,12 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
         <SubjectHeader name={name} code={code} grade={grade} color={color} />
         <div className="bg-hoverBg w-full h-[1px]" />
         {/* Footer */}
-        <div className="flex items-end justify-between pt-1 gap-2">
+        <div className="flex items-center justify-between pt-1 gap-2">
           <div className="flex flex-col items-start  sm:flex-row sm:items-center gap-2">
             <Tag
               value={bottomText}
               color={count === 0 ? "red" : "green"}
-              textSize="text-[10px] sm:text-xs sm:text-[12px]"
+              textSize="text-[11px] sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
             <Tag
@@ -44,7 +44,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
                   : "1 Resource"
               }
               color={resource_count === 0 ? "gray" : "green"}
-              textSize="text-[10px] sm:text-xs sm:text-[12px]"
+              textSize="text-[11px] sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
           </div>
@@ -53,7 +53,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
               <CardCTA
                 cta={resource_count === 0 ? "Add Resource" : "Browse Resources"}
                 padding="py-2 px-3"
-                textSize="text-[10px] sm:text-xs"
+                textSize="text-[11px] sm:text-xs"
               />
             </Link>
             {count !== 0 && role === "student" && (
@@ -61,7 +61,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
                 <CardCTA
                   cta="Browse tutors"
                   padding="py-2 px-3"
-                  textSize="text-[10px] sm:text-xs"
+                  textSize="text-[11px] sm:text-xs"
                 />
               </Link>
             )}
@@ -73,7 +73,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
                 <CardCTA
                   cta="Notify Admins"
                   padding="py-2 px-3"
-                  textSize="text-[10px] sm:text-xs"
+                  textSize="text-[11px] sm:text-xs"
                 />
               </button>
             )}
@@ -82,7 +82,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
               <CardCTA
                 cta={resource_count === 0 ? "Add Resource" : "View Resources"}
                 padding="py-2 px-3"
-                textSize="text-[10px] sm:text-xs"
+                textSize="text-[11px] sm:text-xs"
               />
             </Link>
           </div>
