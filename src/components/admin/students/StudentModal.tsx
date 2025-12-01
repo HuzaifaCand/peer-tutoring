@@ -1,15 +1,15 @@
 import { Lightbulb } from "lucide-react";
 import { ComputedStudentRow } from "../../../lib/users/getStudents";
 import { colors, Tag } from "@/components/ui/Tag";
+import { UserStats } from "../UserStats";
 
 export function StudentModal({
   student,
-  onClose,
 }: {
   student: ComputedStudentRow;
   onClose: () => void;
 }) {
-  const { name, grade, about, subjects } = student;
+  const { id: studentId, name, grade, about, subjects } = student;
   return (
     <div className="space-y-6 py-4">
       <div className="flex flex-col lg:flex-row lg:gap-8 items-start lg:items-start pr-8 lg:pr-0">
@@ -49,7 +49,7 @@ export function StudentModal({
           </div>
         </div>
       </div>
-      <div className="h-px bg-white/5" />
+      <div className="h-px my-8 bg-white/5" />
       {/* SUBJECTS */}
       <div className="space-y-3">
         <h3 className="text-textWhite font-semibold text-md sm:text-lg">
@@ -84,6 +84,10 @@ export function StudentModal({
           ))}
         </div>
       </div>
+
+      <div className="h-px my-8 bg-white/5" />
+
+      <UserStats role="student" userId={studentId} />
     </div>
   );
 }
