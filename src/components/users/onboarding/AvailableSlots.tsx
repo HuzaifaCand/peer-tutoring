@@ -91,7 +91,7 @@ export function AvailableSlots() {
                       "rounded-full p-2 text-xs cursor-pointer font-medium transition border",
                       "hover:opacity-80",
                       selected
-                        ? "bg-green-500 text-white border-white/5"
+                        ? "bg-green-500/15 text-green-300 border-white/5"
                         : "text-textWhite border-white/10"
                     )}
                   >

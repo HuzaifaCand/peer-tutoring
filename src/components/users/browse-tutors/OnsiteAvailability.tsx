@@ -25,7 +25,7 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
         .sort(([a], [b]) => dayOrder[a as dayOfWeek] - dayOrder[b as dayOfWeek])
         .map(([day, daySlots]) => (
           <div key={day} className="space-y-2">
-            <p className="text-textWhite/90 text-xs sm:text-sm font-medium">
+            <p className="text-textWhite/90 text-[13px] sm:text-sm font-medium">
               {day.charAt(0).toUpperCase() + day.slice(1)}
             </p>
 
@@ -38,7 +38,7 @@ export function OnsiteAvailablity({ slots }: { slots: SlotsRow[] }) {
                       key={`${slot.day}-${slot.hour}`}
                       title={!slot.available ? "Booked" : "Available"}
                       className={clsx(
-                        "px-3 py-1.5 rounded-2xl text-[11px] sm:text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
+                        "px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-2xl text-[11px] sm:text-xs shadow-sm whitespace-nowrap shrink-0 transition-colors duration-200 border",
                         slot.available
                           ? "bg-green-500/15 text-green-300  border-white/5 hover:bg-green-500/25"
                           : "bg-elevatedBg border-white/10 text-textMuted/40 line-through"
