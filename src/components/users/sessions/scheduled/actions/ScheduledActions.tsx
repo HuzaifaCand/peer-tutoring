@@ -1,12 +1,9 @@
 "use client";
 
-import { supabase } from "@/lib/supabase/client";
 import { SharedPropsType } from "../../SessionsMain";
 import { CancelSession } from "./CancelSession";
 import { StartSession } from "./StartSession";
-import { useEffect, useRef } from "react";
 import { TimeToSessionType } from "../formatSessionCountdown";
-import { createNotification } from "@/components/notifications/createNotification";
 
 interface ActionProps {
   isOnline: boolean;
