@@ -34,7 +34,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
             <Tag
               value={bottomText}
               color={count === 0 ? "red" : "green"}
-              textSize="text-[10px] sm:text-[12px]"
+              textSize="text-[10px] sm:text-xs sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
             <Tag
@@ -44,7 +44,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
                   : "1 Resource"
               }
               color={resource_count === 0 ? "gray" : "green"}
-              textSize="text-[10px] sm:text-[12px]"
+              textSize="text-[10px] sm:text-xs sm:text-[12px]"
               className="px-1 sm:px-3 py-1"
             />
           </div>
@@ -52,7 +52,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
             <Link className="hidden sm:inline" href={`/${role}/resources`}>
               <CardCTA
                 cta={resource_count === 0 ? "Add Resource" : "Browse Resources"}
-                padding="py-1 px-2 sm:px-3"
+                padding="py-2 px-3"
                 textSize="text-[10px] sm:text-xs"
               />
             </Link>
@@ -60,7 +60,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
               <Link href={`/student/tutors?sub=${subject.subject_id}`}>
                 <CardCTA
                   cta="Browse tutors"
-                  padding="py-1 px-2 sm:px-3"
+                  padding="py-2 px-3"
                   textSize="text-[10px] sm:text-xs"
                 />
               </Link>
@@ -72,7 +72,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
               >
                 <CardCTA
                   cta="Notify Admins"
-                  padding="py-1 px-2 sm:px-3"
+                  padding="py-2 px-3"
                   textSize="text-[10px] sm:text-xs"
                 />
               </button>
@@ -81,7 +81,7 @@ export function UserSubjectCard({ subject, role }: UserSubjectCardProps) {
             <Link className="sm:hidden" href={`/${role}/resources`}>
               <CardCTA
                 cta={resource_count === 0 ? "Add Resource" : "View Resources"}
-                padding="py-1 px-2 sm:px-3"
+                padding="py-2 px-3"
                 textSize="text-[10px] sm:text-xs"
               />
             </Link>
