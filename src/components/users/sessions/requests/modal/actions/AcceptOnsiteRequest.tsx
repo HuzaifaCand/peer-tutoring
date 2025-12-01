@@ -93,7 +93,7 @@ export function AcceptOnsiteRequest({
       />
       <button
         onClick={() => setOnsiteModal(true)}
-        className={getActionButtonClass("positive")}
+        className={getActionButtonClass("positive", "sm")}
       >
         Accept
       </button>

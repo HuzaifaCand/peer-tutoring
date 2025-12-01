@@ -27,7 +27,7 @@ export function AcceptOnlineRequest({
       />
       <button
         onClick={() => setOnlineModal(true)}
-        className={getActionButtonClass("positive")}
+        className={getActionButtonClass("positive", "sm")}
       >
         Schedule & Accept
       </button>

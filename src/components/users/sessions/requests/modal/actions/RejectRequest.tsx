@@ -80,7 +80,7 @@ export function RejectRequest({
       />
       <button
         onClick={() => setRejectModal(true)}
-        className={getActionButtonClass("destructive")}
+        className={getActionButtonClass("destructive", "sm")}
       >
         Reject
       </button>
