@@ -5,6 +5,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ConfirmationModal } from "@/components/modal/ConfirmationModal";
 import { getActionButtonClass } from "@/components/users/sessions/sharedUI";
+import { createNotification } from "@/components/notifications/createNotification";
 
 export function VerifyTutor({
   tutorId,
@@ -32,6 +33,13 @@ export function VerifyTutor({
     }
 
     toast.success("Tutor approved successfully.");
+    await createNotification({
+      userId: tutorId,
+      title: "Your profile has been approved",
+      body: "You will now be visible to students",
+      type: "general",
+    });
+
     closeModal();
     refetch();
   };
