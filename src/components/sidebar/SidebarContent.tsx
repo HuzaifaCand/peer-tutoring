@@ -123,7 +123,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
               <Link
                 key={href}
                 href={href}
-                className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-sm lg:text-xs font-medium ${
+                className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-[13px] lg:text-xs font-medium ${
                   isActive
                     ? "bg-white/5 text-white"
                     : "hover:bg-white/5 text-gray-300"
@@ -163,7 +163,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
             onClick={() => {
               setSignOutModal(true);
             }}
-            className={`flex items-center w-full hover:bg-white/5 cursor-pointer gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-xs font-medium`}
+            className={`flex items-center w-full hover:bg-white/5 cursor-pointer gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-[13px] sm:text-xs font-medium`}
           >
             <LogOut size={15} className="text-gray-400" />
             <span>Sign Out</span>
