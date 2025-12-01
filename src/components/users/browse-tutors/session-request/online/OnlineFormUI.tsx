@@ -71,8 +71,8 @@ export function OnlineFormUI({
 
         <p className="text-[10px] sm:text-xs text-textMuted">
           This is just a suggested time. The tutor may accept it or propose a
-          different time, and you can decide the exact time in the message
-          panel.
+          different time, and you can decide a time that works for both in the
+          messaging panel.
         </p>
       </div>
 

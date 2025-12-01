@@ -105,3 +105,25 @@
 .modal-scroll::-webkit-scrollbar-thumb:hover {
   background: #303741;
 }
+
+input[type="date"],
+input[type="time"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  color-scheme: dark; /* helps force your dark theme */
+  background-color: var(--your-bg-color);
+  color: var(--your-text-color);
+
+  padding: 0.6rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 14px;
+}
+
+/* Hide calendar/time icons if needed */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  opacity: 0.6;
+}
