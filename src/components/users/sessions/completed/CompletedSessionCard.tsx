@@ -3,17 +3,7 @@ import { CompletedSessionsType } from "./getCompletedSessions";
 import { Tag } from "@/components/ui/Tag";
 import { StudentFeedbackButton } from "./StudentFeedbackButton";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
-
-export const formatted = (ts: string | null) =>
-  ts &&
-  new Date(ts).toLocaleString("en-GB", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "2-digit",
-    hour: "numeric",
-    minute: "2-digit",
-    hour12: true,
-  });
+import { formatted } from "../scheduled/ScheduledSessionCard";
 
 export function CompletedSessionCard({
   cs,
