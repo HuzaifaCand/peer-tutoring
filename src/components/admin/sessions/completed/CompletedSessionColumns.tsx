@@ -65,9 +65,7 @@ export const completedSessionColumns: TableColumn<ComputedCompletedSessionRow>[]
       ),
     },
 
-    { key: "date", label: "Date" },
-    { key: "start_time", label: "Started" },
-    { key: "completed_at_time", label: "Ended" },
+    { key: "scheduledFor", label: "Scheduled" },
 
     {
       key: "duration",
