@@ -168,7 +168,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
               onClick={() => setResourceData(resource)}
               className={getActionButtonClass("positive")}
             >
-              Verify Resource
+              Verify
             </button>
           )}
 
