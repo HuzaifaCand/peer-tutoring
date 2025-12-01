@@ -99,8 +99,8 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
         isOpen={signOutModal}
         onCancel={() => setSignOutModal(false)}
         type="positive"
-        confirmText="Sign Out"
-        title="Are you sure you want to sign out?"
+        confirmText="Log Out"
+        title="Are you sure you want to log out?"
         onConfirm={useSignOut()}
         successMessage="Signed out successfully"
       />
@@ -166,7 +166,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
             className={`flex items-center w-full hover:bg-white/5 cursor-pointer gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-[13px] sm:text-xs font-medium`}
           >
             <LogOut size={15} className="text-gray-400" />
-            <span>Sign Out</span>
+            <span>Log Out</span>
           </button>
         </div>
       </section>
