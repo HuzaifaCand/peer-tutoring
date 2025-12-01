@@ -33,7 +33,7 @@ export function ActiveSessionCard({
       ? "orange"
       : "green";
   return (
-    <CardShell className="bg-mainBg border border-white/5">
+    <CardShell className="bg-elevatedBg/60 border border-white/5">
       <div className="space-y-4">
         {/* Header row */}
         <div className="flex justify-between gap-2 items-center">
