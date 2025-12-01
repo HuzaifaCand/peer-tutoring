@@ -19,13 +19,13 @@ export function TutorStudentSection({
   studentInfo,
 }: TutorStudentSectionProps) {
   return (
-    <section className="flex justify-between items-start gap-6 mb-6">
+    <section className="flex justify-between pt-4 sm:pt-0 items-start gap-6 mb-6">
       {/* Tutor */}
       <div className="flex flex-col items-center flex-1">
         <div className="relative w-20 h-20 mb-2 rounded-full bg-blue-500/10 flex items-center justify-center">
           <GraduationCap className="w-8 h-8 text-blue-400" />
         </div>
-        <p className="font-semibold leading-tight mb-1 text-center">
+        <p className="font-semibold text-xs sm:text-base leading-tight mb-1 text-center">
           {tutorInfo.name}
         </p>
         <div className="flex items-center gap-1">
@@ -42,7 +42,7 @@ export function TutorStudentSection({
         <div className="relative w-20 h-20 mb-2 rounded-full bg-yellow-500/10 flex items-center justify-center">
           <Lightbulb className="w-8 h-8 text-yellow-400" />
         </div>
-        <p className="font-semibold leading-tight mb-1 text-center">
+        <p className="font-semibold text-xs sm:text-base leading-tight mb-1 text-center">
           {studentInfo.name}
         </p>
         <div className="flex items-center gap-1">

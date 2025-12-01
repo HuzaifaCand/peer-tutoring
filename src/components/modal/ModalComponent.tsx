@@ -58,6 +58,7 @@ export function Modal({ type, data, onClose, setRefetchFlag }: ModalProps) {
     case "completedSession":
       content = (
         <CompletedSessionModal
+          refetch={refetch}
           cs={data as TableRowByType["completedSession"]}
           onClose={onClose}
         />
