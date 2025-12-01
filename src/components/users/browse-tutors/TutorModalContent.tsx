@@ -14,11 +14,7 @@ function StatsPill({ count, loading }: { count: number; loading: boolean }) {
   return (
     <div className="inline-flex items-center gap-1.5 bg-elevatedBg/60 border border-white/10 px-2.5 py-1 rounded-full">
       <span className="text-xs text-white/80 font-medium">
-        {loading ? (
-          <TextLoader width="width-3" height="height-3"></TextLoader>
-        ) : (
-          count
-        )}{" "}
+        {loading ? <TextLoader width="width-4" height="height-4" /> : count}{" "}
         sessions completed
       </span>
     </div>

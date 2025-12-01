@@ -69,10 +69,10 @@ export function ConfirmationModal({
       noX={true}
       width="tight"
     >
-      <div className="space-y-4 py-2 px-0 sm:px-2 py-1">
+      <div className="space-y-3 sm:space-y-4 py-1 sm:py-3 px-2">
         {/* Title + Description */}
         <div className="space-y-1">
-          <h2 className="text-textWhite font-semibold text-lg sm:text-xl">
+          <h2 className="text-textWhite font-semibold text-base sm:text-lg">
             {title}
           </h2>
 
@@ -107,7 +107,6 @@ export function ConfirmationModal({
                 rows={1}
               />
 
-              {/* Character Counter — show only if maxLength is set */}
               {maxLength !== undefined && (
                 <div
                   className={clsx(
@@ -120,7 +119,6 @@ export function ConfirmationModal({
               )}
             </div>
 
-            {/* Exceeded Message */}
             {exceedsLimit && (
               <p className="text-[11px] text-red-400">
                 Maximum {maxLength} characters allowed.
@@ -130,11 +128,11 @@ export function ConfirmationModal({
         )}
 
         {/* Buttons */}
-        <div className="flex justify-end text-sm pt-2 items-center gap-2">
+        <div className="flex justify-end text-xs sm:text-sm pt-2 items-center gap-2">
           <button
             disabled={loading}
             onClick={onCancel}
-            className="w-full px-4 py-2 bg-elevatedBg text-textWhite/90 hover:bg-hoverBg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer border border-white/5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/10"
+            className="w-full px-3 py-1.5 sm:px-4 sm:py-2 bg-elevatedBg text-textWhite/90 hover:bg-hoverBg disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer border border-white/5 rounded-lg font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-white/10"
           >
             Cancel
           </button>
@@ -147,7 +145,7 @@ export function ConfirmationModal({
             }
             onClick={handleConfirm}
             className={clsx(
-              "w-full px-4 py-2 rounded-lg cursor-pointer font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2",
+              "w-full px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg cursor-pointer font-medium flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200 focus:outline-none focus:ring-2",
 
               type === "positive"
                 ? "bg-green-500/10 text-textWhite hover:bg-green-500/20 focus:ring-green-400/20 border border-green-800/30"
