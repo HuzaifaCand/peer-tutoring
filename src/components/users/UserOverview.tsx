@@ -6,7 +6,7 @@ import SectionHeader from "../ui/SectionHeader";
 import SubjectUserCards from "./user-subjects/UserSubjectCards";
 import SectionDivider from "../ui/SectionDivider";
 import OperationalStats from "../OperationalStats";
-import { Library } from "lucide-react";
+import { Library, Loader2 } from "lucide-react";
 
 const STUDENT_STATS = {
   studentScheduledSessions: true,
@@ -22,38 +22,44 @@ const TUTOR_STATS = {
 export default function UserOverview({ role }: { role: "student" | "tutor" }) {
   const { user, userLoading, userError } = useAuthUser();
 
-  if (!user) return null;
   if (userError) console.error("user loading error", userError);
 
-  const displayName = user.user_metadata.full_name
+  const displayName = user?.user_metadata.full_name
     .split(" ")
     .slice(0, -1)
     .join(" ");
-
-  const rightSlot = userLoading ? (
-    <TextLoader width="width-5" height="height-2" />
-  ) : (
+  const rightSlot = (
     <span>
       Welcome,{" "}
-      <span className="text-yellow whitespace-nowrap">{displayName} 👋</span>
+      {!user || userLoading ? (
+        <span className="inline-block h-4 w-24 bg-white/10 rounded animate-pulse align-middle" />
+      ) : (
+        <span className="text-yellow whitespace-nowrap">{displayName}</span>
+      )}
+      👋
     </span>
   );
 
   return (
     <main>
       <SectionHeader title="Overview" rightSlot={rightSlot} />
+      {(!user || userLoading) && (
+        <div className="flex justify-center items-center h-screen">
+          <Loader2 className="w-5 h-5 animate-spin text-textWhite" />
+        </div>
+      )}
 
-      {role === "tutor" && (
+      {user && role === "tutor" && (
         <>
           <OperationalStats userId={user.id} config={TUTOR_STATS} />
           <SectionDivider />
         </>
       )}
 
-      <SubjectUserCards role={role} uid={user.id} />
+      {user && <SubjectUserCards role={role} uid={user.id} />}
       <SectionDivider />
 
-      {role === "student" && (
+      {user && role === "student" && (
         <>
           <OperationalStats userId={user.id} config={STUDENT_STATS} />
           <SectionDivider />
