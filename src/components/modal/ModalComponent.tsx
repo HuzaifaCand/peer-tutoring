@@ -4,10 +4,10 @@ import { refetchFlagType, TableRowByType } from "../table/types";
 import ModalBase from "./ModalBase";
 import { ActiveSessionModal } from "./session/ActiveSessionModal";
 import { CancelledSessionModal } from "./session/CancelledSessionModal";
-import { CompletedSessionModal } from "./session/CompletedSessionModal";
 import { ScheduledSessionModal } from "./session/ScheduledSessionModal";
-import { StudentModal } from "./StudentModal";
-import { TutorModal } from "./TutorModal";
+import { StudentModal } from "../admin/students/StudentModal";
+import { TutorModal } from "../admin/tutors/TutorModal";
+import { CompletedSessionModal } from "../admin/sessions/completed/CompletedSessionModal";
 
 type ModalType =
   | "activeSession"
@@ -58,7 +58,7 @@ export function Modal({ type, data, onClose, setRefetchFlag }: ModalProps) {
     case "completedSession":
       content = (
         <CompletedSessionModal
-          session={data as TableRowByType["completedSession"]}
+          cs={data as TableRowByType["completedSession"]}
           onClose={onClose}
         />
       );
@@ -73,7 +73,11 @@ export function Modal({ type, data, onClose, setRefetchFlag }: ModalProps) {
       break;
     case "tutor":
       content = (
-        <TutorModal tutor={data as TableRowByType["tutor"]} onClose={onClose} />
+        <TutorModal
+          tutor={data as TableRowByType["tutor"]}
+          onClose={onClose}
+          refetch={refetch}
+        />
       );
       break;
     case "editRequest":

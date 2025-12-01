@@ -82,7 +82,7 @@ export function TutorModalContent({
             </div>
 
             {/* CREDENTIALS */}
-            <div className="space-y-1">
+            <div className="space-y-0">
               <h3 className="text-textWhite font-semibold text-md sm:text-lg">
                 Subject Credentials
               </h3>
@@ -122,7 +122,7 @@ export function TutorModalContent({
             <CardCTA
               cta="Book a Session"
               textSize="text-xs sm:text-sm"
-              padding="py-1.5 px-3"
+              padding="py-2 px-3"
             />
           </button>
         </div>

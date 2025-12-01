@@ -67,18 +67,6 @@ export function ActiveSessionModal({
           }}
         />
       </section>
-
-      {/* Footer */}
-      <footer className="flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <button className="bg-green-600/30 text-green-400 hover:cursor-pointer hover:bg-green-600/60 transition-colors duration-150 font-semibold border border-green-900 text-xs px-4 py-1.5 rounded-md">
-            End and Verify
-          </button>
-          <button className="bg-red-600/30 text-red-400 hover:cursor-pointer hover:bg-red-600/60 transition-colors duration-150 font-semibold border border-red-900 text-xs px-4 py-1.5 rounded-md">
-            End and Reject
-          </button>
-        </div>
-      </footer>
     </div>
   );
 }

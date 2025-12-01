@@ -1,34 +1,34 @@
 import { CalendarClock, CalendarDays } from "lucide-react";
-import { HeaderTags } from "./SessionHeaderTags";
-import { TutorStudentSection } from "./TutorStudentSection";
 import { ComputedCompletedSessionRow } from "@/lib/sessions/completed/getCompletedSessions";
-import { InfoCard } from "../InfoCard";
+import { HeaderTags } from "@/components/modal/session/SessionHeaderTags";
+import { TutorStudentSection } from "@/components/modal/session/TutorStudentSection";
+import { InfoCard } from "@/components/modal/InfoCard";
 
 export function CompletedSessionModal({
-  session,
+  cs,
   onClose,
 }: {
-  session: ComputedCompletedSessionRow;
+  cs: ComputedCompletedSessionRow;
   onClose: () => void;
 }) {
   return (
     <div className="text-textWhite">
       <HeaderTags
-        subject={session.subject}
-        mode={session.mode}
-        is_online={session.is_online}
+        subject={cs.subject}
+        mode={cs.mode}
+        is_online={cs.is_online}
       />
 
       <TutorStudentSection
         tutorInfo={{
-          name: session.tutor_name,
-          grade: session.tutor_grade,
-          id: session.tutor_id,
+          name: cs.tutor_name,
+          grade: cs.tutor_grade,
+          id: cs.tutor_id,
         }}
         studentInfo={{
-          name: session.student_name,
-          grade: session.student_grade,
-          id: session.student_id,
+          name: cs.student_name,
+          grade: cs.student_grade,
+          id: cs.student_id,
         }}
       />
 
