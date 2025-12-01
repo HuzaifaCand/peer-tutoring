@@ -45,7 +45,6 @@ export function MessagingUI({
     setSending(false);
     setInput("");
 
-    // Make sure we scroll after sending
     scrollToBottom();
   }
 
