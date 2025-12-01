@@ -76,7 +76,6 @@ export function RejectRequest({
             "Please provide a short reason for rejecting this request.",
           maxLength: 150,
         }}
-        successMessage="Request rejected successfully!"
       />
       <button
         onClick={() => setRejectModal(true)}
