@@ -12,13 +12,11 @@ import {
   Verified,
   LogOut,
   Library,
-  Clock,
   CalendarX,
   UserSearch,
   Bell,
   UserCircle2,
   Edit,
-  BookUser,
 } from "lucide-react";
 import { useState } from "react";
 import { ConfirmationModal } from "../modal/ConfirmationModal";
