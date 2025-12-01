@@ -9,7 +9,8 @@ export type NotificationType =
   | "session_cancellation"
   | "session_started"
   | "resources"
-  | "system";
+  | "system"
+  | "session";
 
 interface CreateNotificationInput {
   userId: string;
