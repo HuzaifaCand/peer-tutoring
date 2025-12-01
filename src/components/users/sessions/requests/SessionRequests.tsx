@@ -7,7 +7,6 @@ import { RequestCard } from "./RequestCard";
 import { EmptyGrid } from "@/components/card/EmptyCardGrid";
 import { defaultSorters } from "@/utils/sorters";
 import { CardsLoading } from "@/components/card/CardsLoading";
-import { SharedPropsType } from "../SessionsMain";
 import { ViewRequestModal } from "./modal/ViewRequestModal";
 
 export function SessionRequests({

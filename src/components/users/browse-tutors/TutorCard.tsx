@@ -51,7 +51,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
   return (
     <>
       <ModalBase isOpen={!!selectedTutor} onClose={closeModal}>
-        <TutorModalContent tutor={selectedTutor} />
+        {selectedTutor && <TutorModalContent tutor={selectedTutor} />}
       </ModalBase>
 
       <CardShell

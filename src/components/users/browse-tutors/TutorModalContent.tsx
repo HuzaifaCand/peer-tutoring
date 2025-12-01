@@ -25,14 +25,9 @@ function StatsPill({ count, loading }: { count: number; loading: boolean }) {
   );
 }
 
-export function TutorModalContent({
-  tutor,
-}: {
-  tutor: SubjectTutorType | null;
-}) {
+export function TutorModalContent({ tutor }: { tutor: SubjectTutorType }) {
   const [reqModal, setReqModal] = useState(false);
 
-  if (!tutor) return null;
   const {
     id: tutorId,
     name,
