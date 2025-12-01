@@ -2,9 +2,10 @@ import { CardShell } from "@/components/card/CardShell";
 import { CancSessions } from "./getCancelledSessions";
 import { Tag } from "@/components/ui/Tag";
 import { HeaderLeft, tagTextSize } from "../sharedUI";
+import { formatted } from "../scheduled/ScheduledSessionCard";
 
 function getCancelledByLabel(cs: CancSessions, currentUserId: string) {
-  if (cs.source === "system") return "System";
+  if (cs.source === "system" || "timeout") return "System";
 
   if (cs.who === currentUserId) return "You";
 
@@ -22,17 +23,6 @@ export function CancelledSessionCard({
   role: "tutor" | "student";
   currentUserId: string;
 }) {
-  const formattedDate = (timestamp: string | null) =>
-    timestamp &&
-    new Date(timestamp).toLocaleString("en-GB", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "2-digit",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-    });
-
   return (
     <CardShell>
       <div className="space-y-5">
@@ -47,7 +37,7 @@ export function CancelledSessionCard({
               color={
                 cs.source === "manual"
                   ? "gray"
-                  : cs.source === "system"
+                  : cs.source === "system" || "timeout"
                   ? "red"
                   : "orange"
               }
@@ -76,12 +66,12 @@ export function CancelledSessionCard({
         <div className="flex justify-between items-center gap-2">
           <p className="ml-0.5 text-[10px] sm:text-[11px] text-textMuted flex flex-col [@media(min-width:400px)]:gap-1 [@media(min-width:400px)]:flex-row">
             Cancelled on
-            <span className="text-textWhite/80">{formattedDate(cs.when)}</span>
+            <span className="text-textWhite/80">{formatted(cs.when)}</span>
           </p>
           <p className="text-[10px] sm:text-[11px] flex flex-col [@media(min-width:400px)]:gap-1 [@media(min-width:400px)]:flex-row text-textMuted text-right">
             Scheduled For{" "}
             <span className="text-textWhite/80">
-              {formattedDate(cs.scheduled_for)}
+              {formatted(cs.scheduled_for)}
             </span>
           </p>
         </div>
