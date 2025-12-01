@@ -31,7 +31,7 @@ export function CompleteSessionModal({
   const [error, setError] = useState("");
   const [attendanceError, setAttendanceError] = useState("");
 
-  const MAX_CHARS = 500;
+  const MAX_CHARS = 300;
 
   async function handleSubmit() {
     setError("");

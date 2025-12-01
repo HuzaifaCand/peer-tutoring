@@ -24,7 +24,7 @@ export function StudentFeedbackModal({
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
 
-  const MAX_CHARS = 500;
+  const MAX_CHARS = 300;
 
   function validate(text: string) {
     const trimmed = text.trim();
