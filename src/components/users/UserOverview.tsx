@@ -34,8 +34,10 @@ export default function UserOverview({ role }: { role: "student" | "tutor" }) {
       {!user || userLoading ? (
         <span className="inline-block h-4 w-24 bg-white/10 rounded animate-pulse align-middle" />
       ) : (
-        <span className="text-yellow whitespace-nowrap">{displayName}</span>
-      )}
+        <span className="text-yellow [@media(min-width:360px)]:whitespace-nowrap">
+          {displayName}
+        </span>
+      )}{" "}
       👋
     </span>
   );
