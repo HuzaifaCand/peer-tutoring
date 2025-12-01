@@ -30,6 +30,11 @@ export type OnsiteSessionRequest =
 export type OnlineSessionRequest =
   Database["public"]["Tables"]["online_session_requests"]["Row"];
 
+export type StudentSessionFeedback =
+  Database["public"]["Tables"]["student_session_feedback"]["Row"];
+export type TutorSessionFeedback =
+  Database["public"]["Tables"]["tutor_session_feedback"]["Row"];
+
 // formed types, full comemnting needed to know where they are going as i dont want to keep them in the same file but i probably should idk
 // yeah you should fs
 // yeah i am doing
