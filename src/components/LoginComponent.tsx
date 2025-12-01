@@ -16,7 +16,7 @@ export function LoginComponent({
   return (
     <div
       className={clsx(
-        "flex h-screen items-center justify-center px-4 sm:px-6",
+        "flex min-h-screen items-center justify-center px-4 sm:px-6",
         bg
       )}
     >
