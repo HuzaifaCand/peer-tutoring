@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
+import { Calendar, Clock } from "lucide-react";
 
 export function localDateTimeToUTC(date: string, time: string): string {
   const dt = new Date(`${date}T${time}:00`);
@@ -139,31 +140,41 @@ export function AcceptOnlineModal({
             {/* Date */}
             <div className="flex flex-col">
               <label className={getLabelClass("sm")}>Date</label>
-              <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className={clsx(
-                  getInputClass("sm"),
-                  "mt-2",
-                  "[color-scheme:dark]"
-                )}
-              />
+
+              <div className="relative mt-2">
+                <input
+                  type="date"
+                  value={date}
+                  onChange={(e) => setDate(e.target.value)}
+                  className={clsx(
+                    getInputClass("sm"),
+                    "appearance-none pr-10 [color-scheme:dark]"
+                  )}
+                />
+
+                {/* Lucide Calendar Icon */}
+                <Calendar className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-textMuted" />
+              </div>
             </div>
 
             {/* Time */}
             <div className="flex flex-col">
               <label className={getLabelClass("sm")}>Time</label>
-              <input
-                type="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                className={clsx(
-                  getInputClass("sm"),
-                  "mt-2",
-                  "[color-scheme:dark]"
-                )}
-              />
+
+              <div className="relative mt-2">
+                <input
+                  type="time"
+                  value={time}
+                  onChange={(e) => setTime(e.target.value)}
+                  className={clsx(
+                    getInputClass("sm"),
+                    "appearance-none pr-10 [color-scheme:dark]"
+                  )}
+                />
+
+                {/* Lucide Clock Icon */}
+                <Clock className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-textMuted" />
+              </div>
             </div>
           </div>
 

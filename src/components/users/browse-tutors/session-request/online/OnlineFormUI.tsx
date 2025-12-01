@@ -4,6 +4,7 @@ import { getInputClass, getLabelClass } from "@/components/forms/classes";
 import clsx from "clsx";
 import { MessageField } from "../MessageField";
 import { ConfirmButton } from "../ConfirmButton";
+import { Calendar, Clock } from "lucide-react";
 
 interface OnlineFormUIProps {
   fields: {
@@ -40,34 +41,41 @@ export function OnlineFormUI({
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label className={getLabelClass("sm")}>Select a Date</label>
-            <input
-              type="date"
-              placeholder="Select a date..."
-              value={suggestedDate}
-              onChange={(e) => setSuggestedDate(e.target.value)}
-              className={clsx(
-                getInputClass("sm"),
-                "mt-2",
-                "[color-scheme:dark]"
-              )}
-            />
+
+            <div className="relative mt-2">
+              <input
+                type="date"
+                value={suggestedDate}
+                onChange={(e) => setSuggestedDate(e.target.value)}
+                className={clsx(
+                  getInputClass("sm"),
+                  "appearance-none pr-10 [color-scheme:dark]"
+                )}
+              />
+
+              {/* Lucide Calendar Icon */}
+              <Calendar className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-textMuted" />
+            </div>
           </div>
 
           <div className="flex flex-col">
             <label className={getLabelClass("sm")}>
               Suggest a Time (Optional)
             </label>
-            <input
-              type="time"
-              placeholder="Enter a time..."
-              value={suggestedTime}
-              onChange={(e) => setSuggestedTime(e.target.value)}
-              className={clsx(
-                getInputClass("sm"),
-                "mt-2",
-                "[color-scheme:dark]"
-              )}
-            />
+
+            <div className="relative mt-2">
+              <input
+                type="time"
+                value={suggestedTime}
+                onChange={(e) => setSuggestedTime(e.target.value)}
+                className={clsx(
+                  getInputClass("sm"),
+                  "appearance-none pr-10 [color-scheme:dark]"
+                )}
+              />
+
+              <Clock className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-textMuted" />
+            </div>
           </div>
         </div>
 
