@@ -25,7 +25,7 @@ export function formatCompletedSession(s: SessionWithUsers) {
 
     expected_duration: s.duration_minutes,
     actual_duration: s.actual_duration,
-    studentFeedback: s.student_session_feedback.message,
+    studentFeedback: s.student_session_feedback?.message || null,
     tutorFeedback: s.tutor_session_feedback.message,
     studentAttendance: s.tutor_session_feedback.student_attendance,
   };
