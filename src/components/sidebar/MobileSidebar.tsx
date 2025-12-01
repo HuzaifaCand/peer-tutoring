@@ -31,7 +31,7 @@ export default function MobileSidebar({
       )}
 
       <div
-        className={`fixed inset-0 w-4/5 sm:w-2/5 md:w-1/3 bg-elevatedBg text-textWhite z-50 p-4 lg:hidden overflow-y-auto transition-transform duration-300 ease-in-out modal-scroll${
+        className={`fixed inset-0 w-4/5 sm:w-2/5 md:w-1/3 bg-elevatedBg text-textWhite z-50 p-4 lg:hidden overflow-y-auto transition-transform duration-300 ease-in-out modal-scroll ${
           open
             ? "translate-x-0 opacity-100 pointer-events-auto"
             : "-translate-x-full opacity-0 pointer-events-none"
