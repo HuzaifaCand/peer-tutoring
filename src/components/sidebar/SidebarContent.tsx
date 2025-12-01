@@ -123,7 +123,7 @@ export default function SidebarContent({ onClose, type }: SidebarProps) {
               <Link
                 key={href}
                 href={href}
-                className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-sm font-medium ${
+                className={`flex items-center justify-between gap-3 px-4 py-2 rounded-lg transition-colors duration-150 text-sm lg:text-xs font-medium ${
                   isActive
                     ? "bg-white/5 text-white"
                     : "hover:bg-white/5 text-gray-300"
