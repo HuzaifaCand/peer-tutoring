@@ -5,6 +5,8 @@ export function extractTutorStudentInfo(s: SessionWithUsers) {
   const studentEmail = s.students.users.email ?? "";
 
   return {
+    tutorId: s.tutor_id,
+    studentId: s.student_id,
     tutor_id: tutorEmail.split("@")[0],
     tutor_name: s.tutors.users.full_name.split(" ").slice(0, -1).join(" "),
     tutor_grade: s.tutors.grade,
