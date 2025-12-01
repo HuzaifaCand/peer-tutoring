@@ -168,7 +168,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
               onClick={() => setResourceData(resource)}
               className={getActionButtonClass("positive")}
             >
-              Verify
+              Verify Resource
             </button>
           )}
 
@@ -179,7 +179,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
             onClick={() =>
               incrementResourceView(resource.id).catch(console.error)
             }
-            className="flex items-center gap-1 px-3 py-1 text-[11px] sm:text-xs font-medium
+            className="flex items-center gap-1 px-3 py-2 text-[11px] sm:text-xs font-medium
                text-textButton/90 bg-elevatedBg border border-white/10 rounded-md
                hover:bg-hoverBg transition-all duration-200 focus:outline-none focus:bg-hoverBg focus:ring-2 focus:ring-white/10"
           >
