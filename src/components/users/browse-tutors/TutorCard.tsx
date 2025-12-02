@@ -1,8 +1,8 @@
 "use client";
 
-import { getSubjectTutor, SubjectTutorType } from "./getSubjectTutors";
+import { SubjectTutorType } from "./getSubjectTutors";
 import { CardShell } from "@/components/card/CardShell";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BadgeCheck } from "lucide-react";
 import { Tag } from "@/components/ui/Tag";
 import { CardCTA } from "@/components/ui/CardCTA";
@@ -10,7 +10,6 @@ import ModalBase from "@/components/modal/ModalBase";
 import { TutorModalContent } from "./TutorModalContent";
 import { useCloseModal } from "@/components/modal/useCloseModal";
 import { useModalOpener } from "@/components/modal/useModalOpener";
-import { useSearchParams } from "next/navigation";
 
 export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
   const [selectedTutor, setSelectedTutor] = useState<SubjectTutorType | null>(
@@ -24,25 +23,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
     verified,
     available_slots,
     available_online,
-    subject,
   } = tutor;
-
-  const searchParams = useSearchParams();
-
-  useEffect(() => {
-    const id = searchParams.get("id");
-
-    if (!id) return;
-    if (selectedTutor && selectedTutor.id === id) return;
-
-    const getTutor = async () => {
-      const data = await getSubjectTutor(id, subject.id);
-      setSelectedTutor(data);
-    };
-
-    getTutor();
-  }, [searchParams, subject.id]);
-
   const closeModal = useCloseModal(setSelectedTutor);
   const { handleOpen } = useModalOpener<SubjectTutorType>(
     setSelectedTutor,
