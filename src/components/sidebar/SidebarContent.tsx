@@ -65,7 +65,6 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/tutor/profile", label: "Profile", icon: UserCircle2 },
     { href: "/tutor/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/tutor/resources", label: "Resource Library", icon: Library },
-    // { href: "/tutor/my-resources", label: "My Resources", icon: BookUser },
     { href: "/tutor/notifications", label: "Notifications", icon: Bell },
   ],
   student: [
@@ -74,7 +73,6 @@ const navItemsByType: Record<UserType, NavItem[]> = {
     { href: "/student/sessions", label: "My Sessions", icon: CalendarClock },
     { href: "/student/tutors", label: "Browse Tutors", icon: UserSearch },
     { href: "/student/resources", label: "Resource Library", icon: Library },
-    // { href: "/student/my-resources", label: "My Resources", icon: BookUser },
     { href: "/student/notifications", label: "Notifications", icon: Bell },
   ],
 };
