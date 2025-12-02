@@ -5,7 +5,7 @@ import { HeaderLeft, tagTextSize } from "../sharedUI";
 import { formatted } from "../scheduled/ScheduledSessionCard";
 
 function getCancelledByLabel(cs: CancSessions, currentUserId: string) {
-  if (cs.source === "system" || "timeout") return "System";
+  if (cs.source === "system" || cs.source === "timeout") return "System";
 
   if (cs.who === currentUserId) return "You";
 

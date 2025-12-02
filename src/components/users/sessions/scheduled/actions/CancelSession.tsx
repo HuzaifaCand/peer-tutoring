@@ -63,8 +63,9 @@ export function CancelSession({
     const studentId = data.student_id;
     const tutorId = data.tutor_id;
 
+    const canceller = userId === studentId ? "student" : "tutor";
+
     const notifyId = userId === studentId ? tutorId : studentId;
-    const canceller = notifyId === studentId ? "tutor" : "student";
 
     await createNotification({
       userId: notifyId,
