@@ -47,8 +47,8 @@ export function SessionRequestModal({
         <ToggleModeBar online={online} setMode={setMode} mode={mode} />
 
         {(!user || userLoading) && (
-          <div className="flex justify-center h-26">
-            <Loader2 className="w-4 h-4 animate-spin" />
+          <div className="flex justify-center h-40">
+            <Loader2 className="w-4 h-4 animate-spin text-textWhite" />
           </div>
         )}
         {user && mode === "onsite" && (
