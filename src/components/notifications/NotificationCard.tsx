@@ -5,6 +5,7 @@ import { formatUnderscored } from "../admin/edit-requests/getEditRequests";
 import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
+import { CardCTA } from "../ui/CardCTA";
 
 export function NotificationCard({ n }: { n: Notification }) {
   const content = (
@@ -18,7 +19,7 @@ export function NotificationCard({ n }: { n: Notification }) {
       <div className="flex flex-col gap-3 p-0 sm:p-1">
         {/* Header */}
         <div className="flex justify-between items-center gap-3">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col gap-2">
             <h2
               className={clsx(
                 "text-textWhite text-sm sm:text-lg font-semibold"
@@ -26,27 +27,19 @@ export function NotificationCard({ n }: { n: Notification }) {
             >
               {n.title}
             </h2>
-          </div>
-          <div className="flex items-center gap-1">
-            <Tag
-              value={formatUnderscored(n.type ?? "")}
-              color="gray"
-              textSize="text-[10px] sm:text-[12px]"
-              className="px-0.5 sm:px-3 py-1 whitespace-nowrap"
-            />
+            <p className="text-textMuted text-[10px] sm:text-xs max-w-xl">
+              {n.body}
+            </p>
           </div>
         </div>
 
         <div className="bg-white/5 my-1 w-full h-[1px]" />
 
         <div className="flex justify-between items-end gap-8">
-          <p className="text-textMuted text-[10px] sm:text-xs max-w-xl">
-            {n.body}
-          </p>
-
           <p className="text-[10px] sm:text-xs text-textMuted whitespace-nowrap">
             {formatDistanceToNow(new Date(n.created_at), {})} ago
           </p>
+          {n.href && <CardCTA cta={"View"} textSize="text-xs sm:text-sm" />}
         </div>
       </div>
     </CardShell>
