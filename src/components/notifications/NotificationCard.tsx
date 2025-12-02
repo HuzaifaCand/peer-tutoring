@@ -35,7 +35,7 @@ export function NotificationCard({ n }: { n: Notification }) {
 
         <div className="bg-white/5 my-1 w-full h-[1px]" />
 
-        <div className="flex justify-between items-end gap-8">
+        <div className="flex justify-between items-center gap-8">
           <p className="text-[10px] sm:text-xs text-textMuted whitespace-nowrap">
             {formatDistanceToNow(new Date(n.created_at), {})} ago
           </p>
