@@ -33,6 +33,7 @@ export function TutorCard({ tutor }: { tutor: SubjectTutorType }) {
     const id = searchParams.get("id");
 
     if (!id) return;
+    if (selectedTutor && selectedTutor.id === id) return;
 
     const getTutor = async () => {
       const data = await getSubjectTutor(id, subject.id);
