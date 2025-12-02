@@ -43,8 +43,8 @@ export function OnsiteFormUI({
       </div>
 
       {loading && (
-        <div className="flex justify-center h-20 items-center">
-          <Loader2 className="w-4 h-4 animate-spin" />
+        <div className="flex justify-center h-40 items-center">
+          <Loader2 className="w-4 h-4 animate-spin text-textWhite" />
         </div>
       )}
 

@@ -60,23 +60,25 @@ export function NotificationsProvider({
         (payload) => {
           addNotification(payload.new as Notification);
           toast(
-            <div className="flex items-start gap-4 w-full">
+            <div className="flex items-center justify-between gap-4 w-full">
               {/* Icon bubble */}
-              <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 border border-white/10">
-                <BellRingIcon className="w-4 h-4 text-[#e6e9ec]/90" />
-              </div>
+              <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-white/5 border border-white/10">
+                  <BellRingIcon className="w-4 h-4 text-[#e6e9ec]/90" />
+                </div>
 
-              {/* Content */}
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-[#e6e9ec] leading-tight">
-                  {payload.new.title}
-                </p>
-
-                {payload.new.subtitle && (
-                  <p className="text-xs text-[#e6e9ec]/70 mt-0.5">
-                    {payload.new.subtitle}
+                {/* Content */}
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-[#e6e9ec] leading-tight">
+                    {payload.new.title}
                   </p>
-                )}
+
+                  {payload.new.subtitle && (
+                    <p className="text-xs text-[#e6e9ec]/70 mt-0.5">
+                      {payload.new.subtitle}
+                    </p>
+                  )}
+                </div>
               </div>
 
               {/* View button */}
