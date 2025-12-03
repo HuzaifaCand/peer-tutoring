@@ -77,7 +77,7 @@ const STUDENT_STATS = {
         .eq("status", "scheduled"),
   },
   studentSessionRequests: {
-    label: "Your Session Requests",
+    label: "Pending Session Requests",
     cta: "View Session Requests",
     href: "/student/sessions?tab=requests",
     icon: Send,
