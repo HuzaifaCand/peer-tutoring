@@ -31,6 +31,9 @@ export function NotificationCard({ n }: { n: Notification }) {
               {n.body}
             </p>
           </div>
+          {!n.read && (
+            <div className="absolute top-8 right-8 w-2 h-2 bg-yellow rounded-full" />
+          )}
         </div>
 
         <div className="bg-white/5 my-1 w-full h-[1px]" />
