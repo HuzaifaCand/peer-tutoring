@@ -182,7 +182,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
       <footer className="flex justify-between items-center border-t border-white/10 pt-3 mt-3">
         <Tag
           textSize="text-[11px]"
-          value={`${resource.views} views`}
+          value={`${resource.views} ${resource.views === 1 ? "view" : "views"}`}
           color="gray"
         />
 
