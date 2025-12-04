@@ -1,7 +1,5 @@
 import { Notification } from "@/lib/computedtypes";
 import { CardShell } from "../card/CardShell";
-import { Tag } from "../ui/Tag";
-import { formatUnderscored } from "../admin/edit-requests/getEditRequests";
 import clsx from "clsx";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
