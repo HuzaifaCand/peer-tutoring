@@ -134,7 +134,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
             ))}
           {resource.is_curated && (
             <div title="Curated Resource">
-              <BadgeCheck className="text-green-400 w-4.5 h-4.5" />
+              <BadgeCheck className="text-blue w-4.5 h-4.5" />
             </div>
           )}
         </div>
