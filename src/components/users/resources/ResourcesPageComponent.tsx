@@ -6,11 +6,11 @@ import ResourcesGrid from "./ResourcesGrid";
 import { useState } from "react";
 import { AddResourceModal } from "./AddResourceModal";
 import { useDataFetch } from "@/hooks/useDataFetch";
-import { getResources } from "./getResources";
+import { getAllResources } from "./getResources";
 
 export default function ResourcesPageComponent() {
   const [showAddModal, setShowAddModal] = useState(false);
-  const { data, loading, setRefetchFlag } = useDataFetch(getResources);
+  const { data, loading, setRefetchFlag } = useDataFetch(getAllResources);
 
   return (
     <main>

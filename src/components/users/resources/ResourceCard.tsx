@@ -30,6 +30,19 @@ async function incrementResourceView(resourceId: string) {
   }
 }
 
+async function incrementCuratedResourceView(resourceId: string) {
+  const { data, error } = await supabase.rpc(
+    "increment_curated_resource_view",
+    { resource_id: resourceId }
+  );
+
+  if (error) {
+    console.error("Failed to increment view count:", error);
+  } else {
+    console.log("New view count:", data);
+  }
+}
+
 export function ResourceCard({ resource, refetch }: ResourceCardProps) {
   const [resourceData, setResourceData] = useState<ComputedResourceType | null>(
     null
@@ -109,14 +122,18 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
           <Tag value={resource.subject_code} color="muted" />
         </div>
         <div className="flex items-center gap-3">
-          {isVerified ? (
-            <div title="Verified Resource">
-              <Verified className="text-green-400 w-4.5 h-4.5" />
-            </div>
-          ) : (
-            <div title="Pending Verification">
-              <Clock className="text-yellow-400 w-4.5 h-4.5" />
-            </div>
+          {!resource.is_curated &&
+            (isVerified ? (
+              <div title="Verified Resource">
+                <Verified className="text-green-400 w-4.5 h-4.5" />
+              </div>
+            ) : (
+              <div title="Pending Verification">
+                <Clock className="text-yellow-400 w-4.5 h-4.5" />
+              </div>
+            ))}
+          {resource.is_curated && (
+            <Tag value="Curated" color="green" font="font-medium" />
           )}
         </div>
       </header>
@@ -135,13 +152,20 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
 
       {/* Meta info */}
       <section className="text-[10px] sm:text-xs text-textMuted flex flex-col sm:flex-row sm:justify-between pt-2">
-        <span>
-          Added by{" "}
-          <span className="font-medium text-textWhite">
-            {resource.added_by}
-          </span>{" "}
-          ({resource.added_by_role})
-        </span>
+        {resource.is_curated ? (
+          <span>
+            Curated by{" "}
+            <span className="font-medium text-textWhite">PeerLink</span>
+          </span>
+        ) : (
+          <span>
+            Added by{" "}
+            <span className="font-medium text-textWhite">
+              {resource.added_by}
+            </span>{" "}
+            ({resource.added_by_role})
+          </span>
+        )}
 
         {!addedByTutor && resource.verified_by && (
           <span>
@@ -163,7 +187,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
         />
 
         <div className="flex items-center gap-2">
-          {isTutorUser && !resource.verified && (
+          {!resource.is_curated && isTutorUser && !resource.verified && (
             <button
               onClick={() => setResourceData(resource)}
               className={getActionButtonClass("positive")}
@@ -177,7 +201,9 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() =>
-              incrementResourceView(resource.id).catch(console.error)
+              resource.is_curated
+                ? incrementCuratedResourceView(resource.id)
+                : incrementResourceView(resource.id)
             }
             className="flex items-center gap-1 px-3 py-2 text-[11px] sm:text-xs font-medium
                text-textButton/90 bg-elevatedBg border border-white/10 rounded-md
