@@ -2,7 +2,7 @@
 
 import { CardShell } from "@/components/card/CardShell";
 import { colors, Tag } from "@/components/ui/Tag";
-import { ExternalLink, Verified, Clock, Copy } from "lucide-react";
+import { ExternalLink, Verified, Clock, Copy, BadgeCheck } from "lucide-react";
 import { ComputedResourceType } from "./getResources";
 import { supabase } from "@/lib/supabase/client";
 import { toast } from "sonner";
@@ -133,7 +133,9 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
               </div>
             ))}
           {resource.is_curated && (
-            <Tag value="Curated" color="green" font="font-medium" />
+            <div title="Curated Resource">
+              <BadgeCheck className="text-green-400 w-4.5 h-4.5" />
+            </div>
           )}
         </div>
       </header>
