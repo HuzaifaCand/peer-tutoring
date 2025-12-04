@@ -167,7 +167,7 @@ export function ResourceCard({ resource, refetch }: ResourceCardProps) {
           </span>
         )}
 
-        {!addedByTutor && resource.verified_by && (
+        {!resource.is_curated && !addedByTutor && resource.verified_by && (
           <span>
             Verified by{" "}
             <span className="font-medium text-textWhite">
